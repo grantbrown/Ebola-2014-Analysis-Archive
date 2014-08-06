@@ -1,0 +1,2546 @@
+<!doctype HTML>
+<meta charset = 'utf-8'>
+<html>
+  <head>
+    
+    <script src='http://d3js.org/d3.v3.min.js' type='text/javascript'></script>
+    <script src='http://d3js.org/topojson.v1.min.js' type='text/javascript'></script>
+    <script src='http://datamaps.github.io/scripts/datamaps.all.min.js' type='text/javascript'></script>
+    <script src='http://cdnjs.cloudflare.com/ajax/libs/handlebars.js/1.0.0/handlebars.min.js' type='text/javascript'></script>
+    <script src='http://cdnjs.cloudflare.com/ajax/libs/angular.js/1.2.1/angular.min.js' type='text/javascript'></script>
+    
+    <style>
+    .rChart {
+      display: block;
+      margin-left: auto; 
+      margin-right: auto;
+      width: 800px;
+      height: 400px;
+    }  
+    </style>
+    
+  </head>
+  <body ng-app ng-controller='rChartsCtrl'>
+    
+    
+      <div class='container'>
+        <input id='slider' type='range' min=1 max=119 ng-model='Day' width=200>
+        <span ng-bind='Day'></span>
+        <div id='' class='rChart datamaps'></div>  
+      </div>
+      <script>
+        function rChartsCtrl($scope){
+          $scope.Day = 1;
+          $scope.$watch('Day', function(newDay){
+            map.updateChoropleth(chartParams.newData[newDay]);
+          })
+        }
+      </script>    
+    <script id='popup-template' type='text/x-handlebars-template'>
+    
+</script>
+<script>
+  var chartParams = {
+ "dom": "chart_1",
+"width":    800,
+"height":    400,
+"scope": "world",
+"fills": {
+ "1": "#FF0000FF",
+"2": "#FF0E00FF",
+"3": "#FF1C00FF",
+"4": "#FF2A00FF",
+"5": "#FF3900FF",
+"6": "#FF4700FF",
+"7": "#FF5500FF",
+"8": "#FF6300FF",
+"9": "#FF7100FF",
+"10": "#FF8000FF",
+"11": "#FF8E00FF",
+"12": "#FF9C00FF",
+"13": "#FFAA00FF",
+"14": "#FFB800FF",
+"15": "#FFC600FF",
+"16": "#FFD500FF",
+"17": "#FFE300FF",
+"18": "#FFF100FF",
+"19": "#FFFF00FF",
+"20": "#FFFF15FF",
+"21": "#FFFF40FF",
+"22": "#FFFF6AFF",
+"23": "#FFFF95FF",
+"24": "#FFFFBFFF",
+"25": "#FFFFEAFF",
+"white": "white" 
+},
+"data": {
+ "GIN": {
+ "Day": 0,
+"Country": "GIN",
+"Infections":      0,
+"fillKey": "1" 
+},
+"LBR": {
+ "Day": 0,
+"Country": "LBR",
+"Infections":      0,
+"fillKey": "1" 
+},
+"SLE": {
+ "Day": 0,
+"Country": "SLE",
+"Infections":      0,
+"fillKey": "1" 
+} 
+},
+"legend": true,
+"labels": true,
+"bodyattrs": "ng-app ng-controller='rChartsCtrl'",
+"newData": {
+ "1": {
+ "GIN": {
+ "Day": 0,
+"Country": "GIN",
+"Infections":      0,
+"fillKey": "1" 
+},
+"LBR": {
+ "Day": 0,
+"Country": "LBR",
+"Infections":      0,
+"fillKey": "1" 
+},
+"SLE": {
+ "Day": 0,
+"Country": "SLE",
+"Infections":      0,
+"fillKey": "1" 
+} 
+},
+"2": {
+ "GIN": {
+ "Day": 1,
+"Country": "GIN",
+"Infections":     17,
+"fillKey": "18" 
+},
+"LBR": {
+ "Day": 1,
+"Country": "LBR",
+"Infections":      0,
+"fillKey": "1" 
+},
+"SLE": {
+ "Day": 1,
+"Country": "SLE",
+"Infections":      0,
+"fillKey": "1" 
+} 
+},
+"3": {
+ "GIN": {
+ "Day": 2,
+"Country": "GIN",
+"Infections": 13.312,
+"fillKey": "15" 
+},
+"LBR": {
+ "Day": 2,
+"Country": "LBR",
+"Infections":  0.125,
+"fillKey": "1" 
+},
+"SLE": {
+ "Day": 2,
+"Country": "SLE",
+"Infections":      0,
+"fillKey": "1" 
+} 
+},
+"4": {
+ "GIN": {
+ "Day": 3,
+"Country": "GIN",
+"Infections":  9.625,
+"fillKey": "11" 
+},
+"LBR": {
+ "Day": 3,
+"Country": "LBR",
+"Infections":   0.25,
+"fillKey": "1" 
+},
+"SLE": {
+ "Day": 3,
+"Country": "SLE",
+"Infections":      0,
+"fillKey": "1" 
+} 
+},
+"5": {
+ "GIN": {
+ "Day": 4,
+"Country": "GIN",
+"Infections": 5.9375,
+"fillKey": "7" 
+},
+"LBR": {
+ "Day": 4,
+"Country": "LBR",
+"Infections":  0.375,
+"fillKey": "1" 
+},
+"SLE": {
+ "Day": 4,
+"Country": "SLE",
+"Infections":      0,
+"fillKey": "1" 
+} 
+},
+"6": {
+ "GIN": {
+ "Day": 5,
+"Country": "GIN",
+"Infections":   2.25,
+"fillKey": "3" 
+},
+"LBR": {
+ "Day": 5,
+"Country": "LBR",
+"Infections":    0.5,
+"fillKey": "1" 
+},
+"SLE": {
+ "Day": 5,
+"Country": "SLE",
+"Infections":      0,
+"fillKey": "1" 
+} 
+},
+"7": {
+ "GIN": {
+ "Day": 6,
+"Country": "GIN",
+"Infections":     10,
+"fillKey": "11" 
+},
+"LBR": {
+ "Day": 6,
+"Country": "LBR",
+"Infections":      6,
+"fillKey": "7" 
+},
+"SLE": {
+ "Day": 6,
+"Country": "SLE",
+"Infections":      0,
+"fillKey": "1" 
+} 
+},
+"8": {
+ "GIN": {
+ "Day": 7,
+"Country": "GIN",
+"Infections":      5,
+"fillKey": "6" 
+},
+"LBR": {
+ "Day": 7,
+"Country": "LBR",
+"Infections":      0,
+"fillKey": "1" 
+},
+"SLE": {
+ "Day": 7,
+"Country": "SLE",
+"Infections":      0,
+"fillKey": "1" 
+} 
+},
+"9": {
+ "GIN": {
+ "Day": 8,
+"Country": "GIN",
+"Infections":   4.96,
+"fillKey": "6" 
+},
+"LBR": {
+ "Day": 8,
+"Country": "LBR",
+"Infections":   0.16,
+"fillKey": "1" 
+},
+"SLE": {
+ "Day": 8,
+"Country": "SLE",
+"Infections":      0,
+"fillKey": "1" 
+} 
+},
+"10": {
+ "GIN": {
+ "Day": 9,
+"Country": "GIN",
+"Infections":   4.92,
+"fillKey": "6" 
+},
+"LBR": {
+ "Day": 9,
+"Country": "LBR",
+"Infections":   0.32,
+"fillKey": "1" 
+},
+"SLE": {
+ "Day": 9,
+"Country": "SLE",
+"Infections":      0,
+"fillKey": "1" 
+} 
+},
+"11": {
+ "GIN": {
+ "Day": 10,
+"Country": "GIN",
+"Infections":   4.88,
+"fillKey": "6" 
+},
+"LBR": {
+ "Day": 10,
+"Country": "LBR",
+"Infections":   0.48,
+"fillKey": "1" 
+},
+"SLE": {
+ "Day": 10,
+"Country": "SLE",
+"Infections":      0,
+"fillKey": "1" 
+} 
+},
+"12": {
+ "GIN": {
+ "Day": 11,
+"Country": "GIN",
+"Infections":   4.84,
+"fillKey": "6" 
+},
+"LBR": {
+ "Day": 11,
+"Country": "LBR",
+"Infections":   0.64,
+"fillKey": "1" 
+},
+"SLE": {
+ "Day": 11,
+"Country": "SLE",
+"Infections":      0,
+"fillKey": "1" 
+} 
+},
+"13": {
+ "GIN": {
+ "Day": 12,
+"Country": "GIN",
+"Infections":    4.8,
+"fillKey": "6" 
+},
+"LBR": {
+ "Day": 12,
+"Country": "LBR",
+"Infections":    0.8,
+"fillKey": "1" 
+},
+"SLE": {
+ "Day": 12,
+"Country": "SLE",
+"Infections":      0,
+"fillKey": "1" 
+} 
+},
+"14": {
+ "GIN": {
+ "Day": 13,
+"Country": "GIN",
+"Infections": 3.8667,
+"fillKey": "5" 
+},
+"LBR": {
+ "Day": 13,
+"Country": "LBR",
+"Infections": 0.53333,
+"fillKey": "1" 
+},
+"SLE": {
+ "Day": 13,
+"Country": "SLE",
+"Infections":      0,
+"fillKey": "1" 
+} 
+},
+"15": {
+ "GIN": {
+ "Day": 14,
+"Country": "GIN",
+"Infections": 2.9333,
+"fillKey": "4" 
+},
+"LBR": {
+ "Day": 14,
+"Country": "LBR",
+"Infections": 0.26667,
+"fillKey": "1" 
+},
+"SLE": {
+ "Day": 14,
+"Country": "SLE",
+"Infections":      0,
+"fillKey": "1" 
+} 
+},
+"16": {
+ "GIN": {
+ "Day": 15,
+"Country": "GIN",
+"Infections":      2,
+"fillKey": "3" 
+},
+"LBR": {
+ "Day": 15,
+"Country": "LBR",
+"Infections":      0,
+"fillKey": "1" 
+},
+"SLE": {
+ "Day": 15,
+"Country": "SLE",
+"Infections":      0,
+"fillKey": "1" 
+} 
+},
+"17": {
+ "GIN": {
+ "Day": 16,
+"Country": "GIN",
+"Infections": 2.5306,
+"fillKey": "3" 
+},
+"LBR": {
+ "Day": 16,
+"Country": "LBR",
+"Infections":      0,
+"fillKey": "1" 
+},
+"SLE": {
+ "Day": 16,
+"Country": "SLE",
+"Infections":      0,
+"fillKey": "1" 
+} 
+},
+"18": {
+ "GIN": {
+ "Day": 17,
+"Country": "GIN",
+"Infections": 3.0612,
+"fillKey": "4" 
+},
+"LBR": {
+ "Day": 17,
+"Country": "LBR",
+"Infections":      0,
+"fillKey": "1" 
+},
+"SLE": {
+ "Day": 17,
+"Country": "SLE",
+"Infections":      0,
+"fillKey": "1" 
+} 
+},
+"19": {
+ "GIN": {
+ "Day": 18,
+"Country": "GIN",
+"Infections": 3.5918,
+"fillKey": "4" 
+},
+"LBR": {
+ "Day": 18,
+"Country": "LBR",
+"Infections":      0,
+"fillKey": "1" 
+},
+"SLE": {
+ "Day": 18,
+"Country": "SLE",
+"Infections":      0,
+"fillKey": "1" 
+} 
+},
+"20": {
+ "GIN": {
+ "Day": 19,
+"Country": "GIN",
+"Infections": 4.1224,
+"fillKey": "5" 
+},
+"LBR": {
+ "Day": 19,
+"Country": "LBR",
+"Infections":      0,
+"fillKey": "1" 
+},
+"SLE": {
+ "Day": 19,
+"Country": "SLE",
+"Infections":      0,
+"fillKey": "1" 
+} 
+},
+"21": {
+ "GIN": {
+ "Day": 20,
+"Country": "GIN",
+"Infections": 4.6531,
+"fillKey": "5" 
+},
+"LBR": {
+ "Day": 20,
+"Country": "LBR",
+"Infections":      0,
+"fillKey": "1" 
+},
+"SLE": {
+ "Day": 20,
+"Country": "SLE",
+"Infections":      0,
+"fillKey": "1" 
+} 
+},
+"22": {
+ "GIN": {
+ "Day": 21,
+"Country": "GIN",
+"Infections": 5.1837,
+"fillKey": "6" 
+},
+"LBR": {
+ "Day": 21,
+"Country": "LBR",
+"Infections":      0,
+"fillKey": "1" 
+},
+"SLE": {
+ "Day": 21,
+"Country": "SLE",
+"Infections":      0,
+"fillKey": "1" 
+} 
+},
+"23": {
+ "GIN": {
+ "Day": 22,
+"Country": "GIN",
+"Infections": 5.7143,
+"fillKey": "7" 
+},
+"LBR": {
+ "Day": 22,
+"Country": "LBR",
+"Infections":      0,
+"fillKey": "1" 
+},
+"SLE": {
+ "Day": 22,
+"Country": "SLE",
+"Infections":      0,
+"fillKey": "1" 
+} 
+},
+"24": {
+ "GIN": {
+ "Day": 23,
+"Country": "GIN",
+"Infections": 4.6607,
+"fillKey": "5" 
+},
+"LBR": {
+ "Day": 23,
+"Country": "LBR",
+"Infections":      0,
+"fillKey": "1" 
+},
+"SLE": {
+ "Day": 23,
+"Country": "SLE",
+"Infections":      0,
+"fillKey": "1" 
+} 
+},
+"25": {
+ "GIN": {
+ "Day": 24,
+"Country": "GIN",
+"Infections": 3.6071,
+"fillKey": "4" 
+},
+"LBR": {
+ "Day": 24,
+"Country": "LBR",
+"Infections":      0,
+"fillKey": "1" 
+},
+"SLE": {
+ "Day": 24,
+"Country": "SLE",
+"Infections":      0,
+"fillKey": "1" 
+} 
+},
+"26": {
+ "GIN": {
+ "Day": 25,
+"Country": "GIN",
+"Infections": 2.5536,
+"fillKey": "3" 
+},
+"LBR": {
+ "Day": 25,
+"Country": "LBR",
+"Infections":      0,
+"fillKey": "1" 
+},
+"SLE": {
+ "Day": 25,
+"Country": "SLE",
+"Infections":      0,
+"fillKey": "1" 
+} 
+},
+"27": {
+ "GIN": {
+ "Day": 26,
+"Country": "GIN",
+"Infections":    1.5,
+"fillKey": "2" 
+},
+"LBR": {
+ "Day": 26,
+"Country": "LBR",
+"Infections":      0,
+"fillKey": "1" 
+},
+"SLE": {
+ "Day": 26,
+"Country": "SLE",
+"Infections":      0,
+"fillKey": "1" 
+} 
+},
+"28": {
+ "GIN": {
+ "Day": 27,
+"Country": "GIN",
+"Infections":      2,
+"fillKey": "3" 
+},
+"LBR": {
+ "Day": 27,
+"Country": "LBR",
+"Infections":      0,
+"fillKey": "1" 
+},
+"SLE": {
+ "Day": 27,
+"Country": "SLE",
+"Infections":      0,
+"fillKey": "1" 
+} 
+},
+"29": {
+ "GIN": {
+ "Day": 28,
+"Country": "GIN",
+"Infections":    2.5,
+"fillKey": "3" 
+},
+"LBR": {
+ "Day": 28,
+"Country": "LBR",
+"Infections":      0,
+"fillKey": "1" 
+},
+"SLE": {
+ "Day": 28,
+"Country": "SLE",
+"Infections":      0,
+"fillKey": "1" 
+} 
+},
+"30": {
+ "GIN": {
+ "Day": 29,
+"Country": "GIN",
+"Infections": 2.4082,
+"fillKey": "3" 
+},
+"LBR": {
+ "Day": 29,
+"Country": "LBR",
+"Infections":      0,
+"fillKey": "1" 
+},
+"SLE": {
+ "Day": 29,
+"Country": "SLE",
+"Infections":      0,
+"fillKey": "1" 
+} 
+},
+"31": {
+ "GIN": {
+ "Day": 30,
+"Country": "GIN",
+"Infections": 2.3163,
+"fillKey": "3" 
+},
+"LBR": {
+ "Day": 30,
+"Country": "LBR",
+"Infections":      0,
+"fillKey": "1" 
+},
+"SLE": {
+ "Day": 30,
+"Country": "SLE",
+"Infections":      0,
+"fillKey": "1" 
+} 
+},
+"32": {
+ "GIN": {
+ "Day": 31,
+"Country": "GIN",
+"Infections": 2.2245,
+"fillKey": "3" 
+},
+"LBR": {
+ "Day": 31,
+"Country": "LBR",
+"Infections":      0,
+"fillKey": "1" 
+},
+"SLE": {
+ "Day": 31,
+"Country": "SLE",
+"Infections":      0,
+"fillKey": "1" 
+} 
+},
+"33": {
+ "GIN": {
+ "Day": 32,
+"Country": "GIN",
+"Infections": 2.1327,
+"fillKey": "3" 
+},
+"LBR": {
+ "Day": 32,
+"Country": "LBR",
+"Infections":      0,
+"fillKey": "1" 
+},
+"SLE": {
+ "Day": 32,
+"Country": "SLE",
+"Infections":      0,
+"fillKey": "1" 
+} 
+},
+"34": {
+ "GIN": {
+ "Day": 33,
+"Country": "GIN",
+"Infections": 2.0408,
+"fillKey": "3" 
+},
+"LBR": {
+ "Day": 33,
+"Country": "LBR",
+"Infections":      0,
+"fillKey": "1" 
+},
+"SLE": {
+ "Day": 33,
+"Country": "SLE",
+"Infections":      0,
+"fillKey": "1" 
+} 
+},
+"35": {
+ "GIN": {
+ "Day": 34,
+"Country": "GIN",
+"Infections":  1.949,
+"fillKey": "3" 
+},
+"LBR": {
+ "Day": 34,
+"Country": "LBR",
+"Infections":      0,
+"fillKey": "1" 
+},
+"SLE": {
+ "Day": 34,
+"Country": "SLE",
+"Infections":      0,
+"fillKey": "1" 
+} 
+},
+"36": {
+ "GIN": {
+ "Day": 35,
+"Country": "GIN",
+"Infections": 1.8571,
+"fillKey": "2" 
+},
+"LBR": {
+ "Day": 35,
+"Country": "LBR",
+"Infections":      0,
+"fillKey": "1" 
+},
+"SLE": {
+ "Day": 35,
+"Country": "SLE",
+"Infections":      0,
+"fillKey": "1" 
+} 
+},
+"37": {
+ "GIN": {
+ "Day": 36,
+"Country": "GIN",
+"Infections": 1.8857,
+"fillKey": "3" 
+},
+"LBR": {
+ "Day": 36,
+"Country": "LBR",
+"Infections":      0,
+"fillKey": "1" 
+},
+"SLE": {
+ "Day": 36,
+"Country": "SLE",
+"Infections":      0,
+"fillKey": "1" 
+} 
+},
+"38": {
+ "GIN": {
+ "Day": 37,
+"Country": "GIN",
+"Infections": 1.9143,
+"fillKey": "3" 
+},
+"LBR": {
+ "Day": 37,
+"Country": "LBR",
+"Infections":      0,
+"fillKey": "1" 
+},
+"SLE": {
+ "Day": 37,
+"Country": "SLE",
+"Infections":      0,
+"fillKey": "1" 
+} 
+},
+"39": {
+ "GIN": {
+ "Day": 38,
+"Country": "GIN",
+"Infections": 1.9429,
+"fillKey": "3" 
+},
+"LBR": {
+ "Day": 38,
+"Country": "LBR",
+"Infections":      0,
+"fillKey": "1" 
+},
+"SLE": {
+ "Day": 38,
+"Country": "SLE",
+"Infections":      0,
+"fillKey": "1" 
+} 
+},
+"40": {
+ "GIN": {
+ "Day": 39,
+"Country": "GIN",
+"Infections": 1.9714,
+"fillKey": "3" 
+},
+"LBR": {
+ "Day": 39,
+"Country": "LBR",
+"Infections":      0,
+"fillKey": "1" 
+},
+"SLE": {
+ "Day": 39,
+"Country": "SLE",
+"Infections":      0,
+"fillKey": "1" 
+} 
+},
+"41": {
+ "GIN": {
+ "Day": 40,
+"Country": "GIN",
+"Infections":      2,
+"fillKey": "3" 
+},
+"LBR": {
+ "Day": 40,
+"Country": "LBR",
+"Infections":      0,
+"fillKey": "1" 
+},
+"SLE": {
+ "Day": 40,
+"Country": "SLE",
+"Infections":      0,
+"fillKey": "1" 
+} 
+},
+"42": {
+ "GIN": {
+ "Day": 41,
+"Country": "GIN",
+"Infections": 1.8025,
+"fillKey": "2" 
+},
+"LBR": {
+ "Day": 41,
+"Country": "LBR",
+"Infections":      0,
+"fillKey": "1" 
+},
+"SLE": {
+ "Day": 41,
+"Country": "SLE",
+"Infections":      0,
+"fillKey": "1" 
+} 
+},
+"43": {
+ "GIN": {
+ "Day": 42,
+"Country": "GIN",
+"Infections": 1.6049,
+"fillKey": "2" 
+},
+"LBR": {
+ "Day": 42,
+"Country": "LBR",
+"Infections":      0,
+"fillKey": "1" 
+},
+"SLE": {
+ "Day": 42,
+"Country": "SLE",
+"Infections":      0,
+"fillKey": "1" 
+} 
+},
+"44": {
+ "GIN": {
+ "Day": 43,
+"Country": "GIN",
+"Infections": 1.4074,
+"fillKey": "2" 
+},
+"LBR": {
+ "Day": 43,
+"Country": "LBR",
+"Infections":      0,
+"fillKey": "1" 
+},
+"SLE": {
+ "Day": 43,
+"Country": "SLE",
+"Infections":      0,
+"fillKey": "1" 
+} 
+},
+"45": {
+ "GIN": {
+ "Day": 44,
+"Country": "GIN",
+"Infections": 1.2099,
+"fillKey": "2" 
+},
+"LBR": {
+ "Day": 44,
+"Country": "LBR",
+"Infections":      0,
+"fillKey": "1" 
+},
+"SLE": {
+ "Day": 44,
+"Country": "SLE",
+"Infections":      0,
+"fillKey": "1" 
+} 
+},
+"46": {
+ "GIN": {
+ "Day": 45,
+"Country": "GIN",
+"Infections": 1.0123,
+"fillKey": "2" 
+},
+"LBR": {
+ "Day": 45,
+"Country": "LBR",
+"Infections":      0,
+"fillKey": "1" 
+},
+"SLE": {
+ "Day": 45,
+"Country": "SLE",
+"Infections":      0,
+"fillKey": "1" 
+} 
+},
+"47": {
+ "GIN": {
+ "Day": 46,
+"Country": "GIN",
+"Infections": 0.81481,
+"fillKey": "1" 
+},
+"LBR": {
+ "Day": 46,
+"Country": "LBR",
+"Infections":      0,
+"fillKey": "1" 
+},
+"SLE": {
+ "Day": 46,
+"Country": "SLE",
+"Infections":      0,
+"fillKey": "1" 
+} 
+},
+"48": {
+ "GIN": {
+ "Day": 47,
+"Country": "GIN",
+"Infections": 0.61728,
+"fillKey": "1" 
+},
+"LBR": {
+ "Day": 47,
+"Country": "LBR",
+"Infections":      0,
+"fillKey": "1" 
+},
+"SLE": {
+ "Day": 47,
+"Country": "SLE",
+"Infections":      0,
+"fillKey": "1" 
+} 
+},
+"49": {
+ "GIN": {
+ "Day": 48,
+"Country": "GIN",
+"Infections": 0.41975,
+"fillKey": "1" 
+},
+"LBR": {
+ "Day": 48,
+"Country": "LBR",
+"Infections":      0,
+"fillKey": "1" 
+},
+"SLE": {
+ "Day": 48,
+"Country": "SLE",
+"Infections":      0,
+"fillKey": "1" 
+} 
+},
+"50": {
+ "GIN": {
+ "Day": 49,
+"Country": "GIN",
+"Infections": 0.22222,
+"fillKey": "1" 
+},
+"LBR": {
+ "Day": 49,
+"Country": "LBR",
+"Infections":      0,
+"fillKey": "1" 
+},
+"SLE": {
+ "Day": 49,
+"Country": "SLE",
+"Infections":      0,
+"fillKey": "1" 
+} 
+},
+"51": {
+ "GIN": {
+ "Day": 50,
+"Country": "GIN",
+"Infections": 0.50617,
+"fillKey": "1" 
+},
+"LBR": {
+ "Day": 50,
+"Country": "LBR",
+"Infections":      0,
+"fillKey": "1" 
+},
+"SLE": {
+ "Day": 50,
+"Country": "SLE",
+"Infections":      0,
+"fillKey": "1" 
+} 
+},
+"52": {
+ "GIN": {
+ "Day": 51,
+"Country": "GIN",
+"Infections": 0.79012,
+"fillKey": "1" 
+},
+"LBR": {
+ "Day": 51,
+"Country": "LBR",
+"Infections":      0,
+"fillKey": "1" 
+},
+"SLE": {
+ "Day": 51,
+"Country": "SLE",
+"Infections":      0,
+"fillKey": "1" 
+} 
+},
+"53": {
+ "GIN": {
+ "Day": 52,
+"Country": "GIN",
+"Infections": 1.0741,
+"fillKey": "2" 
+},
+"LBR": {
+ "Day": 52,
+"Country": "LBR",
+"Infections":      0,
+"fillKey": "1" 
+},
+"SLE": {
+ "Day": 52,
+"Country": "SLE",
+"Infections":      0,
+"fillKey": "1" 
+} 
+},
+"54": {
+ "GIN": {
+ "Day": 53,
+"Country": "GIN",
+"Infections":  1.358,
+"fillKey": "2" 
+},
+"LBR": {
+ "Day": 53,
+"Country": "LBR",
+"Infections":      0,
+"fillKey": "1" 
+},
+"SLE": {
+ "Day": 53,
+"Country": "SLE",
+"Infections":      0,
+"fillKey": "1" 
+} 
+},
+"55": {
+ "GIN": {
+ "Day": 54,
+"Country": "GIN",
+"Infections":  1.642,
+"fillKey": "2" 
+},
+"LBR": {
+ "Day": 54,
+"Country": "LBR",
+"Infections":      0,
+"fillKey": "1" 
+},
+"SLE": {
+ "Day": 54,
+"Country": "SLE",
+"Infections":      0,
+"fillKey": "1" 
+} 
+},
+"56": {
+ "GIN": {
+ "Day": 55,
+"Country": "GIN",
+"Infections": 1.9259,
+"fillKey": "3" 
+},
+"LBR": {
+ "Day": 55,
+"Country": "LBR",
+"Infections":      0,
+"fillKey": "1" 
+},
+"SLE": {
+ "Day": 55,
+"Country": "SLE",
+"Infections":      0,
+"fillKey": "1" 
+} 
+},
+"57": {
+ "GIN": {
+ "Day": 56,
+"Country": "GIN",
+"Infections": 2.2099,
+"fillKey": "3" 
+},
+"LBR": {
+ "Day": 56,
+"Country": "LBR",
+"Infections":      0,
+"fillKey": "1" 
+},
+"SLE": {
+ "Day": 56,
+"Country": "SLE",
+"Infections":      0,
+"fillKey": "1" 
+} 
+},
+"58": {
+ "GIN": {
+ "Day": 57,
+"Country": "GIN",
+"Infections": 2.4938,
+"fillKey": "3" 
+},
+"LBR": {
+ "Day": 57,
+"Country": "LBR",
+"Infections":      0,
+"fillKey": "1" 
+},
+"SLE": {
+ "Day": 57,
+"Country": "SLE",
+"Infections":      0,
+"fillKey": "1" 
+} 
+},
+"59": {
+ "GIN": {
+ "Day": 58,
+"Country": "GIN",
+"Infections": 2.7778,
+"fillKey": "3" 
+},
+"LBR": {
+ "Day": 58,
+"Country": "LBR",
+"Infections":      0,
+"fillKey": "1" 
+},
+"SLE": {
+ "Day": 58,
+"Country": "SLE",
+"Infections":      0,
+"fillKey": "1" 
+} 
+},
+"60": {
+ "GIN": {
+ "Day": 59,
+"Country": "GIN",
+"Infections": 3.5208,
+"fillKey": "4" 
+},
+"LBR": {
+ "Day": 59,
+"Country": "LBR",
+"Infections":      0,
+"fillKey": "1" 
+},
+"SLE": {
+ "Day": 59,
+"Country": "SLE",
+"Infections":      1,
+"fillKey": "2" 
+} 
+},
+"61": {
+ "GIN": {
+ "Day": 60,
+"Country": "GIN",
+"Infections": 4.2639,
+"fillKey": "5" 
+},
+"LBR": {
+ "Day": 60,
+"Country": "LBR",
+"Infections":      0,
+"fillKey": "1" 
+},
+"SLE": {
+ "Day": 60,
+"Country": "SLE",
+"Infections":      2,
+"fillKey": "3" 
+} 
+},
+"62": {
+ "GIN": {
+ "Day": 61,
+"Country": "GIN",
+"Infections": 5.0069,
+"fillKey": "6" 
+},
+"LBR": {
+ "Day": 61,
+"Country": "LBR",
+"Infections":      0,
+"fillKey": "1" 
+},
+"SLE": {
+ "Day": 61,
+"Country": "SLE",
+"Infections":      3,
+"fillKey": "4" 
+} 
+},
+"63": {
+ "GIN": {
+ "Day": 62,
+"Country": "GIN",
+"Infections":   5.75,
+"fillKey": "7" 
+},
+"LBR": {
+ "Day": 62,
+"Country": "LBR",
+"Infections":      0,
+"fillKey": "1" 
+},
+"SLE": {
+ "Day": 62,
+"Country": "SLE",
+"Infections":      4,
+"fillKey": "5" 
+} 
+},
+"64": {
+ "GIN": {
+ "Day": 63,
+"Country": "GIN",
+"Infections": 5.0694,
+"fillKey": "6" 
+},
+"LBR": {
+ "Day": 63,
+"Country": "LBR",
+"Infections": 0.027778,
+"fillKey": "1" 
+},
+"SLE": {
+ "Day": 63,
+"Country": "SLE",
+"Infections": 4.2778,
+"fillKey": "5" 
+} 
+},
+"65": {
+ "GIN": {
+ "Day": 64,
+"Country": "GIN",
+"Infections": 4.3889,
+"fillKey": "5" 
+},
+"LBR": {
+ "Day": 64,
+"Country": "LBR",
+"Infections": 0.055556,
+"fillKey": "1" 
+},
+"SLE": {
+ "Day": 64,
+"Country": "SLE",
+"Infections": 4.5556,
+"fillKey": "5" 
+} 
+},
+"66": {
+ "GIN": {
+ "Day": 65,
+"Country": "GIN",
+"Infections": 3.7083,
+"fillKey": "4" 
+},
+"LBR": {
+ "Day": 65,
+"Country": "LBR",
+"Infections": 0.083333,
+"fillKey": "1" 
+},
+"SLE": {
+ "Day": 65,
+"Country": "SLE",
+"Infections": 4.8333,
+"fillKey": "6" 
+} 
+},
+"67": {
+ "GIN": {
+ "Day": 66,
+"Country": "GIN",
+"Infections": 3.0278,
+"fillKey": "4" 
+},
+"LBR": {
+ "Day": 66,
+"Country": "LBR",
+"Infections": 0.11111,
+"fillKey": "1" 
+},
+"SLE": {
+ "Day": 66,
+"Country": "SLE",
+"Infections": 5.1111,
+"fillKey": "6" 
+} 
+},
+"68": {
+ "GIN": {
+ "Day": 67,
+"Country": "GIN",
+"Infections": 2.3472,
+"fillKey": "3" 
+},
+"LBR": {
+ "Day": 67,
+"Country": "LBR",
+"Infections": 0.13889,
+"fillKey": "1" 
+},
+"SLE": {
+ "Day": 67,
+"Country": "SLE",
+"Infections": 5.3889,
+"fillKey": "6" 
+} 
+},
+"69": {
+ "GIN": {
+ "Day": 68,
+"Country": "GIN",
+"Infections": 1.6667,
+"fillKey": "2" 
+},
+"LBR": {
+ "Day": 68,
+"Country": "LBR",
+"Infections": 0.16667,
+"fillKey": "1" 
+},
+"SLE": {
+ "Day": 68,
+"Country": "SLE",
+"Infections": 5.6667,
+"fillKey": "6" 
+} 
+},
+"70": {
+ "GIN": {
+ "Day": 69,
+"Country": "GIN",
+"Infections":      7,
+"fillKey": "8" 
+},
+"LBR": {
+ "Day": 69,
+"Country": "LBR",
+"Infections": 0.11111,
+"fillKey": "1" 
+},
+"SLE": {
+ "Day": 69,
+"Country": "SLE",
+"Infections": 7.2222,
+"fillKey": "8" 
+} 
+},
+"71": {
+ "GIN": {
+ "Day": 70,
+"Country": "GIN",
+"Infections": 12.333,
+"fillKey": "14" 
+},
+"LBR": {
+ "Day": 70,
+"Country": "LBR",
+"Infections": 0.055556,
+"fillKey": "1" 
+},
+"SLE": {
+ "Day": 70,
+"Country": "SLE",
+"Infections": 8.7778,
+"fillKey": "10" 
+} 
+},
+"72": {
+ "GIN": {
+ "Day": 71,
+"Country": "GIN",
+"Infections": 17.667,
+"fillKey": "19" 
+},
+"LBR": {
+ "Day": 71,
+"Country": "LBR",
+"Infections":      0,
+"fillKey": "1" 
+},
+"SLE": {
+ "Day": 71,
+"Country": "SLE",
+"Infections": 10.333,
+"fillKey": "11" 
+} 
+},
+"73": {
+ "GIN": {
+ "Day": 72,
+"Country": "GIN",
+"Infections": 15.253,
+"fillKey": "17" 
+},
+"LBR": {
+ "Day": 72,
+"Country": "LBR",
+"Infections":      0,
+"fillKey": "1" 
+},
+"SLE": {
+ "Day": 72,
+"Country": "SLE",
+"Infections": 8.5867,
+"fillKey": "10" 
+} 
+},
+"74": {
+ "GIN": {
+ "Day": 73,
+"Country": "GIN",
+"Infections":  12.84,
+"fillKey": "14" 
+},
+"LBR": {
+ "Day": 73,
+"Country": "LBR",
+"Infections":      0,
+"fillKey": "1" 
+},
+"SLE": {
+ "Day": 73,
+"Country": "SLE",
+"Infections":   6.84,
+"fillKey": "8" 
+} 
+},
+"75": {
+ "GIN": {
+ "Day": 74,
+"Country": "GIN",
+"Infections": 10.427,
+"fillKey": "12" 
+},
+"LBR": {
+ "Day": 74,
+"Country": "LBR",
+"Infections":      0,
+"fillKey": "1" 
+},
+"SLE": {
+ "Day": 74,
+"Country": "SLE",
+"Infections": 5.0933,
+"fillKey": "6" 
+} 
+},
+"76": {
+ "GIN": {
+ "Day": 75,
+"Country": "GIN",
+"Infections": 8.0133,
+"fillKey": "9" 
+},
+"LBR": {
+ "Day": 75,
+"Country": "LBR",
+"Infections":      0,
+"fillKey": "1" 
+},
+"SLE": {
+ "Day": 75,
+"Country": "SLE",
+"Infections": 3.3467,
+"fillKey": "4" 
+} 
+},
+"77": {
+ "GIN": {
+ "Day": 76,
+"Country": "GIN",
+"Infections":    5.6,
+"fillKey": "6" 
+},
+"LBR": {
+ "Day": 76,
+"Country": "LBR",
+"Infections":      0,
+"fillKey": "1" 
+},
+"SLE": {
+ "Day": 76,
+"Country": "SLE",
+"Infections":    1.6,
+"fillKey": "2" 
+} 
+},
+"78": {
+ "GIN": {
+ "Day": 77,
+"Country": "GIN",
+"Infections": 5.3062,
+"fillKey": "6" 
+},
+"LBR": {
+ "Day": 77,
+"Country": "LBR",
+"Infections": 0.3125,
+"fillKey": "1" 
+},
+"SLE": {
+ "Day": 77,
+"Country": "SLE",
+"Infections":  1.525,
+"fillKey": "2" 
+} 
+},
+"79": {
+ "GIN": {
+ "Day": 78,
+"Country": "GIN",
+"Infections": 5.0125,
+"fillKey": "6" 
+},
+"LBR": {
+ "Day": 78,
+"Country": "LBR",
+"Infections":  0.625,
+"fillKey": "1" 
+},
+"SLE": {
+ "Day": 78,
+"Country": "SLE",
+"Infections":   1.45,
+"fillKey": "2" 
+} 
+},
+"80": {
+ "GIN": {
+ "Day": 79,
+"Country": "GIN",
+"Infections": 4.7188,
+"fillKey": "5" 
+},
+"LBR": {
+ "Day": 79,
+"Country": "LBR",
+"Infections": 0.9375,
+"fillKey": "2" 
+},
+"SLE": {
+ "Day": 79,
+"Country": "SLE",
+"Infections":  1.375,
+"fillKey": "2" 
+} 
+},
+"81": {
+ "GIN": {
+ "Day": 80,
+"Country": "GIN",
+"Infections":  4.425,
+"fillKey": "5" 
+},
+"LBR": {
+ "Day": 80,
+"Country": "LBR",
+"Infections":   1.25,
+"fillKey": "2" 
+},
+"SLE": {
+ "Day": 80,
+"Country": "SLE",
+"Infections":    1.3,
+"fillKey": "2" 
+} 
+},
+"82": {
+ "GIN": {
+ "Day": 81,
+"Country": "GIN",
+"Infections": 4.1312,
+"fillKey": "5" 
+},
+"LBR": {
+ "Day": 81,
+"Country": "LBR",
+"Infections": 1.5625,
+"fillKey": "2" 
+},
+"SLE": {
+ "Day": 81,
+"Country": "SLE",
+"Infections":  1.225,
+"fillKey": "2" 
+} 
+},
+"83": {
+ "GIN": {
+ "Day": 82,
+"Country": "GIN",
+"Infections": 3.8375,
+"fillKey": "5" 
+},
+"LBR": {
+ "Day": 82,
+"Country": "LBR",
+"Infections":  1.875,
+"fillKey": "3" 
+},
+"SLE": {
+ "Day": 82,
+"Country": "SLE",
+"Infections":   1.15,
+"fillKey": "2" 
+} 
+},
+"84": {
+ "GIN": {
+ "Day": 83,
+"Country": "GIN",
+"Infections": 3.5438,
+"fillKey": "4" 
+},
+"LBR": {
+ "Day": 83,
+"Country": "LBR",
+"Infections": 2.1875,
+"fillKey": "3" 
+},
+"SLE": {
+ "Day": 83,
+"Country": "SLE",
+"Infections":  1.075,
+"fillKey": "2" 
+} 
+},
+"85": {
+ "GIN": {
+ "Day": 84,
+"Country": "GIN",
+"Infections":   3.25,
+"fillKey": "4" 
+},
+"LBR": {
+ "Day": 84,
+"Country": "LBR",
+"Infections":    2.5,
+"fillKey": "3" 
+},
+"SLE": {
+ "Day": 84,
+"Country": "SLE",
+"Infections":      1,
+"fillKey": "2" 
+} 
+},
+"86": {
+ "GIN": {
+ "Day": 85,
+"Country": "GIN",
+"Infections": 2.7083,
+"fillKey": "3" 
+},
+"LBR": {
+ "Day": 85,
+"Country": "LBR",
+"Infections": 2.5833,
+"fillKey": "3" 
+},
+"SLE": {
+ "Day": 85,
+"Country": "SLE",
+"Infections": 2.5278,
+"fillKey": "3" 
+} 
+},
+"87": {
+ "GIN": {
+ "Day": 86,
+"Country": "GIN",
+"Infections": 2.1667,
+"fillKey": "3" 
+},
+"LBR": {
+ "Day": 86,
+"Country": "LBR",
+"Infections": 2.6667,
+"fillKey": "3" 
+},
+"SLE": {
+ "Day": 86,
+"Country": "SLE",
+"Infections": 4.0556,
+"fillKey": "5" 
+} 
+},
+"88": {
+ "GIN": {
+ "Day": 87,
+"Country": "GIN",
+"Infections":  1.625,
+"fillKey": "2" 
+},
+"LBR": {
+ "Day": 87,
+"Country": "LBR",
+"Infections":   2.75,
+"fillKey": "3" 
+},
+"SLE": {
+ "Day": 87,
+"Country": "SLE",
+"Infections": 5.5833,
+"fillKey": "6" 
+} 
+},
+"89": {
+ "GIN": {
+ "Day": 88,
+"Country": "GIN",
+"Infections": 1.0833,
+"fillKey": "2" 
+},
+"LBR": {
+ "Day": 88,
+"Country": "LBR",
+"Infections": 2.8333,
+"fillKey": "4" 
+},
+"SLE": {
+ "Day": 88,
+"Country": "SLE",
+"Infections": 7.1111,
+"fillKey": "8" 
+} 
+},
+"90": {
+ "GIN": {
+ "Day": 89,
+"Country": "GIN",
+"Infections": 0.54167,
+"fillKey": "1" 
+},
+"LBR": {
+ "Day": 89,
+"Country": "LBR",
+"Infections": 2.9167,
+"fillKey": "4" 
+},
+"SLE": {
+ "Day": 89,
+"Country": "SLE",
+"Infections": 8.6389,
+"fillKey": "10" 
+} 
+},
+"91": {
+ "GIN": {
+ "Day": 90,
+"Country": "GIN",
+"Infections":      0,
+"fillKey": "1" 
+},
+"LBR": {
+ "Day": 90,
+"Country": "LBR",
+"Infections":      3,
+"fillKey": "4" 
+},
+"SLE": {
+ "Day": 90,
+"Country": "SLE",
+"Infections": 10.167,
+"fillKey": "11" 
+} 
+},
+"92": {
+ "GIN": {
+ "Day": 91,
+"Country": "GIN",
+"Infections": 0.35938,
+"fillKey": "1" 
+},
+"LBR": {
+ "Day": 91,
+"Country": "LBR",
+"Infections":    3.5,
+"fillKey": "4" 
+},
+"SLE": {
+ "Day": 91,
+"Country": "SLE",
+"Infections": 10.161,
+"fillKey": "11" 
+} 
+},
+"93": {
+ "GIN": {
+ "Day": 92,
+"Country": "GIN",
+"Infections": 0.71875,
+"fillKey": "1" 
+},
+"LBR": {
+ "Day": 92,
+"Country": "LBR",
+"Infections":      4,
+"fillKey": "5" 
+},
+"SLE": {
+ "Day": 92,
+"Country": "SLE",
+"Infections": 10.156,
+"fillKey": "11" 
+} 
+},
+"94": {
+ "GIN": {
+ "Day": 93,
+"Country": "GIN",
+"Infections": 1.0781,
+"fillKey": "2" 
+},
+"LBR": {
+ "Day": 93,
+"Country": "LBR",
+"Infections":    4.5,
+"fillKey": "5" 
+},
+"SLE": {
+ "Day": 93,
+"Country": "SLE",
+"Infections": 10.151,
+"fillKey": "11" 
+} 
+},
+"95": {
+ "GIN": {
+ "Day": 94,
+"Country": "GIN",
+"Infections": 1.4375,
+"fillKey": "2" 
+},
+"LBR": {
+ "Day": 94,
+"Country": "LBR",
+"Infections":      5,
+"fillKey": "6" 
+},
+"SLE": {
+ "Day": 94,
+"Country": "SLE",
+"Infections": 10.146,
+"fillKey": "11" 
+} 
+},
+"96": {
+ "GIN": {
+ "Day": 95,
+"Country": "GIN",
+"Infections": 1.7969,
+"fillKey": "2" 
+},
+"LBR": {
+ "Day": 95,
+"Country": "LBR",
+"Infections":    5.5,
+"fillKey": "6" 
+},
+"SLE": {
+ "Day": 95,
+"Country": "SLE",
+"Infections": 10.141,
+"fillKey": "11" 
+} 
+},
+"97": {
+ "GIN": {
+ "Day": 96,
+"Country": "GIN",
+"Infections": 2.1562,
+"fillKey": "3" 
+},
+"LBR": {
+ "Day": 96,
+"Country": "LBR",
+"Infections":      6,
+"fillKey": "7" 
+},
+"SLE": {
+ "Day": 96,
+"Country": "SLE",
+"Infections": 10.135,
+"fillKey": "11" 
+} 
+},
+"98": {
+ "GIN": {
+ "Day": 97,
+"Country": "GIN",
+"Infections": 2.5156,
+"fillKey": "3" 
+},
+"LBR": {
+ "Day": 97,
+"Country": "LBR",
+"Infections":    6.5,
+"fillKey": "7" 
+},
+"SLE": {
+ "Day": 97,
+"Country": "SLE",
+"Infections":  10.13,
+"fillKey": "11" 
+} 
+},
+"99": {
+ "GIN": {
+ "Day": 98,
+"Country": "GIN",
+"Infections":  2.875,
+"fillKey": "4" 
+},
+"LBR": {
+ "Day": 98,
+"Country": "LBR",
+"Infections":      7,
+"fillKey": "8" 
+},
+"SLE": {
+ "Day": 98,
+"Country": "SLE",
+"Infections": 10.125,
+"fillKey": "11" 
+} 
+},
+"100": {
+ "GIN": {
+ "Day": 99,
+"Country": "GIN",
+"Infections": 2.3958,
+"fillKey": "3" 
+},
+"LBR": {
+ "Day": 99,
+"Country": "LBR",
+"Infections":    6.5,
+"fillKey": "7" 
+},
+"SLE": {
+ "Day": 99,
+"Country": "SLE",
+"Infections": 10.271,
+"fillKey": "11" 
+} 
+},
+"101": {
+ "GIN": {
+ "Day": 100,
+"Country": "GIN",
+"Infections": 1.9167,
+"fillKey": "3" 
+},
+"LBR": {
+ "Day": 100,
+"Country": "LBR",
+"Infections":      6,
+"fillKey": "7" 
+},
+"SLE": {
+ "Day": 100,
+"Country": "SLE",
+"Infections": 10.417,
+"fillKey": "12" 
+} 
+},
+"102": {
+ "GIN": {
+ "Day": 101,
+"Country": "GIN",
+"Infections": 1.4375,
+"fillKey": "2" 
+},
+"LBR": {
+ "Day": 101,
+"Country": "LBR",
+"Infections":    5.5,
+"fillKey": "6" 
+},
+"SLE": {
+ "Day": 101,
+"Country": "SLE",
+"Infections": 10.562,
+"fillKey": "12" 
+} 
+},
+"103": {
+ "GIN": {
+ "Day": 102,
+"Country": "GIN",
+"Infections": 0.95833,
+"fillKey": "2" 
+},
+"LBR": {
+ "Day": 102,
+"Country": "LBR",
+"Infections":      5,
+"fillKey": "6" 
+},
+"SLE": {
+ "Day": 102,
+"Country": "SLE",
+"Infections": 10.708,
+"fillKey": "12" 
+} 
+},
+"104": {
+ "GIN": {
+ "Day": 103,
+"Country": "GIN",
+"Infections": 0.47917,
+"fillKey": "1" 
+},
+"LBR": {
+ "Day": 103,
+"Country": "LBR",
+"Infections":    4.5,
+"fillKey": "5" 
+},
+"SLE": {
+ "Day": 103,
+"Country": "SLE",
+"Infections": 10.854,
+"fillKey": "12" 
+} 
+},
+"105": {
+ "GIN": {
+ "Day": 104,
+"Country": "GIN",
+"Infections":      0,
+"fillKey": "1" 
+},
+"LBR": {
+ "Day": 104,
+"Country": "LBR",
+"Infections":      4,
+"fillKey": "5" 
+},
+"SLE": {
+ "Day": 104,
+"Country": "SLE",
+"Infections":     11,
+"fillKey": "12" 
+} 
+},
+"106": {
+ "GIN": {
+ "Day": 105,
+"Country": "GIN",
+"Infections":   0.25,
+"fillKey": "1" 
+},
+"LBR": {
+ "Day": 105,
+"Country": "LBR",
+"Infections":   4.75,
+"fillKey": "6" 
+},
+"SLE": {
+ "Day": 105,
+"Country": "SLE",
+"Infections":   13.5,
+"fillKey": "15" 
+} 
+},
+"107": {
+ "GIN": {
+ "Day": 106,
+"Country": "GIN",
+"Infections":    0.5,
+"fillKey": "1" 
+},
+"LBR": {
+ "Day": 106,
+"Country": "LBR",
+"Infections":    5.5,
+"fillKey": "6" 
+},
+"SLE": {
+ "Day": 106,
+"Country": "SLE",
+"Infections":     16,
+"fillKey": "17" 
+} 
+},
+"108": {
+ "GIN": {
+ "Day": 107,
+"Country": "GIN",
+"Infections":    0.4,
+"fillKey": "1" 
+},
+"LBR": {
+ "Day": 107,
+"Country": "LBR",
+"Infections":    5.6,
+"fillKey": "6" 
+},
+"SLE": {
+ "Day": 107,
+"Country": "SLE",
+"Infections":  14.76,
+"fillKey": "16" 
+} 
+},
+"109": {
+ "GIN": {
+ "Day": 108,
+"Country": "GIN",
+"Infections":    0.3,
+"fillKey": "1" 
+},
+"LBR": {
+ "Day": 108,
+"Country": "LBR",
+"Infections":    5.7,
+"fillKey": "7" 
+},
+"SLE": {
+ "Day": 108,
+"Country": "SLE",
+"Infections":  13.52,
+"fillKey": "15" 
+} 
+},
+"110": {
+ "GIN": {
+ "Day": 109,
+"Country": "GIN",
+"Infections":    0.2,
+"fillKey": "1" 
+},
+"LBR": {
+ "Day": 109,
+"Country": "LBR",
+"Infections":    5.8,
+"fillKey": "7" 
+},
+"SLE": {
+ "Day": 109,
+"Country": "SLE",
+"Infections":  12.28,
+"fillKey": "13" 
+} 
+},
+"111": {
+ "GIN": {
+ "Day": 110,
+"Country": "GIN",
+"Infections":    0.1,
+"fillKey": "1" 
+},
+"LBR": {
+ "Day": 110,
+"Country": "LBR",
+"Infections":    5.9,
+"fillKey": "7" 
+},
+"SLE": {
+ "Day": 110,
+"Country": "SLE",
+"Infections":  11.04,
+"fillKey": "12" 
+} 
+},
+"112": {
+ "GIN": {
+ "Day": 111,
+"Country": "GIN",
+"Infections":      0,
+"fillKey": "1" 
+},
+"LBR": {
+ "Day": 111,
+"Country": "LBR",
+"Infections":      6,
+"fillKey": "7" 
+},
+"SLE": {
+ "Day": 111,
+"Country": "SLE",
+"Infections":    9.8,
+"fillKey": "11" 
+} 
+},
+"113": {
+ "GIN": {
+ "Day": 112,
+"Country": "GIN",
+"Infections": 0.44444,
+"fillKey": "1" 
+},
+"LBR": {
+ "Day": 112,
+"Country": "LBR",
+"Infections": 6.6667,
+"fillKey": "8" 
+},
+"SLE": {
+ "Day": 112,
+"Country": "SLE",
+"Infections": 12.756,
+"fillKey": "14" 
+} 
+},
+"114": {
+ "GIN": {
+ "Day": 113,
+"Country": "GIN",
+"Infections": 0.88889,
+"fillKey": "1" 
+},
+"LBR": {
+ "Day": 113,
+"Country": "LBR",
+"Infections": 7.3333,
+"fillKey": "8" 
+},
+"SLE": {
+ "Day": 113,
+"Country": "SLE",
+"Infections": 15.711,
+"fillKey": "17" 
+} 
+},
+"115": {
+ "GIN": {
+ "Day": 114,
+"Country": "GIN",
+"Infections": 1.3333,
+"fillKey": "2" 
+},
+"LBR": {
+ "Day": 114,
+"Country": "LBR",
+"Infections":      8,
+"fillKey": "9" 
+},
+"SLE": {
+ "Day": 114,
+"Country": "SLE",
+"Infections": 18.667,
+"fillKey": "20" 
+} 
+},
+"116": {
+ "GIN": {
+ "Day": 115,
+"Country": "GIN",
+"Infections": 1.9167,
+"fillKey": "3" 
+},
+"LBR": {
+ "Day": 115,
+"Country": "LBR",
+"Infections":     11,
+"fillKey": "12" 
+},
+"SLE": {
+ "Day": 115,
+"Country": "SLE",
+"Infections": 12.333,
+"fillKey": "14" 
+} 
+},
+"117": {
+ "GIN": {
+ "Day": 116,
+"Country": "GIN",
+"Infections":    2.5,
+"fillKey": "3" 
+},
+"LBR": {
+ "Day": 116,
+"Country": "LBR",
+"Infections":     14,
+"fillKey": "15" 
+},
+"SLE": {
+ "Day": 116,
+"Country": "SLE",
+"Infections":      6,
+"fillKey": "7" 
+} 
+},
+"118": {
+ "GIN": {
+ "Day": 117,
+"Country": "GIN",
+"Infections":      3,
+"fillKey": "4" 
+},
+"LBR": {
+ "Day": 117,
+"Country": "LBR",
+"Infections": 12.111,
+"fillKey": "13" 
+},
+"SLE": {
+ "Day": 117,
+"Country": "SLE",
+"Infections": 11.889,
+"fillKey": "13" 
+} 
+},
+"119": {
+ "GIN": {
+ "Day": 118,
+"Country": "GIN",
+"Infections":    3.5,
+"fillKey": "4" 
+},
+"LBR": {
+ "Day": 118,
+"Country": "LBR",
+"Infections": 10.222,
+"fillKey": "11" 
+},
+"SLE": {
+ "Day": 118,
+"Country": "SLE",
+"Infections": 17.778,
+"fillKey": "19" 
+} 
+},
+"120": {
+ "GIN": {
+ "Day": 119,
+"Country": "GIN",
+"Infections":      4,
+"fillKey": "5" 
+},
+"LBR": {
+ "Day": 119,
+"Country": "LBR",
+"Infections": 8.3333,
+"fillKey": "9" 
+},
+"SLE": {
+ "Day": 119,
+"Country": "SLE",
+"Infections": 23.667,
+"fillKey": "25" 
+} 
+} 
+},
+"id": "chart_1" 
+}
+  chartParams.element = document.getElementById('chart_1')
+  
+  
+  var mapchart_1 = new Datamap(chartParams);
+  
+  
+    
+  // draw a bubble map if specified
+  if (chartParams.bubbles) {
+    var bubbles = chartParams.bubbles
+    mapchart_1.bubbles(bubbles)
+  }
+  
+  if (chartParams.labels){
+    mapchart_1.labels()
+  }
+  
+  if (chartParams.legend){
+    mapchart_1.legend()
+  }
+  
+  setProjection = function( element, options ) {
+    var projection, path;
+ 
+      projection = d3.geo.albersUsa()
+        .scale(element.offsetWidth)
+        .translate([element.offsetWidth / 2, element.offsetHeight / 2]);
+ 
+    path = d3.geo.path()
+      .projection( projection );
+ 
+    return {path: path, projection: projection};
+  }
+</script>
+
+<style>
+.datamaps {
+  position: relative;
+}
+</style>
+    
+    <script></script>    
+  </body>
+</html>
