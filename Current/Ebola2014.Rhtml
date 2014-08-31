@@ -493,7 +493,7 @@ Z = poly(daysSinceJan, degree=modelDF)
 # We're going to want to do prediction, so let's generate the fixed and time 
 # varying prediction covariate matrices now as well
 X.predict = cbind(diag(4))
-Z.predict = predict.poly(Z, c(max(daysSinceJan) + 1, 
+Z.predict = predict(Z, c(max(daysSinceJan) + 1, 
                               max(daysSinceJan) + seq(2,pred.days-2,2))) 
 
 # The time varying covariates are the same for each spatial location for this
