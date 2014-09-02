@@ -45,7 +45,7 @@
           <h4>A Quick Stochastic Spatial SEIR Modeling Approach</h4>
           <h5><a href="http://www.public-health.uiowa.edu/people/grant-brown/">Grant Brown</a></h5>
           <h5><a href="http://www.public-health.uiowa.edu/people/jacob-oleson/">Jacob Oleson</a></h5>
-          <h5>Last Updated: 8/28/2014</h5>
+          <h5>Last Updated: 9/2/2014</h5>
         </div>
       </div>
     </div>
@@ -136,6 +136,7 @@
             <li><strong>Aug 12</strong> Liberia continues to worsen, though Sierra Leone appears to have leveled off. Guinea might be worsening slightly. </li>
             <li><strong>Aug 28</strong> With the addition of Nigeria and new data, the situation appears dire across the board, especially in Liberia. The basic reproductive number calculations no longer look reasonable, so more must be done to estimate them separately for each country. The changes may also be due to recent changes to the R0 estimation code, which must now be reevaluated. This work is underway. </li>
             <li><strong>Aug 31</strong> Basic reproductive number clearly very heterogenous between countries. Other interpretations TBD.</li>
+            <li><strong>Sep 2</strong> TBD.</li>
           
           </ul>
         </div>
@@ -172,15 +173,15 @@ modelDF = 4
 pred.days = 12
 
 ## Compute number of samples/batches
-numConvergenceBatches = ifelse(documentCompilationMode == "release", 500,   100)
-convergenceBatchSize =  ifelse(documentCompilationMode == "release", 10000, 100) 
+numConvergenceBatches = ifelse(documentCompilationMode == "release", 250,  100)
+convergenceBatchSize =  ifelse(documentCompilationMode == "release", 1000, 100) 
 extraR0Iterations =     ifelse(documentCompilationMode == "release", 500,   10)
-iterationStride =       ifelse(documentCompilationMode == "release", 1000,  50)
+iterationStride =       ifelse(documentCompilationMode == "release", 500,   50)
 
 ## Read in the data
 url = 'http://en.wikipedia.org/wiki/West_Africa_Ebola_virus_outbreak'
 tbls = readHTMLTable(url)
-dat = tbls[[2]] # This line changes depending on the page formatting.
+dat = tbls[[3]] # This line changes depending on the page formatting.
 
 # One date is now duplicated on the Wikipedia page, due to using different sources. 
 # Clean that up first. 
@@ -668,7 +669,7 @@ buildAndRunModel = function(params)
                         scaleDistanceMode)
   
   SEIRmodel$setRandomSeed(params[["seedVal"]])
-  
+  SEIRmodel$compartmentSamplingMode = 14
   # Do we need to keep track of compartment values for prediction? 
   # No sense doing this for all of the chains.
   if (params[["traceCompartments"]])
