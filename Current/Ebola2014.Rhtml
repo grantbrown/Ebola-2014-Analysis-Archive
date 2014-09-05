@@ -64,13 +64,6 @@
               </ul>
             </li>
             <li><a href="#analysis-1-sect">Analysis 1: Polynomial Basis</a>
-              <ul>
-                <li><a href="#analysis-1-set-up-sect">Set Up</a></li>
-                <li><a href="#analysis-1-convergence-sect">Convergence Diagnosis</a></li>
-                <li><a href="#analysis-1-estimates-sect">Estimated Epidemic Behavior</a></li>
-                <li><a href="#analysis-1-r0-sect">Basic Reproductive Number</a></li>
-                <li><a href="#analysis-1-prediction-sect">Prediction</a></li>
-              </ul>
             </li>
             <li><a href="#anchor-analysis-2-sect">Analysis 2: Natural Spline Basis</a>
               <ul>
@@ -92,29 +85,29 @@
       </a>
       <div class="row">
         <div class = "col-sm-10 col-sm-offset-1">
-        <a id="intro-abstract-sect" class="anchor">
-        <h3>About this document.</h3>
-        </a>
-        <p>This is a living document, as the Ebola epidemic is rapidly evolving. Presented below is a preliminary modeling approach to the 
-        crisis, originally conceived as an illustration of the spatial SEIR model family generally and the capabilities of the rapidly developing 
-        (and totally unfinished) libspatialSEIR software library particularly. This is not yet peer reviewed research, or even a particularly complete analysis. 
-        Nevertheless, we hope that the initial exploration given below is instructive and useful</p>
-        <br/>
-        <p>
-        All revisions of and changes to this document are saved on the 
-        <a href="https://github.com/grantbrown/libspatialSEIR/commits/gh-pages">gh-pages branch</a> of the <a href="https://github.com/grantbrown/libspatialSEIR">libspatialSEIR git repository</a>. Several past versions are also cached in an external repository: 
-        <ul>
-          <li><a href="http://grantbrown.github.io/Ebola-2014-Analysis-Archive/Aug_12_2014/Ebola2014/Ebola2014.html">Aug 12, 2014</a></li>
-          <li><a href="http://grantbrown.github.io/Ebola-2014-Analysis-Archive/Aug_10_2014/Ebola2014/Ebola2014.html">Aug 10, 2014</a></li>
-          <li><a href="http://grantbrown.github.io/Ebola-2014-Analysis-Archive/Aug_05_2014/Ebola2014/Ebola2014.html">Aug 5, 2014</a></li>
-          <li><a href="http://grantbrown.github.io/Ebola-2014-Analysis-Archive/Aug_03_2014/Ebola2014/Ebola2014.html">Aug 3, 2014</a></li>
-          <li><a href="http://grantbrown.github.io/Ebola-2014-Analysis-Archive/Jul_30_2014/Ebola2014/Ebola2014.html">Jul 30, 2014</a></li>
-          <li><a href="http://grantbrown.github.io/Ebola-2014-Analysis-Archive/Jul_29_2014/Ebola2014/Ebola2014.html">Jul 29, 2014</a></li>
-          <li><a href="http://grantbrown.github.io/Ebola-2014-Analysis-Archive/Jul_25_2014/Ebola2014/Ebola2014.html">Jul 25, 2014</a></li>
-          <li><a href="http://grantbrown.github.io/Ebola-2014-Analysis-Archive/Jul_24_2014/Ebola2014/Ebola2014.html">Jul 25, 2014</a></li>
-        <ul>
-        
-        <p>Additional analyses are underway. An <a href = "http://grantbrown.github.io/libspatialSEIR/doc/tutorials/Ebola2014/Ebola2014_PastPred.html">informal look at prediction performance over time</a> is now available.</p>
+          <a id="intro-abstract-sect" class="anchor">
+          <h3>About this document.</h3>
+          </a>
+          <p>This is a living document, as the Ebola epidemic is rapidly evolving. Presented below is a preliminary modeling approach to the 
+          crisis, originally conceived as an illustration of the spatial SEIR model family generally and the capabilities of the rapidly developing 
+          (and totally unfinished) libspatialSEIR software library particularly. This is not yet peer reviewed research, or even a particularly complete analysis. 
+          Nevertheless, we hope that the initial exploration given below is instructive and useful. </p>
+          <br/>
+          <p>
+          Past versions of this analysis are cached in a repository on Github, and remain available: 
+          <ul>
+            <li><a href="http://grantbrown.github.io/Ebola-2014-Analysis-Archive/Aug_28_2014/Ebola2014/Ebola2014.html">Aug 28, 2014</a></li>
+            <li><a href="http://grantbrown.github.io/Ebola-2014-Analysis-Archive/Aug_12_2014/Ebola2014/Ebola2014.html">Aug 12, 2014</a></li>
+            <li><a href="http://grantbrown.github.io/Ebola-2014-Analysis-Archive/Aug_10_2014/Ebola2014/Ebola2014.html">Aug 10, 2014</a></li>
+            <li><a href="http://grantbrown.github.io/Ebola-2014-Analysis-Archive/Aug_05_2014/Ebola2014/Ebola2014.html">Aug 5, 2014</a></li>
+            <li><a href="http://grantbrown.github.io/Ebola-2014-Analysis-Archive/Aug_03_2014/Ebola2014/Ebola2014.html">Aug 3, 2014</a></li>
+            <li><a href="http://grantbrown.github.io/Ebola-2014-Analysis-Archive/Jul_30_2014/Ebola2014/Ebola2014.html">Jul 30, 2014</a></li>
+            <li><a href="http://grantbrown.github.io/Ebola-2014-Analysis-Archive/Jul_29_2014/Ebola2014/Ebola2014.html">Jul 29, 2014</a></li>
+            <li><a href="http://grantbrown.github.io/Ebola-2014-Analysis-Archive/Jul_25_2014/Ebola2014/Ebola2014.html">Jul 25, 2014</a></li>
+            <li><a href="http://grantbrown.github.io/Ebola-2014-Analysis-Archive/Jul_24_2014/Ebola2014/Ebola2014.html">Jul 25, 2014</a></li>
+          <ul>
+          
+          <p>Additional analyses are underway. An <a href = "http://grantbrown.github.io/libspatialSEIR/doc/tutorials/Ebola2014/Ebola2014_PastPred.html">informal look at prediction performance over time</a> is also available.</p>
         </div>
         <div class="col-sm-1"></div>
         <br/>
@@ -123,8 +116,11 @@
           <h3>Summary of Recent Changes</h3>
           </a>
           <ul>
-            <li><Strong>July 30</strong> Previous predictions of mid-fall resolution of epidemic begin to shift.</li>
-            <li><Strong>Aug 3</strong> Predicted epidmic curves start to strongly favor a uniformly worsening situation.</li>
+            <li><strong>Sep 4</strong> The situation continues to worsen, which is especially worrying given that the data used are almost certainly undercounts. Removed the polynomial analysis in favor of the spline basis analysis to save on computation time. </li>
+            <li><strong>Aug 31</strong> Basic reproductive number clearly very heterogenous between countries. Other interpretations TBD.</li>
+            <li><strong>Aug 28</strong> With the addition of Nigeria and new data, the situation appears dire across the board, especially in Liberia. The basic reproductive number calculations no longer look reasonable, so more must be done to estimate them separately for each country. The changes may also be due to recent changes to the R0 estimation code, which must now be reevaluated. This work is underway. </li>
+            <li><strong>Aug 12</strong> Liberia continues to worsen, though Sierra Leone appears to have leveled off. Guinea might be worsening slightly. </li>
+            <li><strong>Aug 10</strong> Predictions remain much the same, though perhaps not so immediately catestrophic as the August 5 predictions. </li>
             <li><Strong>Aug 5</strong> Models begin to show catastrophic predictions. Epidemic is changing too quickly for these simple models.</li>
             <ul>
               <li>Shorten prediction window</li>
@@ -132,12 +128,8 @@
               <li>Recall that these models can't account for changing inteventions, of which there are many. The predictions are therefore made
               under the assumption that the epidemic will continue to evolve according to the same process it has so far.</li>
             </ul>
-            <li><strong>Aug 10</strong> Predictions remain much the same, though perhaps not so immediately catestrophic as the August 5 predictions. </li>
-            <li><strong>Aug 12</strong> Liberia continues to worsen, though Sierra Leone appears to have leveled off. Guinea might be worsening slightly. </li>
-            <li><strong>Aug 28</strong> With the addition of Nigeria and new data, the situation appears dire across the board, especially in Liberia. The basic reproductive number calculations no longer look reasonable, so more must be done to estimate them separately for each country. The changes may also be due to recent changes to the R0 estimation code, which must now be reevaluated. This work is underway. </li>
-            <li><strong>Aug 31</strong> Basic reproductive number clearly very heterogenous between countries. Other interpretations TBD.</li>
-            <li><strong>Sep 2</strong> TBD.</li>
-          
+            <li><Strong>Aug 3</strong> Predicted epidmic curves start to strongly favor a uniformly worsening situation.</li>
+            <li><Strong>July 30</strong> Previous predictions of mid-fall resolution of epidemic begin to shift.</li>
           </ul>
         </div>
         <div class="col-sm-1"></div>
@@ -148,7 +140,7 @@
         <h3>The Outbreak</h3>
         </a>
           <p>
-          The 2014 Ebola outbreak in West Africa is an ongoing public health crisis, which has killed hundreds of people so far. The cross-border nature of this epidemic, which has emerged in Guinea, Liberia and Sierra Leone has complicated mitigation efforts, as has the poor health infrastructure in the region. While there has been much analysis and speculation about the factors at play in the spread of the virus, to our knowledge there aren't any specific predictions about the expected duration and severity of this particular epidemic. In the (certainly temporary) absence of epidemic forecasts, this document explores a simple spatial SEIR model to make some initial predictions. 
+          The 2014 Ebola outbreak in West Africa is an ongoing public health crisis, which has killed thousands of people so far. The cross-border nature of this epidemic, which emerged in Guinea, Liberia and Sierra Leone has complicated mitigation efforts, as has the poor health infrastructure in the region. This document explores a simple spatial SEIR model to make some initial predictions. 
           </p>
           <a id="intro-data-sect" class="anchor">
         <h3>The Data</h3>
@@ -167,21 +159,21 @@ library(parallel) # Load the parallel library to enable multiple chains to be ru
 
 ## Define Document Compilation Parameters
 
-documentCompilationMode = "release"
-#documentCompilationMode = "debug"
-modelDF = 4
+#documentCompilationMode = "release"
+documentCompilationMode = "debug"
+modelDF = 6
 pred.days = 12
 
 ## Compute number of samples/batches
 numConvergenceBatches = ifelse(documentCompilationMode == "release", 250,  100)
-convergenceBatchSize =  ifelse(documentCompilationMode == "release", 1000, 100) 
+convergenceBatchSize =  ifelse(documentCompilationMode == "release", 1000, 50) 
 extraR0Iterations =     ifelse(documentCompilationMode == "release", 500,   10)
 iterationStride =       ifelse(documentCompilationMode == "release", 500,   50)
 
 ## Read in the data
 url = 'http://en.wikipedia.org/wiki/West_Africa_Ebola_virus_outbreak'
 tbls = readHTMLTable(url)
-dat = tbls[[3]] # This line changes depending on the page formatting.
+dat = tbls[[5]] # This line changes depending on the page formatting.
 
 # One date is now duplicated on the Wikipedia page, due to using different sources. 
 # Clean that up first. 
@@ -264,8 +256,7 @@ end.rcode-->
 <p>
 These represent cumulative counts, but because case reports can be revised downward due to non-Ebola illnesses the graphs are not monotone. A quick, but effective solution to this problem is to simply "un-cumulate"* the data and bound it at zero to get a rough estimate of new case counts over time. 
 <br/>
-
-<small> *Unlike uncumulate, decumulate is actually a word. Unfortunately it just means "to decrease", and so was unsuitable for use here. There should probably be a word for uncumulating things, perhaps uncumulate. </small></p>
+</p>
 <button class="btn btn-default code-button">Show/Hide Code Block</button>
 <div class="code-and-output-block" style="display:none">
 <!--begin.rcode
@@ -299,7 +290,7 @@ figure2 = function()
 {
     layout(matrix(c(1,2), nrow = 1),
         widths = c(8,4), heights = c(4,4))
-    plot(rptDate, InfectionPerDay[,1], main = "Crude Guess at New Case Counts Over Time", 
+    plot(rptDate, InfectionPerDay[,1], main = "Crude Guess at New Case Counts Per Day", 
          xlab = "Date", 
          ylab = "New Cases",
          lty=1, lwd = 2,
@@ -422,7 +413,7 @@ end.rcode-->
   <p>
     This sequence, traversed by members of a population (S to E to I to R), forms what we might call the temporal process model of our analysis. This analysis belongs to the stochastic branch of the compartmental modeling family, which has its roots in deterministic systems of ordinary and partial differential equations. In the stochastic framework, transitions between the compartments occur according to unknown probabilities. It is the S to E probability, which captures infection activity, into which we introduce spatial structure. Some details of this are given as comments to the code below, and more information than you probably want on the statistical particulars is available in <a href="https://github.com/grantbrown/libspatialSEIR/blob/master/doc/models/Ebola2014Analysis.pdf">this pdf document</a>. For now, suffice it to say that we'll place a simple spatial structure on the epidemic process which simply allows disease to spread between the three nations involved, and we'll try to estimate the strength of that relationship. Many other potential structures are possible, limited primarily by the amount of additional research and data compilation one is willing to do. </p><br/><br/>
 <p>
-For the purposes of this analysis, we will not do anything fancy with demographic information or public health intervention dates. Demographic parameters are relatively difficult to estimate here, as there are only three spatial units which are all from the same region. Intervention dates are more promising, but their inclusion requires much more background research than we have time for here. In the interest of simplicity and estimability, we'll just fit a different disease intensity parameter for each of the three countries to capture aggregate differences in Ebola susceptibility in addition to using a set of basis functions to capture the 
+For the purposes of this analysis, we will not do anything fancy with demographic information or public health intervention dates. Demographic parameters are relatively difficult to estimate here, as there are only four spatial units which are all from the same region. Intervention dates are more promising, but their inclusion requires much more background research than we have time for here. In the interest of simplicity and estimability, we'll just fit a different disease intensity parameter for each of the three countries to capture aggregate differences in Ebola susceptibility in addition to using a set of basis functions to capture the 
 temporal trend. 
   </p>
     </div>
@@ -434,8 +425,18 @@ temporal trend.
   </a>
   <div class="row">
     <div class = "col-sm-10 col-sm-offset-1">
-      <a id="analysis-1-set-up-sect" class = "anchor">
-      <h3>Set Up</h3></a>
+      A polynomial basis analysis is available in previous versions of this document. It was removed (9/4/2014) in favor of the second, spline based, analysis to save on computation time, as polynomials generally extrapolate poorly. This makes them generally unreliable for prediction purposes. 
+    </div>
+    <div class="col-sm-1"></div>
+  </div>
+<br/><br/>
+ 
+  <a id="anchor-analysis-2-sect" class = "anchor">
+  <h2>Analysis 2: Spline Basis</h2> </a>
+  
+  <div class="row">
+    <div class = "col-sm-10 col-sm-offset-1">
+      <a id="analysis-2-set-up-sect" class="anchor"><h3>Set Up</h3></a>
   <p>
     There are some things we need to define before we can start fitting models and making predictions. 
   </p>
@@ -449,12 +450,38 @@ temporal trend.
     <li>A whole bunch of bookkeeping stuff for which I haven't yet programmed sensible default behavior needs to be set up.</li>
   </ol>
   <p>
-  Compartment starting values follow the usual convention of letting the entire initial population be divided into susceptibles and infectious individuals. The starting value for the number of infectious individuals was 86, the first infection count available in the data. Offsets are actually calculated in the first code block (above) as the differences between the report times. For temporal basis functions, orthogonal polynomials of degree three were used. Prior parameters for the E to I and I to R transitions were chosen based on well documented values for the average latent and infectious times, and the rest of the prior parameters were left vague. These decisions are addressed in more detail as comments to the code below. 
+  Compartment starting values follow the usual convention of letting the entire initial population be divided into susceptibles and infectious individuals. The starting value for the number of infectious individuals was 86, the first infection count available in the data. Offsets are actually calculated in the first code block (above) as the differences between the report times. For temporal basis functions, natural splines were used. Prior parameters for the E to I and I to R transitions were chosen based on well documented values for the average latent and infectious times, and the rest of the prior parameters were left vague. These decisions are addressed in more detail as comments to the code below. 
   </p>
   <br/>
+  <br/>
+  
 <button class="btn btn-default code-button">Show/Hide Code Block</button>
       <div class="code-and-output-block" style="display:none">
 <!--begin.rcode
+library(splines)
+daysSinceJan = as.numeric(rptDate - as.Date("2014-01-01"))
+daysSinceJan.predict = c(max(daysSinceJan) + 1, max(daysSinceJan) 
+                         + seq(2,pred.days-2,2))
+splineBasis = ns(daysSinceJan, df = modelDF)
+splineBasis.predict = predict(splineBasis, daysSinceJan.predict)
+
+# Guinea, Liberia, Sierra Leone, Nigeria
+N = matrix(c(10057975, 4128572, 6190280,174507539), nrow = nrow(I_star),ncol = 4, 
+           byrow=TRUE)
+X = diag(ncol(N))
+X.predict = X
+Z = splineBasis
+Z.predict = splineBasis.predict
+
+# These co-variates are the same for each spatial location, 
+# so duplicate them row-wise. 
+Z = Z[rep(1:nrow(Z), nrow(X)),]
+Z.predict = Z.predict[rep(1:nrow(Z.predict), nrow(X)),]
+
+# For convenience, let's combine X and Z for prediction.
+X.pred = cbind(X.predict[rep(1:nrow(X.predict), 
+                             each = nrow(Z.predict)/nrow(X)),], Z.predict)
+
 
 # Define the simple "distance" matrix. There are 4 countries, three of which 
 # share borders. The borders between Guinea, Liberia, and Sierra Leone have been 
@@ -472,42 +499,8 @@ DM = DM/matrix(apply(DM, 1, sum), nrow = 4, ncol = 4)
 # Define population sizes for the three countries of interest. This data also 
 # from Wikipedia. 
 
-# Guinea, Liberia, Sierra Leone
-N = matrix(c(10057975, 4128572, 6190280,174507539), nrow = nrow(I_star),ncol = 4, 
-           byrow=TRUE)
-
-# Currently, the fixed and time varying co-variates driving the exposure 
-# process must be specified separately This saves computer memory, but 
-# makes things a bit more complicated. I might change this at some point. 
-
-# For the fixed covariates, just fit a separate intercept for each location. 
-X = diag(4)
-
-# For the time varying covariates, we first need to define a temporal index
-daysSinceJan = as.numeric(rptDate - as.Date("2014-01-01"))
-
-# For this analysis, let's use orthogonal polynomials of degree 3 for the 
-# temporal basis. Analysis 2 will compare the prediction performance of the 
-# polynomial based model to a spline basis. 
-Z = poly(daysSinceJan, degree=modelDF)
-
-# We're going to want to do prediction, so let's generate the fixed and time 
-# varying prediction covariate matrices now as well
-X.predict = cbind(diag(4))
-Z.predict = predict(Z, c(max(daysSinceJan) + 1, 
-                              max(daysSinceJan) + seq(2,pred.days-2,2))) 
-
-# The time varying covariates are the same for each spatial location for this
-# analysis, so we just duplicate them row-wise
-Z = Z[rep(1:nrow(Z), nrow(X)),]
-Z.predict = Z.predict[rep(1:nrow(Z.predict), nrow(X)),]
-
-# Let's combine X and Z into their more usual form for later use in prediction.
-X.pred = cbind(X.predict[rep(1:nrow(X.predict), 
-                             each = nrow(Z.predict)/nrow(X)),], Z.predict)
-
 # Define prediction offsets. 
-offset.pred = c(1,seq(2,10,2))
+offset.pred = c(1,seq(2,pred.days-2,2))
 
 # There's no reinfection process for Ebola, but we still need to provide dummy
 # values for the reinfection terms. This will be changed (along with most of 
@@ -617,14 +610,17 @@ proposeParameters = function(seedVal, chainNumber)
 
 end.rcode-->
       </div>
-
+  
+  
 <p>
   With the set up out of the way, we can finally build and run the models the models. The code presented below has recently (8/27/2014) been set up to use the "parallel" library which is included with the R statistical analysis software. While this allows us to spend considerably less time waiting for the document to compile, the code may be more difficult to understand for those unfamiliar with this useful parallelization library. The previous analyses, linked above, may be a better guide to the basic use of the spatialSEIR library for such users. 
 </p>
 <br/>  
+  
 <button class="btn btn-default code-button">Show/Hide Code Block</button>
       <div class="code-and-output-block" style="display:none">
 <!--begin.rcode
+
 
 buildAndRunModel = function(params)
 {
@@ -669,7 +665,7 @@ buildAndRunModel = function(params)
                         scaleDistanceMode)
   
   SEIRmodel$setRandomSeed(params[["seedVal"]])
-  SEIRmodel$compartmentSamplingMode = 14
+  
   # Do we need to keep track of compartment values for prediction? 
   # No sense doing this for all of the chains.
   if (params[["traceCompartments"]])
@@ -700,12 +696,20 @@ buildAndRunModel = function(params)
   }
 
   # Burn in tuning parameters
-  runSimulation(SEIRmodel)
+  runSimulation(SEIRmodel, numBatches = numConvergenceBatches)
+  SEIRmodel$compartmentSamplingMode = 14
   # Run Simulation
   cat(paste("Running chain ", params[["chainNumber"]], "\n", sep =""))
   tm = system.time(runSimulation(SEIRmodel, 
                   numBatches=numConvergenceBatches, 
                   batchSize=convergenceBatchSize, 
+                  targetAcceptanceRatio=0.2,
+                  tolerance=0.025,
+                  proportionChange = 0.05))
+  SEIRmodel$compartmentSamplingMode = 1
+  tm = system.time(runSimulation(SEIRmodel, 
+                  numBatches=floor(numConvergenceBatches)/2, 
+                  batchSize=floor(convergenceBatchSize)/2, 
                   targetAcceptanceRatio=0.2,
                   tolerance=0.025,
                   proportionChange = 0.05))
@@ -741,602 +745,6 @@ buildAndRunModel = function(params)
   
   return(list("chainOutput" = dat, "R0" = R0, "rawSamples" = orig.R0))
 }
-
-cl = makeCluster(3)
-clusterExport(cl, c("compMatDim",
-                     "xDim",
-                     "zDim",
-                     "xPrsDim",   
-                     "offsets",
-                     "X",
-                     "Z",
-                     "X_p_rs",
-                     "DM",
-                     "priorAlpha_gammaEI",
-                     "priorBeta_gammaEI",
-                     "priorAlpha_gammaIR",
-                     "priorBeta_gammaIR",
-                     "betaPriorPrecision",
-                     "beta_p_rs",
-                     "betaPrsPriorPrecision",
-                     "N",
-                     "iterationStride",
-                     "steadyStateConstraintPrecision",
-                     "verbose",
-                     "debug",
-                     "mcmcTuningParams",
-                     "reinfectionMode",
-                     "scaleDistanceMode",
-                     "proposeParameters",
-                     "generateCompartmentProposal",
-                     "numConvergenceBatches",
-                     "convergenceBatchSize",
-                     "extraR0Iterations",
-                     "I_star"))
-
-paramsList = list(list("estimateR0"=FALSE, "traceCompartments"=TRUE, "seedVal"=123123,"chainNumber"=1),
-                  list("estimateR0"=TRUE, "traceCompartments"=FALSE, "seedVal"=123124,"chainNumber"=2),
-                  list("estimateR0"=FALSE,"traceCompartments"=FALSE, "seedVal"=123125,"chainNumber"=3))
-
-chains = parLapply(cl, paramsList, buildAndRunModel)
-stopCluster(cl)
-end.rcode-->
-</div> 
-
-<br/><br/>
-<div>
-<h3><a id="analysis-1-convergence-sect" class="anchor">Convergence Diagnosis</a></h3>
-</div>
-<p>As this is a Bayesian analysis in which the posterior distribution is sampled using MCMC techniques, we really need some
-indication that the samplers have indeed converged to the posterior distribution in order to make any inferences about the 
-problem at hand. In the code below, we'll read in the MCMC output files created so far, plot the three chains for each of 
-several important parameters, and take a look at the Gelman and Rubin convergence diagnostic (which should be close to 1 if the chains have converged.)
-</p>
-<br/>
-<button class="btn btn-default code-button">Show/Hide Code Block</button>
-      <div class="code-and-output-block" style="display:none">
-<!--begin.rcode
-
-# Read in the output files created above
-
-chain1 = chains[[1]]$chainOutput
-chain2 = chains[[2]]$chainOutput
-chain3 = chains[[3]]$chainOutput
-
-plotChains = function(c1, c2, c3, main)
-{
-    idx = floor(length(c1)/2):length(c1)
-    mcl = mcmc.list(as.mcmc(c1),
-                    as.mcmc(c2),
-                    as.mcmc(c3))
-    g.d = gelman.diag(mcl)
-    main = paste(main, "\n", "Gelman Convergence Diagnostic and UL: \n",
-                 round(g.d[[1]][1],2), ", ", round(g.d[[1]][2],2))
-    
-    plot(chain1$Iteration[idx], c1[idx], type = "l", main = main,
-         xlab = "Iteration", ylab = "value")
-    lines(chain2$Iteration[idx],c2[idx], col = "red", lty=2)
-    lines(chain3$Iteration[idx],c3[idx], col = "green", lty=3)
-}
-
-# Guinea, Liberia, Sierra Leone
-figure3 = function()
-{
-  par(mfrow = c(3,2))
-  plotChains(chain1$BetaP_SE_0,
-             chain2$BetaP_SE_0,
-             chain3$BetaP_SE_0, 
-             "Guinea Exposure Intercept")
-  plotChains(chain1$BetaP_SE_3,
-             chain2$BetaP_SE_3,
-             chain3$BetaP_SE_3, 
-             "Linear Time Component")
-  
-  plotChains(chain1$BetaP_SE_1,
-             chain2$BetaP_SE_1,
-             chain3$BetaP_SE_1, 
-             "Liberia Exposure Intercept")
-  plotChains(chain1$BetaP_SE_3,
-             chain2$BetaP_SE_3,
-             chain3$BetaP_SE_3, 
-             "Quadratic Time Component")
-  
-  plotChains(chain1$BetaP_SE_2,
-             chain2$BetaP_SE_2,
-             chain3$BetaP_SE_2, 
-             "Sierra Leone Exposure Intercept")
-  plotChains(chain1$BetaP_SE_3,
-             chain2$BetaP_SE_3,
-             chain3$BetaP_SE_3, 
-             "Cubic Time Component")
-}
-figure4 = function()
-{
-  par(mfrow = c(2,1))
-  plotChains(1-exp(-chain1$gamma_ei),
-             1-exp(-chain2$gamma_ei),
-             1-exp(-chain3$gamma_ei)
-             , "E to I Transition Probability")
-  plotChains(1-exp(-chain1$gamma_ir),
-             1-exp(-chain2$gamma_ir),
-             1-exp(-chain3$gamma_ir)
-             , "I to R Transition Probability")
-}
-end.rcode-->
-</div>
-
-<!--begin.rcode dpi=150,fig.align='center', echo=FALSE
-  figure3()
-end.rcode-->
-
-<!--begin.rcode dpi=150, fig.align='center',echo=FALSE
-  figure4()
-end.rcode-->
-
-<p>
-  The convergence looks quite reasonable, so let's dissect the estimates a bit. 
-</p>
-<br/>
-<a id="analysis-1-estimates-sect" class="anchor">
-<h3>Estimated Epidemic Behavior</h3>
-</a>
-<br/>
-
-
-<button class="btn btn-default code-button">Show/Hide Code Block</button>
-      <div class="code-and-output-block" style="display:none">
-<!--begin.rcode
-
-c1 = chain1[floor(nrow(chain1)/2):nrow(chain1),c(1:8,10:12)]
-c2 = chain2[floor(nrow(chain2)/2):nrow(chain2),c(1:8,10:12)]
-c3 = chain3[floor(nrow(chain3)/2):nrow(chain3),c(1:8,10:12)]
-
-c1$gamma_ei = 1-exp(-c1$gamma_ei)
-c1$gamma_ir = 1-exp(-c1$gamma_ir)
-c2$gamma_ei = 1-exp(-c2$gamma_ei)
-c2$gamma_ir = 1-exp(-c2$gamma_ir)
-c3$gamma_ei = 1-exp(-c3$gamma_ei)
-c3$gamma_ir = 1-exp(-c3$gamma_ir)
-colnames(c1) = c("Guinea Intercept", "Liberia Intercept", 
-                 "Sierra Leone Intercept", "Nigeria Intercept", 
-                 "Linear Time Component", 
-                 "Quadratic Time Component", "Cubic Time Component",
-                 "Quartic Time Component",
-                 "Spatial Dependence Parameter", "E to I probability", 
-                 "I to R probability")
-colnames(c2) = colnames(c1)
-colnames(c3) = colnames(c1)
-
-mcl = mcmc.list(as.mcmc(c1), 
-                as.mcmc(c2),
-                as.mcmc(c3))
-# summary(mcl) given below
-end.rcode-->
-</div>
-
-<!--begin.rcode echo=FALSE
-cat("Output from coda library summary:\n########################\n")
-summary(mcl)
-end.rcode-->
-
-<p>The average time spent in a particular disease compartment is just one divided by the probability of 
-a transition between compartments. The units here are days, so we can see that the average infectious time is estimated to be between 
-
-<!--begin.rcode echo =FALSE, results="asis"
-mcl.summary = summary(mcl)
-cat(paste(" ", round(1/mcl.summary$quantiles[9,5],1), " ", sep = ""))
-end.rcode-->
-
-and
-
-<!--begin.rcode echo =FALSE, results="asis"
-cat(paste(" ", round(1/mcl.summary$quantiles[9,1],1), " ", sep = ""))
-end.rcode-->
-
-days, while the average latent time is most likely between
-
-
-<!--begin.rcode echo =FALSE, results="asis"
-
-cat(paste(" ", round(1/mcl.summary$quantiles[8,5],1), " ", sep = ""))
-end.rcode-->
-
-and
-
-<!--begin.rcode echo =FALSE, results="asis"
-cat(paste(" ", round(1/mcl.summary$quantiles[8,1],1), " ", sep = ""))
-end.rcode-->
-
- (95% credible intervals). In reality, there is a lot 
-of variability in these times for Ebola, but these seem like reasonable estimates for the average values. <br/>
-</p><br/>
-<p>
-We also notice that there is definitely non-zero spatial dependence (the distribution of the spatial dependence parameter is well separated from zero), indicating significant mixing between the populations. This is unsurprising, as the disease has in fact spread between all three nations. 
-</p>
-<br/><br/>
-<p>
-It also appears that Guinea has the lowest estimated epidemic intensity, followed by Sierra Leone and Liberia, which have similar credible
-intervals for their intercept parameters.
-</p>
-
-
-<button class="btn btn-default code-button">Show/Hide Code Block</button>
-      <div class="code-and-output-block" style="display:none">
-<!--begin.rcode
-
-getMeanAndCI = function(loc,tpt,baseStr="I_")
-{
-    vec = chain1[[paste(baseStr, loc, "_", tpt, sep = "")]]
-    vec = vec[floor(length(vec)/2):length(vec)]
-    return(c(mean(vec), quantile(vec, probs = c(0.05, 0.95))))
-}
-
-Guinea.I.Est = sapply(0:(nrow(I_star)-1), getMeanAndCI, loc=0)
-Liberia.I.Est = sapply(0:(nrow(I_star)-1), getMeanAndCI, loc=1)
-SierraLeone.I.Est = sapply(0:(nrow(I_star)-1), getMeanAndCI, loc=2)
-Nigeria.I.Est = sapply(0:(nrow(I_star)-1), getMeanAndCI, loc=3)
-  
-maxI = max(c(Guinea.I.Est, Liberia.I.Est, SierraLeone.I.Est))
-
-figure5 = function()
-{
-  par(mfrow = c(2,2))
-  plot(rptDate, Guinea.I.Est[1,], ylim = c(0, maxI), 
-       main = "Guinea Estimated Epidemic Size\n 90% Credible Interval",
-       type = "l", lwd = 2, xlab = "Date", ylab="Infectious Count")
-  abline(h = seq(0,100000, 100), col= "lightgrey", lty =2 )
-  lines(rptDate, Guinea.I.Est[1,], lty = 1, lwd = 2)
-  lines(rptDate, Guinea.I.Est[2,], lty = 2)
-  lines(rptDate, Guinea.I.Est[3,], lty = 2)
-  
-  plot(rptDate, Liberia.I.Est[1,], ylim = c(0, maxI), 
-       main = "Liberia Estimated Epidemic Size\n 90% Credible Interval",
-       type = "l", lwd = 2, col = "blue", xlab = "Date",
-       ylab="Infectious Count")
-  abline(h = seq(0,100000, 100), col= "lightgrey", lty =2 )
-  lines(rptDate, Liberia.I.Est[1,], lty = 1,, lwd=2, col = "blue")
-  lines(rptDate, Liberia.I.Est[2,], lty = 2, col = "blue")
-  lines(rptDate, Liberia.I.Est[3,], lty = 2, col = "blue")
-  
-  plot(rptDate, SierraLeone.I.Est[1,], ylim = c(0, maxI), 
-       main = "Sierra Leone Estimated Epidemic Size\n 90% Credible Interval",
-       type = "l", lwd = 2, col = "red", xlab = "Date", ylab="Infectious Count")
-  abline(h = seq(0,100000, 100), col= "lightgrey", lty =2 )
-  lines(rptDate, SierraLeone.I.Est[1,], lty = 1,lwd=2, col = "red")
-  lines(rptDate, SierraLeone.I.Est[2,], lty = 2, col = "red")
-  lines(rptDate, SierraLeone.I.Est[3,], lty = 2, col ="red")
-  
-  plot(rptDate, Nigeria.I.Est[1,], ylim = c(0, maxI), 
-       main = "Nigeria Estimated Epidemic Size\n 90% Credible Interval",
-       type = "l", lwd = 2, col = "green", xlab = "Date", ylab="Infectious Count")
-  abline(h = seq(0,100000, 100), col= "lightgrey", lty =2 )
-  lines(rptDate, Nigeria.I.Est[1,], lty = 1,lwd=2, col = "green")
-  lines(rptDate, Nigeria.I.Est[2,], lty = 2, col = "green")
-  lines(rptDate, Nigeria.I.Est[3,], lty = 2, col ="green")
-}
-end.rcode-->
-</div>
-
-<!--begin.rcode dpi=150,fig.align='center', echo=FALSE
-figure5()
-end.rcode-->
-
-<a id="analysis-1-r0-sect" class="anchor">
-<h3>Basic Reproductive Number Calculation</h3>
-</a>
-<p>
-A common tool for describing the evolution of an epidemic is a quantity known as the basic reproductive numer, the basic reproductive ratio, or one of several other variants on that theme. The basic idea is to quantify how many secondary infections a single infectious individual is expected to cause in a large, fully susceptible population. Naturally, when this ratio exceeds one we expect the epidemic to spread. Conversely, a basic reproductive number less than one indicates that a pathogen is more likely to die out. This software library doesn't yet compute the ratio automatically, but does provide what's known as the "next generation matrix" which can be used to quickly calculate the quantity.</p> <br/><br/>
-
-<button class="btn btn-default code-button">Show/Hide Code Block</button>
-      <div class="code-and-output-block" style="display:none">
-<!--begin.rcode
-
-R0_list = chains[[2]]$R0
-
-r0.ylim = c(min(R0_list$LB), max(R0_list$UB))
-
-figure6 = function()
-{
-  par(mfrow = c(2,2))
-  plotR0 = function(main, idx)
-  {
-    plot(rptDate[1:(length(rptDate)-1)], R0_list$mean[1:(length(rptDate)-1),idx] , type = "l", xlab = "Date",
-         ylab = expression('R'[0]),
-         main = main, 
-         ylim = r0.ylim, lwd = 2)
-    lines(rptDate[1:(length(rptDate)-1)], R0_list$LB[1:(length(rptDate)-1),idx], lty = 2)
-    lines(rptDate[1:(length(rptDate)-1)], R0_list$UB[1:(length(rptDate)-1),idx], lty = 2)
-    abline(h=seq(0, 50, 0.5), lty=2, col="lightgrey")
-    abline(h = 1.0, col = "blue", lwd = 1.5, lty = 2)
-  }
-  plotR0("Guinea Estimated R0", 1)
-  plotR0("Liberia Estimated R0", 2)
-  plotR0("Sierra Leone Estimated R0", 3)
-  plotR0("Nigeria Estimated R0", 4)
-}
-end.rcode-->
-</div>
-
-<!--begin.rcode dpi=150,fig.align='center', echo=FALSE
-figure6()
-end.rcode-->
-
-Clearly, the decision to separate the basic reproductive number by country was reasonable - the countries vary widely in epidemic behavior overall and over time.<br/>
-
-While the basic reproductive number is a useful quantity to know, it does not directly make any predictions about future epidemic behavior. In order to do that, we need to simulate epidemics  based on the MCMC samples we have obtained and summarize their variability over time. <br/>
- 
-
-<a id="analysis-1-prediction-sect" class="anchor">
-<h3>Epidemic Prediction</h3>
-</a>
-<p>
- 
- Currently the simulation required for epidemic prediction must be done "manually" by writing a bunch of R code. As the library develops, a simpler prediction interface is a high priority.  </p><br/><br/><p> Below, we will attempt to predict the course of the epidemic through early fall. 
- We must be cautious when making predictions about a chaotic process this far into the future. We must be particularly cautious because the basis chosen for the temporal trend in the epidemic intensity process was polynomial. While polynomial bases often provide a good fit to the data, they can behave unreasonably outside the range over which the model was fit (quadratic and cubic terms can get large very quickly). 
-</p>
-
-<button class="btn btn-default code-button">Show/Hide Code Block</button>
-      <div class="code-and-output-block" style="display:none">
-<!--begin.rcode
-# Declare prediction functions
-  predictEpidemic = function(beta.pred, 
-                             X.pred,
-                             gamma.ei,
-                             gamma.ir,
-                             S0,
-                             E0,
-                             I0,
-                             R0,
-                             rho,
-                             offsets.pred)
-  {
-      N = (S0+E0+I0+R0)
-      p_se_components = matrix(exp(X.pred %*% beta.pred), ncol=length(S0))
-      p_se = matrix(0, ncol = length(S0), nrow = nrow(p_se_components))
-      p_ei = 1-exp(-gamma.ei*offsets.pred)
-      p_ir = 1-exp(-gamma.ir*offsets.pred)
-      S_star = matrix(0, ncol=length(S0),nrow = nrow(p_se_components))
-      E_star = matrix(0, ncol=length(S0),nrow = nrow(p_se_components))
-      I_star = matrix(0, ncol=length(S0),nrow = nrow(p_se_components))
-      R_star = matrix(0, ncol=length(S0),nrow = nrow(p_se_components))
-      S = matrix(0, ncol=length(S0),nrow = nrow(p_se_components))
-      E = matrix(0, ncol=length(S0),nrow = nrow(p_se_components))
-      I = matrix(0, ncol=length(S0),nrow = nrow(p_se_components))
-      R = matrix(0, ncol=length(S0),nrow = nrow(p_se_components))
-      S[1,] = S0
-      E[1,] = E0
-      I[1,] = I0
-      R[1,] = R0
-      S_star[1,] = rbinom(rep(1, length(S0)), R0, 0)
-      p_se[1,] = 1-exp(-offsets.pred[1]*(I[1,]/N*p_se_components[1,] + 
-                            rho*(DM %*% (I[1,]/N*p_se_components[1,]))))
-      E_star[1,] = rbinom(rep(1, length(S0)), S0, p_se[1,])
-      I_star[1,] = rbinom(rep(1, length(S0)), E0, p_ei[1])
-      R_star[1,] = rbinom(rep(1, length(S0)), I0, p_ir[1])
-      
-      for (i in 2:nrow(S))
-      {
-      
-        S[i,] = S[i-1,] + S_star[i-1,] - E_star[i-1,]
-        E[i,] = E[i-1,] + E_star[i-1,] - I_star[i-1,]
-        I[i,] = I[i-1,] + I_star[i-1,] - R_star[i-1,]
-        R[i,] = R[i-1,] + R_star[i-1,] - S_star[i-1,]
-        
-        p_se[i,] = 1-exp(-offsets.pred[i]*(I[i,]/N*p_se_components[i,] + 
-                            rho*(DM %*% (I[i,]/N*p_se_components[i,]))))
-        S_star[i,] = rbinom(rep(1, length(S0)), R[i,], 0)
-        E_star[i,] = rbinom(rep(1, length(S0)), S[i,], p_se[i,])
-        I_star[i,] = rbinom(rep(1, length(S0)), E[i,], p_ei[i])
-        R_star[i,] = rbinom(rep(1, length(S0)), I[i,], p_ir[i])
-      }
-      return(list(S=S,E=E,I=I,R=R,
-                  S_star=S_star,E_star=E_star,
-                  I_star=I_star,R_star=R_star,
-                  p_se=p_se,p_ei=p_ei,p_ir=p_ir))
-  }
-
-
-  predict.i = function(i)
-  {
-    dataRow = chain1[i,]
-    rho = dataRow$rho
-    beta = c()
-    for (i in 0:(modelDF+3))
-    {
-      beta = c(beta, dataRow[[paste("BetaP_SE_", i, sep = "")]])
-    }
-     
-    S0 = c(dataRow[[paste("S_0_", maxIdx-1, sep = "")]],
-           dataRow[[paste("S_1_", maxIdx-1, sep = "")]],
-           dataRow[[paste("S_2_", maxIdx-1, sep = "")]],
-           dataRow[[paste("S_3_", maxIdx-1, sep = "")]])
-    E0 = c(dataRow[[paste("E_0_", maxIdx-1, sep = "")]],
-           dataRow[[paste("E_1_", maxIdx-1, sep = "")]],
-           dataRow[[paste("E_2_", maxIdx-1, sep = "")]],
-           dataRow[[paste("E_3_", maxIdx-1, sep = "")]])
-    I0 = c(dataRow[[paste("I_0_", maxIdx-1, sep = "")]],
-           dataRow[[paste("I_1_", maxIdx-1, sep = "")]],
-           dataRow[[paste("I_2_", maxIdx-1, sep = "")]],
-           dataRow[[paste("I_3_", maxIdx-1, sep = "")]])
-    R0 = c(dataRow[[paste("R_0_", maxIdx-1, sep = "")]],
-           dataRow[[paste("R_1_", maxIdx-1, sep = "")]],
-           dataRow[[paste("R_2_", maxIdx-1, sep = "")]],
-           dataRow[[paste("R_3_", maxIdx-1, sep = "")]])
-    
-    
-    return(predictEpidemic(beta,  
-                           X.pred,
-                           dataRow$gamma_ei,
-                           dataRow$gamma_ir,
-                           S0,
-                           E0,
-                           I0,
-                           R0,
-                           rho,
-                           offset.pred
-                           ))
-  }
-# Perform Prediction
-  preds = lapply((nrow(chain1) - floor(nrow(chain1)/2)):
-                   nrow(chain1), predict.i)
-
-
-
-pred.dates = c(rptDate[(which.max(rptDate))], 
-               rptDate[(which.max(rptDate))] + seq(2,pred.days-2,2))
-pred.xlim = c(min(rptDate), max(pred.dates))
-lastIdx = nrow(I_star)
-Guinea.Pred = preds[[1]]$I[,1]
-Liberia.Pred = preds[[1]]$I[,2]
-SierraLeone.Pred = preds[[1]]$I[,3]
-Nigeria.Pred = preds[[1]]$I[,4]
-
-breakpoint = mean(c(max(rptDate), min(pred.dates)))
-
-for (predIdx in 2:length(preds))
-{
-   Guinea.Pred = rbind(Guinea.Pred, preds[[predIdx]]$I[,1])
-   Liberia.Pred = rbind(Liberia.Pred, preds[[predIdx]]$I[,2])
-   SierraLeone.Pred = rbind(SierraLeone.Pred, preds[[predIdx]]$I[,3])
-   Nigeria.Pred = rbind(Nigeria.Pred, preds[[predIdx]]$I[,4])
-}
-
-Guinea.mean = apply(Guinea.Pred, 2, mean)
-Liberia.mean = apply(Liberia.Pred, 2, mean)
-SierraLeone.mean = apply(SierraLeone.Pred, 2, mean)
-Nigeria.mean = apply(Nigeria.Pred, 2, mean)
-
-Guinea.LB = apply(Guinea.Pred, 2, quantile, probs = c(0.05))
-Guinea.UB = apply(Guinea.Pred, 2, quantile, probs = c(0.95))
-
-Liberia.LB = apply(Liberia.Pred, 2, quantile, probs = c(0.05))
-Liberia.UB = apply(Liberia.Pred, 2, quantile, probs = c(0.95))
-
-SierraLeone.LB = apply(SierraLeone.Pred, 2, quantile, probs = c(0.05))
-SierraLeone.UB = apply(SierraLeone.Pred, 2, quantile, probs = c(0.95))
-
-Nigeria.LB = apply(Nigeria.Pred, 2, quantile, probs = c(0.05))
-Nigeria.UB = apply(Nigeria.Pred, 2, quantile, probs = c(0.95))
-
-## Guinea 
-figure7 = function()
-{
-  par(mfrow = c(2,2))
-  plot(rptDate, Guinea.I.Est[1,], ylim = c(0, maxI), xlim = pred.xlim,
-       main = "Guinea Estimated Epidemic Size\n 90% Credible Interval",
-       type = "l", lwd = 2, ylab = "Infectious Count", xlab = "Date")
-  abline(h = seq(0,100000,50), lty =2, col = "lightgrey")
-  lines(rptDate, Guinea.I.Est[2,], lty = 2)
-  lines(rptDate, Guinea.I.Est[3,], lty = 2)
-  
-  lines(pred.dates,Guinea.mean, 
-          lty=1, col = "black", lwd = 1)
-  lines(pred.dates,Guinea.LB, 
-          lty=2, col = "black", lwd = 1)
-  lines(pred.dates,Guinea.UB, 
-          lty=2, col = "black", lwd = 1)
-  abline(v = breakpoint, lty = 3, col= "lightgrey")
-  
-  ## Liberia 
-  plot(rptDate, Liberia.I.Est[1,], ylim = c(0, maxI),  xlim = pred.xlim,
-       main = "Liberia Estimated Epidemic Size\n 90% Credible Interval",
-       type = "l", lwd = 2, col = "blue", ylab = "Infectious Count", 
-       xlab = "Date")
-  abline(h = seq(0,100000,50), lty =2, col = "lightgrey")
-  lines(rptDate, Liberia.I.Est[2,], lty = 2, col = "blue")
-  lines(rptDate, Liberia.I.Est[3,], lty = 2, col = "blue")
-  
-  lines(pred.dates,Liberia.mean, 
-          lty=1, col = "blue", lwd = 1)
-  lines(pred.dates,Liberia.LB, 
-          lty=2, col = "blue", lwd = 1)
-  lines(pred.dates,Liberia.UB, 
-          lty=2, col = "blue", lwd = 1)
-  abline(v = breakpoint, lty = 3, col= "lightgrey")
-  
-  ## Sierra Leone
-  plot(rptDate, SierraLeone.I.Est[1,], ylim = c(0, maxI),  xlim = pred.xlim,
-       main = "Sierra Leone Estimated Epidemic Size\n 90% Credible Interval",
-       type = "l", lwd = 2, col = "red",ylab = "Infectious Count", 
-       xlab = "Date")
-  abline(h = seq(0,100000,50), lty =2, col = "lightgrey")
-  lines(rptDate, SierraLeone.I.Est[2,], lty = 2, col = "red")
-  lines(rptDate, SierraLeone.I.Est[3,], lty = 2, col ="red")
-  
-  lines(pred.dates,SierraLeone.mean, 
-          lty=1, col = "red", lwd = 1)
-  lines(pred.dates,SierraLeone.LB, 
-          lty=2, col = "red", lwd = 1)
-  lines(pred.dates,SierraLeone.UB, 
-          lty=2, col = "red", lwd = 1)
-  abline(v = breakpoint, lty = 3, col= "lightgrey")
-  
-
-## Nigeria
-  plot(rptDate, Nigeria.I.Est[1,], ylim = c(0, maxI),  xlim = pred.xlim,
-       main = "Nigeria Estimated Epidemic Size\n 90% Credible Interval",
-       type = "l", lwd = 2, col = "green",ylab = "Infectious Count", 
-       xlab = "Date")
-  abline(h = seq(0,100000,50), lty =2, col = "lightgrey")
-  lines(rptDate, Nigeria.I.Est[2,], lty = 2, col = "green")
-  lines(rptDate, Nigeria.I.Est[3,], lty = 2, col ="green")
-  
-  lines(pred.dates,Nigeria.mean, 
-          lty=1, col = "green", lwd = 1)
-  lines(pred.dates,Nigeria.LB, 
-          lty=2, col = "green", lwd = 1)
-  lines(pred.dates,Nigeria.UB, 
-          lty=2, col = "green", lwd = 1)
-  abline(v = breakpoint, lty = 3, col= "lightgrey")
-}
-
-end.rcode-->
-</div>
-
-<!--begin.rcode dpi=150,fig.align='center', echo=FALSE
-figure7()
-end.rcode-->
-
-<p>These predictions do not look alltogether unreasonable, though past analyses have shown that such polynomial bases can extrapolate poorly. Analysis 2 will consider the results of using a natural spline basis for this process instead. Spline bases extrapolate linearly, and so are less prone to extreme extrapolation errors. 
-</p><br/>
-    </div>
-    <div class="col-sm-1">
-  </div>
- 
-  <a id="anchor-analysis-2-sect" class = "anchor">
-  <h2>Analysis 2: Spline Basis</h2> </a>
-  
-  <div class="row">
-    <div class = "col-sm-10 col-sm-offset-1">
-      <a id="analysis-2-set-up-sect" class="anchor"><h3>Set Up</h3></a>
-      <p> The problem with polynomial basis functions is that they extrapolate poorly, exhibiting extreme behavior under prediction. On the other hand, they often perform quite well for estimation purposes and prediction within the range of observed data. For this reason, and because spline basis coefficients are somewhat difficult to interpret, analysis 2 will not repeat the qualitative interpretation work presented above. Parameter estimates are available below for completeness.</p>
-      <br/>
-  <br/>
-<button class="btn btn-default code-button">Show/Hide Code Block</button>
-      <div class="code-and-output-block" style="display:none">
-<!--begin.rcode
-library(splines)
-daysSinceJan.predict = c(max(daysSinceJan) + 1, max(daysSinceJan) 
-                         + seq(2,pred.days-2,2))
-splineBasis = ns(daysSinceJan, df = modelDF)
-splineBasis.predict = predict(splineBasis, daysSinceJan.predict)
-
-# Guinea, Liberia, Sierra Leone, Nigeria
-N = matrix(c(10057975, 4128572, 6190280,174507539), nrow = nrow(I_star),ncol = 4, 
-           byrow=TRUE)
-
-Z = splineBasis
-Z.predict = splineBasis.predict
-
-# These co-variates are the same for each spatial location, 
-# so duplicate them row-wise. 
-Z = Z[rep(1:nrow(Z), nrow(X)),]
-Z.predict = Z.predict[rep(1:nrow(Z.predict), nrow(X)),]
-
-# For convenience, let's combine X and Z for prediction.
-X.pred = cbind(X.predict[rep(1:nrow(X.predict), 
-                             each = nrow(Z.predict)/nrow(X)),], Z.predict)
-
 
 
 cl = makeCluster(3)
@@ -1381,6 +789,23 @@ stopCluster(cl)
 chain1 = chains[[1]]$chainOutput 
 chain2 = chains[[2]]$chainOutput 
 chain3 = chains[[3]]$chainOutput 
+
+
+plotChains = function(c1, c2, c3, main)
+{
+    idx = floor(length(c1)/2):length(c1)
+    mcl = mcmc.list(as.mcmc(c1),
+                    as.mcmc(c2),
+                    as.mcmc(c3))
+    g.d = gelman.diag(mcl)
+    main = paste(main, "\n", "Gelman Convergence Diagnostic and UL: \n",
+                 round(g.d[[1]][1],2), ", ", round(g.d[[1]][2],2))
+    
+    plot(chain1$Iteration[idx], c1[idx], type = "l", main = main,
+         xlab = "Iteration", ylab = "value")
+    lines(chain2$Iteration[idx],c2[idx], col = "red", lty=2)
+    lines(chain3$Iteration[idx],c3[idx], col = "green", lty=3)
+}
 
 
 figure8 = function()
@@ -1428,10 +853,10 @@ figure9 = function()
 
 ## Parameter Estimates 
 
-
-c1 = chain1[floor(nrow(chain1)/2):nrow(chain1),c(1:8,10:12)]
-c2 = chain2[floor(nrow(chain2)/2):nrow(chain2),c(1:8,10:12)]
-c3 = chain3[floor(nrow(chain3)/2):nrow(chain3),c(1:8,10:12)]
+nbeta = ncol(X) + ncol(Z)
+c1 = chain1[floor(nrow(chain1)/2):nrow(chain1),c(1:(nbeta),(nbeta+2):(nbeta+4))]
+c2 = chain2[floor(nrow(chain2)/2):nrow(chain2),c(1:(nbeta),(nbeta+2):(nbeta+4))]
+c3 = chain3[floor(nrow(chain3)/2):nrow(chain3),c(1:(nbeta),(nbeta+2):(nbeta+4))]
 
 c1$gamma_ei = 1-exp(-c1$gamma_ei)
 c1$gamma_ir = 1-exp(-c1$gamma_ir)
@@ -1440,9 +865,8 @@ c2$gamma_ir = 1-exp(-c2$gamma_ir)
 c3$gamma_ei = 1-exp(-c3$gamma_ei)
 c3$gamma_ir = 1-exp(-c3$gamma_ir)
 colnames(c1) = c("Guinea Intercept", "Liberia Intercept", 
-                 "Sierra Leone Intercept","Nigeria Intercept", "Linear Time Component", 
-                 "Quadratic Time Component", "Cubic Time Component",
-                 "Quartic Time Component",
+                 "Sierra Leone Intercept","Nigeria Intercept", 
+                 paste("Time component ", (1:(nbeta-4)), sep = ""),
                  "Spatial Dependence Parameter", "E to I probability", 
                  "I to R probability")
 colnames(c2) = colnames(c1)
@@ -1493,6 +917,105 @@ Liberia.I.Est = sapply(0:(nrow(I_star)- 1), getMeanAndCI, loc=1)
 SierraLeone.I.Est = sapply(0:(nrow(I_star)- 1), getMeanAndCI, loc=2)
 Nigeria.I.Est = sapply(0:(nrow(I_star)- 1), getMeanAndCI, loc=3)
 
+# Declare prediction functions
+predictEpidemic = function(beta.pred, 
+                           X.pred,
+                           gamma.ei,
+                           gamma.ir,
+                           S0,
+                           E0,
+                           I0,
+                           R0,
+                           rho,
+                           offsets.pred)
+{
+    N = (S0+E0+I0+R0)
+    p_se_components = matrix(exp(X.pred %*% beta.pred), ncol=length(S0))
+    p_se = matrix(0, ncol = length(S0), nrow = nrow(p_se_components))
+    p_ei = 1-exp(-gamma.ei*offsets.pred)
+    p_ir = 1-exp(-gamma.ir*offsets.pred)
+    S_star = matrix(0, ncol=length(S0),nrow = nrow(p_se_components))
+    E_star = matrix(0, ncol=length(S0),nrow = nrow(p_se_components))
+    I_star = matrix(0, ncol=length(S0),nrow = nrow(p_se_components))
+    R_star = matrix(0, ncol=length(S0),nrow = nrow(p_se_components))
+    S = matrix(0, ncol=length(S0),nrow = nrow(p_se_components))
+    E = matrix(0, ncol=length(S0),nrow = nrow(p_se_components))
+    I = matrix(0, ncol=length(S0),nrow = nrow(p_se_components))
+    R = matrix(0, ncol=length(S0),nrow = nrow(p_se_components))
+    S[1,] = S0
+    E[1,] = E0
+    I[1,] = I0
+    R[1,] = R0
+    S_star[1,] = rbinom(rep(1, length(S0)), R0, 0)
+    p_se[1,] = 1-exp(-offsets.pred[1]*(I[1,]/N*p_se_components[1,] + 
+                          rho*(DM %*% (I[1,]/N*p_se_components[1,]))))
+    E_star[1,] = rbinom(rep(1, length(S0)), S0, p_se[1,])
+    I_star[1,] = rbinom(rep(1, length(S0)), E0, p_ei[1])
+    R_star[1,] = rbinom(rep(1, length(S0)), I0, p_ir[1])
+    
+    for (i in 2:nrow(S))
+    {
+    
+      S[i,] = S[i-1,] + S_star[i-1,] - E_star[i-1,]
+      E[i,] = E[i-1,] + E_star[i-1,] - I_star[i-1,]
+      I[i,] = I[i-1,] + I_star[i-1,] - R_star[i-1,]
+      R[i,] = R[i-1,] + R_star[i-1,] - S_star[i-1,]
+      
+      p_se[i,] = 1-exp(-offsets.pred[i]*(I[i,]/N*p_se_components[i,] + 
+                          rho*(DM %*% (I[i,]/N*p_se_components[i,]))))
+      S_star[i,] = rbinom(rep(1, length(S0)), R[i,], 0)
+      E_star[i,] = rbinom(rep(1, length(S0)), S[i,], p_se[i,])
+      I_star[i,] = rbinom(rep(1, length(S0)), E[i,], p_ei[i])
+      R_star[i,] = rbinom(rep(1, length(S0)), I[i,], p_ir[i])
+    }
+    return(list(S=S,E=E,I=I,R=R,
+                S_star=S_star,E_star=E_star,
+                I_star=I_star,R_star=R_star,
+                p_se=p_se,p_ei=p_ei,p_ir=p_ir))
+}
+
+
+predict.i = function(i)
+{
+  dataRow = chain1[i,]
+  rho = dataRow$rho
+  beta = c()
+  for (i in 0:(modelDF+3))
+  {
+    beta = c(beta, dataRow[[paste("BetaP_SE_", i, sep = "")]])
+  }
+   
+  S0 = c(dataRow[[paste("S_0_", maxIdx-1, sep = "")]],
+         dataRow[[paste("S_1_", maxIdx-1, sep = "")]],
+         dataRow[[paste("S_2_", maxIdx-1, sep = "")]],
+         dataRow[[paste("S_3_", maxIdx-1, sep = "")]])
+  E0 = c(dataRow[[paste("E_0_", maxIdx-1, sep = "")]],
+         dataRow[[paste("E_1_", maxIdx-1, sep = "")]],
+         dataRow[[paste("E_2_", maxIdx-1, sep = "")]],
+         dataRow[[paste("E_3_", maxIdx-1, sep = "")]])
+  I0 = c(dataRow[[paste("I_0_", maxIdx-1, sep = "")]],
+         dataRow[[paste("I_1_", maxIdx-1, sep = "")]],
+         dataRow[[paste("I_2_", maxIdx-1, sep = "")]],
+         dataRow[[paste("I_3_", maxIdx-1, sep = "")]])
+  R0 = c(dataRow[[paste("R_0_", maxIdx-1, sep = "")]],
+         dataRow[[paste("R_1_", maxIdx-1, sep = "")]],
+         dataRow[[paste("R_2_", maxIdx-1, sep = "")]],
+         dataRow[[paste("R_3_", maxIdx-1, sep = "")]])
+  
+  
+  return(predictEpidemic(beta,  
+                         X.pred,
+                         dataRow$gamma_ei,
+                         dataRow$gamma_ir,
+                         S0,
+                         E0,
+                         I0,
+                         R0,
+                         rho,
+                         offset.pred
+                         ))
+}
+
 preds = lapply((nrow(chain1) - floor(nrow(chain1)/2)):
                   nrow(chain1), predict.i)
 
@@ -1535,6 +1058,22 @@ Nigeria.LB = apply(Nigeria.Pred, 2, quantile, probs = c(0.05))
 Nigeria.UB = apply(Nigeria.Pred, 2, quantile, probs = c(0.95))
 
 maxI = max(c(max(c(Guinea.I.Est, Liberia.I.Est, SierraLeone.I.Est, Nigeria.I.Est)), Guinea.UB, Liberia.UB, SierraLeone.UB, Nigeria.UB))
+
+pred.table1 = cbind(Guinea.I.Est[1,], 
+                    Liberia.I.Est[1,],
+                    SierraLeone.I.Est[1,],
+                    Nigeria.I.Est[1,]
+                    )
+pred.table2 = cbind(Guinea.mean, 
+                    Liberia.mean,
+                    SierraLeone.mean,
+                    Nigeria.mean)
+pred.table = rbind(pred.table1, pred.table2)
+rownames(pred.table) = c(as.character(rptDate), as.character(pred.dates))
+colnames(pred.table) = c("&nbsp;&nbsp;&nbsp;Guinea &nbsp;&nbsp;&nbsp;", 
+                         "&nbsp;&nbsp;&nbsp; Liberia &nbsp;&nbsp;&nbsp;", 
+                         "&nbsp;&nbsp;&nbsp; Sierra Leone &nbsp;&nbsp;&nbsp;", 
+                         "&nbsp;&nbsp;&nbsp; Nigeria &nbsp;&nbsp;&nbsp;")
 
 
 figure11 = function()
@@ -1622,7 +1161,11 @@ end.rcode-->
 <br/>
 <br/>
 <h3><a id="analysis-2-convergence-sect" class="anchor">Convergence</a></h3>
-<p>Again, convergence looks quite good:</p>
+<p>As this is a Bayesian analysis in which the posterior distribution is sampled using MCMC techniques, we really need some
+indication that the samplers have indeed converged to the posterior distribution in order to make any inferences about the 
+problem at hand. In the code below, we'll read in the MCMC output files created so far, plot the three chains for each of 
+several important parameters, and take a look at the Gelman and Rubin convergence diagnostic (which should be close to 1 if the chains have converged.)
+</p>
 <!--begin.rcode dpi=150, fig.align='center', echo=FALSE
 figure8()
 end.rcode-->
@@ -1633,20 +1176,47 @@ end.rcode-->
 
 <br/>
 
+
 <a id="analysis-2-r0-sect" class="anchor"><h3>Basic Reproductive Number Calculation</h3></a>
+
+
+<p>
+A common tool for describing the evolution of an epidemic is a quantity known as the basic reproductive numer, the basic reproductive ratio, or one of several other variants on that theme. The basic idea is to quantify how many secondary infections a single infectious individual is expected to cause in a large, fully susceptible population. Naturally, when this ratio exceeds one we expect the epidemic to spread. Conversely, a basic reproductive number less than one indicates that a pathogen is more likely to die out.</p> <br/><br/>
 
 <!--begin.rcode dpi=150, fig.align='center', echo=FALSE
 figure10()
 end.rcode-->
 
+
+While the basic reproductive number is a useful quantity to know, it does not directly make any predictions about future epidemic behavior. In order to do that, we need to simulate epidemics  based on the MCMC samples we have obtained and summarize their variability over time. <br/>
+
+
 <a id="analysis-2-prediction-sect" class="anchor"><h3>Epidemic Prediction</h3></a><br/>
+
+<br/><br/><p> 
+Below, we will attempt to predict the course of the epidemic through early fall. 
+
+We must be cautious when making predictions about a chaotic process this far into the future. The intensity function which drives the exposure process is based on simple smooth functions of time, rather than any external information. While this is perfectly adequate for estimation, it may or may not provide good prediction performance. 
+</p>
+
 <!--begin.rcode dpi=150, fig.align='center', echo=FALSE
 figure11()
 end.rcode-->
 
+<br/>
+<p>It can also be helpful to take a look at the data in tabular form.</p><br/>
 
 
-<p>Here we see the most prominant difference between the two approaches. Namely, these predictions appear more reasonable. Such data can also be visualized in map form, though the recent surge in predicted cases has the effect of swamping the earlier dynamics:</p>
+<div class="row">
+<div class="col-sm-2"></div>
+<div class="col-sm-9">
+<h4>Estimated and Predicted number of Infectious Individuals</h4><br/>
+<!--begin.rcode results = "asis"
+kable(pred.table, format = "html", digits = 0)
+end.rcode-->
+</div>
+</div>
+<p>Such data can also be visualized in map form, though the recent surge in predicted cases has the effect of swamping the earlier dynamics:</p>
 <br/>
 <h4 align=center>Total Infection Size - Estimated and Predicted:</h4>
 <div class='container' id ="pred_app" style="position: relative; max-width: 100%; height:100%">
@@ -1687,13 +1257,13 @@ That wraps up the analyses for now. This document will continue to be updated as
   </div>
 </div>
     <a id="dummy_anchor" class = "anchor"></a>  
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+    <script src="./js/jquery.min.js"></script>
     <script src="./bootstrap/js/bootstrap.min.js"></script>
-    <script src="http://d3js.org/d3.v3.min.js"></script>
-    <script src="http://d3js.org/topojson.v1.min.js"></script>
-    <script src='http://cdnjs.cloudflare.com/ajax/libs/handlebars.js/1.0.0/handlebars.min.js' type='text/javascript'></script>
-    <script src="http://cdnjs.cloudflare.com/ajax/libs/angular.js/1.2.1/angular.min.js"></script>
-    <script src="./datamaps.world.min.js"></script>
+    <script src="./js/d3.v3.min.js"></script>
+    <script src="./js/topojson.v1.min.js"></script>
+    <script src='./js/handlebars.min.js' type='text/javascript'></script>
+    <script src="./js/angular.min.js"></script>
+    <script src="./js/datamaps.world.min.js"></script>
     
     <script>
   function rChartsCtrl($scope){
@@ -1969,6 +1539,11 @@ if (chartParams_pred.legend){
 </script>
 
 <script type="text/javascript">
+      $(document).ready(function(){
+        $("table").addClass("table-striped");
+        $("table").addClass("table-bordered");
+      });
+
       $(".code-button").click(function(){
           $(this).next().animate({
             opacity: 1,
