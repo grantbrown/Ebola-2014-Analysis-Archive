@@ -159,14 +159,14 @@ library(parallel) # Load the parallel library to enable multiple chains to be ru
 
 ## Define Document Compilation Parameters
 
-#documentCompilationMode = "release"
-documentCompilationMode = "debug"
+documentCompilationMode = "release"
+#documentCompilationMode = "debug"
 modelDF = 6
 pred.days = 24
 
 ## Compute number of samples/batches
 numBurnInBatches =      ifelse(documentCompilationMode == "release", 1000,  1)
-numConvergenceBatches = ifelse(documentCompilationMode == "release", 250,  10)
+numConvergenceBatches = ifelse(documentCompilationMode == "release", 500,  10)
 convergenceBatchSize =  ifelse(documentCompilationMode == "release", 1000, 50) 
 extraR0Iterations =     ifelse(documentCompilationMode == "release", 500,   10)
 iterationStride =       ifelse(documentCompilationMode == "release", 500,   50)
