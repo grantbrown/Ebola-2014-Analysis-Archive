@@ -168,8 +168,8 @@ pred.days = 24
 numBurnInBatches =      ifelse(documentCompilationMode == "release", 1000,  1)
 numConvergenceBatches = ifelse(documentCompilationMode == "release", 500,  10)
 convergenceBatchSize =  ifelse(documentCompilationMode == "release", 1000, 50) 
-extraR0Iterations =     ifelse(documentCompilationMode == "release", 500,   10)
-iterationStride =       ifelse(documentCompilationMode == "release", 500,   50)
+extraR0Iterations =     ifelse(documentCompilationMode == "release", 1000,   10)
+iterationStride =       ifelse(documentCompilationMode == "release", 1000,   50)
 
 ## Read in the data
 url = 'http://en.wikipedia.org/wiki/West_Africa_Ebola_virus_outbreak'
@@ -699,24 +699,30 @@ buildAndRunModel = function(params)
   # Burn in tuning parameters
   runSimulation(SEIRmodel, numBatches = numBurnInBatches)
   SEIRmodel$compartmentSamplingMode = 14
+  SEIRmodel$useDecorrelation = 25
   # Run Simulation
   cat(paste("Running chain ", params[["chainNumber"]], "\n", sep =""))
+  batchFraction = max(floor(numConvergenceBatches/8), 1)
+  for (batch in 1:8)
+  {
+    tm = system.time(runSimulation(SEIRmodel, 
+                    numBatches=batchFraction, 
+                    batchSize=convergenceBatchSize, 
+                    targetAcceptanceRatio=0.2,
+                    tolerance=0.025,
+                    proportionChange = 0.05))
+    SEIRmodel$compartmentSamplingMode = ifelse(SEIRmodel$compartmentSamplingMode == 1, 14, 1)
+  }
+  
+  SEIRmodel$compartmentSamplingMode = 14
   tm = system.time(runSimulation(SEIRmodel, 
                   numBatches=numConvergenceBatches, 
                   batchSize=convergenceBatchSize, 
                   targetAcceptanceRatio=0.2,
                   tolerance=0.025,
                   proportionChange = 0.05))
-  SEIRmodel$compartmentSamplingMode = 1
-  tm = system.time(runSimulation(SEIRmodel, 
-                  numBatches=floor(numConvergenceBatches)/2, 
-                  batchSize=floor(convergenceBatchSize)/2, 
-                  targetAcceptanceRatio=0.2,
-                  tolerance=0.025,
-                  proportionChange = 0.05))
   cat(paste("Time elapsed: ", round(tm[3]/60,3), 
               " minutes\n", sep = ""))
-  
   dat = read.csv(proposal$outFileName)
   
   ## Do we need to estimate R0 for this chain?
@@ -1089,7 +1095,7 @@ figure11 = function()
   plot(rptDate, Guinea.I.Est[1,], ylim = c(0, maxI), xlim = pred.xlim,
        main = "Guinea Estimated Epidemic Size\n 90% Credible Interval",
        type = "l", lwd = 2, ylab = "Infectious Count", xlab = "Date")
-  abline(h = seq(0,1000000,500), lty = 2, col = "lightgrey")
+  abline(h = seq(0,1000000,1000), lty = 2, col = "lightgrey")
   lines(rptDate, Guinea.I.Est[1,], lty = 2)
   lines(rptDate, Guinea.I.Est[2,], lty = 2)
   lines(rptDate, Guinea.I.Est[3,], lty = 2)
@@ -1107,7 +1113,7 @@ figure11 = function()
        main = "Liberia Estimated Epidemic Size\n 90% Credible Interval",
        type = "l", lwd = 2, col = "blue", ylab = "Infectious Count", 
        xlab = "Date")
-  abline(h = seq(0,1000000,500), lty = 2, col = "lightgrey")
+  abline(h = seq(0,1000000,1000), lty = 2, col = "lightgrey")
   lines(rptDate, Liberia.I.Est[1,], lty = 2, col = "blue")
   lines(rptDate, Liberia.I.Est[2,], lty = 2, col = "blue")
   lines(rptDate, Liberia.I.Est[3,], lty = 2, col = "blue")
@@ -1125,7 +1131,7 @@ figure11 = function()
        main = "Sierra Leone Estimated Epidemic Size\n 90% Credible Interval",
        type = "l", lwd = 2, col = "red",ylab = "Infectious Count", 
        xlab = "Date")
-  abline(h = seq(0,1000000,500), lty = 2, col = "lightgrey")
+  abline(h = seq(0,1000000,1000), lty = 2, col = "lightgrey")
   lines(rptDate, SierraLeone.I.Est[1,], lty = 2, col = "red")
   lines(rptDate, SierraLeone.I.Est[2,], lty = 2, col = "red")
   lines(rptDate, SierraLeone.I.Est[3,], lty = 2, col ="red")
@@ -1144,7 +1150,7 @@ figure11 = function()
        main = "Sierra Leone Estimated Epidemic Size\n 90% Credible Interval",
        type = "l", lwd = 2, col = "green",ylab = "Infectious Count", 
        xlab = "Date")
-  abline(h = seq(0,1000000,500), lty = 2, col = "lightgrey")
+  abline(h = seq(0,1000000,1000), lty = 2, col = "lightgrey")
   lines(rptDate, Nigeria.I.Est[1,], lty = 2, col = "green")
   lines(rptDate, Nigeria.I.Est[2,], lty = 2, col = "green")
   lines(rptDate, Nigeria.I.Est[3,], lty = 2, col ="green")
