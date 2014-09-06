@@ -162,13 +162,13 @@ library(parallel) # Load the parallel library to enable multiple chains to be ru
 documentCompilationMode = "release"
 #documentCompilationMode = "debug"
 modelDF = 6
-pred.days = 24
+pred.days = 14
 
 ## Compute number of samples/batches
 numBurnInBatches =      ifelse(documentCompilationMode == "release", 1000,  1)
 numConvergenceBatches = ifelse(documentCompilationMode == "release", 500,  10)
 convergenceBatchSize =  ifelse(documentCompilationMode == "release", 1000, 50) 
-extraR0Iterations =     ifelse(documentCompilationMode == "release", 500,   10)
+extraR0Iterations =     ifelse(documentCompilationMode == "release", 750,   10)
 iterationStride =       ifelse(documentCompilationMode == "release", 1000,   50)
 
 ## Read in the data
@@ -1095,7 +1095,7 @@ figure11 = function()
   plot(rptDate, Guinea.I.Est[1,], ylim = c(0, maxI), xlim = pred.xlim,
        main = "Guinea Estimated Epidemic Size\n 90% Credible Interval",
        type = "l", lwd = 2, ylab = "Infectious Count", xlab = "Date")
-  abline(h = seq(0,1000000,1000), lty = 2, col = "lightgrey")
+  abline(h = seq(0,1000000,5000), lty = 2, col = "lightgrey")
   lines(rptDate, Guinea.I.Est[1,], lty = 2)
   lines(rptDate, Guinea.I.Est[2,], lty = 2)
   lines(rptDate, Guinea.I.Est[3,], lty = 2)
@@ -1113,7 +1113,7 @@ figure11 = function()
        main = "Liberia Estimated Epidemic Size\n 90% Credible Interval",
        type = "l", lwd = 2, col = "blue", ylab = "Infectious Count", 
        xlab = "Date")
-  abline(h = seq(0,1000000,1000), lty = 2, col = "lightgrey")
+  abline(h = seq(0,1000000,5000), lty = 2, col = "lightgrey")
   lines(rptDate, Liberia.I.Est[1,], lty = 2, col = "blue")
   lines(rptDate, Liberia.I.Est[2,], lty = 2, col = "blue")
   lines(rptDate, Liberia.I.Est[3,], lty = 2, col = "blue")
@@ -1131,7 +1131,7 @@ figure11 = function()
        main = "Sierra Leone Estimated Epidemic Size\n 90% Credible Interval",
        type = "l", lwd = 2, col = "red",ylab = "Infectious Count", 
        xlab = "Date")
-  abline(h = seq(0,1000000,1000), lty = 2, col = "lightgrey")
+  abline(h = seq(0,1000000,5000), lty = 2, col = "lightgrey")
   lines(rptDate, SierraLeone.I.Est[1,], lty = 2, col = "red")
   lines(rptDate, SierraLeone.I.Est[2,], lty = 2, col = "red")
   lines(rptDate, SierraLeone.I.Est[3,], lty = 2, col ="red")
@@ -1150,7 +1150,7 @@ figure11 = function()
        main = "Sierra Leone Estimated Epidemic Size\n 90% Credible Interval",
        type = "l", lwd = 2, col = "green",ylab = "Infectious Count", 
        xlab = "Date")
-  abline(h = seq(0,1000000,1000), lty = 2, col = "lightgrey")
+  abline(h = seq(0,1000000,5000), lty = 2, col = "lightgrey")
   lines(rptDate, Nigeria.I.Est[1,], lty = 2, col = "green")
   lines(rptDate, Nigeria.I.Est[2,], lty = 2, col = "green")
   lines(rptDate, Nigeria.I.Est[3,], lty = 2, col ="green")
