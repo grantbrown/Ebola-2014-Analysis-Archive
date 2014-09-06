@@ -229,13 +229,13 @@
 <span class="hl std">documentCompilationMode</span> <span class="hl kwb">=</span> <span class="hl str">&quot;release&quot;</span>
 <span class="hl com">#documentCompilationMode = &quot;debug&quot;</span>
 <span class="hl std">modelDF</span> <span class="hl kwb">=</span> <span class="hl num">6</span>
-<span class="hl std">pred.days</span> <span class="hl kwb">=</span> <span class="hl num">24</span>
+<span class="hl std">pred.days</span> <span class="hl kwb">=</span> <span class="hl num">14</span>
 
 <span class="hl com">## Compute number of samples/batches</span>
 <span class="hl std">numBurnInBatches</span> <span class="hl kwb">=</span>      <span class="hl kwd">ifelse</span><span class="hl std">(documentCompilationMode</span> <span class="hl opt">==</span> <span class="hl str">&quot;release&quot;</span><span class="hl std">,</span> <span class="hl num">1000</span><span class="hl std">,</span>  <span class="hl num">1</span><span class="hl std">)</span>
 <span class="hl std">numConvergenceBatches</span> <span class="hl kwb">=</span> <span class="hl kwd">ifelse</span><span class="hl std">(documentCompilationMode</span> <span class="hl opt">==</span> <span class="hl str">&quot;release&quot;</span><span class="hl std">,</span> <span class="hl num">500</span><span class="hl std">,</span>  <span class="hl num">10</span><span class="hl std">)</span>
 <span class="hl std">convergenceBatchSize</span> <span class="hl kwb">=</span>  <span class="hl kwd">ifelse</span><span class="hl std">(documentCompilationMode</span> <span class="hl opt">==</span> <span class="hl str">&quot;release&quot;</span><span class="hl std">,</span> <span class="hl num">1000</span><span class="hl std">,</span> <span class="hl num">50</span><span class="hl std">)</span>
-<span class="hl std">extraR0Iterations</span> <span class="hl kwb">=</span>     <span class="hl kwd">ifelse</span><span class="hl std">(documentCompilationMode</span> <span class="hl opt">==</span> <span class="hl str">&quot;release&quot;</span><span class="hl std">,</span> <span class="hl num">1000</span><span class="hl std">,</span>   <span class="hl num">10</span><span class="hl std">)</span>
+<span class="hl std">extraR0Iterations</span> <span class="hl kwb">=</span>     <span class="hl kwd">ifelse</span><span class="hl std">(documentCompilationMode</span> <span class="hl opt">==</span> <span class="hl str">&quot;release&quot;</span><span class="hl std">,</span> <span class="hl num">750</span><span class="hl std">,</span>   <span class="hl num">10</span><span class="hl std">)</span>
 <span class="hl std">iterationStride</span> <span class="hl kwb">=</span>       <span class="hl kwd">ifelse</span><span class="hl std">(documentCompilationMode</span> <span class="hl opt">==</span> <span class="hl str">&quot;release&quot;</span><span class="hl std">,</span> <span class="hl num">1000</span><span class="hl std">,</span>   <span class="hl num">50</span><span class="hl std">)</span>
 
 <span class="hl com">## Read in the data</span>
@@ -250,8 +250,13 @@
 <span class="hl std">dat[dup.indices[</span><span class="hl num">1</span><span class="hl std">],]</span><span class="hl opt">$</span><span class="hl std">V2</span> <span class="hl kwb">=</span> <span class="hl std">dat[dup.indices[</span><span class="hl num">2</span><span class="hl std">],]</span><span class="hl opt">$</span><span class="hl std">V2</span>
 <span class="hl std">dat</span> <span class="hl kwb">=</span> <span class="hl kwd">rbind</span><span class="hl std">(dat[</span><span class="hl num">1</span><span class="hl opt">:</span><span class="hl std">dup.indices[</span><span class="hl num">1</span><span class="hl std">],], dat[(dup.indices[</span><span class="hl num">2</span><span class="hl std">]</span><span class="hl opt">+</span><span class="hl num">1</span><span class="hl std">)</span><span class="hl opt">:</span><span class="hl kwd">nrow</span><span class="hl std">(dat),])</span>
 
+<span class="hl std">charDate</span> <span class="hl kwb">=</span> <span class="hl kwd">as.character</span><span class="hl std">(dat[</span><span class="hl num">2</span><span class="hl opt">:</span><span class="hl kwd">nrow</span><span class="hl std">(dat),</span><span class="hl num">1</span><span class="hl std">])</span>
+<span class="hl kwa">for</span> <span class="hl std">(i</span> <span class="hl kwa">in</span> <span class="hl num">1</span><span class="hl opt">:</span><span class="hl kwd">length</span><span class="hl std">(charDate))</span>
+<span class="hl std">{</span>
+  <span class="hl std">charDate[i]</span> <span class="hl kwb">=</span> <span class="hl kwd">gsub</span><span class="hl std">(</span><span class="hl str">&quot;Sept&quot;</span><span class="hl std">,</span> <span class="hl str">&quot;Sep&quot;</span><span class="hl std">, charDate[i])</span>
+<span class="hl std">}</span>
 
-<span class="hl std">rptDate</span> <span class="hl kwb">=</span> <span class="hl kwd">as.Date</span><span class="hl std">(dat[</span><span class="hl num">2</span><span class="hl opt">:</span><span class="hl kwd">nrow</span><span class="hl std">(dat),</span><span class="hl num">1</span><span class="hl std">],</span> <span class="hl str">&quot;%d %b %Y&quot;</span><span class="hl std">)</span>
+<span class="hl std">rptDate</span> <span class="hl kwb">=</span> <span class="hl kwd">as.Date</span><span class="hl std">(charDate,</span> <span class="hl str">&quot;%d %b %Y&quot;</span><span class="hl std">)</span>
 <span class="hl std">numDays</span> <span class="hl kwb">=</span> <span class="hl kwd">max</span><span class="hl std">(rptDate)</span> <span class="hl opt">-</span> <span class="hl kwd">min</span><span class="hl std">(rptDate)</span> <span class="hl opt">+</span> <span class="hl num">1</span>
 <span class="hl std">numDays.pred</span> <span class="hl kwb">=</span> <span class="hl std">numDays</span> <span class="hl opt">+</span> <span class="hl std">pred.days</span>
 
@@ -403,7 +408,7 @@ One can also represent this data geographically to get an idea of the spatial ep
   <div class = "row">
     <div class="col-sm-3">
       <input id='zoom-map-slider' type='range' min=1 max=
-163
+168
       ng-model='Day' width=200>
        <span>Day: <span id ="zoom-map-day-counter"></span></span>
     </div>
@@ -915,37 +920,37 @@ temporal trend.
 ## 1. Empirical mean and standard deviation for each variable,
 ##    plus standard error of the mean:
 ## 
-##                                 Mean      SD Naive SE Time-series SE
-## Guinea Intercept             -2.8317 0.87084 2.23e-02       1.66e-01
-## Liberia Intercept            -2.2029 0.85777 2.20e-02       1.62e-01
-## Sierra Leone Intercept       -2.6778 0.86390 2.21e-02       1.66e-01
-## Nigeria Intercept            -5.5552 1.86447 4.77e-02       2.75e-01
-## Time component 1             -0.4003 1.29249 3.31e-02       1.71e-01
-## Time component 2              1.4372 0.96051 2.46e-02       1.64e-01
-## Time component 3              0.4672 0.87721 2.24e-02       1.74e-01
-## Time component 4              2.8070 0.77845 1.99e-02       1.07e-01
-## Time component 5             -5.4640 2.55557 6.54e-02       5.15e-01
-## Time component 6              5.6769 1.14655 2.93e-02       1.55e-01
-## Spatial Dependence Parameter  0.0068 0.00176 4.49e-05       5.27e-05
-## E to I probability            0.0485 0.00681 1.74e-04       4.49e-04
-## I to R probability            0.0847 0.00721 1.85e-04       2.72e-04
+##                                  Mean      SD Naive SE Time-series SE
+## Guinea Intercept             -2.54145 0.67967 1.74e-02       0.100231
+## Liberia Intercept            -1.91887 0.58996 1.51e-02       0.071524
+## Sierra Leone Intercept       -2.39386 0.60913 1.56e-02       0.078137
+## Nigeria Intercept            -5.61296 1.49932 3.84e-02       0.163055
+## Time component 1             -1.83545 1.27039 3.25e-02       0.169924
+## Time component 2              1.61037 1.11026 2.84e-02       0.145077
+## Time component 3             -0.66401 0.69579 1.78e-02       0.082559
+## Time component 4              2.15708 1.29075 3.30e-02       0.210378
+## Time component 5             -3.32535 1.88482 4.82e-02       0.232832
+## Time component 6              1.72100 1.43785 3.68e-02       0.201104
+## Spatial Dependence Parameter  0.00924 0.00311 7.97e-05       0.000259
+## E to I probability            0.10809 0.06126 1.57e-03       0.009329
+## I to R probability            0.07843 0.00987 2.53e-04       0.001287
 ## 
 ## 2. Quantiles for each variable:
 ## 
-##                                   2.5%      25%      50%      75%   97.5%
-## Guinea Intercept              -4.96033 -3.32510 -2.76113 -2.25440 -1.2112
-## Liberia Intercept             -4.30001 -2.68778 -2.13649 -1.63674 -0.6010
-## Sierra Leone Intercept        -4.79223 -3.16816 -2.60406 -2.11541 -1.0633
-## Nigeria Intercept             -9.76696 -6.76077 -5.30970 -4.30016 -2.4602
-## Time component 1              -2.65455 -1.20076 -0.40388  0.43096  2.1101
-## Time component 2              -0.32822  0.77795  1.40081  2.03507  3.6428
-## Time component 3              -1.14682 -0.07698  0.38831  0.93779  2.5552
-## Time component 4               1.50202  2.22905  2.72979  3.31156  4.5315
-## Time component 5             -10.64623 -7.15282 -5.45429 -3.66523 -0.8158
-## Time component 6               3.74897  4.83411  5.58962  6.46192  8.1292
-## Spatial Dependence Parameter   0.00373  0.00556  0.00667  0.00789  0.0105
-## E to I probability             0.03542  0.04392  0.04837  0.05314  0.0620
-## I to R probability             0.07197  0.07981  0.08441  0.08924  0.1000
+##                                  2.5%     25%      50%     75%   97.5%
+## Guinea Intercept             -4.12023 -2.9118 -2.43761 -2.0715 -1.5027
+## Liberia Intercept            -3.07285 -2.2716 -1.90518 -1.5742 -0.8229
+## Sierra Leone Intercept       -3.70637 -2.7568 -2.32330 -1.9784 -1.3516
+## Nigeria Intercept            -8.82903 -6.6078 -5.44898 -4.5074 -3.0735
+## Time component 1             -4.97832 -2.3338 -1.66943 -1.0966  0.3814
+## Time component 2              0.28240  1.0271  1.45700  2.0718  3.9320
+## Time component 3             -1.80468 -1.1608 -0.75740 -0.2067  0.7990
+## Time component 4              0.64713  1.1475  1.55219  3.2547  4.9577
+## Time component 5             -7.43549 -4.5600 -2.79933 -2.0233 -0.5180
+## Time component 6              0.13011  0.6693  1.06606  2.7724  5.0914
+## Spatial Dependence Parameter  0.00374  0.0065  0.00957  0.0115  0.0148
+## E to I probability            0.00703  0.0415  0.13131  0.1555  0.2026
+## I to R probability            0.06592  0.0728  0.07682  0.0816  0.1037
 </pre></div>
 <div class="source"><pre class="knitr r"><span class="hl com">## R0 stuff</span>
 
@@ -1157,7 +1162,7 @@ temporal trend.
   <span class="hl kwd">plot</span><span class="hl std">(rptDate, Guinea.I.Est[</span><span class="hl num">1</span><span class="hl std">,],</span> <span class="hl kwc">ylim</span> <span class="hl std">=</span> <span class="hl kwd">c</span><span class="hl std">(</span><span class="hl num">0</span><span class="hl std">, maxI),</span> <span class="hl kwc">xlim</span> <span class="hl std">= pred.xlim,</span>
        <span class="hl kwc">main</span> <span class="hl std">=</span> <span class="hl str">&quot;Guinea Estimated Epidemic Size\n 90% Credible Interval&quot;</span><span class="hl std">,</span>
        <span class="hl kwc">type</span> <span class="hl std">=</span> <span class="hl str">&quot;l&quot;</span><span class="hl std">,</span> <span class="hl kwc">lwd</span> <span class="hl std">=</span> <span class="hl num">2</span><span class="hl std">,</span> <span class="hl kwc">ylab</span> <span class="hl std">=</span> <span class="hl str">&quot;Infectious Count&quot;</span><span class="hl std">,</span> <span class="hl kwc">xlab</span> <span class="hl std">=</span> <span class="hl str">&quot;Date&quot;</span><span class="hl std">)</span>
-  <span class="hl kwd">abline</span><span class="hl std">(</span><span class="hl kwc">h</span> <span class="hl std">=</span> <span class="hl kwd">seq</span><span class="hl std">(</span><span class="hl num">0</span><span class="hl std">,</span><span class="hl num">1000000</span><span class="hl std">,</span><span class="hl num">1000</span><span class="hl std">),</span> <span class="hl kwc">lty</span> <span class="hl std">=</span> <span class="hl num">2</span><span class="hl std">,</span> <span class="hl kwc">col</span> <span class="hl std">=</span> <span class="hl str">&quot;lightgrey&quot;</span><span class="hl std">)</span>
+  <span class="hl kwd">abline</span><span class="hl std">(</span><span class="hl kwc">h</span> <span class="hl std">=</span> <span class="hl kwd">seq</span><span class="hl std">(</span><span class="hl num">0</span><span class="hl std">,</span><span class="hl num">1000000</span><span class="hl std">,</span><span class="hl num">5000</span><span class="hl std">),</span> <span class="hl kwc">lty</span> <span class="hl std">=</span> <span class="hl num">2</span><span class="hl std">,</span> <span class="hl kwc">col</span> <span class="hl std">=</span> <span class="hl str">&quot;lightgrey&quot;</span><span class="hl std">)</span>
   <span class="hl kwd">lines</span><span class="hl std">(rptDate, Guinea.I.Est[</span><span class="hl num">1</span><span class="hl std">,],</span> <span class="hl kwc">lty</span> <span class="hl std">=</span> <span class="hl num">2</span><span class="hl std">)</span>
   <span class="hl kwd">lines</span><span class="hl std">(rptDate, Guinea.I.Est[</span><span class="hl num">2</span><span class="hl std">,],</span> <span class="hl kwc">lty</span> <span class="hl std">=</span> <span class="hl num">2</span><span class="hl std">)</span>
   <span class="hl kwd">lines</span><span class="hl std">(rptDate, Guinea.I.Est[</span><span class="hl num">3</span><span class="hl std">,],</span> <span class="hl kwc">lty</span> <span class="hl std">=</span> <span class="hl num">2</span><span class="hl std">)</span>
@@ -1175,7 +1180,7 @@ temporal trend.
        <span class="hl kwc">main</span> <span class="hl std">=</span> <span class="hl str">&quot;Liberia Estimated Epidemic Size\n 90% Credible Interval&quot;</span><span class="hl std">,</span>
        <span class="hl kwc">type</span> <span class="hl std">=</span> <span class="hl str">&quot;l&quot;</span><span class="hl std">,</span> <span class="hl kwc">lwd</span> <span class="hl std">=</span> <span class="hl num">2</span><span class="hl std">,</span> <span class="hl kwc">col</span> <span class="hl std">=</span> <span class="hl str">&quot;blue&quot;</span><span class="hl std">,</span> <span class="hl kwc">ylab</span> <span class="hl std">=</span> <span class="hl str">&quot;Infectious Count&quot;</span><span class="hl std">,</span>
        <span class="hl kwc">xlab</span> <span class="hl std">=</span> <span class="hl str">&quot;Date&quot;</span><span class="hl std">)</span>
-  <span class="hl kwd">abline</span><span class="hl std">(</span><span class="hl kwc">h</span> <span class="hl std">=</span> <span class="hl kwd">seq</span><span class="hl std">(</span><span class="hl num">0</span><span class="hl std">,</span><span class="hl num">1000000</span><span class="hl std">,</span><span class="hl num">1000</span><span class="hl std">),</span> <span class="hl kwc">lty</span> <span class="hl std">=</span> <span class="hl num">2</span><span class="hl std">,</span> <span class="hl kwc">col</span> <span class="hl std">=</span> <span class="hl str">&quot;lightgrey&quot;</span><span class="hl std">)</span>
+  <span class="hl kwd">abline</span><span class="hl std">(</span><span class="hl kwc">h</span> <span class="hl std">=</span> <span class="hl kwd">seq</span><span class="hl std">(</span><span class="hl num">0</span><span class="hl std">,</span><span class="hl num">1000000</span><span class="hl std">,</span><span class="hl num">5000</span><span class="hl std">),</span> <span class="hl kwc">lty</span> <span class="hl std">=</span> <span class="hl num">2</span><span class="hl std">,</span> <span class="hl kwc">col</span> <span class="hl std">=</span> <span class="hl str">&quot;lightgrey&quot;</span><span class="hl std">)</span>
   <span class="hl kwd">lines</span><span class="hl std">(rptDate, Liberia.I.Est[</span><span class="hl num">1</span><span class="hl std">,],</span> <span class="hl kwc">lty</span> <span class="hl std">=</span> <span class="hl num">2</span><span class="hl std">,</span> <span class="hl kwc">col</span> <span class="hl std">=</span> <span class="hl str">&quot;blue&quot;</span><span class="hl std">)</span>
   <span class="hl kwd">lines</span><span class="hl std">(rptDate, Liberia.I.Est[</span><span class="hl num">2</span><span class="hl std">,],</span> <span class="hl kwc">lty</span> <span class="hl std">=</span> <span class="hl num">2</span><span class="hl std">,</span> <span class="hl kwc">col</span> <span class="hl std">=</span> <span class="hl str">&quot;blue&quot;</span><span class="hl std">)</span>
   <span class="hl kwd">lines</span><span class="hl std">(rptDate, Liberia.I.Est[</span><span class="hl num">3</span><span class="hl std">,],</span> <span class="hl kwc">lty</span> <span class="hl std">=</span> <span class="hl num">2</span><span class="hl std">,</span> <span class="hl kwc">col</span> <span class="hl std">=</span> <span class="hl str">&quot;blue&quot;</span><span class="hl std">)</span>
@@ -1193,7 +1198,7 @@ temporal trend.
        <span class="hl kwc">main</span> <span class="hl std">=</span> <span class="hl str">&quot;Sierra Leone Estimated Epidemic Size\n 90% Credible Interval&quot;</span><span class="hl std">,</span>
        <span class="hl kwc">type</span> <span class="hl std">=</span> <span class="hl str">&quot;l&quot;</span><span class="hl std">,</span> <span class="hl kwc">lwd</span> <span class="hl std">=</span> <span class="hl num">2</span><span class="hl std">,</span> <span class="hl kwc">col</span> <span class="hl std">=</span> <span class="hl str">&quot;red&quot;</span><span class="hl std">,</span><span class="hl kwc">ylab</span> <span class="hl std">=</span> <span class="hl str">&quot;Infectious Count&quot;</span><span class="hl std">,</span>
        <span class="hl kwc">xlab</span> <span class="hl std">=</span> <span class="hl str">&quot;Date&quot;</span><span class="hl std">)</span>
-  <span class="hl kwd">abline</span><span class="hl std">(</span><span class="hl kwc">h</span> <span class="hl std">=</span> <span class="hl kwd">seq</span><span class="hl std">(</span><span class="hl num">0</span><span class="hl std">,</span><span class="hl num">1000000</span><span class="hl std">,</span><span class="hl num">1000</span><span class="hl std">),</span> <span class="hl kwc">lty</span> <span class="hl std">=</span> <span class="hl num">2</span><span class="hl std">,</span> <span class="hl kwc">col</span> <span class="hl std">=</span> <span class="hl str">&quot;lightgrey&quot;</span><span class="hl std">)</span>
+  <span class="hl kwd">abline</span><span class="hl std">(</span><span class="hl kwc">h</span> <span class="hl std">=</span> <span class="hl kwd">seq</span><span class="hl std">(</span><span class="hl num">0</span><span class="hl std">,</span><span class="hl num">1000000</span><span class="hl std">,</span><span class="hl num">5000</span><span class="hl std">),</span> <span class="hl kwc">lty</span> <span class="hl std">=</span> <span class="hl num">2</span><span class="hl std">,</span> <span class="hl kwc">col</span> <span class="hl std">=</span> <span class="hl str">&quot;lightgrey&quot;</span><span class="hl std">)</span>
   <span class="hl kwd">lines</span><span class="hl std">(rptDate, SierraLeone.I.Est[</span><span class="hl num">1</span><span class="hl std">,],</span> <span class="hl kwc">lty</span> <span class="hl std">=</span> <span class="hl num">2</span><span class="hl std">,</span> <span class="hl kwc">col</span> <span class="hl std">=</span> <span class="hl str">&quot;red&quot;</span><span class="hl std">)</span>
   <span class="hl kwd">lines</span><span class="hl std">(rptDate, SierraLeone.I.Est[</span><span class="hl num">2</span><span class="hl std">,],</span> <span class="hl kwc">lty</span> <span class="hl std">=</span> <span class="hl num">2</span><span class="hl std">,</span> <span class="hl kwc">col</span> <span class="hl std">=</span> <span class="hl str">&quot;red&quot;</span><span class="hl std">)</span>
   <span class="hl kwd">lines</span><span class="hl std">(rptDate, SierraLeone.I.Est[</span><span class="hl num">3</span><span class="hl std">,],</span> <span class="hl kwc">lty</span> <span class="hl std">=</span> <span class="hl num">2</span><span class="hl std">,</span> <span class="hl kwc">col</span> <span class="hl std">=</span><span class="hl str">&quot;red&quot;</span><span class="hl std">)</span>
@@ -1212,7 +1217,7 @@ temporal trend.
        <span class="hl kwc">main</span> <span class="hl std">=</span> <span class="hl str">&quot;Sierra Leone Estimated Epidemic Size\n 90% Credible Interval&quot;</span><span class="hl std">,</span>
        <span class="hl kwc">type</span> <span class="hl std">=</span> <span class="hl str">&quot;l&quot;</span><span class="hl std">,</span> <span class="hl kwc">lwd</span> <span class="hl std">=</span> <span class="hl num">2</span><span class="hl std">,</span> <span class="hl kwc">col</span> <span class="hl std">=</span> <span class="hl str">&quot;green&quot;</span><span class="hl std">,</span><span class="hl kwc">ylab</span> <span class="hl std">=</span> <span class="hl str">&quot;Infectious Count&quot;</span><span class="hl std">,</span>
        <span class="hl kwc">xlab</span> <span class="hl std">=</span> <span class="hl str">&quot;Date&quot;</span><span class="hl std">)</span>
-  <span class="hl kwd">abline</span><span class="hl std">(</span><span class="hl kwc">h</span> <span class="hl std">=</span> <span class="hl kwd">seq</span><span class="hl std">(</span><span class="hl num">0</span><span class="hl std">,</span><span class="hl num">1000000</span><span class="hl std">,</span><span class="hl num">1000</span><span class="hl std">),</span> <span class="hl kwc">lty</span> <span class="hl std">=</span> <span class="hl num">2</span><span class="hl std">,</span> <span class="hl kwc">col</span> <span class="hl std">=</span> <span class="hl str">&quot;lightgrey&quot;</span><span class="hl std">)</span>
+  <span class="hl kwd">abline</span><span class="hl std">(</span><span class="hl kwc">h</span> <span class="hl std">=</span> <span class="hl kwd">seq</span><span class="hl std">(</span><span class="hl num">0</span><span class="hl std">,</span><span class="hl num">1000000</span><span class="hl std">,</span><span class="hl num">5000</span><span class="hl std">),</span> <span class="hl kwc">lty</span> <span class="hl std">=</span> <span class="hl num">2</span><span class="hl std">,</span> <span class="hl kwc">col</span> <span class="hl std">=</span> <span class="hl str">&quot;lightgrey&quot;</span><span class="hl std">)</span>
   <span class="hl kwd">lines</span><span class="hl std">(rptDate, Nigeria.I.Est[</span><span class="hl num">1</span><span class="hl std">,],</span> <span class="hl kwc">lty</span> <span class="hl std">=</span> <span class="hl num">2</span><span class="hl std">,</span> <span class="hl kwc">col</span> <span class="hl std">=</span> <span class="hl str">&quot;green&quot;</span><span class="hl std">)</span>
   <span class="hl kwd">lines</span><span class="hl std">(rptDate, Nigeria.I.Est[</span><span class="hl num">2</span><span class="hl std">,],</span> <span class="hl kwc">lty</span> <span class="hl std">=</span> <span class="hl num">2</span><span class="hl std">,</span> <span class="hl kwc">col</span> <span class="hl std">=</span> <span class="hl str">&quot;green&quot;</span><span class="hl std">)</span>
   <span class="hl kwd">lines</span><span class="hl std">(rptDate, Nigeria.I.Est[</span><span class="hl num">3</span><span class="hl std">,],</span> <span class="hl kwc">lty</span> <span class="hl std">=</span> <span class="hl num">2</span><span class="hl std">,</span> <span class="hl kwc">col</span> <span class="hl std">=</span><span class="hl str">&quot;green&quot;</span><span class="hl std">)</span>
@@ -1307,290 +1312,255 @@ We must be cautious when making predictions about a chaotic process this far int
   </tr>
   <tr>
    <td align="left"> &nbsp;2014-03-31&nbsp; </td>
-   <td align="center"> 54 </td>
+   <td align="center"> 55 </td>
    <td align="center"> 7 </td>
    <td align="center"> 0 </td>
    <td align="center"> 0 </td>
   </tr>
   <tr>
    <td align="left"> &nbsp;2014-04-07&nbsp; </td>
-   <td align="center"> 59 </td>
+   <td align="center"> 61 </td>
    <td align="center"> 12 </td>
    <td align="center"> 0 </td>
    <td align="center"> 0 </td>
   </tr>
   <tr>
    <td align="left"> &nbsp;2014-04-10&nbsp; </td>
-   <td align="center"> 61 </td>
-   <td align="center"> 20 </td>
+   <td align="center"> 69 </td>
+   <td align="center"> 19 </td>
    <td align="center"> 0 </td>
    <td align="center"> 0 </td>
   </tr>
   <tr>
    <td align="left"> &nbsp;2014-04-14&nbsp; </td>
-   <td align="center"> 53 </td>
-   <td align="center"> 24 </td>
+   <td align="center"> 63 </td>
+   <td align="center"> 22 </td>
    <td align="center"> 0 </td>
    <td align="center"> 0 </td>
   </tr>
   <tr>
    <td align="left"> &nbsp;2014-04-17&nbsp; </td>
-   <td align="center"> 75 </td>
-   <td align="center"> 21 </td>
+   <td align="center"> 88 </td>
+   <td align="center"> 20 </td>
    <td align="center"> 0 </td>
    <td align="center"> 0 </td>
   </tr>
   <tr>
    <td align="left"> &nbsp;2014-04-21&nbsp; </td>
-   <td align="center"> 60 </td>
-   <td align="center"> 19 </td>
+   <td align="center"> 79 </td>
+   <td align="center"> 17 </td>
    <td align="center"> 0 </td>
    <td align="center"> 0 </td>
   </tr>
   <tr>
    <td align="left"> &nbsp;2014-04-24&nbsp; </td>
-   <td align="center"> 52 </td>
-   <td align="center"> 24 </td>
+   <td align="center"> 68 </td>
+   <td align="center"> 22 </td>
    <td align="center"> 0 </td>
    <td align="center"> 0 </td>
   </tr>
   <tr>
    <td align="left"> &nbsp;2014-05-01&nbsp; </td>
-   <td align="center"> 22 </td>
-   <td align="center"> 20 </td>
+   <td align="center"> 29 </td>
+   <td align="center"> 19 </td>
    <td align="center"> 0 </td>
    <td align="center"> 0 </td>
   </tr>
   <tr>
    <td align="left"> &nbsp;2014-05-03&nbsp; </td>
+   <td align="center"> 26 </td>
    <td align="center"> 19 </td>
-   <td align="center"> 20 </td>
    <td align="center"> 0 </td>
    <td align="center"> 0 </td>
   </tr>
   <tr>
    <td align="left"> &nbsp;2014-05-10&nbsp; </td>
-   <td align="center"> 20 </td>
+   <td align="center"> 24 </td>
    <td align="center"> 18 </td>
    <td align="center"> 0 </td>
    <td align="center"> 0 </td>
   </tr>
   <tr>
    <td align="left"> &nbsp;2014-05-18&nbsp; </td>
-   <td align="center"> 27 </td>
-   <td align="center"> 16 </td>
+   <td align="center"> 31 </td>
+   <td align="center"> 14 </td>
    <td align="center"> 0 </td>
    <td align="center"> 0 </td>
   </tr>
   <tr>
    <td align="left"> &nbsp;2014-05-27&nbsp; </td>
-   <td align="center"> 17 </td>
-   <td align="center"> 12 </td>
+   <td align="center"> 19 </td>
+   <td align="center"> 10 </td>
    <td align="center"> 0 </td>
    <td align="center"> 0 </td>
   </tr>
   <tr>
    <td align="left"> &nbsp;2014-05-29&nbsp; </td>
-   <td align="center"> 40 </td>
-   <td align="center"> 9 </td>
+   <td align="center"> 43 </td>
+   <td align="center"> 8 </td>
    <td align="center"> 15 </td>
    <td align="center"> 0 </td>
   </tr>
   <tr>
    <td align="left"> &nbsp;2014-06-03&nbsp; </td>
-   <td align="center"> 65 </td>
-   <td align="center"> 6 </td>
    <td align="center"> 66 </td>
+   <td align="center"> 5 </td>
+   <td align="center"> 64 </td>
    <td align="center"> 0 </td>
   </tr>
   <tr>
    <td align="left"> &nbsp;2014-06-06&nbsp; </td>
-   <td align="center"> 66 </td>
+   <td align="center"> 68 </td>
    <td align="center"> 4 </td>
    <td align="center"> 46 </td>
    <td align="center"> 0 </td>
   </tr>
   <tr>
    <td align="left"> &nbsp;2014-06-15&nbsp; </td>
-   <td align="center"> 63 </td>
+   <td align="center"> 66 </td>
    <td align="center"> 3 </td>
-   <td align="center"> 37 </td>
+   <td align="center"> 38 </td>
    <td align="center"> 0 </td>
   </tr>
   <tr>
    <td align="left"> &nbsp;2014-06-17&nbsp; </td>
-   <td align="center"> 61 </td>
+   <td align="center"> 65 </td>
    <td align="center"> 21 </td>
-   <td align="center"> 27 </td>
+   <td align="center"> 29 </td>
    <td align="center"> 0 </td>
   </tr>
   <tr>
    <td align="left"> &nbsp;2014-06-22&nbsp; </td>
-   <td align="center"> 43 </td>
+   <td align="center"> 47 </td>
    <td align="center"> 15 </td>
-   <td align="center"> 82 </td>
+   <td align="center"> 84 </td>
    <td align="center"> 0 </td>
   </tr>
   <tr>
    <td align="left"> &nbsp;2014-07-02&nbsp; </td>
-   <td align="center"> 41 </td>
-   <td align="center"> 71 </td>
-   <td align="center"> 115 </td>
+   <td align="center"> 44 </td>
+   <td align="center"> 72 </td>
+   <td align="center"> 118 </td>
    <td align="center"> 0 </td>
   </tr>
   <tr>
    <td align="left"> &nbsp;2014-07-08&nbsp; </td>
-   <td align="center"> 24 </td>
-   <td align="center"> 64 </td>
-   <td align="center"> 130 </td>
+   <td align="center"> 27 </td>
+   <td align="center"> 66 </td>
+   <td align="center"> 135 </td>
    <td align="center"> 0 </td>
   </tr>
   <tr>
    <td align="left"> &nbsp;2014-07-14&nbsp; </td>
-   <td align="center"> 15 </td>
-   <td align="center"> 75 </td>
-   <td align="center"> 148 </td>
+   <td align="center"> 17 </td>
+   <td align="center"> 78 </td>
+   <td align="center"> 155 </td>
    <td align="center"> 0 </td>
   </tr>
   <tr>
    <td align="left"> &nbsp;2014-07-20&nbsp; </td>
-   <td align="center"> 14 </td>
-   <td align="center"> 72 </td>
-   <td align="center"> 149 </td>
+   <td align="center"> 16 </td>
+   <td align="center"> 75 </td>
+   <td align="center"> 157 </td>
    <td align="center"> 0 </td>
   </tr>
   <tr>
    <td align="left"> &nbsp;2014-07-27&nbsp; </td>
-   <td align="center"> 24 </td>
-   <td align="center"> 89 </td>
-   <td align="center"> 168 </td>
+   <td align="center"> 26 </td>
+   <td align="center"> 93 </td>
+   <td align="center"> 176 </td>
    <td align="center"> 0 </td>
   </tr>
   <tr>
    <td align="left"> &nbsp;2014-08-01&nbsp; </td>
-   <td align="center"> 50 </td>
-   <td align="center"> 171 </td>
-   <td align="center"> 137 </td>
+   <td align="center"> 52 </td>
+   <td align="center"> 177 </td>
+   <td align="center"> 147 </td>
    <td align="center"> 3 </td>
   </tr>
   <tr>
    <td align="left"> &nbsp;2014-08-06&nbsp; </td>
-   <td align="center"> 52 </td>
-   <td align="center"> 217 </td>
-   <td align="center"> 189 </td>
+   <td align="center"> 55 </td>
+   <td align="center"> 226 </td>
+   <td align="center"> 199 </td>
    <td align="center"> 8 </td>
   </tr>
   <tr>
    <td align="left"> &nbsp;2014-08-11&nbsp; </td>
-   <td align="center"> 44 </td>
-   <td align="center"> 214 </td>
-   <td align="center"> 155 </td>
+   <td align="center"> 47 </td>
+   <td align="center"> 225 </td>
+   <td align="center"> 166 </td>
    <td align="center"> 8 </td>
   </tr>
   <tr>
    <td align="left"> &nbsp;2014-08-16&nbsp; </td>
-   <td align="center"> 44 </td>
-   <td align="center"> 326 </td>
-   <td align="center"> 180 </td>
+   <td align="center"> 46 </td>
+   <td align="center"> 339 </td>
+   <td align="center"> 192 </td>
    <td align="center"> 6 </td>
   </tr>
   <tr>
    <td align="left"> &nbsp;2014-08-20&nbsp; </td>
-   <td align="center"> 85 </td>
-   <td align="center"> 389 </td>
-   <td align="center"> 207 </td>
+   <td align="center"> 87 </td>
+   <td align="center"> 405 </td>
+   <td align="center"> 219 </td>
    <td align="center"> 6 </td>
   </tr>
   <tr>
    <td align="left"> &nbsp;2014-08-31&nbsp; </td>
-   <td align="center"> 99 </td>
-   <td align="center"> 553 </td>
-   <td align="center"> 220 </td>
+   <td align="center"> 104 </td>
+   <td align="center"> 573 </td>
+   <td align="center"> 233 </td>
    <td align="center"> 5 </td>
   </tr>
   <tr>
-   <td align="left"> &nbsp;2014-08-31&nbsp; </td>
-   <td align="center"> 99 </td>
-   <td align="center"> 553 </td>
-   <td align="center"> 220 </td>
-   <td align="center"> 5 </td>
+   <td align="left"> &nbsp;2014-09-05&nbsp; </td>
+   <td align="center"> 192 </td>
+   <td align="center"> 700 </td>
+   <td align="center"> 344 </td>
+   <td align="center"> 7 </td>
   </tr>
   <tr>
-   <td align="left"> &nbsp;2014-09-02&nbsp; </td>
-   <td align="center"> 107 </td>
-   <td align="center"> 590 </td>
-   <td align="center"> 236 </td>
-   <td align="center"> 6 </td>
+   <td align="left"> &nbsp;2014-09-07&nbsp; </td>
+   <td align="center"> 188 </td>
+   <td align="center"> 703 </td>
+   <td align="center"> 335 </td>
+   <td align="center"> 8 </td>
   </tr>
   <tr>
-   <td align="left"> &nbsp;2014-09-04&nbsp; </td>
-   <td align="center"> 120 </td>
-   <td align="center"> 673 </td>
-   <td align="center"> 268 </td>
-   <td align="center"> 10 </td>
+   <td align="left"> &nbsp;2014-09-09&nbsp; </td>
+   <td align="center"> 180 </td>
+   <td align="center"> 705 </td>
+   <td align="center"> 319 </td>
+   <td align="center"> 12 </td>
   </tr>
   <tr>
-   <td align="left"> &nbsp;2014-09-06&nbsp; </td>
-   <td align="center"> 147 </td>
-   <td align="center"> 871 </td>
-   <td align="center"> 332 </td>
-   <td align="center"> 27 </td>
+   <td align="left"> &nbsp;2014-09-11&nbsp; </td>
+   <td align="center"> 164 </td>
+   <td align="center"> 704 </td>
+   <td align="center"> 294 </td>
+   <td align="center"> 25 </td>
   </tr>
   <tr>
-   <td align="left"> &nbsp;2014-09-08&nbsp; </td>
-   <td align="center"> 194 </td>
-   <td align="center"> 1294 </td>
-   <td align="center"> 444 </td>
-   <td align="center"> 74 </td>
+   <td align="left"> &nbsp;2014-09-13&nbsp; </td>
+   <td align="center"> 150 </td>
+   <td align="center"> 709 </td>
+   <td align="center"> 270 </td>
+   <td align="center"> 52 </td>
   </tr>
   <tr>
-   <td align="left"> &nbsp;2014-09-10&nbsp; </td>
-   <td align="center"> 277 </td>
-   <td align="center"> 2187 </td>
-   <td align="center"> 649 </td>
-   <td align="center"> 187 </td>
+   <td align="left"> &nbsp;2014-09-15&nbsp; </td>
+   <td align="center"> 139 </td>
+   <td align="center"> 726 </td>
+   <td align="center"> 250 </td>
+   <td align="center"> 86 </td>
   </tr>
   <tr>
-   <td align="left"> &nbsp;2014-09-12&nbsp; </td>
-   <td align="center"> 441 </td>
-   <td align="center"> 4180 </td>
-   <td align="center"> 1059 </td>
-   <td align="center"> 430 </td>
-  </tr>
-  <tr>
-   <td align="left"> &nbsp;2014-09-14&nbsp; </td>
-   <td align="center"> 780 </td>
-   <td align="center"> 8948 </td>
-   <td align="center"> 1909 </td>
-   <td align="center"> 997 </td>
-  </tr>
-  <tr>
-   <td align="left"> &nbsp;2014-09-16&nbsp; </td>
-   <td align="center"> 1535 </td>
-   <td align="center"> 21366 </td>
-   <td align="center"> 3818 </td>
-   <td align="center"> 2441 </td>
-  </tr>
-  <tr>
-   <td align="left"> &nbsp;2014-09-18&nbsp; </td>
-   <td align="center"> 3386 </td>
-   <td align="center"> 56174 </td>
-   <td align="center"> 8431 </td>
-   <td align="center"> 6477 </td>
-  </tr>
-  <tr>
-   <td align="left"> &nbsp;2014-09-20&nbsp; </td>
-   <td align="center"> 8328 </td>
-   <td align="center"> 158640 </td>
-   <td align="center"> 20573 </td>
-   <td align="center"> 18880 </td>
-  </tr>
-  <tr>
-   <td align="left"> &nbsp;2014-09-22&nbsp; </td>
-   <td align="center"> 22865 </td>
-   <td align="center"> 441585 </td>
-   <td align="center"> 55002 </td>
-   <td align="center"> 60285 </td>
+   <td align="left"> &nbsp;2014-09-17&nbsp; </td>
+   <td align="center"> 129 </td>
+   <td align="center"> 749 </td>
+   <td align="center"> 234 </td>
+   <td align="center"> 114 </td>
   </tr>
 </tbody>
 </table>
@@ -1604,7 +1574,7 @@ We must be cautious when making predictions about a chaotic process this far int
   <div class = "row" ng-controller='rChartsCtrl_pred' >
     <div class="col-sm-3">
       <input id='zoom-map-slider-pred' type='range' min=1 max=
-187
+182
       ng-model='pred_Day' width=200>
        <span>Day: <span id ="zoom-map-day-counter-pred"></span></span>
     </div>
@@ -3923,6 +3893,76 @@ var alldata =
 "NGA": {
  "fillKey": "lt8" 
 } 
+},
+"162": {
+ "GIN": {
+ "fillKey": "lt23" 
+},
+"LBR": {
+ "fillKey": "lt61" 
+},
+"SLE": {
+ "fillKey": "lt38" 
+},
+"NGA": {
+ "fillKey": "lt8" 
+} 
+},
+"163": {
+ "GIN": {
+ "fillKey": "lt23" 
+},
+"LBR": {
+ "fillKey": "lt54" 
+},
+"SLE": {
+ "fillKey": "lt31" 
+},
+"NGA": {
+ "fillKey": "lt8" 
+} 
+},
+"164": {
+ "GIN": {
+ "fillKey": "lt15" 
+},
+"LBR": {
+ "fillKey": "lt54" 
+},
+"SLE": {
+ "fillKey": "lt23" 
+},
+"NGA": {
+ "fillKey": "lt8" 
+} 
+},
+"165": {
+ "GIN": {
+ "fillKey": "lt15" 
+},
+"LBR": {
+ "fillKey": "lt46" 
+},
+"SLE": {
+ "fillKey": "lt15" 
+},
+"NGA": {
+ "fillKey": "lt8" 
+} 
+},
+"166": {
+ "GIN": {
+ "fillKey": "lt15" 
+},
+"LBR": {
+ "fillKey": "lt38" 
+},
+"SLE": {
+ "fillKey": "lt15" 
+},
+"NGA": {
+ "fillKey": "lt8" 
+} 
 } 
 }
 
@@ -4093,2564 +4133,2494 @@ var alldata_pred =
 {
  "1": {
  "GIN": {
- "fillKey": "lt49100" 
+ "fillKey": "lt83" 
 },
 "LBR": {
- "fillKey": "lt49100" 
+ "fillKey": "lt83" 
 },
 "SLE": {
- "fillKey": "lt49100" 
+ "fillKey": "lt83" 
 },
 "NGA": {
- "fillKey": "lt49100" 
+ "fillKey": "lt83" 
 } 
 },
 "2": {
  "GIN": {
- "fillKey": "lt49100" 
+ "fillKey": "lt83" 
 },
 "LBR": {
- "fillKey": "lt49100" 
+ "fillKey": "lt83" 
 },
 "SLE": {
- "fillKey": "lt49100" 
+ "fillKey": "lt83" 
 },
 "NGA": {
- "fillKey": "lt49100" 
+ "fillKey": "lt83" 
 } 
 },
 "3": {
  "GIN": {
- "fillKey": "lt49100" 
+ "fillKey": "lt83" 
 },
 "LBR": {
- "fillKey": "lt49100" 
+ "fillKey": "lt83" 
 },
 "SLE": {
- "fillKey": "lt49100" 
+ "fillKey": "lt83" 
 },
 "NGA": {
- "fillKey": "lt49100" 
+ "fillKey": "lt83" 
 } 
 },
 "4": {
  "GIN": {
- "fillKey": "lt49100" 
+ "fillKey": "lt83" 
 },
 "LBR": {
- "fillKey": "lt49100" 
+ "fillKey": "lt83" 
 },
 "SLE": {
- "fillKey": "lt49100" 
+ "fillKey": "lt83" 
 },
 "NGA": {
- "fillKey": "lt49100" 
+ "fillKey": "lt83" 
 } 
 },
 "5": {
  "GIN": {
- "fillKey": "lt49100" 
+ "fillKey": "lt83" 
 },
 "LBR": {
- "fillKey": "lt49100" 
+ "fillKey": "lt83" 
 },
 "SLE": {
- "fillKey": "lt49100" 
+ "fillKey": "lt83" 
 },
 "NGA": {
- "fillKey": "lt49100" 
+ "fillKey": "lt83" 
 } 
 },
 "6": {
  "GIN": {
- "fillKey": "lt49100" 
+ "fillKey": "lt83" 
 },
 "LBR": {
- "fillKey": "lt49100" 
+ "fillKey": "lt83" 
 },
 "SLE": {
- "fillKey": "lt49100" 
+ "fillKey": "lt83" 
 },
 "NGA": {
- "fillKey": "lt49100" 
+ "fillKey": "lt83" 
 } 
 },
 "7": {
  "GIN": {
- "fillKey": "lt49100" 
+ "fillKey": "lt83" 
 },
 "LBR": {
- "fillKey": "lt49100" 
+ "fillKey": "lt83" 
 },
 "SLE": {
- "fillKey": "lt49100" 
+ "fillKey": "lt83" 
 },
 "NGA": {
- "fillKey": "lt49100" 
+ "fillKey": "lt83" 
 } 
 },
 "8": {
  "GIN": {
- "fillKey": "lt49100" 
+ "fillKey": "lt83" 
 },
 "LBR": {
- "fillKey": "lt49100" 
+ "fillKey": "lt83" 
 },
 "SLE": {
- "fillKey": "lt49100" 
+ "fillKey": "lt83" 
 },
 "NGA": {
- "fillKey": "lt49100" 
+ "fillKey": "lt83" 
 } 
 },
 "9": {
  "GIN": {
- "fillKey": "lt49100" 
+ "fillKey": "lt83" 
 },
 "LBR": {
- "fillKey": "lt49100" 
+ "fillKey": "lt83" 
 },
 "SLE": {
- "fillKey": "lt49100" 
+ "fillKey": "lt83" 
 },
 "NGA": {
- "fillKey": "lt49100" 
+ "fillKey": "lt83" 
 } 
 },
 "10": {
  "GIN": {
- "fillKey": "lt49100" 
+ "fillKey": "lt83" 
 },
 "LBR": {
- "fillKey": "lt49100" 
+ "fillKey": "lt83" 
 },
 "SLE": {
- "fillKey": "lt49100" 
+ "fillKey": "lt83" 
 },
 "NGA": {
- "fillKey": "lt49100" 
+ "fillKey": "lt83" 
 } 
 },
 "11": {
  "GIN": {
- "fillKey": "lt49100" 
+ "fillKey": "lt83" 
 },
 "LBR": {
- "fillKey": "lt49100" 
+ "fillKey": "lt83" 
 },
 "SLE": {
- "fillKey": "lt49100" 
+ "fillKey": "lt83" 
 },
 "NGA": {
- "fillKey": "lt49100" 
+ "fillKey": "lt83" 
 } 
 },
 "12": {
  "GIN": {
- "fillKey": "lt49100" 
+ "fillKey": "lt83" 
 },
 "LBR": {
- "fillKey": "lt49100" 
+ "fillKey": "lt83" 
 },
 "SLE": {
- "fillKey": "lt49100" 
+ "fillKey": "lt83" 
 },
 "NGA": {
- "fillKey": "lt49100" 
+ "fillKey": "lt83" 
 } 
 },
 "13": {
  "GIN": {
- "fillKey": "lt49100" 
+ "fillKey": "lt83" 
 },
 "LBR": {
- "fillKey": "lt49100" 
+ "fillKey": "lt83" 
 },
 "SLE": {
- "fillKey": "lt49100" 
+ "fillKey": "lt83" 
 },
 "NGA": {
- "fillKey": "lt49100" 
+ "fillKey": "lt83" 
 } 
 },
 "14": {
  "GIN": {
- "fillKey": "lt49100" 
+ "fillKey": "lt83" 
 },
 "LBR": {
- "fillKey": "lt49100" 
+ "fillKey": "lt83" 
 },
 "SLE": {
- "fillKey": "lt49100" 
+ "fillKey": "lt83" 
 },
 "NGA": {
- "fillKey": "lt49100" 
+ "fillKey": "lt83" 
 } 
 },
 "15": {
  "GIN": {
- "fillKey": "lt49100" 
+ "fillKey": "lt83" 
 },
 "LBR": {
- "fillKey": "lt49100" 
+ "fillKey": "lt83" 
 },
 "SLE": {
- "fillKey": "lt49100" 
+ "fillKey": "lt83" 
 },
 "NGA": {
- "fillKey": "lt49100" 
+ "fillKey": "lt83" 
 } 
 },
 "16": {
  "GIN": {
- "fillKey": "lt49100" 
+ "fillKey": "lt83" 
 },
 "LBR": {
- "fillKey": "lt49100" 
+ "fillKey": "lt83" 
 },
 "SLE": {
- "fillKey": "lt49100" 
+ "fillKey": "lt83" 
 },
 "NGA": {
- "fillKey": "lt49100" 
+ "fillKey": "lt83" 
 } 
 },
 "17": {
  "GIN": {
- "fillKey": "lt49100" 
+ "fillKey": "lt83" 
 },
 "LBR": {
- "fillKey": "lt49100" 
+ "fillKey": "lt83" 
 },
 "SLE": {
- "fillKey": "lt49100" 
+ "fillKey": "lt83" 
 },
 "NGA": {
- "fillKey": "lt49100" 
+ "fillKey": "lt83" 
 } 
 },
 "18": {
  "GIN": {
- "fillKey": "lt49100" 
+ "fillKey": "lt83" 
 },
 "LBR": {
- "fillKey": "lt49100" 
+ "fillKey": "lt83" 
 },
 "SLE": {
- "fillKey": "lt49100" 
+ "fillKey": "lt83" 
 },
 "NGA": {
- "fillKey": "lt49100" 
+ "fillKey": "lt83" 
 } 
 },
 "19": {
  "GIN": {
- "fillKey": "lt49100" 
+ "fillKey": "lt83" 
 },
 "LBR": {
- "fillKey": "lt49100" 
+ "fillKey": "lt83" 
 },
 "SLE": {
- "fillKey": "lt49100" 
+ "fillKey": "lt83" 
 },
 "NGA": {
- "fillKey": "lt49100" 
+ "fillKey": "lt83" 
 } 
 },
 "20": {
  "GIN": {
- "fillKey": "lt49100" 
+ "fillKey": "lt83" 
 },
 "LBR": {
- "fillKey": "lt49100" 
+ "fillKey": "lt83" 
 },
 "SLE": {
- "fillKey": "lt49100" 
+ "fillKey": "lt83" 
 },
 "NGA": {
- "fillKey": "lt49100" 
+ "fillKey": "lt83" 
 } 
 },
 "21": {
  "GIN": {
- "fillKey": "lt49100" 
+ "fillKey": "lt83" 
 },
 "LBR": {
- "fillKey": "lt49100" 
+ "fillKey": "lt83" 
 },
 "SLE": {
- "fillKey": "lt49100" 
+ "fillKey": "lt83" 
 },
 "NGA": {
- "fillKey": "lt49100" 
+ "fillKey": "lt83" 
 } 
 },
 "22": {
  "GIN": {
- "fillKey": "lt49100" 
+ "fillKey": "lt83" 
 },
 "LBR": {
- "fillKey": "lt49100" 
+ "fillKey": "lt83" 
 },
 "SLE": {
- "fillKey": "lt49100" 
+ "fillKey": "lt83" 
 },
 "NGA": {
- "fillKey": "lt49100" 
+ "fillKey": "lt83" 
 } 
 },
 "23": {
  "GIN": {
- "fillKey": "lt49100" 
+ "fillKey": "lt83" 
 },
 "LBR": {
- "fillKey": "lt49100" 
+ "fillKey": "lt83" 
 },
 "SLE": {
- "fillKey": "lt49100" 
+ "fillKey": "lt83" 
 },
 "NGA": {
- "fillKey": "lt49100" 
+ "fillKey": "lt83" 
 } 
 },
 "24": {
  "GIN": {
- "fillKey": "lt49100" 
+ "fillKey": "lt83" 
 },
 "LBR": {
- "fillKey": "lt49100" 
+ "fillKey": "lt83" 
 },
 "SLE": {
- "fillKey": "lt49100" 
+ "fillKey": "lt83" 
 },
 "NGA": {
- "fillKey": "lt49100" 
+ "fillKey": "lt83" 
 } 
 },
 "25": {
  "GIN": {
- "fillKey": "lt49100" 
+ "fillKey": "lt166" 
 },
 "LBR": {
- "fillKey": "lt49100" 
+ "fillKey": "lt83" 
 },
 "SLE": {
- "fillKey": "lt49100" 
+ "fillKey": "lt83" 
 },
 "NGA": {
- "fillKey": "lt49100" 
+ "fillKey": "lt83" 
 } 
 },
 "26": {
  "GIN": {
- "fillKey": "lt49100" 
+ "fillKey": "lt166" 
 },
 "LBR": {
- "fillKey": "lt49100" 
+ "fillKey": "lt83" 
 },
 "SLE": {
- "fillKey": "lt49100" 
+ "fillKey": "lt83" 
 },
 "NGA": {
- "fillKey": "lt49100" 
+ "fillKey": "lt83" 
 } 
 },
 "27": {
  "GIN": {
- "fillKey": "lt49100" 
+ "fillKey": "lt166" 
 },
 "LBR": {
- "fillKey": "lt49100" 
+ "fillKey": "lt83" 
 },
 "SLE": {
- "fillKey": "lt49100" 
+ "fillKey": "lt83" 
 },
 "NGA": {
- "fillKey": "lt49100" 
+ "fillKey": "lt83" 
 } 
 },
 "28": {
  "GIN": {
- "fillKey": "lt49100" 
+ "fillKey": "lt166" 
 },
 "LBR": {
- "fillKey": "lt49100" 
+ "fillKey": "lt83" 
 },
 "SLE": {
- "fillKey": "lt49100" 
+ "fillKey": "lt83" 
 },
 "NGA": {
- "fillKey": "lt49100" 
+ "fillKey": "lt83" 
 } 
 },
 "29": {
  "GIN": {
- "fillKey": "lt49100" 
+ "fillKey": "lt83" 
 },
 "LBR": {
- "fillKey": "lt49100" 
+ "fillKey": "lt83" 
 },
 "SLE": {
- "fillKey": "lt49100" 
+ "fillKey": "lt83" 
 },
 "NGA": {
- "fillKey": "lt49100" 
+ "fillKey": "lt83" 
 } 
 },
 "30": {
  "GIN": {
- "fillKey": "lt49100" 
+ "fillKey": "lt83" 
 },
 "LBR": {
- "fillKey": "lt49100" 
+ "fillKey": "lt83" 
 },
 "SLE": {
- "fillKey": "lt49100" 
+ "fillKey": "lt83" 
 },
 "NGA": {
- "fillKey": "lt49100" 
+ "fillKey": "lt83" 
 } 
 },
 "31": {
  "GIN": {
- "fillKey": "lt49100" 
+ "fillKey": "lt83" 
 },
 "LBR": {
- "fillKey": "lt49100" 
+ "fillKey": "lt83" 
 },
 "SLE": {
- "fillKey": "lt49100" 
+ "fillKey": "lt83" 
 },
 "NGA": {
- "fillKey": "lt49100" 
+ "fillKey": "lt83" 
 } 
 },
 "32": {
  "GIN": {
- "fillKey": "lt49100" 
+ "fillKey": "lt83" 
 },
 "LBR": {
- "fillKey": "lt49100" 
+ "fillKey": "lt83" 
 },
 "SLE": {
- "fillKey": "lt49100" 
+ "fillKey": "lt83" 
 },
 "NGA": {
- "fillKey": "lt49100" 
+ "fillKey": "lt83" 
 } 
 },
 "33": {
  "GIN": {
- "fillKey": "lt49100" 
+ "fillKey": "lt83" 
 },
 "LBR": {
- "fillKey": "lt49100" 
+ "fillKey": "lt83" 
 },
 "SLE": {
- "fillKey": "lt49100" 
+ "fillKey": "lt83" 
 },
 "NGA": {
- "fillKey": "lt49100" 
+ "fillKey": "lt83" 
 } 
 },
 "34": {
  "GIN": {
- "fillKey": "lt49100" 
+ "fillKey": "lt83" 
 },
 "LBR": {
- "fillKey": "lt49100" 
+ "fillKey": "lt83" 
 },
 "SLE": {
- "fillKey": "lt49100" 
+ "fillKey": "lt83" 
 },
 "NGA": {
- "fillKey": "lt49100" 
+ "fillKey": "lt83" 
 } 
 },
 "35": {
  "GIN": {
- "fillKey": "lt49100" 
+ "fillKey": "lt83" 
 },
 "LBR": {
- "fillKey": "lt49100" 
+ "fillKey": "lt83" 
 },
 "SLE": {
- "fillKey": "lt49100" 
+ "fillKey": "lt83" 
 },
 "NGA": {
- "fillKey": "lt49100" 
+ "fillKey": "lt83" 
 } 
 },
 "36": {
  "GIN": {
- "fillKey": "lt49100" 
+ "fillKey": "lt83" 
 },
 "LBR": {
- "fillKey": "lt49100" 
+ "fillKey": "lt83" 
 },
 "SLE": {
- "fillKey": "lt49100" 
+ "fillKey": "lt83" 
 },
 "NGA": {
- "fillKey": "lt49100" 
+ "fillKey": "lt83" 
 } 
 },
 "37": {
  "GIN": {
- "fillKey": "lt49100" 
+ "fillKey": "lt83" 
 },
 "LBR": {
- "fillKey": "lt49100" 
+ "fillKey": "lt83" 
 },
 "SLE": {
- "fillKey": "lt49100" 
+ "fillKey": "lt83" 
 },
 "NGA": {
- "fillKey": "lt49100" 
+ "fillKey": "lt83" 
 } 
 },
 "38": {
  "GIN": {
- "fillKey": "lt49100" 
+ "fillKey": "lt83" 
 },
 "LBR": {
- "fillKey": "lt49100" 
+ "fillKey": "lt83" 
 },
 "SLE": {
- "fillKey": "lt49100" 
+ "fillKey": "lt83" 
 },
 "NGA": {
- "fillKey": "lt49100" 
+ "fillKey": "lt83" 
 } 
 },
 "39": {
  "GIN": {
- "fillKey": "lt49100" 
+ "fillKey": "lt83" 
 },
 "LBR": {
- "fillKey": "lt49100" 
+ "fillKey": "lt83" 
 },
 "SLE": {
- "fillKey": "lt49100" 
+ "fillKey": "lt83" 
 },
 "NGA": {
- "fillKey": "lt49100" 
+ "fillKey": "lt83" 
 } 
 },
 "40": {
  "GIN": {
- "fillKey": "lt49100" 
+ "fillKey": "lt83" 
 },
 "LBR": {
- "fillKey": "lt49100" 
+ "fillKey": "lt83" 
 },
 "SLE": {
- "fillKey": "lt49100" 
+ "fillKey": "lt83" 
 },
 "NGA": {
- "fillKey": "lt49100" 
+ "fillKey": "lt83" 
 } 
 },
 "41": {
  "GIN": {
- "fillKey": "lt49100" 
+ "fillKey": "lt83" 
 },
 "LBR": {
- "fillKey": "lt49100" 
+ "fillKey": "lt83" 
 },
 "SLE": {
- "fillKey": "lt49100" 
+ "fillKey": "lt83" 
 },
 "NGA": {
- "fillKey": "lt49100" 
+ "fillKey": "lt83" 
 } 
 },
 "42": {
  "GIN": {
- "fillKey": "lt49100" 
+ "fillKey": "lt83" 
 },
 "LBR": {
- "fillKey": "lt49100" 
+ "fillKey": "lt83" 
 },
 "SLE": {
- "fillKey": "lt49100" 
+ "fillKey": "lt83" 
 },
 "NGA": {
- "fillKey": "lt49100" 
+ "fillKey": "lt83" 
 } 
 },
 "43": {
  "GIN": {
- "fillKey": "lt49100" 
+ "fillKey": "lt83" 
 },
 "LBR": {
- "fillKey": "lt49100" 
+ "fillKey": "lt83" 
 },
 "SLE": {
- "fillKey": "lt49100" 
+ "fillKey": "lt83" 
 },
 "NGA": {
- "fillKey": "lt49100" 
+ "fillKey": "lt83" 
 } 
 },
 "44": {
  "GIN": {
- "fillKey": "lt49100" 
+ "fillKey": "lt83" 
 },
 "LBR": {
- "fillKey": "lt49100" 
+ "fillKey": "lt83" 
 },
 "SLE": {
- "fillKey": "lt49100" 
+ "fillKey": "lt83" 
 },
 "NGA": {
- "fillKey": "lt49100" 
+ "fillKey": "lt83" 
 } 
 },
 "45": {
  "GIN": {
- "fillKey": "lt49100" 
+ "fillKey": "lt83" 
 },
 "LBR": {
- "fillKey": "lt49100" 
+ "fillKey": "lt83" 
 },
 "SLE": {
- "fillKey": "lt49100" 
+ "fillKey": "lt83" 
 },
 "NGA": {
- "fillKey": "lt49100" 
+ "fillKey": "lt83" 
 } 
 },
 "46": {
  "GIN": {
- "fillKey": "lt49100" 
+ "fillKey": "lt83" 
 },
 "LBR": {
- "fillKey": "lt49100" 
+ "fillKey": "lt83" 
 },
 "SLE": {
- "fillKey": "lt49100" 
+ "fillKey": "lt83" 
 },
 "NGA": {
- "fillKey": "lt49100" 
+ "fillKey": "lt83" 
 } 
 },
 "47": {
  "GIN": {
- "fillKey": "lt49100" 
+ "fillKey": "lt83" 
 },
 "LBR": {
- "fillKey": "lt49100" 
+ "fillKey": "lt83" 
 },
 "SLE": {
- "fillKey": "lt49100" 
+ "fillKey": "lt83" 
 },
 "NGA": {
- "fillKey": "lt49100" 
+ "fillKey": "lt83" 
 } 
 },
 "48": {
  "GIN": {
- "fillKey": "lt49100" 
+ "fillKey": "lt83" 
 },
 "LBR": {
- "fillKey": "lt49100" 
+ "fillKey": "lt83" 
 },
 "SLE": {
- "fillKey": "lt49100" 
+ "fillKey": "lt83" 
 },
 "NGA": {
- "fillKey": "lt49100" 
+ "fillKey": "lt83" 
 } 
 },
 "49": {
  "GIN": {
- "fillKey": "lt49100" 
+ "fillKey": "lt83" 
 },
 "LBR": {
- "fillKey": "lt49100" 
+ "fillKey": "lt83" 
 },
 "SLE": {
- "fillKey": "lt49100" 
+ "fillKey": "lt83" 
 },
 "NGA": {
- "fillKey": "lt49100" 
+ "fillKey": "lt83" 
 } 
 },
 "50": {
  "GIN": {
- "fillKey": "lt49100" 
+ "fillKey": "lt83" 
 },
 "LBR": {
- "fillKey": "lt49100" 
+ "fillKey": "lt83" 
 },
 "SLE": {
- "fillKey": "lt49100" 
+ "fillKey": "lt83" 
 },
 "NGA": {
- "fillKey": "lt49100" 
+ "fillKey": "lt83" 
 } 
 },
 "51": {
  "GIN": {
- "fillKey": "lt49100" 
+ "fillKey": "lt83" 
 },
 "LBR": {
- "fillKey": "lt49100" 
+ "fillKey": "lt83" 
 },
 "SLE": {
- "fillKey": "lt49100" 
+ "fillKey": "lt83" 
 },
 "NGA": {
- "fillKey": "lt49100" 
+ "fillKey": "lt83" 
 } 
 },
 "52": {
  "GIN": {
- "fillKey": "lt49100" 
+ "fillKey": "lt83" 
 },
 "LBR": {
- "fillKey": "lt49100" 
+ "fillKey": "lt83" 
 },
 "SLE": {
- "fillKey": "lt49100" 
+ "fillKey": "lt83" 
 },
 "NGA": {
- "fillKey": "lt49100" 
+ "fillKey": "lt83" 
 } 
 },
 "53": {
  "GIN": {
- "fillKey": "lt49100" 
+ "fillKey": "lt83" 
 },
 "LBR": {
- "fillKey": "lt49100" 
+ "fillKey": "lt83" 
 },
 "SLE": {
- "fillKey": "lt49100" 
+ "fillKey": "lt83" 
 },
 "NGA": {
- "fillKey": "lt49100" 
+ "fillKey": "lt83" 
 } 
 },
 "54": {
  "GIN": {
- "fillKey": "lt49100" 
+ "fillKey": "lt83" 
 },
 "LBR": {
- "fillKey": "lt49100" 
+ "fillKey": "lt83" 
 },
 "SLE": {
- "fillKey": "lt49100" 
+ "fillKey": "lt83" 
 },
 "NGA": {
- "fillKey": "lt49100" 
+ "fillKey": "lt83" 
 } 
 },
 "55": {
  "GIN": {
- "fillKey": "lt49100" 
+ "fillKey": "lt83" 
 },
 "LBR": {
- "fillKey": "lt49100" 
+ "fillKey": "lt83" 
 },
 "SLE": {
- "fillKey": "lt49100" 
+ "fillKey": "lt83" 
 },
 "NGA": {
- "fillKey": "lt49100" 
+ "fillKey": "lt83" 
 } 
 },
 "56": {
  "GIN": {
- "fillKey": "lt49100" 
+ "fillKey": "lt83" 
 },
 "LBR": {
- "fillKey": "lt49100" 
+ "fillKey": "lt83" 
 },
 "SLE": {
- "fillKey": "lt49100" 
+ "fillKey": "lt83" 
 },
 "NGA": {
- "fillKey": "lt49100" 
+ "fillKey": "lt83" 
 } 
 },
 "57": {
  "GIN": {
- "fillKey": "lt49100" 
+ "fillKey": "lt83" 
 },
 "LBR": {
- "fillKey": "lt49100" 
+ "fillKey": "lt83" 
 },
 "SLE": {
- "fillKey": "lt49100" 
+ "fillKey": "lt83" 
 },
 "NGA": {
- "fillKey": "lt49100" 
+ "fillKey": "lt83" 
 } 
 },
 "58": {
  "GIN": {
- "fillKey": "lt49100" 
+ "fillKey": "lt83" 
 },
 "LBR": {
- "fillKey": "lt49100" 
+ "fillKey": "lt83" 
 },
 "SLE": {
- "fillKey": "lt49100" 
+ "fillKey": "lt83" 
 },
 "NGA": {
- "fillKey": "lt49100" 
+ "fillKey": "lt83" 
 } 
 },
 "59": {
  "GIN": {
- "fillKey": "lt49100" 
+ "fillKey": "lt83" 
 },
 "LBR": {
- "fillKey": "lt49100" 
+ "fillKey": "lt83" 
 },
 "SLE": {
- "fillKey": "lt49100" 
+ "fillKey": "lt83" 
 },
 "NGA": {
- "fillKey": "lt49100" 
+ "fillKey": "lt83" 
 } 
 },
 "60": {
  "GIN": {
- "fillKey": "lt49100" 
+ "fillKey": "lt83" 
 },
 "LBR": {
- "fillKey": "lt49100" 
+ "fillKey": "lt83" 
 },
 "SLE": {
- "fillKey": "lt49100" 
+ "fillKey": "lt83" 
 },
 "NGA": {
- "fillKey": "lt49100" 
+ "fillKey": "lt83" 
 } 
 },
 "61": {
  "GIN": {
- "fillKey": "lt49100" 
+ "fillKey": "lt83" 
 },
 "LBR": {
- "fillKey": "lt49100" 
+ "fillKey": "lt83" 
 },
 "SLE": {
- "fillKey": "lt49100" 
+ "fillKey": "lt83" 
 },
 "NGA": {
- "fillKey": "lt49100" 
+ "fillKey": "lt83" 
 } 
 },
 "62": {
  "GIN": {
- "fillKey": "lt49100" 
+ "fillKey": "lt83" 
 },
 "LBR": {
- "fillKey": "lt49100" 
+ "fillKey": "lt83" 
 },
 "SLE": {
- "fillKey": "lt49100" 
+ "fillKey": "lt83" 
 },
 "NGA": {
- "fillKey": "lt49100" 
+ "fillKey": "lt83" 
 } 
 },
 "63": {
  "GIN": {
- "fillKey": "lt49100" 
+ "fillKey": "lt83" 
 },
 "LBR": {
- "fillKey": "lt49100" 
+ "fillKey": "lt83" 
 },
 "SLE": {
- "fillKey": "lt49100" 
+ "fillKey": "lt83" 
 },
 "NGA": {
- "fillKey": "lt49100" 
+ "fillKey": "lt83" 
 } 
 },
 "64": {
  "GIN": {
- "fillKey": "lt49100" 
+ "fillKey": "lt83" 
 },
 "LBR": {
- "fillKey": "lt49100" 
+ "fillKey": "lt83" 
 },
 "SLE": {
- "fillKey": "lt49100" 
+ "fillKey": "lt83" 
 },
 "NGA": {
- "fillKey": "lt49100" 
+ "fillKey": "lt83" 
 } 
 },
 "65": {
  "GIN": {
- "fillKey": "lt49100" 
+ "fillKey": "lt83" 
 },
 "LBR": {
- "fillKey": "lt49100" 
+ "fillKey": "lt83" 
 },
 "SLE": {
- "fillKey": "lt49100" 
+ "fillKey": "lt83" 
 },
 "NGA": {
- "fillKey": "lt49100" 
+ "fillKey": "lt83" 
 } 
 },
 "66": {
  "GIN": {
- "fillKey": "lt49100" 
+ "fillKey": "lt83" 
 },
 "LBR": {
- "fillKey": "lt49100" 
+ "fillKey": "lt83" 
 },
 "SLE": {
- "fillKey": "lt49100" 
+ "fillKey": "lt83" 
 },
 "NGA": {
- "fillKey": "lt49100" 
+ "fillKey": "lt83" 
 } 
 },
 "67": {
  "GIN": {
- "fillKey": "lt49100" 
+ "fillKey": "lt83" 
 },
 "LBR": {
- "fillKey": "lt49100" 
+ "fillKey": "lt83" 
 },
 "SLE": {
- "fillKey": "lt49100" 
+ "fillKey": "lt83" 
 },
 "NGA": {
- "fillKey": "lt49100" 
+ "fillKey": "lt83" 
 } 
 },
 "68": {
  "GIN": {
- "fillKey": "lt49100" 
+ "fillKey": "lt83" 
 },
 "LBR": {
- "fillKey": "lt49100" 
+ "fillKey": "lt83" 
 },
 "SLE": {
- "fillKey": "lt49100" 
+ "fillKey": "lt83" 
 },
 "NGA": {
- "fillKey": "lt49100" 
+ "fillKey": "lt83" 
 } 
 },
 "69": {
  "GIN": {
- "fillKey": "lt49100" 
+ "fillKey": "lt83" 
 },
 "LBR": {
- "fillKey": "lt49100" 
+ "fillKey": "lt83" 
 },
 "SLE": {
- "fillKey": "lt49100" 
+ "fillKey": "lt83" 
 },
 "NGA": {
- "fillKey": "lt49100" 
+ "fillKey": "lt83" 
 } 
 },
 "70": {
  "GIN": {
- "fillKey": "lt49100" 
+ "fillKey": "lt83" 
 },
 "LBR": {
- "fillKey": "lt49100" 
+ "fillKey": "lt83" 
 },
 "SLE": {
- "fillKey": "lt49100" 
+ "fillKey": "lt83" 
 },
 "NGA": {
- "fillKey": "lt49100" 
+ "fillKey": "lt83" 
 } 
 },
 "71": {
  "GIN": {
- "fillKey": "lt49100" 
+ "fillKey": "lt83" 
 },
 "LBR": {
- "fillKey": "lt49100" 
+ "fillKey": "lt83" 
 },
 "SLE": {
- "fillKey": "lt49100" 
+ "fillKey": "lt83" 
 },
 "NGA": {
- "fillKey": "lt49100" 
+ "fillKey": "lt83" 
 } 
 },
 "72": {
  "GIN": {
- "fillKey": "lt49100" 
+ "fillKey": "lt83" 
 },
 "LBR": {
- "fillKey": "lt49100" 
+ "fillKey": "lt83" 
 },
 "SLE": {
- "fillKey": "lt49100" 
+ "fillKey": "lt83" 
 },
 "NGA": {
- "fillKey": "lt49100" 
+ "fillKey": "lt83" 
 } 
 },
 "73": {
  "GIN": {
- "fillKey": "lt49100" 
+ "fillKey": "lt83" 
 },
 "LBR": {
- "fillKey": "lt49100" 
+ "fillKey": "lt83" 
 },
 "SLE": {
- "fillKey": "lt49100" 
+ "fillKey": "lt83" 
 },
 "NGA": {
- "fillKey": "lt49100" 
+ "fillKey": "lt83" 
 } 
 },
 "74": {
  "GIN": {
- "fillKey": "lt49100" 
+ "fillKey": "lt83" 
 },
 "LBR": {
- "fillKey": "lt49100" 
+ "fillKey": "lt83" 
 },
 "SLE": {
- "fillKey": "lt49100" 
+ "fillKey": "lt83" 
 },
 "NGA": {
- "fillKey": "lt49100" 
+ "fillKey": "lt83" 
 } 
 },
 "75": {
  "GIN": {
- "fillKey": "lt49100" 
+ "fillKey": "lt83" 
 },
 "LBR": {
- "fillKey": "lt49100" 
+ "fillKey": "lt83" 
 },
 "SLE": {
- "fillKey": "lt49100" 
+ "fillKey": "lt83" 
 },
 "NGA": {
- "fillKey": "lt49100" 
+ "fillKey": "lt83" 
 } 
 },
 "76": {
  "GIN": {
- "fillKey": "lt49100" 
+ "fillKey": "lt83" 
 },
 "LBR": {
- "fillKey": "lt49100" 
+ "fillKey": "lt83" 
 },
 "SLE": {
- "fillKey": "lt49100" 
+ "fillKey": "lt83" 
 },
 "NGA": {
- "fillKey": "lt49100" 
+ "fillKey": "lt83" 
 } 
 },
 "77": {
  "GIN": {
- "fillKey": "lt49100" 
+ "fillKey": "lt83" 
 },
 "LBR": {
- "fillKey": "lt49100" 
+ "fillKey": "lt83" 
 },
 "SLE": {
- "fillKey": "lt49100" 
+ "fillKey": "lt83" 
 },
 "NGA": {
- "fillKey": "lt49100" 
+ "fillKey": "lt83" 
 } 
 },
 "78": {
  "GIN": {
- "fillKey": "lt49100" 
+ "fillKey": "lt83" 
 },
 "LBR": {
- "fillKey": "lt49100" 
+ "fillKey": "lt83" 
 },
 "SLE": {
- "fillKey": "lt49100" 
+ "fillKey": "lt83" 
 },
 "NGA": {
- "fillKey": "lt49100" 
+ "fillKey": "lt83" 
 } 
 },
 "79": {
  "GIN": {
- "fillKey": "lt49100" 
+ "fillKey": "lt83" 
 },
 "LBR": {
- "fillKey": "lt49100" 
+ "fillKey": "lt83" 
 },
 "SLE": {
- "fillKey": "lt49100" 
+ "fillKey": "lt83" 
 },
 "NGA": {
- "fillKey": "lt49100" 
+ "fillKey": "lt83" 
 } 
 },
 "80": {
  "GIN": {
- "fillKey": "lt49100" 
+ "fillKey": "lt83" 
 },
 "LBR": {
- "fillKey": "lt49100" 
+ "fillKey": "lt83" 
 },
 "SLE": {
- "fillKey": "lt49100" 
+ "fillKey": "lt83" 
 },
 "NGA": {
- "fillKey": "lt49100" 
+ "fillKey": "lt83" 
 } 
 },
 "81": {
  "GIN": {
- "fillKey": "lt49100" 
+ "fillKey": "lt83" 
 },
 "LBR": {
- "fillKey": "lt49100" 
+ "fillKey": "lt83" 
 },
 "SLE": {
- "fillKey": "lt49100" 
+ "fillKey": "lt83" 
 },
 "NGA": {
- "fillKey": "lt49100" 
+ "fillKey": "lt83" 
 } 
 },
 "82": {
  "GIN": {
- "fillKey": "lt49100" 
+ "fillKey": "lt83" 
 },
 "LBR": {
- "fillKey": "lt49100" 
+ "fillKey": "lt83" 
 },
 "SLE": {
- "fillKey": "lt49100" 
+ "fillKey": "lt83" 
 },
 "NGA": {
- "fillKey": "lt49100" 
+ "fillKey": "lt83" 
 } 
 },
 "83": {
  "GIN": {
- "fillKey": "lt49100" 
+ "fillKey": "lt83" 
 },
 "LBR": {
- "fillKey": "lt49100" 
+ "fillKey": "lt83" 
 },
 "SLE": {
- "fillKey": "lt49100" 
+ "fillKey": "lt83" 
 },
 "NGA": {
- "fillKey": "lt49100" 
+ "fillKey": "lt83" 
 } 
 },
 "84": {
  "GIN": {
- "fillKey": "lt49100" 
+ "fillKey": "lt83" 
 },
 "LBR": {
- "fillKey": "lt49100" 
+ "fillKey": "lt83" 
 },
 "SLE": {
- "fillKey": "lt49100" 
+ "fillKey": "lt83" 
 },
 "NGA": {
- "fillKey": "lt49100" 
+ "fillKey": "lt83" 
 } 
 },
 "85": {
  "GIN": {
- "fillKey": "lt49100" 
+ "fillKey": "lt83" 
 },
 "LBR": {
- "fillKey": "lt49100" 
+ "fillKey": "lt83" 
 },
 "SLE": {
- "fillKey": "lt49100" 
+ "fillKey": "lt83" 
 },
 "NGA": {
- "fillKey": "lt49100" 
+ "fillKey": "lt83" 
 } 
 },
 "86": {
  "GIN": {
- "fillKey": "lt49100" 
+ "fillKey": "lt83" 
 },
 "LBR": {
- "fillKey": "lt49100" 
+ "fillKey": "lt83" 
 },
 "SLE": {
- "fillKey": "lt49100" 
+ "fillKey": "lt83" 
 },
 "NGA": {
- "fillKey": "lt49100" 
+ "fillKey": "lt83" 
 } 
 },
 "87": {
  "GIN": {
- "fillKey": "lt49100" 
+ "fillKey": "lt83" 
 },
 "LBR": {
- "fillKey": "lt49100" 
+ "fillKey": "lt83" 
 },
 "SLE": {
- "fillKey": "lt49100" 
+ "fillKey": "lt83" 
 },
 "NGA": {
- "fillKey": "lt49100" 
+ "fillKey": "lt83" 
 } 
 },
 "88": {
  "GIN": {
- "fillKey": "lt49100" 
+ "fillKey": "lt83" 
 },
 "LBR": {
- "fillKey": "lt49100" 
+ "fillKey": "lt83" 
 },
 "SLE": {
- "fillKey": "lt49100" 
+ "fillKey": "lt83" 
 },
 "NGA": {
- "fillKey": "lt49100" 
+ "fillKey": "lt83" 
 } 
 },
 "89": {
  "GIN": {
- "fillKey": "lt49100" 
+ "fillKey": "lt83" 
 },
 "LBR": {
- "fillKey": "lt49100" 
+ "fillKey": "lt83" 
 },
 "SLE": {
- "fillKey": "lt49100" 
+ "fillKey": "lt83" 
 },
 "NGA": {
- "fillKey": "lt49100" 
+ "fillKey": "lt83" 
 } 
 },
 "90": {
  "GIN": {
- "fillKey": "lt49100" 
+ "fillKey": "lt83" 
 },
 "LBR": {
- "fillKey": "lt49100" 
+ "fillKey": "lt83" 
 },
 "SLE": {
- "fillKey": "lt49100" 
+ "fillKey": "lt83" 
 },
 "NGA": {
- "fillKey": "lt49100" 
+ "fillKey": "lt83" 
 } 
 },
 "91": {
  "GIN": {
- "fillKey": "lt49100" 
+ "fillKey": "lt83" 
 },
 "LBR": {
- "fillKey": "lt49100" 
+ "fillKey": "lt83" 
 },
 "SLE": {
- "fillKey": "lt49100" 
+ "fillKey": "lt166" 
 },
 "NGA": {
- "fillKey": "lt49100" 
+ "fillKey": "lt83" 
 } 
 },
 "92": {
  "GIN": {
- "fillKey": "lt49100" 
+ "fillKey": "lt83" 
 },
 "LBR": {
- "fillKey": "lt49100" 
+ "fillKey": "lt83" 
 },
 "SLE": {
- "fillKey": "lt49100" 
+ "fillKey": "lt83" 
 },
 "NGA": {
- "fillKey": "lt49100" 
+ "fillKey": "lt83" 
 } 
 },
 "93": {
  "GIN": {
- "fillKey": "lt49100" 
+ "fillKey": "lt83" 
 },
 "LBR": {
- "fillKey": "lt49100" 
+ "fillKey": "lt83" 
 },
 "SLE": {
- "fillKey": "lt49100" 
+ "fillKey": "lt83" 
 },
 "NGA": {
- "fillKey": "lt49100" 
+ "fillKey": "lt83" 
 } 
 },
 "94": {
  "GIN": {
- "fillKey": "lt49100" 
+ "fillKey": "lt83" 
 },
 "LBR": {
- "fillKey": "lt49100" 
+ "fillKey": "lt83" 
 },
 "SLE": {
- "fillKey": "lt49100" 
+ "fillKey": "lt83" 
 },
 "NGA": {
- "fillKey": "lt49100" 
+ "fillKey": "lt83" 
 } 
 },
 "95": {
  "GIN": {
- "fillKey": "lt49100" 
+ "fillKey": "lt83" 
 },
 "LBR": {
- "fillKey": "lt49100" 
+ "fillKey": "lt83" 
 },
 "SLE": {
- "fillKey": "lt49100" 
+ "fillKey": "lt83" 
 },
 "NGA": {
- "fillKey": "lt49100" 
+ "fillKey": "lt83" 
 } 
 },
 "96": {
  "GIN": {
- "fillKey": "lt49100" 
+ "fillKey": "lt83" 
 },
 "LBR": {
- "fillKey": "lt49100" 
+ "fillKey": "lt83" 
 },
 "SLE": {
- "fillKey": "lt49100" 
+ "fillKey": "lt83" 
 },
 "NGA": {
- "fillKey": "lt49100" 
+ "fillKey": "lt83" 
 } 
 },
 "97": {
  "GIN": {
- "fillKey": "lt49100" 
+ "fillKey": "lt83" 
 },
 "LBR": {
- "fillKey": "lt49100" 
+ "fillKey": "lt83" 
 },
 "SLE": {
- "fillKey": "lt49100" 
+ "fillKey": "lt83" 
 },
 "NGA": {
- "fillKey": "lt49100" 
+ "fillKey": "lt83" 
 } 
 },
 "98": {
  "GIN": {
- "fillKey": "lt49100" 
+ "fillKey": "lt83" 
 },
 "LBR": {
- "fillKey": "lt49100" 
+ "fillKey": "lt83" 
 },
 "SLE": {
- "fillKey": "lt49100" 
+ "fillKey": "lt83" 
 },
 "NGA": {
- "fillKey": "lt49100" 
+ "fillKey": "lt83" 
 } 
 },
 "99": {
  "GIN": {
- "fillKey": "lt49100" 
+ "fillKey": "lt83" 
 },
 "LBR": {
- "fillKey": "lt49100" 
+ "fillKey": "lt83" 
 },
 "SLE": {
- "fillKey": "lt49100" 
+ "fillKey": "lt83" 
 },
 "NGA": {
- "fillKey": "lt49100" 
+ "fillKey": "lt83" 
 } 
 },
 "100": {
  "GIN": {
- "fillKey": "lt49100" 
+ "fillKey": "lt83" 
 },
 "LBR": {
- "fillKey": "lt49100" 
+ "fillKey": "lt83" 
 },
 "SLE": {
- "fillKey": "lt49100" 
+ "fillKey": "lt166" 
 },
 "NGA": {
- "fillKey": "lt49100" 
+ "fillKey": "lt83" 
 } 
 },
 "101": {
  "GIN": {
- "fillKey": "lt49100" 
+ "fillKey": "lt83" 
 },
 "LBR": {
- "fillKey": "lt49100" 
+ "fillKey": "lt83" 
 },
 "SLE": {
- "fillKey": "lt49100" 
+ "fillKey": "lt166" 
 },
 "NGA": {
- "fillKey": "lt49100" 
+ "fillKey": "lt83" 
 } 
 },
 "102": {
  "GIN": {
- "fillKey": "lt49100" 
+ "fillKey": "lt83" 
 },
 "LBR": {
- "fillKey": "lt49100" 
+ "fillKey": "lt83" 
 },
 "SLE": {
- "fillKey": "lt49100" 
+ "fillKey": "lt166" 
 },
 "NGA": {
- "fillKey": "lt49100" 
+ "fillKey": "lt83" 
 } 
 },
 "103": {
  "GIN": {
- "fillKey": "lt49100" 
+ "fillKey": "lt83" 
 },
 "LBR": {
- "fillKey": "lt49100" 
+ "fillKey": "lt83" 
 },
 "SLE": {
- "fillKey": "lt49100" 
+ "fillKey": "lt166" 
 },
 "NGA": {
- "fillKey": "lt49100" 
+ "fillKey": "lt83" 
 } 
 },
 "104": {
  "GIN": {
- "fillKey": "lt49100" 
+ "fillKey": "lt83" 
 },
 "LBR": {
- "fillKey": "lt49100" 
+ "fillKey": "lt83" 
 },
 "SLE": {
- "fillKey": "lt49100" 
+ "fillKey": "lt166" 
 },
 "NGA": {
- "fillKey": "lt49100" 
+ "fillKey": "lt83" 
 } 
 },
 "105": {
  "GIN": {
- "fillKey": "lt49100" 
+ "fillKey": "lt83" 
 },
 "LBR": {
- "fillKey": "lt49100" 
+ "fillKey": "lt83" 
 },
 "SLE": {
- "fillKey": "lt49100" 
+ "fillKey": "lt166" 
 },
 "NGA": {
- "fillKey": "lt49100" 
+ "fillKey": "lt83" 
 } 
 },
 "106": {
  "GIN": {
- "fillKey": "lt49100" 
+ "fillKey": "lt83" 
 },
 "LBR": {
- "fillKey": "lt49100" 
+ "fillKey": "lt83" 
 },
 "SLE": {
- "fillKey": "lt49100" 
+ "fillKey": "lt166" 
 },
 "NGA": {
- "fillKey": "lt49100" 
+ "fillKey": "lt83" 
 } 
 },
 "107": {
  "GIN": {
- "fillKey": "lt49100" 
+ "fillKey": "lt83" 
 },
 "LBR": {
- "fillKey": "lt49100" 
+ "fillKey": "lt83" 
 },
 "SLE": {
- "fillKey": "lt49100" 
+ "fillKey": "lt166" 
 },
 "NGA": {
- "fillKey": "lt49100" 
+ "fillKey": "lt83" 
 } 
 },
 "108": {
  "GIN": {
- "fillKey": "lt49100" 
+ "fillKey": "lt83" 
 },
 "LBR": {
- "fillKey": "lt49100" 
+ "fillKey": "lt83" 
 },
 "SLE": {
- "fillKey": "lt49100" 
+ "fillKey": "lt166" 
 },
 "NGA": {
- "fillKey": "lt49100" 
+ "fillKey": "lt83" 
 } 
 },
 "109": {
  "GIN": {
- "fillKey": "lt49100" 
+ "fillKey": "lt83" 
 },
 "LBR": {
- "fillKey": "lt49100" 
+ "fillKey": "lt83" 
 },
 "SLE": {
- "fillKey": "lt49100" 
+ "fillKey": "lt166" 
 },
 "NGA": {
- "fillKey": "lt49100" 
+ "fillKey": "lt83" 
 } 
 },
 "110": {
  "GIN": {
- "fillKey": "lt49100" 
+ "fillKey": "lt83" 
 },
 "LBR": {
- "fillKey": "lt49100" 
+ "fillKey": "lt83" 
 },
 "SLE": {
- "fillKey": "lt49100" 
+ "fillKey": "lt166" 
 },
 "NGA": {
- "fillKey": "lt49100" 
+ "fillKey": "lt83" 
 } 
 },
 "111": {
  "GIN": {
- "fillKey": "lt49100" 
+ "fillKey": "lt83" 
 },
 "LBR": {
- "fillKey": "lt49100" 
+ "fillKey": "lt83" 
 },
 "SLE": {
- "fillKey": "lt49100" 
+ "fillKey": "lt166" 
 },
 "NGA": {
- "fillKey": "lt49100" 
+ "fillKey": "lt83" 
 } 
 },
 "112": {
  "GIN": {
- "fillKey": "lt49100" 
+ "fillKey": "lt83" 
 },
 "LBR": {
- "fillKey": "lt49100" 
+ "fillKey": "lt83" 
 },
 "SLE": {
- "fillKey": "lt49100" 
+ "fillKey": "lt166" 
 },
 "NGA": {
- "fillKey": "lt49100" 
+ "fillKey": "lt83" 
 } 
 },
 "113": {
  "GIN": {
- "fillKey": "lt49100" 
+ "fillKey": "lt83" 
 },
 "LBR": {
- "fillKey": "lt49100" 
+ "fillKey": "lt83" 
 },
 "SLE": {
- "fillKey": "lt49100" 
+ "fillKey": "lt166" 
 },
 "NGA": {
- "fillKey": "lt49100" 
+ "fillKey": "lt83" 
 } 
 },
 "114": {
  "GIN": {
- "fillKey": "lt49100" 
+ "fillKey": "lt83" 
 },
 "LBR": {
- "fillKey": "lt49100" 
+ "fillKey": "lt83" 
 },
 "SLE": {
- "fillKey": "lt49100" 
+ "fillKey": "lt166" 
 },
 "NGA": {
- "fillKey": "lt49100" 
+ "fillKey": "lt83" 
 } 
 },
 "115": {
  "GIN": {
- "fillKey": "lt49100" 
+ "fillKey": "lt83" 
 },
 "LBR": {
- "fillKey": "lt49100" 
+ "fillKey": "lt83" 
 },
 "SLE": {
- "fillKey": "lt49100" 
+ "fillKey": "lt166" 
 },
 "NGA": {
- "fillKey": "lt49100" 
+ "fillKey": "lt83" 
 } 
 },
 "116": {
  "GIN": {
- "fillKey": "lt49100" 
+ "fillKey": "lt83" 
 },
 "LBR": {
- "fillKey": "lt49100" 
+ "fillKey": "lt83" 
 },
 "SLE": {
- "fillKey": "lt49100" 
+ "fillKey": "lt166" 
 },
 "NGA": {
- "fillKey": "lt49100" 
+ "fillKey": "lt83" 
 } 
 },
 "117": {
  "GIN": {
- "fillKey": "lt49100" 
+ "fillKey": "lt83" 
 },
 "LBR": {
- "fillKey": "lt49100" 
+ "fillKey": "lt83" 
 },
 "SLE": {
- "fillKey": "lt49100" 
+ "fillKey": "lt166" 
 },
 "NGA": {
- "fillKey": "lt49100" 
+ "fillKey": "lt83" 
 } 
 },
 "118": {
  "GIN": {
- "fillKey": "lt49100" 
+ "fillKey": "lt83" 
 },
 "LBR": {
- "fillKey": "lt49100" 
+ "fillKey": "lt83" 
 },
 "SLE": {
- "fillKey": "lt49100" 
+ "fillKey": "lt166" 
 },
 "NGA": {
- "fillKey": "lt49100" 
+ "fillKey": "lt83" 
 } 
 },
 "119": {
  "GIN": {
- "fillKey": "lt49100" 
+ "fillKey": "lt83" 
 },
 "LBR": {
- "fillKey": "lt49100" 
+ "fillKey": "lt83" 
 },
 "SLE": {
- "fillKey": "lt49100" 
+ "fillKey": "lt166" 
 },
 "NGA": {
- "fillKey": "lt49100" 
+ "fillKey": "lt83" 
 } 
 },
 "120": {
  "GIN": {
- "fillKey": "lt49100" 
+ "fillKey": "lt83" 
 },
 "LBR": {
- "fillKey": "lt49100" 
+ "fillKey": "lt83" 
 },
 "SLE": {
- "fillKey": "lt49100" 
+ "fillKey": "lt166" 
 },
 "NGA": {
- "fillKey": "lt49100" 
+ "fillKey": "lt83" 
 } 
 },
 "121": {
  "GIN": {
- "fillKey": "lt49100" 
+ "fillKey": "lt83" 
 },
 "LBR": {
- "fillKey": "lt49100" 
+ "fillKey": "lt83" 
 },
 "SLE": {
- "fillKey": "lt49100" 
+ "fillKey": "lt166" 
 },
 "NGA": {
- "fillKey": "lt49100" 
+ "fillKey": "lt83" 
 } 
 },
 "122": {
  "GIN": {
- "fillKey": "lt49100" 
+ "fillKey": "lt83" 
 },
 "LBR": {
- "fillKey": "lt49100" 
+ "fillKey": "lt166" 
 },
 "SLE": {
- "fillKey": "lt49100" 
+ "fillKey": "lt166" 
 },
 "NGA": {
- "fillKey": "lt49100" 
+ "fillKey": "lt83" 
 } 
 },
 "123": {
  "GIN": {
- "fillKey": "lt49100" 
+ "fillKey": "lt83" 
 },
 "LBR": {
- "fillKey": "lt49100" 
+ "fillKey": "lt166" 
 },
 "SLE": {
- "fillKey": "lt49100" 
+ "fillKey": "lt166" 
 },
 "NGA": {
- "fillKey": "lt49100" 
+ "fillKey": "lt83" 
 } 
 },
 "124": {
  "GIN": {
- "fillKey": "lt49100" 
+ "fillKey": "lt83" 
 },
 "LBR": {
- "fillKey": "lt49100" 
+ "fillKey": "lt166" 
 },
 "SLE": {
- "fillKey": "lt49100" 
+ "fillKey": "lt166" 
 },
 "NGA": {
- "fillKey": "lt49100" 
+ "fillKey": "lt83" 
 } 
 },
 "125": {
  "GIN": {
- "fillKey": "lt49100" 
+ "fillKey": "lt83" 
 },
 "LBR": {
- "fillKey": "lt49100" 
+ "fillKey": "lt166" 
 },
 "SLE": {
- "fillKey": "lt49100" 
+ "fillKey": "lt166" 
 },
 "NGA": {
- "fillKey": "lt49100" 
+ "fillKey": "lt83" 
 } 
 },
 "126": {
  "GIN": {
- "fillKey": "lt49100" 
+ "fillKey": "lt83" 
 },
 "LBR": {
- "fillKey": "lt49100" 
+ "fillKey": "lt166" 
 },
 "SLE": {
- "fillKey": "lt49100" 
+ "fillKey": "lt250" 
 },
 "NGA": {
- "fillKey": "lt49100" 
+ "fillKey": "lt83" 
 } 
 },
 "127": {
  "GIN": {
- "fillKey": "lt49100" 
+ "fillKey": "lt83" 
 },
 "LBR": {
- "fillKey": "lt49100" 
+ "fillKey": "lt166" 
 },
 "SLE": {
- "fillKey": "lt49100" 
+ "fillKey": "lt166" 
 },
 "NGA": {
- "fillKey": "lt49100" 
+ "fillKey": "lt83" 
 } 
 },
 "128": {
  "GIN": {
- "fillKey": "lt49100" 
+ "fillKey": "lt83" 
 },
 "LBR": {
- "fillKey": "lt49100" 
+ "fillKey": "lt166" 
 },
 "SLE": {
- "fillKey": "lt49100" 
+ "fillKey": "lt166" 
 },
 "NGA": {
- "fillKey": "lt49100" 
+ "fillKey": "lt83" 
 } 
 },
 "129": {
  "GIN": {
- "fillKey": "lt49100" 
+ "fillKey": "lt83" 
 },
 "LBR": {
- "fillKey": "lt49100" 
+ "fillKey": "lt166" 
 },
 "SLE": {
- "fillKey": "lt49100" 
+ "fillKey": "lt166" 
 },
 "NGA": {
- "fillKey": "lt49100" 
+ "fillKey": "lt83" 
 } 
 },
 "130": {
  "GIN": {
- "fillKey": "lt49100" 
+ "fillKey": "lt83" 
 },
 "LBR": {
- "fillKey": "lt49100" 
+ "fillKey": "lt166" 
 },
 "SLE": {
- "fillKey": "lt49100" 
+ "fillKey": "lt166" 
 },
 "NGA": {
- "fillKey": "lt49100" 
+ "fillKey": "lt83" 
 } 
 },
 "131": {
  "GIN": {
- "fillKey": "lt49100" 
+ "fillKey": "lt83" 
 },
 "LBR": {
- "fillKey": "lt49100" 
+ "fillKey": "lt250" 
 },
 "SLE": {
- "fillKey": "lt49100" 
+ "fillKey": "lt166" 
 },
 "NGA": {
- "fillKey": "lt49100" 
+ "fillKey": "lt83" 
 } 
 },
 "132": {
  "GIN": {
- "fillKey": "lt49100" 
+ "fillKey": "lt83" 
 },
 "LBR": {
- "fillKey": "lt49100" 
+ "fillKey": "lt250" 
 },
 "SLE": {
- "fillKey": "lt49100" 
+ "fillKey": "lt166" 
 },
 "NGA": {
- "fillKey": "lt49100" 
+ "fillKey": "lt83" 
 } 
 },
 "133": {
  "GIN": {
- "fillKey": "lt49100" 
+ "fillKey": "lt83" 
 },
 "LBR": {
- "fillKey": "lt49100" 
+ "fillKey": "lt250" 
 },
 "SLE": {
- "fillKey": "lt49100" 
+ "fillKey": "lt250" 
 },
 "NGA": {
- "fillKey": "lt49100" 
+ "fillKey": "lt83" 
 } 
 },
 "134": {
  "GIN": {
- "fillKey": "lt49100" 
+ "fillKey": "lt83" 
 },
 "LBR": {
- "fillKey": "lt49100" 
+ "fillKey": "lt250" 
 },
 "SLE": {
- "fillKey": "lt49100" 
+ "fillKey": "lt250" 
 },
 "NGA": {
- "fillKey": "lt49100" 
+ "fillKey": "lt83" 
 } 
 },
 "135": {
  "GIN": {
- "fillKey": "lt49100" 
+ "fillKey": "lt83" 
 },
 "LBR": {
- "fillKey": "lt49100" 
+ "fillKey": "lt250" 
 },
 "SLE": {
- "fillKey": "lt49100" 
+ "fillKey": "lt250" 
 },
 "NGA": {
- "fillKey": "lt49100" 
+ "fillKey": "lt83" 
 } 
 },
 "136": {
  "GIN": {
- "fillKey": "lt49100" 
+ "fillKey": "lt83" 
 },
 "LBR": {
- "fillKey": "lt49100" 
+ "fillKey": "lt250" 
 },
 "SLE": {
- "fillKey": "lt49100" 
+ "fillKey": "lt250" 
 },
 "NGA": {
- "fillKey": "lt49100" 
+ "fillKey": "lt83" 
 } 
 },
 "137": {
  "GIN": {
- "fillKey": "lt49100" 
+ "fillKey": "lt83" 
 },
 "LBR": {
- "fillKey": "lt49100" 
+ "fillKey": "lt250" 
 },
 "SLE": {
- "fillKey": "lt49100" 
+ "fillKey": "lt250" 
 },
 "NGA": {
- "fillKey": "lt49100" 
+ "fillKey": "lt83" 
 } 
 },
 "138": {
  "GIN": {
- "fillKey": "lt49100" 
+ "fillKey": "lt83" 
 },
 "LBR": {
- "fillKey": "lt49100" 
+ "fillKey": "lt250" 
 },
 "SLE": {
- "fillKey": "lt49100" 
+ "fillKey": "lt250" 
 },
 "NGA": {
- "fillKey": "lt49100" 
+ "fillKey": "lt83" 
 } 
 },
 "139": {
  "GIN": {
- "fillKey": "lt49100" 
+ "fillKey": "lt83" 
 },
 "LBR": {
- "fillKey": "lt49100" 
+ "fillKey": "lt250" 
 },
 "SLE": {
- "fillKey": "lt49100" 
+ "fillKey": "lt250" 
 },
 "NGA": {
- "fillKey": "lt49100" 
+ "fillKey": "lt83" 
 } 
 },
 "140": {
  "GIN": {
- "fillKey": "lt49100" 
+ "fillKey": "lt83" 
 },
 "LBR": {
- "fillKey": "lt49100" 
+ "fillKey": "lt250" 
 },
 "SLE": {
- "fillKey": "lt49100" 
+ "fillKey": "lt250" 
 },
 "NGA": {
- "fillKey": "lt49100" 
+ "fillKey": "lt83" 
 } 
 },
 "141": {
  "GIN": {
- "fillKey": "lt49100" 
+ "fillKey": "lt83" 
 },
 "LBR": {
- "fillKey": "lt49100" 
+ "fillKey": "lt250" 
 },
 "SLE": {
- "fillKey": "lt49100" 
+ "fillKey": "lt166" 
 },
 "NGA": {
- "fillKey": "lt49100" 
+ "fillKey": "lt83" 
 } 
 },
 "142": {
  "GIN": {
- "fillKey": "lt49100" 
+ "fillKey": "lt83" 
 },
 "LBR": {
- "fillKey": "lt49100" 
+ "fillKey": "lt250" 
 },
 "SLE": {
- "fillKey": "lt49100" 
+ "fillKey": "lt250" 
 },
 "NGA": {
- "fillKey": "lt49100" 
+ "fillKey": "lt83" 
 } 
 },
 "143": {
  "GIN": {
- "fillKey": "lt49100" 
+ "fillKey": "lt83" 
 },
 "LBR": {
- "fillKey": "lt49100" 
+ "fillKey": "lt333" 
 },
 "SLE": {
- "fillKey": "lt49100" 
+ "fillKey": "lt250" 
 },
 "NGA": {
- "fillKey": "lt49100" 
+ "fillKey": "lt83" 
 } 
 },
 "144": {
  "GIN": {
- "fillKey": "lt49100" 
+ "fillKey": "lt83" 
 },
 "LBR": {
- "fillKey": "lt49100" 
+ "fillKey": "lt333" 
 },
 "SLE": {
- "fillKey": "lt49100" 
+ "fillKey": "lt250" 
 },
 "NGA": {
- "fillKey": "lt49100" 
+ "fillKey": "lt83" 
 } 
 },
 "145": {
  "GIN": {
- "fillKey": "lt49100" 
+ "fillKey": "lt83" 
 },
 "LBR": {
- "fillKey": "lt49100" 
+ "fillKey": "lt333" 
 },
 "SLE": {
- "fillKey": "lt49100" 
+ "fillKey": "lt250" 
 },
 "NGA": {
- "fillKey": "lt49100" 
+ "fillKey": "lt83" 
 } 
 },
 "146": {
  "GIN": {
- "fillKey": "lt49100" 
+ "fillKey": "lt83" 
 },
 "LBR": {
- "fillKey": "lt49100" 
+ "fillKey": "lt416" 
 },
 "SLE": {
- "fillKey": "lt49100" 
+ "fillKey": "lt250" 
 },
 "NGA": {
- "fillKey": "lt49100" 
+ "fillKey": "lt83" 
 } 
 },
 "147": {
  "GIN": {
- "fillKey": "lt49100" 
+ "fillKey": "lt83" 
 },
 "LBR": {
- "fillKey": "lt49100" 
+ "fillKey": "lt333" 
 },
 "SLE": {
- "fillKey": "lt49100" 
+ "fillKey": "lt250" 
 },
 "NGA": {
- "fillKey": "lt49100" 
+ "fillKey": "lt83" 
 } 
 },
 "148": {
  "GIN": {
- "fillKey": "lt49100" 
+ "fillKey": "lt83" 
 },
 "LBR": {
- "fillKey": "lt49100" 
+ "fillKey": "lt333" 
 },
 "SLE": {
- "fillKey": "lt49100" 
+ "fillKey": "lt250" 
 },
 "NGA": {
- "fillKey": "lt49100" 
+ "fillKey": "lt83" 
 } 
 },
 "149": {
  "GIN": {
- "fillKey": "lt49100" 
+ "fillKey": "lt83" 
 },
 "LBR": {
- "fillKey": "lt49100" 
+ "fillKey": "lt416" 
 },
 "SLE": {
- "fillKey": "lt49100" 
+ "fillKey": "lt250" 
 },
 "NGA": {
- "fillKey": "lt49100" 
+ "fillKey": "lt83" 
 } 
 },
 "150": {
  "GIN": {
- "fillKey": "lt49100" 
+ "fillKey": "lt166" 
 },
 "LBR": {
- "fillKey": "lt49100" 
+ "fillKey": "lt416" 
 },
 "SLE": {
- "fillKey": "lt49100" 
+ "fillKey": "lt250" 
 },
 "NGA": {
- "fillKey": "lt49100" 
+ "fillKey": "lt83" 
 } 
 },
 "151": {
  "GIN": {
- "fillKey": "lt49100" 
+ "fillKey": "lt166" 
 },
 "LBR": {
- "fillKey": "lt49100" 
+ "fillKey": "lt416" 
 },
 "SLE": {
- "fillKey": "lt49100" 
+ "fillKey": "lt250" 
 },
 "NGA": {
- "fillKey": "lt49100" 
+ "fillKey": "lt83" 
 } 
 },
 "152": {
  "GIN": {
- "fillKey": "lt49100" 
+ "fillKey": "lt166" 
 },
 "LBR": {
- "fillKey": "lt49100" 
+ "fillKey": "lt499" 
 },
 "SLE": {
- "fillKey": "lt49100" 
+ "fillKey": "lt250" 
 },
 "NGA": {
- "fillKey": "lt49100" 
+ "fillKey": "lt83" 
 } 
 },
 "153": {
  "GIN": {
- "fillKey": "lt49100" 
+ "fillKey": "lt166" 
 },
 "LBR": {
- "fillKey": "lt49100" 
+ "fillKey": "lt499" 
 },
 "SLE": {
- "fillKey": "lt49100" 
+ "fillKey": "lt250" 
 },
 "NGA": {
- "fillKey": "lt49100" 
+ "fillKey": "lt83" 
 } 
 },
 "154": {
  "GIN": {
- "fillKey": "lt49100" 
+ "fillKey": "lt166" 
 },
 "LBR": {
- "fillKey": "lt49100" 
+ "fillKey": "lt499" 
 },
 "SLE": {
- "fillKey": "lt49100" 
+ "fillKey": "lt250" 
 },
 "NGA": {
- "fillKey": "lt49100" 
+ "fillKey": "lt83" 
 } 
 },
 "155": {
  "GIN": {
- "fillKey": "lt49100" 
+ "fillKey": "lt166" 
 },
 "LBR": {
- "fillKey": "lt49100" 
+ "fillKey": "lt499" 
 },
 "SLE": {
- "fillKey": "lt49100" 
+ "fillKey": "lt250" 
 },
 "NGA": {
- "fillKey": "lt49100" 
+ "fillKey": "lt83" 
 } 
 },
 "156": {
  "GIN": {
- "fillKey": "lt49100" 
+ "fillKey": "lt166" 
 },
 "LBR": {
- "fillKey": "lt49100" 
+ "fillKey": "lt499" 
 },
 "SLE": {
- "fillKey": "lt49100" 
+ "fillKey": "lt250" 
 },
 "NGA": {
- "fillKey": "lt49100" 
+ "fillKey": "lt83" 
 } 
 },
 "157": {
  "GIN": {
- "fillKey": "lt49100" 
+ "fillKey": "lt166" 
 },
 "LBR": {
- "fillKey": "lt49100" 
+ "fillKey": "lt499" 
 },
 "SLE": {
- "fillKey": "lt49100" 
+ "fillKey": "lt250" 
 },
 "NGA": {
- "fillKey": "lt49100" 
+ "fillKey": "lt83" 
 } 
 },
 "158": {
  "GIN": {
- "fillKey": "lt49100" 
+ "fillKey": "lt166" 
 },
 "LBR": {
- "fillKey": "lt49100" 
+ "fillKey": "lt582" 
 },
 "SLE": {
- "fillKey": "lt49100" 
+ "fillKey": "lt250" 
 },
 "NGA": {
- "fillKey": "lt49100" 
+ "fillKey": "lt83" 
 } 
 },
 "159": {
  "GIN": {
- "fillKey": "lt49100" 
+ "fillKey": "lt166" 
 },
 "LBR": {
- "fillKey": "lt49100" 
+ "fillKey": "lt582" 
 },
 "SLE": {
- "fillKey": "lt49100" 
+ "fillKey": "lt250" 
 },
 "NGA": {
- "fillKey": "lt49100" 
+ "fillKey": "lt83" 
 } 
 },
 "160": {
  "GIN": {
- "fillKey": "lt49100" 
+ "fillKey": "lt166" 
 },
 "LBR": {
- "fillKey": "lt49100" 
+ "fillKey": "lt582" 
 },
 "SLE": {
- "fillKey": "lt49100" 
+ "fillKey": "lt250" 
 },
 "NGA": {
- "fillKey": "lt49100" 
+ "fillKey": "lt83" 
 } 
 },
 "161": {
  "GIN": {
- "fillKey": "lt49100" 
+ "fillKey": "lt166" 
 },
 "LBR": {
- "fillKey": "lt49100" 
+ "fillKey": "lt582" 
 },
 "SLE": {
- "fillKey": "lt49100" 
+ "fillKey": "lt250" 
 },
 "NGA": {
- "fillKey": "lt49100" 
+ "fillKey": "lt83" 
 } 
 },
 "162": {
  "GIN": {
- "fillKey": "lt49100" 
+ "fillKey": "lt166" 
 },
 "LBR": {
- "fillKey": "lt49100" 
+ "fillKey": "lt666" 
 },
 "SLE": {
- "fillKey": "lt49100" 
+ "fillKey": "lt333" 
 },
 "NGA": {
- "fillKey": "lt49100" 
+ "fillKey": "lt83" 
 } 
 },
 "163": {
  "GIN": {
- "fillKey": "lt49100" 
+ "fillKey": "lt166" 
 },
 "LBR": {
- "fillKey": "lt49100" 
+ "fillKey": "lt666" 
 },
 "SLE": {
- "fillKey": "lt49100" 
+ "fillKey": "lt333" 
 },
 "NGA": {
- "fillKey": "lt49100" 
+ "fillKey": "lt83" 
 } 
 },
 "164": {
  "GIN": {
- "fillKey": "lt49100" 
+ "fillKey": "lt166" 
 },
 "LBR": {
- "fillKey": "lt49100" 
+ "fillKey": "lt666" 
 },
 "SLE": {
- "fillKey": "lt49100" 
+ "fillKey": "lt333" 
 },
 "NGA": {
- "fillKey": "lt49100" 
+ "fillKey": "lt83" 
 } 
 },
 "165": {
  "GIN": {
- "fillKey": "lt49100" 
+ "fillKey": "lt250" 
 },
 "LBR": {
- "fillKey": "lt49100" 
+ "fillKey": "lt750" 
 },
 "SLE": {
- "fillKey": "lt49100" 
+ "fillKey": "lt333" 
 },
 "NGA": {
- "fillKey": "lt49100" 
+ "fillKey": "lt83" 
 } 
 },
 "166": {
  "GIN": {
- "fillKey": "lt49100" 
+ "fillKey": "lt250" 
 },
 "LBR": {
- "fillKey": "lt49100" 
+ "fillKey": "lt750" 
 },
 "SLE": {
- "fillKey": "lt49100" 
+ "fillKey": "lt416" 
 },
 "NGA": {
- "fillKey": "lt49100" 
+ "fillKey": "lt83" 
 } 
 },
 "167": {
  "GIN": {
- "fillKey": "lt49100" 
+ "fillKey": "lt250" 
 },
 "LBR": {
- "fillKey": "lt49100" 
+ "fillKey": "lt750" 
 },
 "SLE": {
- "fillKey": "lt49100" 
+ "fillKey": "lt416" 
 },
 "NGA": {
- "fillKey": "lt49100" 
+ "fillKey": "lt83" 
 } 
 },
 "168": {
  "GIN": {
- "fillKey": "lt49100" 
+ "fillKey": "lt250" 
 },
 "LBR": {
- "fillKey": "lt49100" 
+ "fillKey": "lt750" 
 },
 "SLE": {
- "fillKey": "lt49100" 
+ "fillKey": "lt416" 
 },
 "NGA": {
- "fillKey": "lt49100" 
+ "fillKey": "lt83" 
 } 
 },
 "169": {
  "GIN": {
- "fillKey": "lt49100" 
+ "fillKey": "lt250" 
 },
 "LBR": {
- "fillKey": "lt49100" 
+ "fillKey": "lt750" 
 },
 "SLE": {
- "fillKey": "lt49100" 
+ "fillKey": "lt333" 
 },
 "NGA": {
- "fillKey": "lt49100" 
+ "fillKey": "lt83" 
 } 
 },
 "170": {
  "GIN": {
- "fillKey": "lt49100" 
+ "fillKey": "lt250" 
 },
 "LBR": {
- "fillKey": "lt49100" 
+ "fillKey": "lt750" 
 },
 "SLE": {
- "fillKey": "lt49100" 
+ "fillKey": "lt333" 
 },
 "NGA": {
- "fillKey": "lt49100" 
+ "fillKey": "lt83" 
 } 
 },
 "171": {
  "GIN": {
- "fillKey": "lt49100" 
+ "fillKey": "lt250" 
 },
 "LBR": {
- "fillKey": "lt49100" 
+ "fillKey": "lt750" 
 },
 "SLE": {
- "fillKey": "lt49100" 
+ "fillKey": "lt333" 
 },
 "NGA": {
- "fillKey": "lt49100" 
+ "fillKey": "lt83" 
 } 
 },
 "172": {
  "GIN": {
- "fillKey": "lt49100" 
+ "fillKey": "lt166" 
 },
 "LBR": {
- "fillKey": "lt49100" 
+ "fillKey": "lt750" 
 },
 "SLE": {
- "fillKey": "lt49100" 
+ "fillKey": "lt333" 
 },
 "NGA": {
- "fillKey": "lt49100" 
+ "fillKey": "lt83" 
 } 
 },
 "173": {
  "GIN": {
- "fillKey": "lt49100" 
+ "fillKey": "lt166" 
 },
 "LBR": {
- "fillKey": "lt49100" 
+ "fillKey": "lt750" 
 },
 "SLE": {
- "fillKey": "lt49100" 
+ "fillKey": "lt333" 
 },
 "NGA": {
- "fillKey": "lt49100" 
+ "fillKey": "lt83" 
 } 
 },
 "174": {
  "GIN": {
- "fillKey": "lt49100" 
+ "fillKey": "lt166" 
 },
 "LBR": {
- "fillKey": "lt49100" 
+ "fillKey": "lt750" 
 },
 "SLE": {
- "fillKey": "lt49100" 
+ "fillKey": "lt333" 
 },
 "NGA": {
- "fillKey": "lt49100" 
+ "fillKey": "lt83" 
 } 
 },
 "175": {
  "GIN": {
- "fillKey": "lt49100" 
+ "fillKey": "lt166" 
 },
 "LBR": {
- "fillKey": "lt49100" 
+ "fillKey": "lt750" 
 },
 "SLE": {
- "fillKey": "lt49100" 
+ "fillKey": "lt333" 
 },
 "NGA": {
- "fillKey": "lt49100" 
+ "fillKey": "lt83" 
 } 
 },
 "176": {
  "GIN": {
- "fillKey": "lt49100" 
+ "fillKey": "lt166" 
 },
 "LBR": {
- "fillKey": "lt49100" 
+ "fillKey": "lt750" 
 },
 "SLE": {
- "fillKey": "lt49100" 
+ "fillKey": "lt333" 
 },
 "NGA": {
- "fillKey": "lt49100" 
+ "fillKey": "lt166" 
 } 
 },
 "177": {
  "GIN": {
- "fillKey": "lt49100" 
+ "fillKey": "lt166" 
 },
 "LBR": {
- "fillKey": "lt49100" 
+ "fillKey": "lt750" 
 },
 "SLE": {
- "fillKey": "lt49100" 
+ "fillKey": "lt250" 
 },
 "NGA": {
- "fillKey": "lt49100" 
+ "fillKey": "lt166" 
 } 
 },
 "178": {
  "GIN": {
- "fillKey": "lt49100" 
+ "fillKey": "lt166" 
 },
 "LBR": {
- "fillKey": "lt49100" 
+ "fillKey": "lt750" 
 },
 "SLE": {
- "fillKey": "lt49100" 
+ "fillKey": "lt250" 
 },
 "NGA": {
- "fillKey": "lt49100" 
-} 
-},
-"179": {
- "GIN": {
- "fillKey": "lt49100" 
-},
-"LBR": {
- "fillKey": "lt98100" 
-},
-"SLE": {
- "fillKey": "lt49100" 
-},
-"NGA": {
- "fillKey": "lt49100" 
-} 
-},
-"180": {
- "GIN": {
- "fillKey": "lt49100" 
-},
-"LBR": {
- "fillKey": "lt147000" 
-},
-"SLE": {
- "fillKey": "lt49100" 
-},
-"NGA": {
- "fillKey": "lt49100" 
-} 
-},
-"181": {
- "GIN": {
- "fillKey": "lt49100" 
-},
-"LBR": {
- "fillKey": "lt196000" 
-},
-"SLE": {
- "fillKey": "lt49100" 
-},
-"NGA": {
- "fillKey": "lt49100" 
-} 
-},
-"182": {
- "GIN": {
- "fillKey": "lt49100" 
-},
-"LBR": {
- "fillKey": "lt343000" 
-},
-"SLE": {
- "fillKey": "lt49100" 
-},
-"NGA": {
- "fillKey": "lt49100" 
-} 
-},
-"183": {
- "GIN": {
- "fillKey": "lt49100" 
-},
-"LBR": {
- "fillKey": "lt442000" 
-},
-"SLE": {
- "fillKey": "lt98100" 
-},
-"NGA": {
- "fillKey": "lt98100" 
+ "fillKey": "lt166" 
 } 
 } 
 }
@@ -6840,12 +6810,7 @@ var dayLabels=
 "180": "2014-09-19",
 "181": "2014-09-20",
 "182": "2014-09-21",
-"183": "2014-09-22",
-"184": "2014-09-23",
-"185": "2014-09-24",
-"186": "2014-09-25",
-"187": "2014-09-26",
-"188": "2014-09-27" 
+"183": "2014-09-22" 
 };
 var chartParams_pred={"dom": "zoom_map_pred",
 "scope": "world",
@@ -6856,30 +6821,30 @@ var chartParams_pred={"dom": "zoom_map_pred",
 "fills": 
 {
  "defaultFill": "#ffffef",
-"lt49100": "#ffffef",
-"lt98100": "#fff7bf",
-"lt147000": "#fee39f",
-"lt196000": "#fec45f",
-"lt245000": "#fe993f",
-"lt294000": "#ec702f",
-"lt343000": "#cc4c1f",
-"lt393000": "#993402",
-"lt442000": "#662520" 
+"lt83": "#ffffef",
+"lt166": "#fff7bf",
+"lt250": "#fee39f",
+"lt333": "#fec45f",
+"lt416": "#fe993f",
+"lt499": "#ec702f",
+"lt582": "#cc4c1f",
+"lt666": "#993402",
+"lt750": "#662520" 
 }
 ,
 "data":
 {
  "GIN": {
- "fillKey": "lt49100" 
+ "fillKey": "lt83" 
 },
 "LBR": {
- "fillKey": "lt49100" 
+ "fillKey": "lt83" 
 },
 "SLE": {
- "fillKey": "lt49100" 
+ "fillKey": "lt83" 
 },
 "NGA": {
- "fillKey": "lt49100" 
+ "fillKey": "lt83" 
 } 
 }
 ,"setProjection": function( element, options ) {
