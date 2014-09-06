@@ -159,8 +159,8 @@ library(parallel) # Load the parallel library to enable multiple chains to be ru
 
 ## Define Document Compilation Parameters
 
-documentCompilationMode = "release"
-#documentCompilationMode = "debug"
+#documentCompilationMode = "release"
+documentCompilationMode = "debug"
 modelDF = 6
 pred.days = 14
 
@@ -183,8 +183,13 @@ dup.indices = which(as.Date(dat[,1], "%d %b %Y") == as.Date("2014-06-05"))
 dat[dup.indices[1],]$V2 = dat[dup.indices[2],]$V2
 dat = rbind(dat[1:dup.indices[1],], dat[(dup.indices[2]+1):nrow(dat),])
 
+charDate = as.character(dat[2:nrow(dat),1])
+for (i in 1:length(charDate))
+{
+  charDate[i] = gsub("Sept", "Sep", charDate[i])
+}
 
-rptDate = as.Date(dat[2:nrow(dat),1], "%d %b %Y")
+rptDate = as.Date(charDate, "%d %b %Y")
 numDays = max(rptDate) - min(rptDate) + 1
 numDays.pred = numDays + pred.days
 
