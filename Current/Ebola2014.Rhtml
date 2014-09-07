@@ -168,7 +168,7 @@ pred.days = 14
 numBurnInBatches =      ifelse(documentCompilationMode == "release", 1000,  1)
 numConvergenceBatches = ifelse(documentCompilationMode == "release", 1000,  10)
 convergenceBatchSize =  ifelse(documentCompilationMode == "release", 1000, 50) 
-extraR0Iterations =     ifelse(documentCompilationMode == "release", 750,   10)
+extraR0Iterations =     ifelse(documentCompilationMode == "release", 500,   10)
 iterationStride =       ifelse(documentCompilationMode == "release", 1000,   50)
 
 ## Read in the data
@@ -733,7 +733,7 @@ buildAndRunModel = function(params)
         SEIRmodel$simulate(iterationStride)
         for (j in 1:nrow(proposal$I_star))
         {
-            R0[j,,i] = apply(SEIRmodel$getGenerationMatrix(j), 2, sum)
+            R0[j,,i] = apply(SEIRmodel$getIntegratedGenerationMatrix(j), 2, sum)
         }
     }
     
