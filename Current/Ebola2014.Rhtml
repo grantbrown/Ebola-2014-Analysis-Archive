@@ -166,7 +166,7 @@ pred.days = 14
 
 ## Compute number of samples/batches
 numBurnInBatches =      ifelse(documentCompilationMode == "release", 1000,  1)
-numConvergenceBatches = ifelse(documentCompilationMode == "release", 500,  10)
+numConvergenceBatches = ifelse(documentCompilationMode == "release", 1000,  10)
 convergenceBatchSize =  ifelse(documentCompilationMode == "release", 1000, 50) 
 extraR0Iterations =     ifelse(documentCompilationMode == "release", 750,   10)
 iterationStride =       ifelse(documentCompilationMode == "release", 1000,   50)
@@ -526,10 +526,10 @@ xDim = dim(X)
 zDim = dim(Z)
     
 # Declare prior parameters for the E to I and I to R probabilities. 
-priorAlpha_gammaEI = 250;
-priorBeta_gammaEI = 1000;
-priorAlpha_gammaIR = 140;
-priorBeta_gammaIR = 1000;
+priorAlpha_gammaEI = 25;
+priorBeta_gammaEI = 100;
+priorAlpha_gammaIR = 14;
+priorBeta_gammaIR = 100;
 
 # Declare prior precision for exposure model paramters
 betaPriorPrecision = 0.1
@@ -707,25 +707,19 @@ buildAndRunModel = function(params)
   SEIRmodel$useDecorrelation = 25
   # Run Simulation
   cat(paste("Running chain ", params[["chainNumber"]], "\n", sep =""))
-  batchFraction = max(floor(numConvergenceBatches/8), 1)
-  for (batch in 1:8)
-  {
-    tm = system.time(runSimulation(SEIRmodel, 
-                    numBatches=batchFraction, 
-                    batchSize=convergenceBatchSize, 
-                    targetAcceptanceRatio=0.2,
-                    tolerance=0.025,
-                    proportionChange = 0.05))
-    SEIRmodel$compartmentSamplingMode = ifelse(SEIRmodel$compartmentSamplingMode == 1, 14, 1)
-  }
+
+  tm = 0
+
+
+  tm = tm + system.time(runSimulation(SEIRmodel, 
+	    numBatches=numConvergenceBatches, 
+	    batchSize=convergenceBatchSize, 
+	    targetAcceptanceRatio=0.2,
+	    tolerance=0.025,
+	    proportionChange = 0.05))
+
+
   
-  SEIRmodel$compartmentSamplingMode = 14
-  tm = system.time(runSimulation(SEIRmodel, 
-                  numBatches=numConvergenceBatches, 
-                  batchSize=convergenceBatchSize, 
-                  targetAcceptanceRatio=0.2,
-                  tolerance=0.025,
-                  proportionChange = 0.05))
   cat(paste("Time elapsed: ", round(tm[3]/60,3), 
               " minutes\n", sep = ""))
   dat = read.csv(proposal$outFileName)
