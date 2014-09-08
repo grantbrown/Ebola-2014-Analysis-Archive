@@ -159,8 +159,8 @@ library(parallel) # Load the parallel library to enable multiple chains to be ru
 
 ## Define Document Compilation Parameters
 
-documentCompilationMode = "release"
-#documentCompilationMode = "debug"
+#documentCompilationMode = "release"
+documentCompilationMode = "debug"
 modelDF = 6
 pred.days = 14
 
@@ -564,7 +564,8 @@ mcmcTuningParams = c(1, # S_star
                      0.0,  # beta_p_rs, fixed in this case
                      0.01, # rho
                      0.01, # gamma_ei
-                     0.01) # gamma_ir
+                     0.01,  # gamma_ir
+                     0.01) # phi
 
 
 # We don't want to re-scale the distance matrix. 
