@@ -732,7 +732,7 @@ buildAndRunModel = function(params)
     for (i in 1:extraR0Iterations)
     {
         SEIRmodel$simulate(iterationStride)
-        for (j in 1:nrow(proposal$I_star))
+        for (j in 0:(nrow(proposal$I_star)-1))
         {
             R0[j,,i] = apply(SEIRmodel$getIntegratedGenerationMatrix(j), 2, sum)
         }
@@ -743,8 +743,7 @@ buildAndRunModel = function(params)
     R0UB = apply(R0, 1:2, quantile, probs = 0.95)
     orig.R0 = R0
     R0 = list("mean"=R0Mean, "LB" = R0LB, "UB" = R0UB)
-  }
-  else
+  } else
   {
      R0 = NULL
      orig.R0 = NULL
