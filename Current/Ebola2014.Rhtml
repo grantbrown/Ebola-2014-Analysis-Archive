@@ -530,6 +530,12 @@ priorAlpha_gammaEI = 25;
 priorBeta_gammaEI = 100;
 priorAlpha_gammaIR = 14;
 priorBeta_gammaIR = 100;
+# Declare prior parameters for the overdispersion precision
+priorAlpha_phi = 1
+priorBeta_phi = 1
+
+# Choose overdispersion data model
+dataModel = 1
 
 # Declare prior precision for exposure model paramters
 betaPriorPrecision = 0.1
@@ -589,7 +595,8 @@ proposeParameters = function(seedVal, chainNumber)
     beta[1] = 2.5 + rnorm(1,0,0.5)
     
     rho = 0.1 + rnorm(1,0,0.01) # spatial dependence parameter
-  
+    phi = 0.01 # Overdispersion precision
+    
     outFileName = paste("./chain_output_ebola_", chainNumber ,".txt", sep = "")
     
     # Make a crude guess as to the true compartments:
@@ -609,6 +616,7 @@ proposeParameters = function(seedVal, chainNumber)
                 I_star=proposal$I_star,
                 R_star=proposal$R_star,
                 rho=rho,
+                phi=phi,
                 beta=beta,
                 gamma_ei=gamma_ei,
                 gamma_ir=gamma_ir,
@@ -633,7 +641,7 @@ buildAndRunModel = function(params)
 {
     library(spatialSEIR)
     proposal = proposeParameters(params[["seedVal"]], params[["chainNumber"]])
-    SEIRmodel =  spatialSEIRModel(compMatDim,
+    SEIRmodel =  spatialSEIRDataModel(compMatDim,
                         xDim,
                         zDim,
                         xPrsDim,
@@ -641,6 +649,7 @@ buildAndRunModel = function(params)
                         proposal$E0,
                         proposal$I0,
                         proposal$R0,
+                        proposal$I_star,
                         proposal$S_star,
                         proposal$E_star,
                         proposal$I_star,
@@ -651,10 +660,13 @@ buildAndRunModel = function(params)
                         X_p_rs,
                         DM,
                         proposal$rho,
+                        proposal$phi,
                         priorAlpha_gammaEI,
                         priorBeta_gammaEI,
                         priorAlpha_gammaIR,
                         priorBeta_gammaIR,
+                        priorAlpha_phi,
+                        priorBeta_phi,
                         proposal$beta,
                         betaPriorPrecision,
                         beta_p_rs,
@@ -669,6 +681,7 @@ buildAndRunModel = function(params)
                         debug,
                         mcmcTuningParams,
                         reinfectionMode,
+                        dataModel,
                         scaleDistanceMode)
   
   SEIRmodel$setRandomSeed(params[["seedVal"]])
@@ -767,6 +780,8 @@ clusterExport(cl, c("compMatDim",
                      "priorBeta_gammaEI",
                      "priorAlpha_gammaIR",
                      "priorBeta_gammaIR",
+                     "priorAlpha_phi",
+                     "priorBeta_phi",
                      "betaPriorPrecision",
                      "beta_p_rs",
                      "betaPrsPriorPrecision",
@@ -784,7 +799,8 @@ clusterExport(cl, c("compMatDim",
                      "convergenceBatchSize",
                      "extraR0Iterations",
                      "I_star",
-                     "numBurnInBatches"))
+                     "numBurnInBatches",
+                      "dataModel"))
 
 paramsList = list(list("estimateR0"=FALSE, "traceCompartments"=TRUE, "seedVal"=123123,"chainNumber"=4),
                   list("estimateR0"=TRUE, "traceCompartments"=FALSE, "seedVal"=123124,"chainNumber"=5),
