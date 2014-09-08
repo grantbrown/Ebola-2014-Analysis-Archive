@@ -235,7 +235,7 @@
 <span class="hl std">numBurnInBatches</span> <span class="hl kwb">=</span>      <span class="hl kwd">ifelse</span><span class="hl std">(documentCompilationMode</span> <span class="hl opt">==</span> <span class="hl str">&quot;release&quot;</span><span class="hl std">,</span> <span class="hl num">1000</span><span class="hl std">,</span>  <span class="hl num">1</span><span class="hl std">)</span>
 <span class="hl std">numConvergenceBatches</span> <span class="hl kwb">=</span> <span class="hl kwd">ifelse</span><span class="hl std">(documentCompilationMode</span> <span class="hl opt">==</span> <span class="hl str">&quot;release&quot;</span><span class="hl std">,</span> <span class="hl num">1000</span><span class="hl std">,</span>  <span class="hl num">10</span><span class="hl std">)</span>
 <span class="hl std">convergenceBatchSize</span> <span class="hl kwb">=</span>  <span class="hl kwd">ifelse</span><span class="hl std">(documentCompilationMode</span> <span class="hl opt">==</span> <span class="hl str">&quot;release&quot;</span><span class="hl std">,</span> <span class="hl num">1000</span><span class="hl std">,</span> <span class="hl num">50</span><span class="hl std">)</span>
-<span class="hl std">extraR0Iterations</span> <span class="hl kwb">=</span>     <span class="hl kwd">ifelse</span><span class="hl std">(documentCompilationMode</span> <span class="hl opt">==</span> <span class="hl str">&quot;release&quot;</span><span class="hl std">,</span> <span class="hl num">750</span><span class="hl std">,</span>   <span class="hl num">10</span><span class="hl std">)</span>
+<span class="hl std">extraR0Iterations</span> <span class="hl kwb">=</span>     <span class="hl kwd">ifelse</span><span class="hl std">(documentCompilationMode</span> <span class="hl opt">==</span> <span class="hl str">&quot;release&quot;</span><span class="hl std">,</span> <span class="hl num">500</span><span class="hl std">,</span>   <span class="hl num">10</span><span class="hl std">)</span>
 <span class="hl std">iterationStride</span> <span class="hl kwb">=</span>       <span class="hl kwd">ifelse</span><span class="hl std">(documentCompilationMode</span> <span class="hl opt">==</span> <span class="hl str">&quot;release&quot;</span><span class="hl std">,</span> <span class="hl num">1000</span><span class="hl std">,</span>   <span class="hl num">50</span><span class="hl std">)</span>
 
 <span class="hl com">## Read in the data</span>
@@ -754,7 +754,7 @@ temporal trend.
         <span class="hl std">SEIRmodel</span><span class="hl opt">$</span><span class="hl kwd">simulate</span><span class="hl std">(iterationStride)</span>
         <span class="hl kwa">for</span> <span class="hl std">(j</span> <span class="hl kwa">in</span> <span class="hl num">1</span><span class="hl opt">:</span><span class="hl kwd">nrow</span><span class="hl std">(proposal</span><span class="hl opt">$</span><span class="hl std">I_star))</span>
         <span class="hl std">{</span>
-            <span class="hl std">R0[j,,i]</span> <span class="hl kwb">=</span> <span class="hl kwd">apply</span><span class="hl std">(SEIRmodel</span><span class="hl opt">$</span><span class="hl kwd">getGenerationMatrix</span><span class="hl std">(j),</span> <span class="hl num">2</span><span class="hl std">, sum)</span>
+            <span class="hl std">R0[j,,i]</span> <span class="hl kwb">=</span> <span class="hl kwd">apply</span><span class="hl std">(SEIRmodel</span><span class="hl opt">$</span><span class="hl kwd">getIntegratedGenerationMatrix</span><span class="hl std">(j),</span> <span class="hl num">2</span><span class="hl std">, sum)</span>
         <span class="hl std">}</span>
     <span class="hl std">}</span>
 
@@ -1517,7 +1517,7 @@ We must be cautious when making predictions about a chaotic process this far int
   <tr>
    <td align="left"> &nbsp;2014-09-07&nbsp; </td>
    <td align="center"> 246 </td>
-   <td align="center"> 954 </td>
+   <td align="center"> 953 </td>
    <td align="center"> 442 </td>
    <td align="center"> 10 </td>
   </tr>
@@ -1525,36 +1525,36 @@ We must be cautious when making predictions about a chaotic process this far int
    <td align="left"> &nbsp;2014-09-09&nbsp; </td>
    <td align="center"> 240 </td>
    <td align="center"> 948 </td>
-   <td align="center"> 427 </td>
-   <td align="center"> 20 </td>
+   <td align="center"> 428 </td>
+   <td align="center"> 21 </td>
   </tr>
   <tr>
    <td align="left"> &nbsp;2014-09-11&nbsp; </td>
    <td align="center"> 222 </td>
-   <td align="center"> 910 </td>
-   <td align="center"> 394 </td>
+   <td align="center"> 912 </td>
+   <td align="center"> 396 </td>
    <td align="center"> 42 </td>
   </tr>
   <tr>
    <td align="left"> &nbsp;2014-09-13&nbsp; </td>
    <td align="center"> 212 </td>
-   <td align="center"> 934 </td>
-   <td align="center"> 377 </td>
+   <td align="center"> 935 </td>
+   <td align="center"> 379 </td>
    <td align="center"> 78 </td>
   </tr>
   <tr>
    <td align="left"> &nbsp;2014-09-15&nbsp; </td>
    <td align="center"> 207 </td>
-   <td align="center"> 984 </td>
-   <td align="center"> 366 </td>
+   <td align="center"> 987 </td>
+   <td align="center"> 368 </td>
    <td align="center"> 116 </td>
   </tr>
   <tr>
    <td align="left"> &nbsp;2014-09-17&nbsp; </td>
-   <td align="center"> 206 </td>
-   <td align="center"> 1071 </td>
-   <td align="center"> 362 </td>
-   <td align="center"> 153 </td>
+   <td align="center"> 205 </td>
+   <td align="center"> 1074 </td>
+   <td align="center"> 364 </td>
+   <td align="center"> 152 </td>
   </tr>
 </tbody>
 </table>
@@ -5533,7 +5533,7 @@ var alldata_pred =
  "fillKey": "lt119" 
 },
 "SLE": {
- "fillKey": "lt238" 
+ "fillKey": "lt239" 
 },
 "NGA": {
  "fillKey": "lt119" 
@@ -5547,7 +5547,7 @@ var alldata_pred =
  "fillKey": "lt119" 
 },
 "SLE": {
- "fillKey": "lt238" 
+ "fillKey": "lt239" 
 },
 "NGA": {
  "fillKey": "lt119" 
@@ -5561,7 +5561,7 @@ var alldata_pred =
  "fillKey": "lt119" 
 },
 "SLE": {
- "fillKey": "lt238" 
+ "fillKey": "lt239" 
 },
 "NGA": {
  "fillKey": "lt119" 
@@ -5575,7 +5575,7 @@ var alldata_pred =
  "fillKey": "lt119" 
 },
 "SLE": {
- "fillKey": "lt238" 
+ "fillKey": "lt239" 
 },
 "NGA": {
  "fillKey": "lt119" 
@@ -5589,7 +5589,7 @@ var alldata_pred =
  "fillKey": "lt119" 
 },
 "SLE": {
- "fillKey": "lt238" 
+ "fillKey": "lt239" 
 },
 "NGA": {
  "fillKey": "lt119" 
@@ -5603,7 +5603,7 @@ var alldata_pred =
  "fillKey": "lt119" 
 },
 "SLE": {
- "fillKey": "lt238" 
+ "fillKey": "lt239" 
 },
 "NGA": {
  "fillKey": "lt119" 
@@ -5617,7 +5617,7 @@ var alldata_pred =
  "fillKey": "lt119" 
 },
 "SLE": {
- "fillKey": "lt238" 
+ "fillKey": "lt239" 
 },
 "NGA": {
  "fillKey": "lt119" 
@@ -5631,7 +5631,7 @@ var alldata_pred =
  "fillKey": "lt119" 
 },
 "SLE": {
- "fillKey": "lt238" 
+ "fillKey": "lt239" 
 },
 "NGA": {
  "fillKey": "lt119" 
@@ -5645,7 +5645,7 @@ var alldata_pred =
  "fillKey": "lt119" 
 },
 "SLE": {
- "fillKey": "lt238" 
+ "fillKey": "lt239" 
 },
 "NGA": {
  "fillKey": "lt119" 
@@ -5659,7 +5659,7 @@ var alldata_pred =
  "fillKey": "lt119" 
 },
 "SLE": {
- "fillKey": "lt238" 
+ "fillKey": "lt239" 
 },
 "NGA": {
  "fillKey": "lt119" 
@@ -5673,7 +5673,7 @@ var alldata_pred =
  "fillKey": "lt119" 
 },
 "SLE": {
- "fillKey": "lt238" 
+ "fillKey": "lt239" 
 },
 "NGA": {
  "fillKey": "lt119" 
@@ -5687,7 +5687,7 @@ var alldata_pred =
  "fillKey": "lt119" 
 },
 "SLE": {
- "fillKey": "lt238" 
+ "fillKey": "lt239" 
 },
 "NGA": {
  "fillKey": "lt119" 
@@ -5701,7 +5701,7 @@ var alldata_pred =
  "fillKey": "lt119" 
 },
 "SLE": {
- "fillKey": "lt238" 
+ "fillKey": "lt239" 
 },
 "NGA": {
  "fillKey": "lt119" 
@@ -5715,7 +5715,7 @@ var alldata_pred =
  "fillKey": "lt119" 
 },
 "SLE": {
- "fillKey": "lt238" 
+ "fillKey": "lt239" 
 },
 "NGA": {
  "fillKey": "lt119" 
@@ -5729,7 +5729,7 @@ var alldata_pred =
  "fillKey": "lt119" 
 },
 "SLE": {
- "fillKey": "lt238" 
+ "fillKey": "lt239" 
 },
 "NGA": {
  "fillKey": "lt119" 
@@ -5743,7 +5743,7 @@ var alldata_pred =
  "fillKey": "lt119" 
 },
 "SLE": {
- "fillKey": "lt238" 
+ "fillKey": "lt239" 
 },
 "NGA": {
  "fillKey": "lt119" 
@@ -5757,7 +5757,7 @@ var alldata_pred =
  "fillKey": "lt119" 
 },
 "SLE": {
- "fillKey": "lt238" 
+ "fillKey": "lt239" 
 },
 "NGA": {
  "fillKey": "lt119" 
@@ -5771,7 +5771,7 @@ var alldata_pred =
  "fillKey": "lt119" 
 },
 "SLE": {
- "fillKey": "lt238" 
+ "fillKey": "lt239" 
 },
 "NGA": {
  "fillKey": "lt119" 
@@ -5785,7 +5785,7 @@ var alldata_pred =
  "fillKey": "lt119" 
 },
 "SLE": {
- "fillKey": "lt238" 
+ "fillKey": "lt239" 
 },
 "NGA": {
  "fillKey": "lt119" 
@@ -5799,7 +5799,7 @@ var alldata_pred =
  "fillKey": "lt119" 
 },
 "SLE": {
- "fillKey": "lt238" 
+ "fillKey": "lt239" 
 },
 "NGA": {
  "fillKey": "lt119" 
@@ -5813,7 +5813,7 @@ var alldata_pred =
  "fillKey": "lt119" 
 },
 "SLE": {
- "fillKey": "lt238" 
+ "fillKey": "lt239" 
 },
 "NGA": {
  "fillKey": "lt119" 
@@ -5827,7 +5827,7 @@ var alldata_pred =
  "fillKey": "lt119" 
 },
 "SLE": {
- "fillKey": "lt238" 
+ "fillKey": "lt239" 
 },
 "NGA": {
  "fillKey": "lt119" 
@@ -5841,7 +5841,7 @@ var alldata_pred =
  "fillKey": "lt119" 
 },
 "SLE": {
- "fillKey": "lt238" 
+ "fillKey": "lt239" 
 },
 "NGA": {
  "fillKey": "lt119" 
@@ -5855,7 +5855,7 @@ var alldata_pred =
  "fillKey": "lt119" 
 },
 "SLE": {
- "fillKey": "lt238" 
+ "fillKey": "lt239" 
 },
 "NGA": {
  "fillKey": "lt119" 
@@ -5869,7 +5869,7 @@ var alldata_pred =
  "fillKey": "lt119" 
 },
 "SLE": {
- "fillKey": "lt238" 
+ "fillKey": "lt239" 
 },
 "NGA": {
  "fillKey": "lt119" 
@@ -5883,7 +5883,7 @@ var alldata_pred =
  "fillKey": "lt119" 
 },
 "SLE": {
- "fillKey": "lt238" 
+ "fillKey": "lt239" 
 },
 "NGA": {
  "fillKey": "lt119" 
@@ -5894,10 +5894,10 @@ var alldata_pred =
  "fillKey": "lt119" 
 },
 "LBR": {
- "fillKey": "lt238" 
+ "fillKey": "lt239" 
 },
 "SLE": {
- "fillKey": "lt238" 
+ "fillKey": "lt239" 
 },
 "NGA": {
  "fillKey": "lt119" 
@@ -5908,10 +5908,10 @@ var alldata_pred =
  "fillKey": "lt119" 
 },
 "LBR": {
- "fillKey": "lt238" 
+ "fillKey": "lt239" 
 },
 "SLE": {
- "fillKey": "lt238" 
+ "fillKey": "lt239" 
 },
 "NGA": {
  "fillKey": "lt119" 
@@ -5922,10 +5922,10 @@ var alldata_pred =
  "fillKey": "lt119" 
 },
 "LBR": {
- "fillKey": "lt238" 
+ "fillKey": "lt239" 
 },
 "SLE": {
- "fillKey": "lt238" 
+ "fillKey": "lt239" 
 },
 "NGA": {
  "fillKey": "lt119" 
@@ -5936,10 +5936,10 @@ var alldata_pred =
  "fillKey": "lt119" 
 },
 "LBR": {
- "fillKey": "lt238" 
+ "fillKey": "lt239" 
 },
 "SLE": {
- "fillKey": "lt238" 
+ "fillKey": "lt239" 
 },
 "NGA": {
  "fillKey": "lt119" 
@@ -5950,10 +5950,10 @@ var alldata_pred =
  "fillKey": "lt119" 
 },
 "LBR": {
- "fillKey": "lt238" 
+ "fillKey": "lt239" 
 },
 "SLE": {
- "fillKey": "lt238" 
+ "fillKey": "lt239" 
 },
 "NGA": {
  "fillKey": "lt119" 
@@ -5964,10 +5964,10 @@ var alldata_pred =
  "fillKey": "lt119" 
 },
 "LBR": {
- "fillKey": "lt238" 
+ "fillKey": "lt239" 
 },
 "SLE": {
- "fillKey": "lt238" 
+ "fillKey": "lt239" 
 },
 "NGA": {
  "fillKey": "lt119" 
@@ -5978,10 +5978,10 @@ var alldata_pred =
  "fillKey": "lt119" 
 },
 "LBR": {
- "fillKey": "lt357" 
+ "fillKey": "lt358" 
 },
 "SLE": {
- "fillKey": "lt357" 
+ "fillKey": "lt239" 
 },
 "NGA": {
  "fillKey": "lt119" 
@@ -5992,10 +5992,10 @@ var alldata_pred =
  "fillKey": "lt119" 
 },
 "LBR": {
- "fillKey": "lt357" 
+ "fillKey": "lt358" 
 },
 "SLE": {
- "fillKey": "lt357" 
+ "fillKey": "lt358" 
 },
 "NGA": {
  "fillKey": "lt119" 
@@ -6006,10 +6006,10 @@ var alldata_pred =
  "fillKey": "lt119" 
 },
 "LBR": {
- "fillKey": "lt357" 
+ "fillKey": "lt358" 
 },
 "SLE": {
- "fillKey": "lt357" 
+ "fillKey": "lt358" 
 },
 "NGA": {
  "fillKey": "lt119" 
@@ -6020,10 +6020,10 @@ var alldata_pred =
  "fillKey": "lt119" 
 },
 "LBR": {
- "fillKey": "lt357" 
+ "fillKey": "lt358" 
 },
 "SLE": {
- "fillKey": "lt357" 
+ "fillKey": "lt358" 
 },
 "NGA": {
  "fillKey": "lt119" 
@@ -6034,10 +6034,10 @@ var alldata_pred =
  "fillKey": "lt119" 
 },
 "LBR": {
- "fillKey": "lt357" 
+ "fillKey": "lt358" 
 },
 "SLE": {
- "fillKey": "lt357" 
+ "fillKey": "lt358" 
 },
 "NGA": {
  "fillKey": "lt119" 
@@ -6048,10 +6048,10 @@ var alldata_pred =
  "fillKey": "lt119" 
 },
 "LBR": {
- "fillKey": "lt357" 
+ "fillKey": "lt358" 
 },
 "SLE": {
- "fillKey": "lt357" 
+ "fillKey": "lt358" 
 },
 "NGA": {
  "fillKey": "lt119" 
@@ -6062,10 +6062,10 @@ var alldata_pred =
  "fillKey": "lt119" 
 },
 "LBR": {
- "fillKey": "lt357" 
+ "fillKey": "lt358" 
 },
 "SLE": {
- "fillKey": "lt357" 
+ "fillKey": "lt358" 
 },
 "NGA": {
  "fillKey": "lt119" 
@@ -6076,10 +6076,10 @@ var alldata_pred =
  "fillKey": "lt119" 
 },
 "LBR": {
- "fillKey": "lt357" 
+ "fillKey": "lt358" 
 },
 "SLE": {
- "fillKey": "lt357" 
+ "fillKey": "lt358" 
 },
 "NGA": {
  "fillKey": "lt119" 
@@ -6090,10 +6090,10 @@ var alldata_pred =
  "fillKey": "lt119" 
 },
 "LBR": {
- "fillKey": "lt357" 
+ "fillKey": "lt358" 
 },
 "SLE": {
- "fillKey": "lt238" 
+ "fillKey": "lt239" 
 },
 "NGA": {
  "fillKey": "lt119" 
@@ -6104,10 +6104,10 @@ var alldata_pred =
  "fillKey": "lt119" 
 },
 "LBR": {
- "fillKey": "lt357" 
+ "fillKey": "lt358" 
 },
 "SLE": {
- "fillKey": "lt357" 
+ "fillKey": "lt358" 
 },
 "NGA": {
  "fillKey": "lt119" 
@@ -6118,10 +6118,10 @@ var alldata_pred =
  "fillKey": "lt119" 
 },
 "LBR": {
- "fillKey": "lt357" 
+ "fillKey": "lt358" 
 },
 "SLE": {
- "fillKey": "lt357" 
+ "fillKey": "lt358" 
 },
 "NGA": {
  "fillKey": "lt119" 
@@ -6132,10 +6132,10 @@ var alldata_pred =
  "fillKey": "lt119" 
 },
 "LBR": {
- "fillKey": "lt357" 
+ "fillKey": "lt358" 
 },
 "SLE": {
- "fillKey": "lt357" 
+ "fillKey": "lt358" 
 },
 "NGA": {
  "fillKey": "lt119" 
@@ -6146,10 +6146,10 @@ var alldata_pred =
  "fillKey": "lt119" 
 },
 "LBR": {
- "fillKey": "lt476" 
+ "fillKey": "lt477" 
 },
 "SLE": {
- "fillKey": "lt357" 
+ "fillKey": "lt358" 
 },
 "NGA": {
  "fillKey": "lt119" 
@@ -6160,10 +6160,10 @@ var alldata_pred =
  "fillKey": "lt119" 
 },
 "LBR": {
- "fillKey": "lt476" 
+ "fillKey": "lt477" 
 },
 "SLE": {
- "fillKey": "lt357" 
+ "fillKey": "lt358" 
 },
 "NGA": {
  "fillKey": "lt119" 
@@ -6174,10 +6174,10 @@ var alldata_pred =
  "fillKey": "lt119" 
 },
 "LBR": {
- "fillKey": "lt476" 
+ "fillKey": "lt477" 
 },
 "SLE": {
- "fillKey": "lt357" 
+ "fillKey": "lt358" 
 },
 "NGA": {
  "fillKey": "lt119" 
@@ -6188,10 +6188,10 @@ var alldata_pred =
  "fillKey": "lt119" 
 },
 "LBR": {
- "fillKey": "lt476" 
+ "fillKey": "lt477" 
 },
 "SLE": {
- "fillKey": "lt357" 
+ "fillKey": "lt358" 
 },
 "NGA": {
  "fillKey": "lt119" 
@@ -6202,10 +6202,10 @@ var alldata_pred =
  "fillKey": "lt119" 
 },
 "LBR": {
- "fillKey": "lt476" 
+ "fillKey": "lt477" 
 },
 "SLE": {
- "fillKey": "lt357" 
+ "fillKey": "lt358" 
 },
 "NGA": {
  "fillKey": "lt119" 
@@ -6216,10 +6216,10 @@ var alldata_pred =
  "fillKey": "lt119" 
 },
 "LBR": {
- "fillKey": "lt595" 
+ "fillKey": "lt597" 
 },
 "SLE": {
- "fillKey": "lt357" 
+ "fillKey": "lt358" 
 },
 "NGA": {
  "fillKey": "lt119" 
@@ -6230,10 +6230,10 @@ var alldata_pred =
  "fillKey": "lt119" 
 },
 "LBR": {
- "fillKey": "lt595" 
+ "fillKey": "lt597" 
 },
 "SLE": {
- "fillKey": "lt357" 
+ "fillKey": "lt358" 
 },
 "NGA": {
  "fillKey": "lt119" 
@@ -6244,10 +6244,10 @@ var alldata_pred =
  "fillKey": "lt119" 
 },
 "LBR": {
- "fillKey": "lt595" 
+ "fillKey": "lt597" 
 },
 "SLE": {
- "fillKey": "lt357" 
+ "fillKey": "lt358" 
 },
 "NGA": {
  "fillKey": "lt119" 
@@ -6258,10 +6258,10 @@ var alldata_pred =
  "fillKey": "lt119" 
 },
 "LBR": {
- "fillKey": "lt595" 
+ "fillKey": "lt597" 
 },
 "SLE": {
- "fillKey": "lt357" 
+ "fillKey": "lt358" 
 },
 "NGA": {
  "fillKey": "lt119" 
@@ -6269,13 +6269,13 @@ var alldata_pred =
 },
 "154": {
  "GIN": {
- "fillKey": "lt238" 
+ "fillKey": "lt239" 
 },
 "LBR": {
- "fillKey": "lt595" 
+ "fillKey": "lt597" 
 },
 "SLE": {
- "fillKey": "lt357" 
+ "fillKey": "lt358" 
 },
 "NGA": {
  "fillKey": "lt119" 
@@ -6283,13 +6283,13 @@ var alldata_pred =
 },
 "155": {
  "GIN": {
- "fillKey": "lt238" 
+ "fillKey": "lt239" 
 },
 "LBR": {
- "fillKey": "lt595" 
+ "fillKey": "lt597" 
 },
 "SLE": {
- "fillKey": "lt357" 
+ "fillKey": "lt358" 
 },
 "NGA": {
  "fillKey": "lt119" 
@@ -6297,13 +6297,13 @@ var alldata_pred =
 },
 "156": {
  "GIN": {
- "fillKey": "lt238" 
+ "fillKey": "lt239" 
 },
 "LBR": {
- "fillKey": "lt595" 
+ "fillKey": "lt597" 
 },
 "SLE": {
- "fillKey": "lt357" 
+ "fillKey": "lt358" 
 },
 "NGA": {
  "fillKey": "lt119" 
@@ -6311,13 +6311,13 @@ var alldata_pred =
 },
 "157": {
  "GIN": {
- "fillKey": "lt238" 
+ "fillKey": "lt239" 
 },
 "LBR": {
- "fillKey": "lt595" 
+ "fillKey": "lt597" 
 },
 "SLE": {
- "fillKey": "lt357" 
+ "fillKey": "lt358" 
 },
 "NGA": {
  "fillKey": "lt119" 
@@ -6325,13 +6325,13 @@ var alldata_pred =
 },
 "158": {
  "GIN": {
- "fillKey": "lt238" 
+ "fillKey": "lt239" 
 },
 "LBR": {
- "fillKey": "lt714" 
+ "fillKey": "lt716" 
 },
 "SLE": {
- "fillKey": "lt357" 
+ "fillKey": "lt358" 
 },
 "NGA": {
  "fillKey": "lt119" 
@@ -6339,13 +6339,13 @@ var alldata_pred =
 },
 "159": {
  "GIN": {
- "fillKey": "lt238" 
+ "fillKey": "lt239" 
 },
 "LBR": {
- "fillKey": "lt714" 
+ "fillKey": "lt716" 
 },
 "SLE": {
- "fillKey": "lt357" 
+ "fillKey": "lt358" 
 },
 "NGA": {
  "fillKey": "lt119" 
@@ -6353,13 +6353,13 @@ var alldata_pred =
 },
 "160": {
  "GIN": {
- "fillKey": "lt238" 
+ "fillKey": "lt239" 
 },
 "LBR": {
- "fillKey": "lt714" 
+ "fillKey": "lt716" 
 },
 "SLE": {
- "fillKey": "lt357" 
+ "fillKey": "lt358" 
 },
 "NGA": {
  "fillKey": "lt119" 
@@ -6367,13 +6367,13 @@ var alldata_pred =
 },
 "161": {
  "GIN": {
- "fillKey": "lt238" 
+ "fillKey": "lt239" 
 },
 "LBR": {
- "fillKey": "lt714" 
+ "fillKey": "lt716" 
 },
 "SLE": {
- "fillKey": "lt357" 
+ "fillKey": "lt358" 
 },
 "NGA": {
  "fillKey": "lt119" 
@@ -6381,13 +6381,13 @@ var alldata_pred =
 },
 "162": {
  "GIN": {
- "fillKey": "lt238" 
+ "fillKey": "lt239" 
 },
 "LBR": {
- "fillKey": "lt833" 
+ "fillKey": "lt835" 
 },
 "SLE": {
- "fillKey": "lt357" 
+ "fillKey": "lt358" 
 },
 "NGA": {
  "fillKey": "lt119" 
@@ -6395,13 +6395,13 @@ var alldata_pred =
 },
 "163": {
  "GIN": {
- "fillKey": "lt238" 
+ "fillKey": "lt239" 
 },
 "LBR": {
- "fillKey": "lt833" 
+ "fillKey": "lt835" 
 },
 "SLE": {
- "fillKey": "lt357" 
+ "fillKey": "lt358" 
 },
 "NGA": {
  "fillKey": "lt119" 
@@ -6409,13 +6409,13 @@ var alldata_pred =
 },
 "164": {
  "GIN": {
- "fillKey": "lt238" 
+ "fillKey": "lt239" 
 },
 "LBR": {
- "fillKey": "lt833" 
+ "fillKey": "lt835" 
 },
 "SLE": {
- "fillKey": "lt476" 
+ "fillKey": "lt477" 
 },
 "NGA": {
  "fillKey": "lt119" 
@@ -6423,13 +6423,13 @@ var alldata_pred =
 },
 "165": {
  "GIN": {
- "fillKey": "lt238" 
+ "fillKey": "lt239" 
 },
 "LBR": {
- "fillKey": "lt833" 
+ "fillKey": "lt835" 
 },
 "SLE": {
- "fillKey": "lt476" 
+ "fillKey": "lt477" 
 },
 "NGA": {
  "fillKey": "lt119" 
@@ -6437,13 +6437,13 @@ var alldata_pred =
 },
 "166": {
  "GIN": {
- "fillKey": "lt238" 
+ "fillKey": "lt239" 
 },
 "LBR": {
- "fillKey": "lt952" 
+ "fillKey": "lt954" 
 },
 "SLE": {
- "fillKey": "lt476" 
+ "fillKey": "lt477" 
 },
 "NGA": {
  "fillKey": "lt119" 
@@ -6451,13 +6451,13 @@ var alldata_pred =
 },
 "167": {
  "GIN": {
- "fillKey": "lt238" 
+ "fillKey": "lt239" 
 },
 "LBR": {
- "fillKey": "lt952" 
+ "fillKey": "lt954" 
 },
 "SLE": {
- "fillKey": "lt476" 
+ "fillKey": "lt477" 
 },
 "NGA": {
  "fillKey": "lt119" 
@@ -6465,13 +6465,13 @@ var alldata_pred =
 },
 "168": {
  "GIN": {
- "fillKey": "lt357" 
+ "fillKey": "lt358" 
 },
 "LBR": {
- "fillKey": "lt1070" 
+ "fillKey": "lt954" 
 },
 "SLE": {
- "fillKey": "lt476" 
+ "fillKey": "lt477" 
 },
 "NGA": {
  "fillKey": "lt119" 
@@ -6479,13 +6479,13 @@ var alldata_pred =
 },
 "169": {
  "GIN": {
- "fillKey": "lt357" 
+ "fillKey": "lt358" 
 },
 "LBR": {
- "fillKey": "lt952" 
+ "fillKey": "lt954" 
 },
 "SLE": {
- "fillKey": "lt476" 
+ "fillKey": "lt477" 
 },
 "NGA": {
  "fillKey": "lt119" 
@@ -6493,13 +6493,13 @@ var alldata_pred =
 },
 "170": {
  "GIN": {
- "fillKey": "lt357" 
+ "fillKey": "lt358" 
 },
 "LBR": {
- "fillKey": "lt952" 
+ "fillKey": "lt954" 
 },
 "SLE": {
- "fillKey": "lt476" 
+ "fillKey": "lt477" 
 },
 "NGA": {
  "fillKey": "lt119" 
@@ -6507,13 +6507,13 @@ var alldata_pred =
 },
 "171": {
  "GIN": {
- "fillKey": "lt238" 
+ "fillKey": "lt239" 
 },
 "LBR": {
- "fillKey": "lt952" 
+ "fillKey": "lt954" 
 },
 "SLE": {
- "fillKey": "lt476" 
+ "fillKey": "lt477" 
 },
 "NGA": {
  "fillKey": "lt119" 
@@ -6521,13 +6521,13 @@ var alldata_pred =
 },
 "172": {
  "GIN": {
- "fillKey": "lt238" 
+ "fillKey": "lt239" 
 },
 "LBR": {
- "fillKey": "lt952" 
+ "fillKey": "lt954" 
 },
 "SLE": {
- "fillKey": "lt476" 
+ "fillKey": "lt477" 
 },
 "NGA": {
  "fillKey": "lt119" 
@@ -6535,13 +6535,13 @@ var alldata_pred =
 },
 "173": {
  "GIN": {
- "fillKey": "lt238" 
+ "fillKey": "lt239" 
 },
 "LBR": {
- "fillKey": "lt952" 
+ "fillKey": "lt954" 
 },
 "SLE": {
- "fillKey": "lt476" 
+ "fillKey": "lt477" 
 },
 "NGA": {
  "fillKey": "lt119" 
@@ -6549,13 +6549,13 @@ var alldata_pred =
 },
 "174": {
  "GIN": {
- "fillKey": "lt238" 
+ "fillKey": "lt239" 
 },
 "LBR": {
- "fillKey": "lt952" 
+ "fillKey": "lt954" 
 },
 "SLE": {
- "fillKey": "lt476" 
+ "fillKey": "lt477" 
 },
 "NGA": {
  "fillKey": "lt119" 
@@ -6563,13 +6563,13 @@ var alldata_pred =
 },
 "175": {
  "GIN": {
- "fillKey": "lt238" 
+ "fillKey": "lt239" 
 },
 "LBR": {
  "fillKey": "lt1070" 
 },
 "SLE": {
- "fillKey": "lt476" 
+ "fillKey": "lt477" 
 },
 "NGA": {
  "fillKey": "lt119" 
@@ -6577,13 +6577,13 @@ var alldata_pred =
 },
 "176": {
  "GIN": {
- "fillKey": "lt238" 
+ "fillKey": "lt239" 
 },
 "LBR": {
  "fillKey": "lt1070" 
 },
 "SLE": {
- "fillKey": "lt476" 
+ "fillKey": "lt477" 
 },
 "NGA": {
  "fillKey": "lt119" 
@@ -6591,30 +6591,30 @@ var alldata_pred =
 },
 "177": {
  "GIN": {
- "fillKey": "lt238" 
+ "fillKey": "lt239" 
 },
 "LBR": {
  "fillKey": "lt1070" 
 },
 "SLE": {
- "fillKey": "lt476" 
+ "fillKey": "lt477" 
 },
 "NGA": {
- "fillKey": "lt238" 
+ "fillKey": "lt239" 
 } 
 },
 "178": {
  "GIN": {
- "fillKey": "lt238" 
+ "fillKey": "lt239" 
 },
 "LBR": {
  "fillKey": "lt1070" 
 },
 "SLE": {
- "fillKey": "lt476" 
+ "fillKey": "lt477" 
 },
 "NGA": {
- "fillKey": "lt238" 
+ "fillKey": "lt239" 
 } 
 } 
 }
@@ -6816,13 +6816,13 @@ var chartParams_pred={"dom": "zoom_map_pred",
 {
  "defaultFill": "#ffffef",
 "lt119": "#ffffef",
-"lt238": "#fff7bf",
-"lt357": "#fee39f",
-"lt476": "#fec45f",
-"lt595": "#fe993f",
-"lt714": "#ec702f",
-"lt833": "#cc4c1f",
-"lt952": "#993402",
+"lt239": "#fff7bf",
+"lt358": "#fee39f",
+"lt477": "#fec45f",
+"lt597": "#fe993f",
+"lt716": "#ec702f",
+"lt835": "#cc4c1f",
+"lt954": "#993402",
 "lt1070": "#662520" 
 }
 ,
