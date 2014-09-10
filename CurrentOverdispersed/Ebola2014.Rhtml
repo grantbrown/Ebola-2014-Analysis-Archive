@@ -162,7 +162,7 @@ library(parallel) # Load the parallel library to enable multiple chains to be ru
 documentCompilationMode = "release"
 #documentCompilationMode = "debug"
 modelDF = 6
-pred.days = 14
+pred.days = 90
 
 ## Compute number of samples/batches
 numBurnInBatches =      ifelse(documentCompilationMode == "release", 1000,  1)
