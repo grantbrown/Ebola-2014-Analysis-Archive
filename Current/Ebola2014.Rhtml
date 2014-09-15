@@ -489,18 +489,15 @@ X.pred = cbind(X.predict[rep(1:nrow(X.predict),
                              each = nrow(Z.predict)/nrow(X)),], Z.predict)
 
 
-# Define the simple "distance" matrix. There are 4 countries, three of which 
-# share borders. The borders between Guinea, Liberia, and Sierra Leone have been 
-# reported to be quite porous, and so mixing between these three nations should dwarf
-# mixing between them and Nigeria. At a conservative guess, there is probably at least 10 times
-# more contact directly across the borders compared to air travel between Nigeria and the rest. 
-# A better solution would be to allow separate dependence parameters for the different types of mixing. 
-# This work is underway. 
-DM = (1-diag(4))
-DM[4,1:3] = 0.1
-DM[1:3,4] = 0.1
+# Define the simple "distance" matrices. There are 4 countries, three of which 
+# share borders. Let all of the nations share an overall correlation term, and
+# let the three neighboring nations share an additional parameter
+DM1 = (1-diag(4))
+DM2 = rbind(cbind((1-diag(3)), rep(0, 3)), rep(0,4))
 # Make row stochastic:
-DM = DM/matrix(apply(DM, 1, sum), nrow = 4, ncol = 4)
+DM1 = DM1/matrix(apply(DM1, 1, sum), nrow = 4, ncol = 4)
+DM2 = DM2/matrix(apply(DM2, 1, sum), nrow = 4, ncol = 4)
+DM2 = ifelse(is.na(DM2), 0, DM2)
 
 # Define population sizes for the three countries of interest. This data also 
 # from Wikipedia. 
@@ -534,48 +531,8 @@ priorBeta_gammaIR = 100;
 priorAlpha_phi = 1
 priorBeta_phi = 1
 
-# Choose overdispersion data model
-dataModel = 1
-
 # Declare prior precision for exposure model paramters
 betaPriorPrecision = 0.1
-
-# Set the reinfection mode to 3, which indicates that S_star, or the newly 
-# susceptibles, must remain zero. People are very unlikely to get ebola twice.
-# How were you to know that "3" denotes a traditional SEIR model as opposed to
-# a serial SEIR or SEIRS model? No good reason at all, actually. The planned R 
-# API will make the distinction between SEIRmodel SEIRSmodel and 
-# SerialSEIRmodel objects, so in the future you won't have to worry about this
-# unless you're digging into the c++ code. 
-reinfectionMode = 3
-
-# steadyStateConstraintPrecision is a loose constraint on net flows
-# between compartments. Setting it to a negative value eliminates
-# the constraint, but it can help with identifiability in cases where 
-# there should be a long term equilibrium (endemic disease, for example).
-# We do not need this parameter here. 
-steadyStateConstraintPrecision = -1
-
-# We don't need no verbose or debug level output
-verbose = FALSE
-debug = FALSE
-
-# Declare initial tuning parameters for MCMC sampling
-mcmcTuningParams = c(1, # S_star
-                     1, # E_star
-                     1,  # R_star
-                     1,  # S_0
-                     1,  # I_0
-                     0.05,  # beta
-                     0.0,  # beta_p_rs, fixed in this case
-                     0.01, # rho
-                     0.01, # gamma_ei
-                     0.01,  # gamma_ir
-                     0.01) # phi
-
-
-# We don't want to re-scale the distance matrix. 
-scaleDistanceMode = 0
 
 # Declare a function which can come up with several different starting values 
 # for the model parameters. This will allow us to assess convergence. 
@@ -601,25 +558,38 @@ proposeParameters = function(seedVal, chainNumber)
     
     # Make a crude guess as to the true compartments:
     # S_star, E_star, R_star, and thus S,E,I and R
-    proposal = generateCompartmentProposal(I_star, N, 
-                                           S0 = N[1,]-I_star[1,] - c(86,0,0,0),
-                                           I0 = c(86,0,0,0), 
-                                           p_ir = 0.5, 
-                                           p_rs = 0.00)
+    DataModel = buildDataModel(I_star, type = "overdispersion", 
+                               params=c(priorAlpha_phi,priorBeta_phi))
+    ExposureModel = buildExposureModel(X, Z, beta, betaPriorPrecision)
+    ReinfectionModel = buildReinfectionModel("SEIR")
+    SamplingControl = buildSamplingControl(iterationStride=iterationStride,
+                                           sliceWidths=c(1, # S_star
+                                                         1, # E_star
+                                                         1,  # R_star
+                                                         1,  # S_0
+                                                         1,  # I_0
+                                                         0.05,  # beta
+                                                         0.0,  # beta_p_rs, fixed in this case
+                                                         0.01, # rho
+                                                         0.01, # gamma_ei
+                                                         0.01,  # gamma_ir
+                                                         0.01)) # phi)
     
-    return(list(S0=proposal$S0,
-                E0=proposal$E0,
-                I0=proposal$I0,
-                R0=proposal$R0,
-                S_star=proposal$S_star,
-                E_star=proposal$E_star,
-                I_star=proposal$I_star,
-                R_star=proposal$R_star,
-                rho=rho,
-                phi=phi,
-                beta=beta,
-                gamma_ei=gamma_ei,
-                gamma_ir=gamma_ir,
+    InitContainer = buildInitialValueContainer(I_star, N, 
+                                               S0 = N[1,]-I_star[1,] - c(86,0,0,0),
+                                               I0 = c(86,0,0,0), 
+                                               p_ir = 0.5, 
+                                               p_rs = 0.00)
+    DistanceModel = buildDistanceModel(list(DM1,DM2))
+    TransitionPriors = buildTransitionPriorsManually(priorAlpha_gammaEI,priorBeta_gammaEI,
+                                                     priorAlpha_gammaIR,priorBeta_gammaIR)
+    return(list(DataModel=DataModel,
+                ExposureModel=ExposureModel,
+                ReinfectionModel=ReinfectionModel,
+                SamplingControl=SamplingControl,
+                InitContainer=InitContainer,
+                DistanceModel=DistanceModel,
+                TransitionPriors=TransitionPriors,
                 outFileName=outFileName))
 }
 
@@ -639,50 +609,16 @@ end.rcode-->
 
 buildAndRunModel = function(params)
 {
-    library(spatialSEIR)
-    proposal = proposeParameters(params[["seedVal"]], params[["chainNumber"]])
-    SEIRmodel =  spatialSEIRDataModel(compMatDim,
-                        xDim,
-                        zDim,
-                        xPrsDim,
-                        proposal$S0,
-                        proposal$E0,
-                        proposal$I0,
-                        proposal$R0,
-                        proposal$I_star,
-                        proposal$S_star,
-                        proposal$E_star,
-                        proposal$I_star,
-                        proposal$R_star,
-                        offsets,
-                        X,
-                        Z,
-                        X_p_rs,
-                        DM,
-                        proposal$rho,
-                        proposal$phi,
-                        priorAlpha_gammaEI,
-                        priorBeta_gammaEI,
-                        priorAlpha_gammaIR,
-                        priorBeta_gammaIR,
-                        priorAlpha_phi,
-                        priorBeta_phi,
-                        proposal$beta,
-                        betaPriorPrecision,
-                        beta_p_rs,
-                        betaPrsPriorPrecision,
-                        proposal$gamma_ei,
-                        proposal$gamma_ir,
-                        N,
-                        proposal$outFileName,
-                        iterationStride,
-                        steadyStateConstraintPrecision,
-                        verbose,
-                        debug,
-                        mcmcTuningParams,
-                        reinfectionMode,
-                        dataModel,
-                        scaleDistanceMode)
+  library(spatialSEIR)
+  proposal = proposeParameters(params[["seedVal"]], params[["chainNumber"]])
+  SEIRmodel =  buildSEIRModel(proposal$outFileName,
+                              proposal$DataModel,
+                              proposal$ExposureModel,
+                              proposal$ReinfectionModel,
+                              proposal$DistanceModel,
+                              proposal$TransitionPriors,
+                              proposal$InitContainer,
+                              proposal$SamplingControl)
   
   SEIRmodel$setRandomSeed(params[["seedVal"]])
   
@@ -741,11 +677,11 @@ buildAndRunModel = function(params)
   ## Do we need to estimate R0 for this chain?
   if (params[["estimateR0"]])
   {  
-    R0 = array(0, dim = c(nrow(proposal$I_star), ncol(proposal$I_star), extraR0Iterations))
+    R0 = array(0, dim = c(nrow(I_star), ncol(I_star), extraR0Iterations))
     for (i in 1:extraR0Iterations)
     {
         SEIRmodel$simulate(iterationStride)
-        for (j in 0:(nrow(proposal$I_star)-1))
+        for (j in 0:(nrow(I_star)-1))
         {
             R0[j,,i] = apply(SEIRmodel$getIntegratedGenerationMatrix(j), 2, sum)
         }
@@ -775,7 +711,6 @@ clusterExport(cl, c("compMatDim",
                      "X",
                      "Z",
                      "X_p_rs",
-                     "DM",
                      "priorAlpha_gammaEI",
                      "priorBeta_gammaEI",
                      "priorAlpha_gammaIR",
@@ -786,13 +721,9 @@ clusterExport(cl, c("compMatDim",
                      "beta_p_rs",
                      "betaPrsPriorPrecision",
                      "N",
+                     "DM1",
+                     "DM2",
                      "iterationStride",
-                     "steadyStateConstraintPrecision",
-                     "verbose",
-                     "debug",
-                     "mcmcTuningParams",
-                     "reinfectionMode",
-                     "scaleDistanceMode",
                      "proposeParameters",
                      "generateCompartmentProposal",
                      "numConvergenceBatches",
@@ -800,7 +731,7 @@ clusterExport(cl, c("compMatDim",
                      "extraR0Iterations",
                      "I_star",
                      "numBurnInBatches",
-                      "dataModel"))
+                     "dataModel"))
 
 paramsList = list(list("estimateR0"=FALSE, "traceCompartments"=TRUE, "seedVal"=123123,"chainNumber"=4),
                   list("estimateR0"=TRUE, "traceCompartments"=FALSE, "seedVal"=123124,"chainNumber"=5),
@@ -877,9 +808,9 @@ figure9 = function()
 ## Parameter Estimates 
 
 nbeta = ncol(X) + ncol(Z)
-c1 = chain1[floor(nrow(chain1)/2):nrow(chain1),c(1:(nbeta),(nbeta+2):(nbeta+4))]
-c2 = chain2[floor(nrow(chain2)/2):nrow(chain2),c(1:(nbeta),(nbeta+2):(nbeta+4))]
-c3 = chain3[floor(nrow(chain3)/2):nrow(chain3),c(1:(nbeta),(nbeta+2):(nbeta+4))]
+c1 = chain1[floor(nrow(chain1)/2):nrow(chain1),c(1:(nbeta + 2),(nbeta+3):(nbeta+5))]
+c2 = chain2[floor(nrow(chain2)/2):nrow(chain2),c(1:(nbeta + 2),(nbeta+3):(nbeta+5))]
+c3 = chain3[floor(nrow(chain3)/2):nrow(chain3),c(1:(nbeta + 2),(nbeta+3):(nbeta+5))]
 
 c1$gamma_ei = 1-exp(-c1$gamma_ei)
 c1$gamma_ir = 1-exp(-c1$gamma_ir)
@@ -890,7 +821,8 @@ c3$gamma_ir = 1-exp(-c3$gamma_ir)
 colnames(c1) = c("Guinea Intercept", "Liberia Intercept", 
                  "Sierra Leone Intercept","Nigeria Intercept", 
                  paste("Time component ", (1:(nbeta-4)), sep = ""),
-                 "Spatial Dependence Parameter", "E to I probability", 
+                 "Spatial Dependence Parameter 1", "Spatial Dependence Parameter 2", 
+                 "E to I probability", 
                  "I to R probability")
 colnames(c2) = colnames(c1)
 colnames(c3) = colnames(c1)
@@ -971,7 +903,8 @@ predictEpidemic = function(beta.pred,
     R[1,] = R0
     S_star[1,] = rbinom(rep(1, length(S0)), R0, 0)
     p_se[1,] = 1-exp(-offsets.pred[1]*(I[1,]/N*p_se_components[1,] + 
-                          rho*(DM %*% (I[1,]/N*p_se_components[1,]))))
+                          rho[1]*(DM1 %*% (I[1,]/N*p_se_components[1,])) + 
+                          rho[2]*(DM2 %*% (I[1,]/N*p_se_components[1,]))))
     E_star[1,] = rbinom(rep(1, length(S0)), S0, p_se[1,])
     I_star[1,] = rbinom(rep(1, length(S0)), E0, p_ei[1])
     R_star[1,] = rbinom(rep(1, length(S0)), I0, p_ir[1])
@@ -985,7 +918,8 @@ predictEpidemic = function(beta.pred,
       R[i,] = R[i-1,] + R_star[i-1,] - S_star[i-1,]
       
       p_se[i,] = 1-exp(-offsets.pred[i]*(I[i,]/N*p_se_components[i,] + 
-                          rho*(DM %*% (I[i,]/N*p_se_components[i,]))))
+                          rho[1]*(DM1 %*% (I[i,]/N*p_se_components[i,])) + 
+                          rho[2]*(DM2 %*% (I[i,]/N*p_se_components[i,]))))
       S_star[i,] = rbinom(rep(1, length(S0)), R[i,], 0)
       E_star[i,] = rbinom(rep(1, length(S0)), S[i,], p_se[i,])
       I_star[i,] = rbinom(rep(1, length(S0)), E[i,], p_ei[i])
@@ -1001,7 +935,7 @@ predictEpidemic = function(beta.pred,
 predict.i = function(i)
 {
   dataRow = chain1[i,]
-  rho = dataRow$rho
+  rho = c(dataRow$rho_0, dataRow$rho_1)
   beta = c()
   for (i in 0:(modelDF+3))
   {
