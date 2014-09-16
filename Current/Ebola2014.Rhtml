@@ -159,8 +159,8 @@ library(parallel) # Load the parallel library to enable multiple chains to be ru
 
 ## Define Document Compilation Parameters
 
-documentCompilationMode = "release"
-#documentCompilationMode = "debug"
+#documentCompilationMode = "release"
+documentCompilationMode = "debug"
 modelDF = 6
 pred.days = 30
 
@@ -820,7 +820,7 @@ c3$gamma_ei = 1-exp(-c3$gamma_ei)
 c3$gamma_ir = 1-exp(-c3$gamma_ir)
 colnames(c1) = c("Guinea Intercept", "Liberia Intercept", 
                  "Sierra Leone Intercept","Nigeria Intercept", 
-                 paste("Time component ", (1:(nbeta-4)), sep = ""),
+                 paste("Time component ", (1:(nbeta-3)), sep = ""),
                  "Spatial Dependence Parameter 1", "Spatial Dependence Parameter 2", 
                  "E to I probability", 
                  "I to R probability")
