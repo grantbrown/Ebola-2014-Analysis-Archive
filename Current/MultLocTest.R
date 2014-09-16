@@ -319,15 +319,101 @@ proposeParameters = function(seedVal, chainNumber)
                 outFileName=outFileName))
 }
 
-library(spatialSEIR)
-params =list("estimateR0"=FALSE, "traceCompartments"=TRUE, "seedVal"=12312334,"chainNumber"=4)
-proposal = proposeParameters(params[["seedVal"]], params[["chainNumber"]])
-SEIRmodel =  buildSEIRModel(proposal$outFileName,
-                          proposal$DataModel,
-                          proposal$ExposureModel,
-                          proposal$ReinfectionModel,
-                          proposal$DistanceModel,
-                          proposal$TransitionPriors,
-                          proposal$InitContainer,
-                          proposal$SamplingControl)
+params =list("estimateR0"=TRUE, "traceCompartments"=TRUE, "seedVal"=12312334,"chainNumber"=4)
+buildAndRunModel = function(params)
+{
+  library(spatialSEIR)
+  proposal = proposeParameters(params[["seedVal"]], params[["chainNumber"]])
+  SEIRmodel =  buildSEIRModel(proposal$outFileName,
+                              proposal$DataModel,
+                              proposal$ExposureModel,
+                              proposal$ReinfectionModel,
+                              proposal$DistanceModel,
+                              proposal$TransitionPriors,
+                              proposal$InitContainer,
+                              proposal$SamplingControl)
   
+  SEIRmodel$setRandomSeed(params[["seedVal"]])
+  
+  # Do we need to keep track of compartment values for prediction? 
+  # No sense doing this for all of the chains.
+  if (params[["traceCompartments"]])
+  {
+    SEIRmodel$setTrace(0) #Guinea 
+    SEIRmodel$setTrace(1) #Liberia
+    SEIRmodel$setTrace(2) #Sierra Leone
+    SEIRmodel$setTrace(3) #Nigeria
+  }
+      
+  # Make a helper function to run each chain, as well as update the metropolis 
+  # tuning parameters. 
+  runSimulation = function(modelObject,
+                           numBatches=500, 
+                           batchSize=20, 
+                           targetAcceptanceRatio=0.2,
+                           tolerance=0.05,
+                           proportionChange = 0.1
+                          )
+  {
+      for (batch in 1:numBatches)
+      {
+          modelObject$simulate(batchSize)
+          modelObject$updateSamplingParameters(targetAcceptanceRatio, 
+                                               tolerance, 
+                                               proportionChange)
+      }
+  }
+
+  # Burn in tuning parameters
+  runSimulation(SEIRmodel, numBatches = numBurnInBatches)
+  SEIRmodel$compartmentSamplingMode = 14
+  SEIRmodel$useDecorrelation = 25
+  # Run Simulation
+  cat(paste("Running chain ", params[["chainNumber"]], "\n", sep =""))
+
+  tm = 0
+
+
+  tm = tm + system.time(runSimulation(SEIRmodel, 
+	    numBatches=numConvergenceBatches, 
+	    batchSize=convergenceBatchSize, 
+	    targetAcceptanceRatio=0.2,
+	    tolerance=0.025,
+	    proportionChange = 0.05))
+
+
+  
+  cat(paste("Time elapsed: ", round(tm[3]/60,3), 
+              " minutes\n", sep = ""))
+  dat = read.csv(proposal$outFileName)
+  
+  ## Do we need to estimate R0 for this chain?
+  if (params[["estimateR0"]])
+  {  
+    R0 = array(0, dim = c(nrow(I_star), ncol(I_star), extraR0Iterations))
+    for (i in 1:extraR0Iterations)
+    {
+        SEIRmodel$simulate(iterationStride)
+        for (j in 0:(nrow(I_star)-1))
+        {
+            R0[j,,i] = apply(SEIRmodel$getIntegratedGenerationMatrix(j), 2, sum)
+        }
+    }
+    
+    R0Mean = apply(R0, 1:2, mean)
+    R0LB = apply(R0, 1:2, quantile, probs = 0.05)
+    R0UB = apply(R0, 1:2, quantile, probs = 0.95)
+    orig.R0 = R0
+    R0 = list("mean"=R0Mean, "LB" = R0LB, "UB" = R0UB)
+  } else
+  {
+     R0 = NULL
+     orig.R0 = NULL
+  }  
+  
+  return(list("chainOutput" = dat, "R0" = R0, "rawSamples" = orig.R0))
+}
+
+
+
+mod = buildAndRunModel(params)
