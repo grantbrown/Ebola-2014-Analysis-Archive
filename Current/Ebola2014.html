@@ -220,6 +220,12 @@
 <div class="source"><pre class="knitr r"><span class="hl kwd">library</span><span class="hl std">(spatialSEIR)</span> <span class="hl com"># Load the spatialSEIR library to perform the modeling. </span>
 </pre></div>
 <div class="message"><pre class="knitr r">## Loading required package: Rcpp
+## 
+## Attaching package: 'spatialSEIR'
+## 
+## The following object is masked _by_ '.GlobalEnv':
+## 
+##     dataModel
 </pre></div>
 <div class="source"><pre class="knitr r"><span class="hl kwd">library</span><span class="hl std">(XML)</span> <span class="hl com"># Load the XML library to read in data from Wikipedia</span>
 <span class="hl kwd">library</span><span class="hl std">(parallel)</span> <span class="hl com"># Load the parallel library to enable multiple chains to be run simultaneously. </span>
@@ -408,7 +414,7 @@ One can also represent this data geographically to get an idea of the spatial ep
   <div class = "row">
     <div class="col-sm-3">
       <input id='zoom-map-slider' type='range' min=1 max=
-168
+173
       ng-model='Day' width=200>
        <span>Day: <span id ="zoom-map-day-counter"></span></span>
     </div>
@@ -513,18 +519,15 @@ temporal trend.
                              <span class="hl kwc">each</span> <span class="hl std">=</span> <span class="hl kwd">nrow</span><span class="hl std">(Z.predict)</span><span class="hl opt">/</span><span class="hl kwd">nrow</span><span class="hl std">(X)),], Z.predict)</span>
 
 
-<span class="hl com"># Define the simple &quot;distance&quot; matrix. There are 4 countries, three of which </span>
-<span class="hl com"># share borders. The borders between Guinea, Liberia, and Sierra Leone have been </span>
-<span class="hl com"># reported to be quite porous, and so mixing between these three nations should dwarf</span>
-<span class="hl com"># mixing between them and Nigeria. At a conservative guess, there is probably at least 10 times</span>
-<span class="hl com"># more contact directly across the borders compared to air travel between Nigeria and the rest. </span>
-<span class="hl com"># A better solution would be to allow separate dependence parameters for the different types of mixing. </span>
-<span class="hl com"># This work is underway. </span>
-<span class="hl std">DM</span> <span class="hl kwb">=</span> <span class="hl std">(</span><span class="hl num">1</span><span class="hl opt">-</span><span class="hl kwd">diag</span><span class="hl std">(</span><span class="hl num">4</span><span class="hl std">))</span>
-<span class="hl std">DM[</span><span class="hl num">4</span><span class="hl std">,</span><span class="hl num">1</span><span class="hl opt">:</span><span class="hl num">3</span><span class="hl std">]</span> <span class="hl kwb">=</span> <span class="hl num">0.1</span>
-<span class="hl std">DM[</span><span class="hl num">1</span><span class="hl opt">:</span><span class="hl num">3</span><span class="hl std">,</span><span class="hl num">4</span><span class="hl std">]</span> <span class="hl kwb">=</span> <span class="hl num">0.1</span>
+<span class="hl com"># Define the simple &quot;distance&quot; matrices. There are 4 countries, three of which </span>
+<span class="hl com"># share borders. Let all of the nations share an overall correlation term, and</span>
+<span class="hl com"># let the three neighboring nations share an additional parameter</span>
+<span class="hl std">DM1</span> <span class="hl kwb">=</span> <span class="hl std">(</span><span class="hl num">1</span><span class="hl opt">-</span><span class="hl kwd">diag</span><span class="hl std">(</span><span class="hl num">4</span><span class="hl std">))</span>
+<span class="hl std">DM2</span> <span class="hl kwb">=</span> <span class="hl kwd">rbind</span><span class="hl std">(</span><span class="hl kwd">cbind</span><span class="hl std">((</span><span class="hl num">1</span><span class="hl opt">-</span><span class="hl kwd">diag</span><span class="hl std">(</span><span class="hl num">3</span><span class="hl std">)),</span> <span class="hl kwd">rep</span><span class="hl std">(</span><span class="hl num">0</span><span class="hl std">,</span> <span class="hl num">3</span><span class="hl std">)),</span> <span class="hl kwd">rep</span><span class="hl std">(</span><span class="hl num">0</span><span class="hl std">,</span><span class="hl num">4</span><span class="hl std">))</span>
 <span class="hl com"># Make row stochastic:</span>
-<span class="hl std">DM</span> <span class="hl kwb">=</span> <span class="hl std">DM</span><span class="hl opt">/</span><span class="hl kwd">matrix</span><span class="hl std">(</span><span class="hl kwd">apply</span><span class="hl std">(DM,</span> <span class="hl num">1</span><span class="hl std">, sum),</span> <span class="hl kwc">nrow</span> <span class="hl std">=</span> <span class="hl num">4</span><span class="hl std">,</span> <span class="hl kwc">ncol</span> <span class="hl std">=</span> <span class="hl num">4</span><span class="hl std">)</span>
+<span class="hl std">DM1</span> <span class="hl kwb">=</span> <span class="hl std">DM1</span><span class="hl opt">/</span><span class="hl kwd">matrix</span><span class="hl std">(</span><span class="hl kwd">apply</span><span class="hl std">(DM1,</span> <span class="hl num">1</span><span class="hl std">, sum),</span> <span class="hl kwc">nrow</span> <span class="hl std">=</span> <span class="hl num">4</span><span class="hl std">,</span> <span class="hl kwc">ncol</span> <span class="hl std">=</span> <span class="hl num">4</span><span class="hl std">)</span>
+<span class="hl std">DM2</span> <span class="hl kwb">=</span> <span class="hl std">DM2</span><span class="hl opt">/</span><span class="hl kwd">matrix</span><span class="hl std">(</span><span class="hl kwd">apply</span><span class="hl std">(DM2,</span> <span class="hl num">1</span><span class="hl std">, sum),</span> <span class="hl kwc">nrow</span> <span class="hl std">=</span> <span class="hl num">4</span><span class="hl std">,</span> <span class="hl kwc">ncol</span> <span class="hl std">=</span> <span class="hl num">4</span><span class="hl std">)</span>
+<span class="hl std">DM2</span> <span class="hl kwb">=</span> <span class="hl kwd">ifelse</span><span class="hl std">(</span><span class="hl kwd">is.na</span><span class="hl std">(DM2),</span> <span class="hl num">0</span><span class="hl std">, DM2)</span>
 
 <span class="hl com"># Define population sizes for the three countries of interest. This data also </span>
 <span class="hl com"># from Wikipedia. </span>
@@ -554,46 +557,12 @@ temporal trend.
 <span class="hl std">priorBeta_gammaEI</span> <span class="hl kwb">=</span> <span class="hl num">100</span><span class="hl std">;</span>
 <span class="hl std">priorAlpha_gammaIR</span> <span class="hl kwb">=</span> <span class="hl num">14</span><span class="hl std">;</span>
 <span class="hl std">priorBeta_gammaIR</span> <span class="hl kwb">=</span> <span class="hl num">100</span><span class="hl std">;</span>
+<span class="hl com"># Declare prior parameters for the overdispersion precision</span>
+<span class="hl std">priorAlpha_phi</span> <span class="hl kwb">=</span> <span class="hl num">1</span>
+<span class="hl std">priorBeta_phi</span> <span class="hl kwb">=</span> <span class="hl num">1</span>
 
 <span class="hl com"># Declare prior precision for exposure model paramters</span>
 <span class="hl std">betaPriorPrecision</span> <span class="hl kwb">=</span> <span class="hl num">0.1</span>
-
-<span class="hl com"># Set the reinfection mode to 3, which indicates that S_star, or the newly </span>
-<span class="hl com"># susceptibles, must remain zero. People are very unlikely to get ebola twice.</span>
-<span class="hl com"># How were you to know that &quot;3&quot; denotes a traditional SEIR model as opposed to</span>
-<span class="hl com"># a serial SEIR or SEIRS model? No good reason at all, actually. The planned R </span>
-<span class="hl com"># API will make the distinction between SEIRmodel SEIRSmodel and </span>
-<span class="hl com"># SerialSEIRmodel objects, so in the future you won't have to worry about this</span>
-<span class="hl com"># unless you're digging into the c++ code. </span>
-<span class="hl std">reinfectionMode</span> <span class="hl kwb">=</span> <span class="hl num">3</span>
-
-<span class="hl com"># steadyStateConstraintPrecision is a loose constraint on net flows</span>
-<span class="hl com"># between compartments. Setting it to a negative value eliminates</span>
-<span class="hl com"># the constraint, but it can help with identifiability in cases where </span>
-<span class="hl com"># there should be a long term equilibrium (endemic disease, for example).</span>
-<span class="hl com"># We do not need this parameter here. </span>
-<span class="hl std">steadyStateConstraintPrecision</span> <span class="hl kwb">=</span> <span class="hl opt">-</span><span class="hl num">1</span>
-
-<span class="hl com"># We don't need no verbose or debug level output</span>
-<span class="hl std">verbose</span> <span class="hl kwb">=</span> <span class="hl num">FALSE</span>
-<span class="hl std">debug</span> <span class="hl kwb">=</span> <span class="hl num">FALSE</span>
-
-<span class="hl com"># Declare initial tuning parameters for MCMC sampling</span>
-<span class="hl std">mcmcTuningParams</span> <span class="hl kwb">=</span> <span class="hl kwd">c</span><span class="hl std">(</span><span class="hl num">1</span><span class="hl std">,</span> <span class="hl com"># S_star</span>
-                     <span class="hl num">1</span><span class="hl std">,</span> <span class="hl com"># E_star</span>
-                     <span class="hl num">1</span><span class="hl std">,</span>  <span class="hl com"># R_star</span>
-                     <span class="hl num">1</span><span class="hl std">,</span>  <span class="hl com"># S_0</span>
-                     <span class="hl num">1</span><span class="hl std">,</span>  <span class="hl com"># I_0</span>
-                     <span class="hl num">0.05</span><span class="hl std">,</span>  <span class="hl com"># beta</span>
-                     <span class="hl num">0.0</span><span class="hl std">,</span>  <span class="hl com"># beta_p_rs, fixed in this case</span>
-                     <span class="hl num">0.01</span><span class="hl std">,</span> <span class="hl com"># rho</span>
-                     <span class="hl num">0.01</span><span class="hl std">,</span> <span class="hl com"># gamma_ei</span>
-                     <span class="hl num">0.01</span><span class="hl std">,</span>  <span class="hl com"># gamma_ir</span>
-                     <span class="hl num">0.01</span><span class="hl std">)</span> <span class="hl com"># phi</span>
-
-
-<span class="hl com"># We don't want to re-scale the distance matrix. </span>
-<span class="hl std">scaleDistanceMode</span> <span class="hl kwb">=</span> <span class="hl num">0</span>
 
 <span class="hl com"># Declare a function which can come up with several different starting values </span>
 <span class="hl com"># for the model parameters. This will allow us to assess convergence. </span>
@@ -613,29 +582,44 @@ temporal trend.
     <span class="hl std">beta[</span><span class="hl num">1</span><span class="hl std">]</span> <span class="hl kwb">=</span> <span class="hl num">2.5</span> <span class="hl opt">+</span> <span class="hl kwd">rnorm</span><span class="hl std">(</span><span class="hl num">1</span><span class="hl std">,</span><span class="hl num">0</span><span class="hl std">,</span><span class="hl num">0.5</span><span class="hl std">)</span>
 
     <span class="hl std">rho</span> <span class="hl kwb">=</span> <span class="hl num">0.1</span> <span class="hl opt">+</span> <span class="hl kwd">rnorm</span><span class="hl std">(</span><span class="hl num">1</span><span class="hl std">,</span><span class="hl num">0</span><span class="hl std">,</span><span class="hl num">0.01</span><span class="hl std">)</span> <span class="hl com"># spatial dependence parameter</span>
+    <span class="hl std">phi</span> <span class="hl kwb">=</span> <span class="hl num">0.01</span> <span class="hl com"># Overdispersion precision</span>
 
     <span class="hl std">outFileName</span> <span class="hl kwb">=</span> <span class="hl kwd">paste</span><span class="hl std">(</span><span class="hl str">&quot;./chain_output_ebola_&quot;</span><span class="hl std">, chainNumber ,</span><span class="hl str">&quot;.txt&quot;</span><span class="hl std">,</span> <span class="hl kwc">sep</span> <span class="hl std">=</span> <span class="hl str">&quot;&quot;</span><span class="hl std">)</span>
 
     <span class="hl com"># Make a crude guess as to the true compartments:</span>
     <span class="hl com"># S_star, E_star, R_star, and thus S,E,I and R</span>
-    <span class="hl std">proposal</span> <span class="hl kwb">=</span> <span class="hl kwd">generateCompartmentProposal</span><span class="hl std">(I_star, N,</span>
-                                           <span class="hl kwc">S0</span> <span class="hl std">= N[</span><span class="hl num">1</span><span class="hl std">,]</span><span class="hl opt">-</span><span class="hl std">I_star[</span><span class="hl num">1</span><span class="hl std">,]</span> <span class="hl opt">-</span> <span class="hl kwd">c</span><span class="hl std">(</span><span class="hl num">86</span><span class="hl std">,</span><span class="hl num">0</span><span class="hl std">,</span><span class="hl num">0</span><span class="hl std">,</span><span class="hl num">0</span><span class="hl std">),</span>
-                                           <span class="hl kwc">I0</span> <span class="hl std">=</span> <span class="hl kwd">c</span><span class="hl std">(</span><span class="hl num">86</span><span class="hl std">,</span><span class="hl num">0</span><span class="hl std">,</span><span class="hl num">0</span><span class="hl std">,</span><span class="hl num">0</span><span class="hl std">),</span>
-                                           <span class="hl kwc">p_ir</span> <span class="hl std">=</span> <span class="hl num">0.5</span><span class="hl std">,</span>
-                                           <span class="hl kwc">p_rs</span> <span class="hl std">=</span> <span class="hl num">0.00</span><span class="hl std">)</span>
+    <span class="hl std">DataModel</span> <span class="hl kwb">=</span> <span class="hl kwd">buildDataModel</span><span class="hl std">(I_star,</span> <span class="hl kwc">type</span> <span class="hl std">=</span> <span class="hl str">&quot;overdispersion&quot;</span><span class="hl std">,</span>
+                               <span class="hl kwc">params</span><span class="hl std">=</span><span class="hl kwd">c</span><span class="hl std">(priorAlpha_phi,priorBeta_phi))</span>
+    <span class="hl std">ExposureModel</span> <span class="hl kwb">=</span> <span class="hl kwd">buildExposureModel</span><span class="hl std">(X, Z, beta, betaPriorPrecision)</span>
+    <span class="hl std">ReinfectionModel</span> <span class="hl kwb">=</span> <span class="hl kwd">buildReinfectionModel</span><span class="hl std">(</span><span class="hl str">&quot;SEIR&quot;</span><span class="hl std">)</span>
+    <span class="hl std">SamplingControl</span> <span class="hl kwb">=</span> <span class="hl kwd">buildSamplingControl</span><span class="hl std">(</span><span class="hl kwc">iterationStride</span><span class="hl std">=iterationStride,</span>
+                                           <span class="hl kwc">sliceWidths</span><span class="hl std">=</span><span class="hl kwd">c</span><span class="hl std">(</span><span class="hl num">1</span><span class="hl std">,</span> <span class="hl com"># S_star</span>
+                                                         <span class="hl num">1</span><span class="hl std">,</span> <span class="hl com"># E_star</span>
+                                                         <span class="hl num">1</span><span class="hl std">,</span>  <span class="hl com"># R_star</span>
+                                                         <span class="hl num">1</span><span class="hl std">,</span>  <span class="hl com"># S_0</span>
+                                                         <span class="hl num">1</span><span class="hl std">,</span>  <span class="hl com"># I_0</span>
+                                                         <span class="hl num">0.05</span><span class="hl std">,</span>  <span class="hl com"># beta</span>
+                                                         <span class="hl num">0.0</span><span class="hl std">,</span>  <span class="hl com"># beta_p_rs, fixed in this case</span>
+                                                         <span class="hl num">0.01</span><span class="hl std">,</span> <span class="hl com"># rho</span>
+                                                         <span class="hl num">0.01</span><span class="hl std">,</span> <span class="hl com"># gamma_ei</span>
+                                                         <span class="hl num">0.01</span><span class="hl std">,</span>  <span class="hl com"># gamma_ir</span>
+                                                         <span class="hl num">0.01</span><span class="hl std">))</span> <span class="hl com"># phi)</span>
 
-    <span class="hl kwd">return</span><span class="hl std">(</span><span class="hl kwd">list</span><span class="hl std">(</span><span class="hl kwc">S0</span><span class="hl std">=proposal</span><span class="hl opt">$</span><span class="hl std">S0,</span>
-                <span class="hl kwc">E0</span><span class="hl std">=proposal</span><span class="hl opt">$</span><span class="hl std">E0,</span>
-                <span class="hl kwc">I0</span><span class="hl std">=proposal</span><span class="hl opt">$</span><span class="hl std">I0,</span>
-                <span class="hl kwc">R0</span><span class="hl std">=proposal</span><span class="hl opt">$</span><span class="hl std">R0,</span>
-                <span class="hl kwc">S_star</span><span class="hl std">=proposal</span><span class="hl opt">$</span><span class="hl std">S_star,</span>
-                <span class="hl kwc">E_star</span><span class="hl std">=proposal</span><span class="hl opt">$</span><span class="hl std">E_star,</span>
-                <span class="hl kwc">I_star</span><span class="hl std">=proposal</span><span class="hl opt">$</span><span class="hl std">I_star,</span>
-                <span class="hl kwc">R_star</span><span class="hl std">=proposal</span><span class="hl opt">$</span><span class="hl std">R_star,</span>
-                <span class="hl kwc">rho</span><span class="hl std">=rho,</span>
-                <span class="hl kwc">beta</span><span class="hl std">=beta,</span>
-                <span class="hl kwc">gamma_ei</span><span class="hl std">=gamma_ei,</span>
-                <span class="hl kwc">gamma_ir</span><span class="hl std">=gamma_ir,</span>
+    <span class="hl std">InitContainer</span> <span class="hl kwb">=</span> <span class="hl kwd">buildInitialValueContainer</span><span class="hl std">(I_star, N,</span>
+                                               <span class="hl kwc">S0</span> <span class="hl std">= N[</span><span class="hl num">1</span><span class="hl std">,]</span><span class="hl opt">-</span><span class="hl std">I_star[</span><span class="hl num">1</span><span class="hl std">,]</span> <span class="hl opt">-</span> <span class="hl kwd">c</span><span class="hl std">(</span><span class="hl num">86</span><span class="hl std">,</span><span class="hl num">0</span><span class="hl std">,</span><span class="hl num">0</span><span class="hl std">,</span><span class="hl num">0</span><span class="hl std">),</span>
+                                               <span class="hl kwc">I0</span> <span class="hl std">=</span> <span class="hl kwd">c</span><span class="hl std">(</span><span class="hl num">86</span><span class="hl std">,</span><span class="hl num">0</span><span class="hl std">,</span><span class="hl num">0</span><span class="hl std">,</span><span class="hl num">0</span><span class="hl std">),</span>
+                                               <span class="hl kwc">p_ir</span> <span class="hl std">=</span> <span class="hl num">0.5</span><span class="hl std">,</span>
+                                               <span class="hl kwc">p_rs</span> <span class="hl std">=</span> <span class="hl num">0.00</span><span class="hl std">)</span>
+    <span class="hl std">DistanceModel</span> <span class="hl kwb">=</span> <span class="hl kwd">buildDistanceModel</span><span class="hl std">(</span><span class="hl kwd">list</span><span class="hl std">(DM1,DM2))</span>
+    <span class="hl std">TransitionPriors</span> <span class="hl kwb">=</span> <span class="hl kwd">buildTransitionPriorsManually</span><span class="hl std">(priorAlpha_gammaEI,priorBeta_gammaEI,</span>
+                                                     <span class="hl std">priorAlpha_gammaIR,priorBeta_gammaIR)</span>
+    <span class="hl kwd">return</span><span class="hl std">(</span><span class="hl kwd">list</span><span class="hl std">(</span><span class="hl kwc">DataModel</span><span class="hl std">=DataModel,</span>
+                <span class="hl kwc">ExposureModel</span><span class="hl std">=ExposureModel,</span>
+                <span class="hl kwc">ReinfectionModel</span><span class="hl std">=ReinfectionModel,</span>
+                <span class="hl kwc">SamplingControl</span><span class="hl std">=SamplingControl,</span>
+                <span class="hl kwc">InitContainer</span><span class="hl std">=InitContainer,</span>
+                <span class="hl kwc">DistanceModel</span><span class="hl std">=DistanceModel,</span>
+                <span class="hl kwc">TransitionPriors</span><span class="hl std">=TransitionPriors,</span>
                 <span class="hl kwc">outFileName</span><span class="hl std">=outFileName))</span>
 <span class="hl std">}</span>
 </pre></div>
@@ -652,45 +636,16 @@ temporal trend.
       <div class="code-and-output-block" style="display:none">
 <div class="chunk" id="unnamed-chunk-8"><div class="rcode"><div class="source"><pre class="knitr r"><span class="hl std">buildAndRunModel</span> <span class="hl kwb">=</span> <span class="hl kwa">function</span><span class="hl std">(</span><span class="hl kwc">params</span><span class="hl std">)</span>
 <span class="hl std">{</span>
-    <span class="hl kwd">library</span><span class="hl std">(spatialSEIR)</span>
-    <span class="hl std">proposal</span> <span class="hl kwb">=</span> <span class="hl kwd">proposeParameters</span><span class="hl std">(params[[</span><span class="hl str">&quot;seedVal&quot;</span><span class="hl std">]], params[[</span><span class="hl str">&quot;chainNumber&quot;</span><span class="hl std">]])</span>
-    <span class="hl std">SEIRmodel</span> <span class="hl kwb">=</span>  <span class="hl kwd">spatialSEIRModel</span><span class="hl std">(compMatDim,</span>
-                        <span class="hl std">xDim,</span>
-                        <span class="hl std">zDim,</span>
-                        <span class="hl std">xPrsDim,</span>
-                        <span class="hl std">proposal</span><span class="hl opt">$</span><span class="hl std">S0,</span>
-                        <span class="hl std">proposal</span><span class="hl opt">$</span><span class="hl std">E0,</span>
-                        <span class="hl std">proposal</span><span class="hl opt">$</span><span class="hl std">I0,</span>
-                        <span class="hl std">proposal</span><span class="hl opt">$</span><span class="hl std">R0,</span>
-                        <span class="hl std">proposal</span><span class="hl opt">$</span><span class="hl std">S_star,</span>
-                        <span class="hl std">proposal</span><span class="hl opt">$</span><span class="hl std">E_star,</span>
-                        <span class="hl std">proposal</span><span class="hl opt">$</span><span class="hl std">I_star,</span>
-                        <span class="hl std">proposal</span><span class="hl opt">$</span><span class="hl std">R_star,</span>
-                        <span class="hl std">offsets,</span>
-                        <span class="hl std">X,</span>
-                        <span class="hl std">Z,</span>
-                        <span class="hl std">X_p_rs,</span>
-                        <span class="hl std">DM,</span>
-                        <span class="hl std">proposal</span><span class="hl opt">$</span><span class="hl std">rho,</span>
-                        <span class="hl std">priorAlpha_gammaEI,</span>
-                        <span class="hl std">priorBeta_gammaEI,</span>
-                        <span class="hl std">priorAlpha_gammaIR,</span>
-                        <span class="hl std">priorBeta_gammaIR,</span>
-                        <span class="hl std">proposal</span><span class="hl opt">$</span><span class="hl std">beta,</span>
-                        <span class="hl std">betaPriorPrecision,</span>
-                        <span class="hl std">beta_p_rs,</span>
-                        <span class="hl std">betaPrsPriorPrecision,</span>
-                        <span class="hl std">proposal</span><span class="hl opt">$</span><span class="hl std">gamma_ei,</span>
-                        <span class="hl std">proposal</span><span class="hl opt">$</span><span class="hl std">gamma_ir,</span>
-                        <span class="hl std">N,</span>
-                        <span class="hl std">proposal</span><span class="hl opt">$</span><span class="hl std">outFileName,</span>
-                        <span class="hl std">iterationStride,</span>
-                        <span class="hl std">steadyStateConstraintPrecision,</span>
-                        <span class="hl std">verbose,</span>
-                        <span class="hl std">debug,</span>
-                        <span class="hl std">mcmcTuningParams,</span>
-                        <span class="hl std">reinfectionMode,</span>
-                        <span class="hl std">scaleDistanceMode)</span>
+  <span class="hl kwd">library</span><span class="hl std">(spatialSEIR)</span>
+  <span class="hl std">proposal</span> <span class="hl kwb">=</span> <span class="hl kwd">proposeParameters</span><span class="hl std">(params[[</span><span class="hl str">&quot;seedVal&quot;</span><span class="hl std">]], params[[</span><span class="hl str">&quot;chainNumber&quot;</span><span class="hl std">]])</span>
+  <span class="hl std">SEIRmodel</span> <span class="hl kwb">=</span>  <span class="hl kwd">buildSEIRModel</span><span class="hl std">(proposal</span><span class="hl opt">$</span><span class="hl std">outFileName,</span>
+                              <span class="hl std">proposal</span><span class="hl opt">$</span><span class="hl std">DataModel,</span>
+                              <span class="hl std">proposal</span><span class="hl opt">$</span><span class="hl std">ExposureModel,</span>
+                              <span class="hl std">proposal</span><span class="hl opt">$</span><span class="hl std">ReinfectionModel,</span>
+                              <span class="hl std">proposal</span><span class="hl opt">$</span><span class="hl std">DistanceModel,</span>
+                              <span class="hl std">proposal</span><span class="hl opt">$</span><span class="hl std">TransitionPriors,</span>
+                              <span class="hl std">proposal</span><span class="hl opt">$</span><span class="hl std">InitContainer,</span>
+                              <span class="hl std">proposal</span><span class="hl opt">$</span><span class="hl std">SamplingControl)</span>
 
   <span class="hl std">SEIRmodel</span><span class="hl opt">$</span><span class="hl kwd">setRandomSeed</span><span class="hl std">(params[[</span><span class="hl str">&quot;seedVal&quot;</span><span class="hl std">]])</span>
 
@@ -749,11 +704,11 @@ temporal trend.
   <span class="hl com">## Do we need to estimate R0 for this chain?</span>
   <span class="hl kwa">if</span> <span class="hl std">(params[[</span><span class="hl str">&quot;estimateR0&quot;</span><span class="hl std">]])</span>
   <span class="hl std">{</span>
-    <span class="hl std">R0</span> <span class="hl kwb">=</span> <span class="hl kwd">array</span><span class="hl std">(</span><span class="hl num">0</span><span class="hl std">,</span> <span class="hl kwc">dim</span> <span class="hl std">=</span> <span class="hl kwd">c</span><span class="hl std">(</span><span class="hl kwd">nrow</span><span class="hl std">(proposal</span><span class="hl opt">$</span><span class="hl std">I_star),</span> <span class="hl kwd">ncol</span><span class="hl std">(proposal</span><span class="hl opt">$</span><span class="hl std">I_star), extraR0Iterations))</span>
+    <span class="hl std">R0</span> <span class="hl kwb">=</span> <span class="hl kwd">array</span><span class="hl std">(</span><span class="hl num">0</span><span class="hl std">,</span> <span class="hl kwc">dim</span> <span class="hl std">=</span> <span class="hl kwd">c</span><span class="hl std">(</span><span class="hl kwd">nrow</span><span class="hl std">(I_star),</span> <span class="hl kwd">ncol</span><span class="hl std">(I_star), extraR0Iterations))</span>
     <span class="hl kwa">for</span> <span class="hl std">(i</span> <span class="hl kwa">in</span> <span class="hl num">1</span><span class="hl opt">:</span><span class="hl std">extraR0Iterations)</span>
     <span class="hl std">{</span>
         <span class="hl std">SEIRmodel</span><span class="hl opt">$</span><span class="hl kwd">simulate</span><span class="hl std">(iterationStride)</span>
-        <span class="hl kwa">for</span> <span class="hl std">(j</span> <span class="hl kwa">in</span> <span class="hl num">0</span><span class="hl opt">:</span><span class="hl std">(</span><span class="hl kwd">nrow</span><span class="hl std">(proposal</span><span class="hl opt">$</span><span class="hl std">I_star)</span><span class="hl opt">-</span><span class="hl num">1</span><span class="hl std">))</span>
+        <span class="hl kwa">for</span> <span class="hl std">(j</span> <span class="hl kwa">in</span> <span class="hl num">0</span><span class="hl opt">:</span><span class="hl std">(</span><span class="hl kwd">nrow</span><span class="hl std">(I_star)</span><span class="hl opt">-</span><span class="hl num">1</span><span class="hl std">))</span>
         <span class="hl std">{</span>
             <span class="hl std">R0[j,,i]</span> <span class="hl kwb">=</span> <span class="hl kwd">apply</span><span class="hl std">(SEIRmodel</span><span class="hl opt">$</span><span class="hl kwd">getIntegratedGenerationMatrix</span><span class="hl std">(j),</span> <span class="hl num">2</span><span class="hl std">, sum)</span>
         <span class="hl std">}</span>
@@ -783,36 +738,37 @@ temporal trend.
                      <span class="hl str">&quot;X&quot;</span><span class="hl std">,</span>
                      <span class="hl str">&quot;Z&quot;</span><span class="hl std">,</span>
                      <span class="hl str">&quot;X_p_rs&quot;</span><span class="hl std">,</span>
-                     <span class="hl str">&quot;DM&quot;</span><span class="hl std">,</span>
                      <span class="hl str">&quot;priorAlpha_gammaEI&quot;</span><span class="hl std">,</span>
                      <span class="hl str">&quot;priorBeta_gammaEI&quot;</span><span class="hl std">,</span>
                      <span class="hl str">&quot;priorAlpha_gammaIR&quot;</span><span class="hl std">,</span>
                      <span class="hl str">&quot;priorBeta_gammaIR&quot;</span><span class="hl std">,</span>
+                     <span class="hl str">&quot;priorAlpha_phi&quot;</span><span class="hl std">,</span>
+                     <span class="hl str">&quot;priorBeta_phi&quot;</span><span class="hl std">,</span>
                      <span class="hl str">&quot;betaPriorPrecision&quot;</span><span class="hl std">,</span>
                      <span class="hl str">&quot;beta_p_rs&quot;</span><span class="hl std">,</span>
                      <span class="hl str">&quot;betaPrsPriorPrecision&quot;</span><span class="hl std">,</span>
                      <span class="hl str">&quot;N&quot;</span><span class="hl std">,</span>
+                     <span class="hl str">&quot;DM1&quot;</span><span class="hl std">,</span>
+                     <span class="hl str">&quot;DM2&quot;</span><span class="hl std">,</span>
                      <span class="hl str">&quot;iterationStride&quot;</span><span class="hl std">,</span>
-                     <span class="hl str">&quot;steadyStateConstraintPrecision&quot;</span><span class="hl std">,</span>
-                     <span class="hl str">&quot;verbose&quot;</span><span class="hl std">,</span>
-                     <span class="hl str">&quot;debug&quot;</span><span class="hl std">,</span>
-                     <span class="hl str">&quot;mcmcTuningParams&quot;</span><span class="hl std">,</span>
-                     <span class="hl str">&quot;reinfectionMode&quot;</span><span class="hl std">,</span>
-                     <span class="hl str">&quot;scaleDistanceMode&quot;</span><span class="hl std">,</span>
                      <span class="hl str">&quot;proposeParameters&quot;</span><span class="hl std">,</span>
                      <span class="hl str">&quot;generateCompartmentProposal&quot;</span><span class="hl std">,</span>
                      <span class="hl str">&quot;numConvergenceBatches&quot;</span><span class="hl std">,</span>
                      <span class="hl str">&quot;convergenceBatchSize&quot;</span><span class="hl std">,</span>
                      <span class="hl str">&quot;extraR0Iterations&quot;</span><span class="hl std">,</span>
                      <span class="hl str">&quot;I_star&quot;</span><span class="hl std">,</span>
-                     <span class="hl str">&quot;numBurnInBatches&quot;</span><span class="hl std">))</span>
+                     <span class="hl str">&quot;numBurnInBatches&quot;</span><span class="hl std">,</span>
+                     <span class="hl str">&quot;dataModel&quot;</span><span class="hl std">))</span>
 
 <span class="hl std">paramsList</span> <span class="hl kwb">=</span> <span class="hl kwd">list</span><span class="hl std">(</span><span class="hl kwd">list</span><span class="hl std">(</span><span class="hl str">&quot;estimateR0&quot;</span><span class="hl std">=</span><span class="hl num">FALSE</span><span class="hl std">,</span> <span class="hl str">&quot;traceCompartments&quot;</span><span class="hl std">=</span><span class="hl num">TRUE</span><span class="hl std">,</span> <span class="hl str">&quot;seedVal&quot;</span><span class="hl std">=</span><span class="hl num">123123</span><span class="hl std">,</span><span class="hl str">&quot;chainNumber&quot;</span><span class="hl std">=</span><span class="hl num">4</span><span class="hl std">),</span>
                   <span class="hl kwd">list</span><span class="hl std">(</span><span class="hl str">&quot;estimateR0&quot;</span><span class="hl std">=</span><span class="hl num">TRUE</span><span class="hl std">,</span> <span class="hl str">&quot;traceCompartments&quot;</span><span class="hl std">=</span><span class="hl num">FALSE</span><span class="hl std">,</span> <span class="hl str">&quot;seedVal&quot;</span><span class="hl std">=</span><span class="hl num">123124</span><span class="hl std">,</span><span class="hl str">&quot;chainNumber&quot;</span><span class="hl std">=</span><span class="hl num">5</span><span class="hl std">),</span>
                   <span class="hl kwd">list</span><span class="hl std">(</span><span class="hl str">&quot;estimateR0&quot;</span><span class="hl std">=</span><span class="hl num">FALSE</span><span class="hl std">,</span><span class="hl str">&quot;traceCompartments&quot;</span><span class="hl std">=</span><span class="hl num">FALSE</span><span class="hl std">,</span> <span class="hl str">&quot;seedVal&quot;</span><span class="hl std">=</span><span class="hl num">123125</span><span class="hl std">,</span><span class="hl str">&quot;chainNumber&quot;</span><span class="hl std">=</span><span class="hl num">6</span><span class="hl std">))</span>
 
 <span class="hl std">chains</span> <span class="hl kwb">=</span> <span class="hl kwd">parLapply</span><span class="hl std">(cl, paramsList, buildAndRunModel)</span>
-<span class="hl kwd">stopCluster</span><span class="hl std">(cl)</span>
+</pre></div>
+<div class="error"><pre class="knitr r">## Error: error reading from connection
+</pre></div>
+<div class="source"><pre class="knitr r"><span class="hl kwd">stopCluster</span><span class="hl std">(cl)</span>
 
 <span class="hl std">chain1</span> <span class="hl kwb">=</span> <span class="hl std">chains[[</span><span class="hl num">1</span><span class="hl std">]]</span><span class="hl opt">$</span><span class="hl std">chainOutput</span>
 <span class="hl std">chain2</span> <span class="hl kwb">=</span> <span class="hl std">chains[[</span><span class="hl num">2</span><span class="hl std">]]</span><span class="hl opt">$</span><span class="hl std">chainOutput</span>
@@ -882,9 +838,9 @@ temporal trend.
 <span class="hl com">## Parameter Estimates </span>
 
 <span class="hl std">nbeta</span> <span class="hl kwb">=</span> <span class="hl kwd">ncol</span><span class="hl std">(X)</span> <span class="hl opt">+</span> <span class="hl kwd">ncol</span><span class="hl std">(Z)</span>
-<span class="hl std">c1</span> <span class="hl kwb">=</span> <span class="hl std">chain1[</span><span class="hl kwd">floor</span><span class="hl std">(</span><span class="hl kwd">nrow</span><span class="hl std">(chain1)</span><span class="hl opt">/</span><span class="hl num">2</span><span class="hl std">)</span><span class="hl opt">:</span><span class="hl kwd">nrow</span><span class="hl std">(chain1),</span><span class="hl kwd">c</span><span class="hl std">(</span><span class="hl num">1</span><span class="hl opt">:</span><span class="hl std">(nbeta),(nbeta</span><span class="hl opt">+</span><span class="hl num">2</span><span class="hl std">)</span><span class="hl opt">:</span><span class="hl std">(nbeta</span><span class="hl opt">+</span><span class="hl num">4</span><span class="hl std">))]</span>
-<span class="hl std">c2</span> <span class="hl kwb">=</span> <span class="hl std">chain2[</span><span class="hl kwd">floor</span><span class="hl std">(</span><span class="hl kwd">nrow</span><span class="hl std">(chain2)</span><span class="hl opt">/</span><span class="hl num">2</span><span class="hl std">)</span><span class="hl opt">:</span><span class="hl kwd">nrow</span><span class="hl std">(chain2),</span><span class="hl kwd">c</span><span class="hl std">(</span><span class="hl num">1</span><span class="hl opt">:</span><span class="hl std">(nbeta),(nbeta</span><span class="hl opt">+</span><span class="hl num">2</span><span class="hl std">)</span><span class="hl opt">:</span><span class="hl std">(nbeta</span><span class="hl opt">+</span><span class="hl num">4</span><span class="hl std">))]</span>
-<span class="hl std">c3</span> <span class="hl kwb">=</span> <span class="hl std">chain3[</span><span class="hl kwd">floor</span><span class="hl std">(</span><span class="hl kwd">nrow</span><span class="hl std">(chain3)</span><span class="hl opt">/</span><span class="hl num">2</span><span class="hl std">)</span><span class="hl opt">:</span><span class="hl kwd">nrow</span><span class="hl std">(chain3),</span><span class="hl kwd">c</span><span class="hl std">(</span><span class="hl num">1</span><span class="hl opt">:</span><span class="hl std">(nbeta),(nbeta</span><span class="hl opt">+</span><span class="hl num">2</span><span class="hl std">)</span><span class="hl opt">:</span><span class="hl std">(nbeta</span><span class="hl opt">+</span><span class="hl num">4</span><span class="hl std">))]</span>
+<span class="hl std">c1</span> <span class="hl kwb">=</span> <span class="hl std">chain1[</span><span class="hl kwd">floor</span><span class="hl std">(</span><span class="hl kwd">nrow</span><span class="hl std">(chain1)</span><span class="hl opt">/</span><span class="hl num">2</span><span class="hl std">)</span><span class="hl opt">:</span><span class="hl kwd">nrow</span><span class="hl std">(chain1),</span><span class="hl kwd">c</span><span class="hl std">(</span><span class="hl num">1</span><span class="hl opt">:</span><span class="hl std">(nbeta</span> <span class="hl opt">+</span> <span class="hl num">2</span><span class="hl std">),(nbeta</span><span class="hl opt">+</span><span class="hl num">3</span><span class="hl std">)</span><span class="hl opt">:</span><span class="hl std">(nbeta</span><span class="hl opt">+</span><span class="hl num">5</span><span class="hl std">))]</span>
+<span class="hl std">c2</span> <span class="hl kwb">=</span> <span class="hl std">chain2[</span><span class="hl kwd">floor</span><span class="hl std">(</span><span class="hl kwd">nrow</span><span class="hl std">(chain2)</span><span class="hl opt">/</span><span class="hl num">2</span><span class="hl std">)</span><span class="hl opt">:</span><span class="hl kwd">nrow</span><span class="hl std">(chain2),</span><span class="hl kwd">c</span><span class="hl std">(</span><span class="hl num">1</span><span class="hl opt">:</span><span class="hl std">(nbeta</span> <span class="hl opt">+</span> <span class="hl num">2</span><span class="hl std">),(nbeta</span><span class="hl opt">+</span><span class="hl num">3</span><span class="hl std">)</span><span class="hl opt">:</span><span class="hl std">(nbeta</span><span class="hl opt">+</span><span class="hl num">5</span><span class="hl std">))]</span>
+<span class="hl std">c3</span> <span class="hl kwb">=</span> <span class="hl std">chain3[</span><span class="hl kwd">floor</span><span class="hl std">(</span><span class="hl kwd">nrow</span><span class="hl std">(chain3)</span><span class="hl opt">/</span><span class="hl num">2</span><span class="hl std">)</span><span class="hl opt">:</span><span class="hl kwd">nrow</span><span class="hl std">(chain3),</span><span class="hl kwd">c</span><span class="hl std">(</span><span class="hl num">1</span><span class="hl opt">:</span><span class="hl std">(nbeta</span> <span class="hl opt">+</span> <span class="hl num">2</span><span class="hl std">),(nbeta</span><span class="hl opt">+</span><span class="hl num">3</span><span class="hl std">)</span><span class="hl opt">:</span><span class="hl std">(nbeta</span><span class="hl opt">+</span><span class="hl num">5</span><span class="hl std">))]</span>
 
 <span class="hl std">c1</span><span class="hl opt">$</span><span class="hl std">gamma_ei</span> <span class="hl kwb">=</span> <span class="hl num">1</span><span class="hl opt">-</span><span class="hl kwd">exp</span><span class="hl std">(</span><span class="hl opt">-</span><span class="hl std">c1</span><span class="hl opt">$</span><span class="hl std">gamma_ei)</span>
 <span class="hl std">c1</span><span class="hl opt">$</span><span class="hl std">gamma_ir</span> <span class="hl kwb">=</span> <span class="hl num">1</span><span class="hl opt">-</span><span class="hl kwd">exp</span><span class="hl std">(</span><span class="hl opt">-</span><span class="hl std">c1</span><span class="hl opt">$</span><span class="hl std">gamma_ir)</span>
@@ -895,7 +851,8 @@ temporal trend.
 <span class="hl kwd">colnames</span><span class="hl std">(c1)</span> <span class="hl kwb">=</span> <span class="hl kwd">c</span><span class="hl std">(</span><span class="hl str">&quot;Guinea Intercept&quot;</span><span class="hl std">,</span> <span class="hl str">&quot;Liberia Intercept&quot;</span><span class="hl std">,</span>
                  <span class="hl str">&quot;Sierra Leone Intercept&quot;</span><span class="hl std">,</span><span class="hl str">&quot;Nigeria Intercept&quot;</span><span class="hl std">,</span>
                  <span class="hl kwd">paste</span><span class="hl std">(</span><span class="hl str">&quot;Time component &quot;</span><span class="hl std">, (</span><span class="hl num">1</span><span class="hl opt">:</span><span class="hl std">(nbeta</span><span class="hl opt">-</span><span class="hl num">4</span><span class="hl std">)),</span> <span class="hl kwc">sep</span> <span class="hl std">=</span> <span class="hl str">&quot;&quot;</span><span class="hl std">),</span>
-                 <span class="hl str">&quot;Spatial Dependence Parameter&quot;</span><span class="hl std">,</span> <span class="hl str">&quot;E to I probability&quot;</span><span class="hl std">,</span>
+                 <span class="hl str">&quot;Spatial Dependence Parameter 1&quot;</span><span class="hl std">,</span> <span class="hl str">&quot;Spatial Dependence Parameter 2&quot;</span><span class="hl std">,</span>
+                 <span class="hl str">&quot;E to I probability&quot;</span><span class="hl std">,</span>
                  <span class="hl str">&quot;I to R probability&quot;</span><span class="hl std">)</span>
 <span class="hl kwd">colnames</span><span class="hl std">(c2)</span> <span class="hl kwb">=</span> <span class="hl kwd">colnames</span><span class="hl std">(c1)</span>
 <span class="hl kwd">colnames</span><span class="hl std">(c3)</span> <span class="hl kwb">=</span> <span class="hl kwd">colnames</span><span class="hl std">(c1)</span>
@@ -903,7 +860,10 @@ temporal trend.
 <span class="hl std">mcl</span> <span class="hl kwb">=</span> <span class="hl kwd">mcmc.list</span><span class="hl std">(</span><span class="hl kwd">as.mcmc</span><span class="hl std">(c1),</span>
                 <span class="hl kwd">as.mcmc</span><span class="hl std">(c2),</span>
                 <span class="hl kwd">as.mcmc</span><span class="hl std">(c3))</span>
-<span class="hl kwd">summary</span><span class="hl std">(mcl)</span>
+</pre></div>
+<div class="error"><pre class="knitr r">## Error: missing value where TRUE/FALSE needed
+</pre></div>
+<div class="source"><pre class="knitr r"><span class="hl kwd">summary</span><span class="hl std">(mcl)</span>
 </pre></div>
 <div class="output"><pre class="knitr r">## 
 ## Iterations = 1:521
@@ -982,11 +942,26 @@ temporal trend.
 <span class="hl std">}</span>
 
 <span class="hl std">Guinea.I.Est</span> <span class="hl kwb">=</span> <span class="hl kwd">sapply</span><span class="hl std">(</span><span class="hl num">0</span><span class="hl opt">:</span><span class="hl std">(</span><span class="hl kwd">nrow</span><span class="hl std">(I_star)</span><span class="hl opt">-</span> <span class="hl num">1</span><span class="hl std">), getMeanAndCI,</span> <span class="hl kwc">loc</span><span class="hl std">=</span><span class="hl num">0</span><span class="hl std">)</span>
-<span class="hl std">Liberia.I.Est</span> <span class="hl kwb">=</span> <span class="hl kwd">sapply</span><span class="hl std">(</span><span class="hl num">0</span><span class="hl opt">:</span><span class="hl std">(</span><span class="hl kwd">nrow</span><span class="hl std">(I_star)</span><span class="hl opt">-</span> <span class="hl num">1</span><span class="hl std">), getMeanAndCI,</span> <span class="hl kwc">loc</span><span class="hl std">=</span><span class="hl num">1</span><span class="hl std">)</span>
-<span class="hl std">SierraLeone.I.Est</span> <span class="hl kwb">=</span> <span class="hl kwd">sapply</span><span class="hl std">(</span><span class="hl num">0</span><span class="hl opt">:</span><span class="hl std">(</span><span class="hl kwd">nrow</span><span class="hl std">(I_star)</span><span class="hl opt">-</span> <span class="hl num">1</span><span class="hl std">), getMeanAndCI,</span> <span class="hl kwc">loc</span><span class="hl std">=</span><span class="hl num">2</span><span class="hl std">)</span>
-<span class="hl std">Nigeria.I.Est</span> <span class="hl kwb">=</span> <span class="hl kwd">sapply</span><span class="hl std">(</span><span class="hl num">0</span><span class="hl opt">:</span><span class="hl std">(</span><span class="hl kwd">nrow</span><span class="hl std">(I_star)</span><span class="hl opt">-</span> <span class="hl num">1</span><span class="hl std">), getMeanAndCI,</span> <span class="hl kwc">loc</span><span class="hl std">=</span><span class="hl num">3</span><span class="hl std">)</span>
-
-<span class="hl com"># Declare prediction functions</span>
+</pre></div>
+<div class="warning"><pre class="knitr r">## Warning: argument is not numeric or logical: returning NA
+## Warning: argument is not numeric or logical: returning NA
+</pre></div>
+<div class="source"><pre class="knitr r"><span class="hl std">Liberia.I.Est</span> <span class="hl kwb">=</span> <span class="hl kwd">sapply</span><span class="hl std">(</span><span class="hl num">0</span><span class="hl opt">:</span><span class="hl std">(</span><span class="hl kwd">nrow</span><span class="hl std">(I_star)</span><span class="hl opt">-</span> <span class="hl num">1</span><span class="hl std">), getMeanAndCI,</span> <span class="hl kwc">loc</span><span class="hl std">=</span><span class="hl num">1</span><span class="hl std">)</span>
+</pre></div>
+<div class="warning"><pre class="knitr r">## Warning: argument is not numeric or logical: returning NA
+## Warning: argument is not numeric or logical: returning NA
+</pre></div>
+<div class="source"><pre class="knitr r"><span class="hl std">SierraLeone.I.Est</span> <span class="hl kwb">=</span> <span class="hl kwd">sapply</span><span class="hl std">(</span><span class="hl num">0</span><span class="hl opt">:</span><span class="hl std">(</span><span class="hl kwd">nrow</span><span class="hl std">(I_star)</span><span class="hl opt">-</span> <span class="hl num">1</span><span class="hl std">), getMeanAndCI,</span> <span class="hl kwc">loc</span><span class="hl std">=</span><span class="hl num">2</span><span class="hl std">)</span>
+</pre></div>
+<div class="warning"><pre class="knitr r">## Warning: argument is not numeric or logical: returning NA
+## Warning: argument is not numeric or logical: returning NA
+</pre></div>
+<div class="source"><pre class="knitr r"><span class="hl std">Nigeria.I.Est</span> <span class="hl kwb">=</span> <span class="hl kwd">sapply</span><span class="hl std">(</span><span class="hl num">0</span><span class="hl opt">:</span><span class="hl std">(</span><span class="hl kwd">nrow</span><span class="hl std">(I_star)</span><span class="hl opt">-</span> <span class="hl num">1</span><span class="hl std">), getMeanAndCI,</span> <span class="hl kwc">loc</span><span class="hl std">=</span><span class="hl num">3</span><span class="hl std">)</span>
+</pre></div>
+<div class="warning"><pre class="knitr r">## Warning: argument is not numeric or logical: returning NA
+## Warning: argument is not numeric or logical: returning NA
+</pre></div>
+<div class="source"><pre class="knitr r"><span class="hl com"># Declare prediction functions</span>
 <span class="hl std">predictEpidemic</span> <span class="hl kwb">=</span> <span class="hl kwa">function</span><span class="hl std">(</span><span class="hl kwc">beta.pred</span><span class="hl std">,</span>
                            <span class="hl kwc">X.pred</span><span class="hl std">,</span>
                            <span class="hl kwc">gamma.ei</span><span class="hl std">,</span>
@@ -1017,7 +992,8 @@ temporal trend.
     <span class="hl std">R[</span><span class="hl num">1</span><span class="hl std">,]</span> <span class="hl kwb">=</span> <span class="hl std">R0</span>
     <span class="hl std">S_star[</span><span class="hl num">1</span><span class="hl std">,]</span> <span class="hl kwb">=</span> <span class="hl kwd">rbinom</span><span class="hl std">(</span><span class="hl kwd">rep</span><span class="hl std">(</span><span class="hl num">1</span><span class="hl std">,</span> <span class="hl kwd">length</span><span class="hl std">(S0)), R0,</span> <span class="hl num">0</span><span class="hl std">)</span>
     <span class="hl std">p_se[</span><span class="hl num">1</span><span class="hl std">,]</span> <span class="hl kwb">=</span> <span class="hl num">1</span><span class="hl opt">-</span><span class="hl kwd">exp</span><span class="hl std">(</span><span class="hl opt">-</span><span class="hl std">offsets.pred[</span><span class="hl num">1</span><span class="hl std">]</span><span class="hl opt">*</span><span class="hl std">(I[</span><span class="hl num">1</span><span class="hl std">,]</span><span class="hl opt">/</span><span class="hl std">N</span><span class="hl opt">*</span><span class="hl std">p_se_components[</span><span class="hl num">1</span><span class="hl std">,]</span> <span class="hl opt">+</span>
-                          <span class="hl std">rho</span><span class="hl opt">*</span><span class="hl std">(DM</span> <span class="hl opt">%*%</span> <span class="hl std">(I[</span><span class="hl num">1</span><span class="hl std">,]</span><span class="hl opt">/</span><span class="hl std">N</span><span class="hl opt">*</span><span class="hl std">p_se_components[</span><span class="hl num">1</span><span class="hl std">,]))))</span>
+                          <span class="hl std">rho[</span><span class="hl num">1</span><span class="hl std">]</span><span class="hl opt">*</span><span class="hl std">(DM1</span> <span class="hl opt">%*%</span> <span class="hl std">(I[</span><span class="hl num">1</span><span class="hl std">,]</span><span class="hl opt">/</span><span class="hl std">N</span><span class="hl opt">*</span><span class="hl std">p_se_components[</span><span class="hl num">1</span><span class="hl std">,]))</span> <span class="hl opt">+</span>
+                          <span class="hl std">rho[</span><span class="hl num">2</span><span class="hl std">]</span><span class="hl opt">*</span><span class="hl std">(DM2</span> <span class="hl opt">%*%</span> <span class="hl std">(I[</span><span class="hl num">1</span><span class="hl std">,]</span><span class="hl opt">/</span><span class="hl std">N</span><span class="hl opt">*</span><span class="hl std">p_se_components[</span><span class="hl num">1</span><span class="hl std">,]))))</span>
     <span class="hl std">E_star[</span><span class="hl num">1</span><span class="hl std">,]</span> <span class="hl kwb">=</span> <span class="hl kwd">rbinom</span><span class="hl std">(</span><span class="hl kwd">rep</span><span class="hl std">(</span><span class="hl num">1</span><span class="hl std">,</span> <span class="hl kwd">length</span><span class="hl std">(S0)), S0, p_se[</span><span class="hl num">1</span><span class="hl std">,])</span>
     <span class="hl std">I_star[</span><span class="hl num">1</span><span class="hl std">,]</span> <span class="hl kwb">=</span> <span class="hl kwd">rbinom</span><span class="hl std">(</span><span class="hl kwd">rep</span><span class="hl std">(</span><span class="hl num">1</span><span class="hl std">,</span> <span class="hl kwd">length</span><span class="hl std">(S0)), E0, p_ei[</span><span class="hl num">1</span><span class="hl std">])</span>
     <span class="hl std">R_star[</span><span class="hl num">1</span><span class="hl std">,]</span> <span class="hl kwb">=</span> <span class="hl kwd">rbinom</span><span class="hl std">(</span><span class="hl kwd">rep</span><span class="hl std">(</span><span class="hl num">1</span><span class="hl std">,</span> <span class="hl kwd">length</span><span class="hl std">(S0)), I0, p_ir[</span><span class="hl num">1</span><span class="hl std">])</span>
@@ -1031,7 +1007,8 @@ temporal trend.
       <span class="hl std">R[i,]</span> <span class="hl kwb">=</span> <span class="hl std">R[i</span><span class="hl opt">-</span><span class="hl num">1</span><span class="hl std">,]</span> <span class="hl opt">+</span> <span class="hl std">R_star[i</span><span class="hl opt">-</span><span class="hl num">1</span><span class="hl std">,]</span> <span class="hl opt">-</span> <span class="hl std">S_star[i</span><span class="hl opt">-</span><span class="hl num">1</span><span class="hl std">,]</span>
 
       <span class="hl std">p_se[i,]</span> <span class="hl kwb">=</span> <span class="hl num">1</span><span class="hl opt">-</span><span class="hl kwd">exp</span><span class="hl std">(</span><span class="hl opt">-</span><span class="hl std">offsets.pred[i]</span><span class="hl opt">*</span><span class="hl std">(I[i,]</span><span class="hl opt">/</span><span class="hl std">N</span><span class="hl opt">*</span><span class="hl std">p_se_components[i,]</span> <span class="hl opt">+</span>
-                          <span class="hl std">rho</span><span class="hl opt">*</span><span class="hl std">(DM</span> <span class="hl opt">%*%</span> <span class="hl std">(I[i,]</span><span class="hl opt">/</span><span class="hl std">N</span><span class="hl opt">*</span><span class="hl std">p_se_components[i,]))))</span>
+                          <span class="hl std">rho[</span><span class="hl num">1</span><span class="hl std">]</span><span class="hl opt">*</span><span class="hl std">(DM1</span> <span class="hl opt">%*%</span> <span class="hl std">(I[i,]</span><span class="hl opt">/</span><span class="hl std">N</span><span class="hl opt">*</span><span class="hl std">p_se_components[i,]))</span> <span class="hl opt">+</span>
+                          <span class="hl std">rho[</span><span class="hl num">2</span><span class="hl std">]</span><span class="hl opt">*</span><span class="hl std">(DM2</span> <span class="hl opt">%*%</span> <span class="hl std">(I[i,]</span><span class="hl opt">/</span><span class="hl std">N</span><span class="hl opt">*</span><span class="hl std">p_se_components[i,]))))</span>
       <span class="hl std">S_star[i,]</span> <span class="hl kwb">=</span> <span class="hl kwd">rbinom</span><span class="hl std">(</span><span class="hl kwd">rep</span><span class="hl std">(</span><span class="hl num">1</span><span class="hl std">,</span> <span class="hl kwd">length</span><span class="hl std">(S0)), R[i,],</span> <span class="hl num">0</span><span class="hl std">)</span>
       <span class="hl std">E_star[i,]</span> <span class="hl kwb">=</span> <span class="hl kwd">rbinom</span><span class="hl std">(</span><span class="hl kwd">rep</span><span class="hl std">(</span><span class="hl num">1</span><span class="hl std">,</span> <span class="hl kwd">length</span><span class="hl std">(S0)), S[i,], p_se[i,])</span>
       <span class="hl std">I_star[i,]</span> <span class="hl kwb">=</span> <span class="hl kwd">rbinom</span><span class="hl std">(</span><span class="hl kwd">rep</span><span class="hl std">(</span><span class="hl num">1</span><span class="hl std">,</span> <span class="hl kwd">length</span><span class="hl std">(S0)), E[i,], p_ei[i])</span>
@@ -1047,7 +1024,7 @@ temporal trend.
 <span class="hl std">predict.i</span> <span class="hl kwb">=</span> <span class="hl kwa">function</span><span class="hl std">(</span><span class="hl kwc">i</span><span class="hl std">)</span>
 <span class="hl std">{</span>
   <span class="hl std">dataRow</span> <span class="hl kwb">=</span> <span class="hl std">chain1[i,]</span>
-  <span class="hl std">rho</span> <span class="hl kwb">=</span> <span class="hl std">dataRow</span><span class="hl opt">$</span><span class="hl std">rho</span>
+  <span class="hl std">rho</span> <span class="hl kwb">=</span> <span class="hl kwd">c</span><span class="hl std">(dataRow</span><span class="hl opt">$</span><span class="hl std">rho_0, dataRow</span><span class="hl opt">$</span><span class="hl std">rho_1)</span>
   <span class="hl std">beta</span> <span class="hl kwb">=</span> <span class="hl kwd">c</span><span class="hl std">()</span>
   <span class="hl kwa">for</span> <span class="hl std">(i</span> <span class="hl kwa">in</span> <span class="hl num">0</span><span class="hl opt">:</span><span class="hl std">(modelDF</span><span class="hl opt">+</span><span class="hl num">3</span><span class="hl std">))</span>
   <span class="hl std">{</span>
@@ -1087,9 +1064,10 @@ temporal trend.
 
 <span class="hl std">preds</span> <span class="hl kwb">=</span> <span class="hl kwd">lapply</span><span class="hl std">((</span><span class="hl kwd">nrow</span><span class="hl std">(chain1)</span> <span class="hl opt">-</span> <span class="hl kwd">floor</span><span class="hl std">(</span><span class="hl kwd">nrow</span><span class="hl std">(chain1)</span><span class="hl opt">/</span><span class="hl num">2</span><span class="hl std">))</span><span class="hl opt">:</span>
                   <span class="hl kwd">nrow</span><span class="hl std">(chain1), predict.i)</span>
-
-
-<span class="hl std">pred.dates</span> <span class="hl kwb">=</span> <span class="hl kwd">c</span><span class="hl std">(rptDate[(</span><span class="hl kwd">which.max</span><span class="hl std">(rptDate))],</span>
+</pre></div>
+<div class="error"><pre class="knitr r">## Error: data is too long
+</pre></div>
+<div class="source"><pre class="knitr r"><span class="hl std">pred.dates</span> <span class="hl kwb">=</span> <span class="hl kwd">c</span><span class="hl std">(rptDate[(</span><span class="hl kwd">which.max</span><span class="hl std">(rptDate))],</span>
                <span class="hl std">rptDate[(</span><span class="hl kwd">which.max</span><span class="hl std">(rptDate))]</span> <span class="hl opt">+</span> <span class="hl kwd">seq</span><span class="hl std">(</span><span class="hl num">2</span><span class="hl std">,pred.days</span><span class="hl opt">-</span><span class="hl num">2</span><span class="hl std">,</span><span class="hl num">2</span><span class="hl std">))</span>
 <span class="hl std">pred.xlim</span> <span class="hl kwb">=</span> <span class="hl kwd">c</span><span class="hl std">(</span><span class="hl kwd">min</span><span class="hl std">(rptDate),</span> <span class="hl kwd">max</span><span class="hl std">(pred.dates))</span>
 <span class="hl std">lastIdx</span> <span class="hl kwb">=</span> <span class="hl kwd">nrow</span><span class="hl std">(I_star)</span>
@@ -1248,7 +1226,9 @@ several important parameters, and take a look at the Gelman and Rubin convergenc
 <p>
 A common tool for describing the evolution of an epidemic is a quantity known as the basic reproductive numer, the basic reproductive ratio, or one of several other variants on that theme. The basic idea is to quantify how many secondary infections a single infectious individual is expected to cause in a large, fully susceptible population. Naturally, when this ratio exceeds one we expect the epidemic to spread. Conversely, a basic reproductive number less than one indicates that a pathogen is more likely to die out.</p> <br/><br/>
 
-<div class="chunk" id="unnamed-chunk-11"><div class="rimage center"><img src="figure/unnamed-chunk-11.png" title="plot of chunk unnamed-chunk-11" alt="plot of chunk unnamed-chunk-11" class="plot" /></div></div>
+<div class="chunk" id="unnamed-chunk-11"><div class="rcode"><div class="error"><pre class="knitr r">## Error: subscript out of bounds
+</pre></div>
+</div></div>
 
 
 While the basic reproductive number is a useful quantity to know, it does not directly make any predictions about future epidemic behavior. In order to do that, we need to simulate epidemics  based on the MCMC samples we have obtained and summarize their variability over time. <br/>
@@ -1262,7 +1242,9 @@ Below, we will attempt to predict the course of the epidemic through early fall.
 We must be cautious when making predictions about a chaotic process this far into the future. The intensity function which drives the exposure process is based on simple smooth functions of time, rather than any external information. While this is perfectly adequate for estimation, it may or may not provide good prediction performance. 
 </p>
 
-<div class="chunk" id="unnamed-chunk-12"><div class="rimage center"><img src="figure/unnamed-chunk-12.png" title="plot of chunk unnamed-chunk-12" alt="plot of chunk unnamed-chunk-12" class="plot" /></div></div>
+<div class="chunk" id="unnamed-chunk-12"><div class="rcode"><div class="error"><pre class="knitr r">## Error: need finite 'ylim' values
+</pre></div>
+</div><div class="rimage center"><img src="figure/unnamed-chunk-12.png" title="plot of chunk unnamed-chunk-12" alt="plot of chunk unnamed-chunk-12" class="plot" /></div></div>
 
 <br/>
 <p>It can also be helpful to take a look at the data in tabular form.</p><br/>
@@ -1508,105 +1490,112 @@ We must be cautious when making predictions about a chaotic process this far int
    <td align="center"> 7 </td>
   </tr>
   <tr>
-   <td align="left"> &nbsp;2014-09-05&nbsp; </td>
+   <td align="left"> &nbsp;2014-09-07&nbsp; </td>
+   <td align="center"> NA </td>
+   <td align="center"> NA </td>
+   <td align="center"> NA </td>
+   <td align="center"> NA </td>
+  </tr>
+  <tr>
+   <td align="left"> &nbsp;2014-09-10&nbsp; </td>
    <td align="center"> 224 </td>
    <td align="center"> 853 </td>
    <td align="center"> 428 </td>
    <td align="center"> 10 </td>
   </tr>
   <tr>
-   <td align="left"> &nbsp;2014-09-07&nbsp; </td>
+   <td align="left"> &nbsp;2014-09-12&nbsp; </td>
    <td align="center"> 246 </td>
    <td align="center"> 953 </td>
    <td align="center"> 443 </td>
    <td align="center"> 10 </td>
   </tr>
   <tr>
-   <td align="left"> &nbsp;2014-09-09&nbsp; </td>
+   <td align="left"> &nbsp;2014-09-14&nbsp; </td>
    <td align="center"> 241 </td>
    <td align="center"> 948 </td>
    <td align="center"> 429 </td>
    <td align="center"> 20 </td>
   </tr>
   <tr>
-   <td align="left"> &nbsp;2014-09-11&nbsp; </td>
+   <td align="left"> &nbsp;2014-09-16&nbsp; </td>
    <td align="center"> 223 </td>
    <td align="center"> 912 </td>
    <td align="center"> 397 </td>
    <td align="center"> 42 </td>
   </tr>
   <tr>
-   <td align="left"> &nbsp;2014-09-13&nbsp; </td>
+   <td align="left"> &nbsp;2014-09-18&nbsp; </td>
    <td align="center"> 214 </td>
    <td align="center"> 937 </td>
    <td align="center"> 380 </td>
    <td align="center"> 78 </td>
   </tr>
   <tr>
-   <td align="left"> &nbsp;2014-09-15&nbsp; </td>
+   <td align="left"> &nbsp;2014-09-20&nbsp; </td>
    <td align="center"> 209 </td>
    <td align="center"> 991 </td>
    <td align="center"> 370 </td>
    <td align="center"> 117 </td>
   </tr>
   <tr>
-   <td align="left"> &nbsp;2014-09-17&nbsp; </td>
+   <td align="left"> &nbsp;2014-09-22&nbsp; </td>
    <td align="center"> 209 </td>
    <td align="center"> 1081 </td>
    <td align="center"> 367 </td>
    <td align="center"> 155 </td>
   </tr>
   <tr>
-   <td align="left"> &nbsp;2014-09-19&nbsp; </td>
+   <td align="left"> &nbsp;2014-09-24&nbsp; </td>
    <td align="center"> 211 </td>
    <td align="center"> 1198 </td>
    <td align="center"> 369 </td>
    <td align="center"> 190 </td>
   </tr>
   <tr>
-   <td align="left"> &nbsp;2014-09-21&nbsp; </td>
+   <td align="left"> &nbsp;2014-09-26&nbsp; </td>
    <td align="center"> 217 </td>
    <td align="center"> 1358 </td>
    <td align="center"> 377 </td>
    <td align="center"> 225 </td>
   </tr>
   <tr>
-   <td align="left"> &nbsp;2014-09-23&nbsp; </td>
+   <td align="left"> &nbsp;2014-09-28&nbsp; </td>
    <td align="center"> 227 </td>
    <td align="center"> 1562 </td>
    <td align="center"> 387 </td>
    <td align="center"> 261 </td>
   </tr>
   <tr>
-   <td align="left"> &nbsp;2014-09-25&nbsp; </td>
+   <td align="left"> &nbsp;2014-09-30&nbsp; </td>
    <td align="center"> 240 </td>
    <td align="center"> 1824 </td>
    <td align="center"> 403 </td>
    <td align="center"> 305 </td>
   </tr>
   <tr>
-   <td align="left"> &nbsp;2014-09-27&nbsp; </td>
+   <td align="left"> &nbsp;2014-10-02&nbsp; </td>
    <td align="center"> 257 </td>
    <td align="center"> 2151 </td>
    <td align="center"> 424 </td>
    <td align="center"> 355 </td>
   </tr>
   <tr>
-   <td align="left"> &nbsp;2014-09-29&nbsp; </td>
+   <td align="left"> &nbsp;2014-10-04&nbsp; </td>
    <td align="center"> 279 </td>
    <td align="center"> 2572 </td>
    <td align="center"> 450 </td>
    <td align="center"> 420 </td>
   </tr>
   <tr>
-   <td align="left"> &nbsp;2014-10-01&nbsp; </td>
+   <td align="left"> &nbsp;2014-10-06&nbsp; </td>
    <td align="center"> 308 </td>
    <td align="center"> 3100 </td>
    <td align="center"> 484 </td>
    <td align="center"> 501 </td>
   </tr>
   <tr>
-   <td align="left"> &nbsp;2014-10-03&nbsp; </td>
+   <td align="left"> &nbsp;2014-10-08&nbsp; </td>
    <td align="center"> 343 </td>
    <td align="center"> 3779 </td>
    <td align="center"> 528 </td>
@@ -1624,7 +1613,7 @@ We must be cautious when making predictions about a chaotic process this far int
   <div class = "row" ng-controller='rChartsCtrl_pred' >
     <div class="col-sm-3">
       <input id='zoom-map-slider-pred' type='range' min=1 max=
-198
+203
       ng-model='pred_Day' width=200>
        <span>Day: <span id ="zoom-map-day-counter-pred"></span></span>
     </div>
@@ -1692,2326 +1681,2396 @@ var alldata =
 {
  "1": {
  "GIN": {
- "fillKey": "lt23" 
+ "fillKey": "lt25" 
 },
 "LBR": {
- "fillKey": "lt8" 
+ "fillKey": "lt12" 
 },
 "SLE": {
- "fillKey": "lt8" 
+ "fillKey": "lt12" 
 },
 "NGA": {
- "fillKey": "lt8" 
+ "fillKey": "lt12" 
 } 
 },
 "2": {
  "GIN": {
- "fillKey": "lt8" 
+ "fillKey": "lt12" 
 },
 "LBR": {
- "fillKey": "lt8" 
+ "fillKey": "lt12" 
 },
 "SLE": {
- "fillKey": "lt8" 
+ "fillKey": "lt12" 
 },
 "NGA": {
- "fillKey": "lt8" 
+ "fillKey": "lt12" 
 } 
 },
 "3": {
  "GIN": {
- "fillKey": "lt8" 
+ "fillKey": "lt12" 
 },
 "LBR": {
- "fillKey": "lt8" 
+ "fillKey": "lt12" 
 },
 "SLE": {
- "fillKey": "lt8" 
+ "fillKey": "lt12" 
 },
 "NGA": {
- "fillKey": "lt8" 
+ "fillKey": "lt12" 
 } 
 },
 "4": {
  "GIN": {
- "fillKey": "lt23" 
+ "fillKey": "lt25" 
 },
 "LBR": {
- "fillKey": "lt15" 
+ "fillKey": "lt12" 
 },
 "SLE": {
- "fillKey": "lt8" 
+ "fillKey": "lt12" 
 },
 "NGA": {
- "fillKey": "lt8" 
+ "fillKey": "lt12" 
 } 
 },
 "5": {
  "GIN": {
- "fillKey": "lt15" 
+ "fillKey": "lt12" 
 },
 "LBR": {
- "fillKey": "lt8" 
+ "fillKey": "lt12" 
 },
 "SLE": {
- "fillKey": "lt8" 
+ "fillKey": "lt12" 
 },
 "NGA": {
- "fillKey": "lt8" 
+ "fillKey": "lt12" 
 } 
 },
 "6": {
  "GIN": {
- "fillKey": "lt8" 
+ "fillKey": "lt12" 
 },
 "LBR": {
- "fillKey": "lt8" 
+ "fillKey": "lt12" 
 },
 "SLE": {
- "fillKey": "lt8" 
+ "fillKey": "lt12" 
 },
 "NGA": {
- "fillKey": "lt8" 
+ "fillKey": "lt12" 
 } 
 },
 "7": {
  "GIN": {
- "fillKey": "lt8" 
+ "fillKey": "lt12" 
 },
 "LBR": {
- "fillKey": "lt8" 
+ "fillKey": "lt12" 
 },
 "SLE": {
- "fillKey": "lt8" 
+ "fillKey": "lt12" 
 },
 "NGA": {
- "fillKey": "lt8" 
+ "fillKey": "lt12" 
 } 
 },
 "8": {
  "GIN": {
- "fillKey": "lt8" 
+ "fillKey": "lt12" 
 },
 "LBR": {
- "fillKey": "lt8" 
+ "fillKey": "lt12" 
 },
 "SLE": {
- "fillKey": "lt8" 
+ "fillKey": "lt12" 
 },
 "NGA": {
- "fillKey": "lt8" 
+ "fillKey": "lt12" 
 } 
 },
 "9": {
  "GIN": {
- "fillKey": "lt8" 
+ "fillKey": "lt12" 
 },
 "LBR": {
- "fillKey": "lt8" 
+ "fillKey": "lt12" 
 },
 "SLE": {
- "fillKey": "lt8" 
+ "fillKey": "lt12" 
 },
 "NGA": {
- "fillKey": "lt8" 
+ "fillKey": "lt12" 
 } 
 },
 "10": {
  "GIN": {
- "fillKey": "lt8" 
+ "fillKey": "lt12" 
 },
 "LBR": {
- "fillKey": "lt8" 
+ "fillKey": "lt12" 
 },
 "SLE": {
- "fillKey": "lt8" 
+ "fillKey": "lt12" 
 },
 "NGA": {
- "fillKey": "lt8" 
+ "fillKey": "lt12" 
 } 
 },
 "11": {
  "GIN": {
- "fillKey": "lt8" 
+ "fillKey": "lt12" 
 },
 "LBR": {
- "fillKey": "lt8" 
+ "fillKey": "lt12" 
 },
 "SLE": {
- "fillKey": "lt8" 
+ "fillKey": "lt12" 
 },
 "NGA": {
- "fillKey": "lt8" 
+ "fillKey": "lt12" 
 } 
 },
 "12": {
  "GIN": {
- "fillKey": "lt8" 
+ "fillKey": "lt12" 
 },
 "LBR": {
- "fillKey": "lt8" 
+ "fillKey": "lt12" 
 },
 "SLE": {
- "fillKey": "lt8" 
+ "fillKey": "lt12" 
 },
 "NGA": {
- "fillKey": "lt8" 
+ "fillKey": "lt12" 
 } 
 },
 "13": {
  "GIN": {
- "fillKey": "lt8" 
+ "fillKey": "lt12" 
 },
 "LBR": {
- "fillKey": "lt8" 
+ "fillKey": "lt12" 
 },
 "SLE": {
- "fillKey": "lt8" 
+ "fillKey": "lt12" 
 },
 "NGA": {
- "fillKey": "lt8" 
+ "fillKey": "lt12" 
 } 
 },
 "14": {
  "GIN": {
- "fillKey": "lt8" 
+ "fillKey": "lt12" 
 },
 "LBR": {
- "fillKey": "lt8" 
+ "fillKey": "lt12" 
 },
 "SLE": {
- "fillKey": "lt8" 
+ "fillKey": "lt12" 
 },
 "NGA": {
- "fillKey": "lt8" 
+ "fillKey": "lt12" 
 } 
 },
 "15": {
  "GIN": {
- "fillKey": "lt8" 
+ "fillKey": "lt12" 
 },
 "LBR": {
- "fillKey": "lt8" 
+ "fillKey": "lt12" 
 },
 "SLE": {
- "fillKey": "lt8" 
+ "fillKey": "lt12" 
 },
 "NGA": {
- "fillKey": "lt8" 
+ "fillKey": "lt12" 
 } 
 },
 "16": {
  "GIN": {
- "fillKey": "lt8" 
+ "fillKey": "lt12" 
 },
 "LBR": {
- "fillKey": "lt8" 
+ "fillKey": "lt12" 
 },
 "SLE": {
- "fillKey": "lt8" 
+ "fillKey": "lt12" 
 },
 "NGA": {
- "fillKey": "lt8" 
+ "fillKey": "lt12" 
 } 
 },
 "17": {
  "GIN": {
- "fillKey": "lt8" 
+ "fillKey": "lt12" 
 },
 "LBR": {
- "fillKey": "lt8" 
+ "fillKey": "lt12" 
 },
 "SLE": {
- "fillKey": "lt8" 
+ "fillKey": "lt12" 
 },
 "NGA": {
- "fillKey": "lt8" 
+ "fillKey": "lt12" 
 } 
 },
 "18": {
  "GIN": {
- "fillKey": "lt8" 
+ "fillKey": "lt12" 
 },
 "LBR": {
- "fillKey": "lt8" 
+ "fillKey": "lt12" 
 },
 "SLE": {
- "fillKey": "lt8" 
+ "fillKey": "lt12" 
 },
 "NGA": {
- "fillKey": "lt8" 
+ "fillKey": "lt12" 
 } 
 },
 "19": {
  "GIN": {
- "fillKey": "lt8" 
+ "fillKey": "lt12" 
 },
 "LBR": {
- "fillKey": "lt8" 
+ "fillKey": "lt12" 
 },
 "SLE": {
- "fillKey": "lt8" 
+ "fillKey": "lt12" 
 },
 "NGA": {
- "fillKey": "lt8" 
+ "fillKey": "lt12" 
 } 
 },
 "20": {
  "GIN": {
- "fillKey": "lt8" 
+ "fillKey": "lt12" 
 },
 "LBR": {
- "fillKey": "lt8" 
+ "fillKey": "lt12" 
 },
 "SLE": {
- "fillKey": "lt8" 
+ "fillKey": "lt12" 
 },
 "NGA": {
- "fillKey": "lt8" 
+ "fillKey": "lt12" 
 } 
 },
 "21": {
  "GIN": {
- "fillKey": "lt8" 
+ "fillKey": "lt12" 
 },
 "LBR": {
- "fillKey": "lt8" 
+ "fillKey": "lt12" 
 },
 "SLE": {
- "fillKey": "lt8" 
+ "fillKey": "lt12" 
 },
 "NGA": {
- "fillKey": "lt8" 
+ "fillKey": "lt12" 
 } 
 },
 "22": {
  "GIN": {
- "fillKey": "lt8" 
+ "fillKey": "lt12" 
 },
 "LBR": {
- "fillKey": "lt8" 
+ "fillKey": "lt12" 
 },
 "SLE": {
- "fillKey": "lt8" 
+ "fillKey": "lt12" 
 },
 "NGA": {
- "fillKey": "lt8" 
+ "fillKey": "lt12" 
 } 
 },
 "23": {
  "GIN": {
- "fillKey": "lt15" 
+ "fillKey": "lt12" 
 },
 "LBR": {
- "fillKey": "lt8" 
+ "fillKey": "lt12" 
 },
 "SLE": {
- "fillKey": "lt8" 
+ "fillKey": "lt12" 
 },
 "NGA": {
- "fillKey": "lt8" 
+ "fillKey": "lt12" 
 } 
 },
 "24": {
  "GIN": {
- "fillKey": "lt15" 
+ "fillKey": "lt25" 
 },
 "LBR": {
- "fillKey": "lt8" 
+ "fillKey": "lt12" 
 },
 "SLE": {
- "fillKey": "lt8" 
+ "fillKey": "lt12" 
 },
 "NGA": {
- "fillKey": "lt8" 
+ "fillKey": "lt12" 
 } 
 },
 "25": {
  "GIN": {
- "fillKey": "lt8" 
+ "fillKey": "lt12" 
 },
 "LBR": {
- "fillKey": "lt8" 
+ "fillKey": "lt12" 
 },
 "SLE": {
- "fillKey": "lt8" 
+ "fillKey": "lt12" 
 },
 "NGA": {
- "fillKey": "lt8" 
+ "fillKey": "lt12" 
 } 
 },
 "26": {
  "GIN": {
- "fillKey": "lt8" 
+ "fillKey": "lt12" 
 },
 "LBR": {
- "fillKey": "lt8" 
+ "fillKey": "lt12" 
 },
 "SLE": {
- "fillKey": "lt8" 
+ "fillKey": "lt12" 
 },
 "NGA": {
- "fillKey": "lt8" 
+ "fillKey": "lt12" 
 } 
 },
 "27": {
  "GIN": {
- "fillKey": "lt8" 
+ "fillKey": "lt12" 
 },
 "LBR": {
- "fillKey": "lt8" 
+ "fillKey": "lt12" 
 },
 "SLE": {
- "fillKey": "lt8" 
+ "fillKey": "lt12" 
 },
 "NGA": {
- "fillKey": "lt8" 
+ "fillKey": "lt12" 
 } 
 },
 "28": {
  "GIN": {
- "fillKey": "lt8" 
+ "fillKey": "lt12" 
 },
 "LBR": {
- "fillKey": "lt8" 
+ "fillKey": "lt12" 
 },
 "SLE": {
- "fillKey": "lt8" 
+ "fillKey": "lt12" 
 },
 "NGA": {
- "fillKey": "lt8" 
+ "fillKey": "lt12" 
 } 
 },
 "29": {
  "GIN": {
- "fillKey": "lt8" 
+ "fillKey": "lt12" 
 },
 "LBR": {
- "fillKey": "lt8" 
+ "fillKey": "lt12" 
 },
 "SLE": {
- "fillKey": "lt8" 
+ "fillKey": "lt12" 
 },
 "NGA": {
- "fillKey": "lt8" 
+ "fillKey": "lt12" 
 } 
 },
 "30": {
  "GIN": {
- "fillKey": "lt8" 
+ "fillKey": "lt12" 
 },
 "LBR": {
- "fillKey": "lt8" 
+ "fillKey": "lt12" 
 },
 "SLE": {
- "fillKey": "lt8" 
+ "fillKey": "lt12" 
 },
 "NGA": {
- "fillKey": "lt8" 
+ "fillKey": "lt12" 
 } 
 },
 "31": {
  "GIN": {
- "fillKey": "lt8" 
+ "fillKey": "lt12" 
 },
 "LBR": {
- "fillKey": "lt8" 
+ "fillKey": "lt12" 
 },
 "SLE": {
- "fillKey": "lt8" 
+ "fillKey": "lt12" 
 },
 "NGA": {
- "fillKey": "lt8" 
+ "fillKey": "lt12" 
 } 
 },
 "32": {
  "GIN": {
- "fillKey": "lt8" 
+ "fillKey": "lt12" 
 },
 "LBR": {
- "fillKey": "lt8" 
+ "fillKey": "lt12" 
 },
 "SLE": {
- "fillKey": "lt8" 
+ "fillKey": "lt12" 
 },
 "NGA": {
- "fillKey": "lt8" 
+ "fillKey": "lt12" 
 } 
 },
 "33": {
  "GIN": {
- "fillKey": "lt8" 
+ "fillKey": "lt12" 
 },
 "LBR": {
- "fillKey": "lt8" 
+ "fillKey": "lt12" 
 },
 "SLE": {
- "fillKey": "lt8" 
+ "fillKey": "lt12" 
 },
 "NGA": {
- "fillKey": "lt8" 
+ "fillKey": "lt12" 
 } 
 },
 "34": {
  "GIN": {
- "fillKey": "lt8" 
+ "fillKey": "lt12" 
 },
 "LBR": {
- "fillKey": "lt8" 
+ "fillKey": "lt12" 
 },
 "SLE": {
- "fillKey": "lt8" 
+ "fillKey": "lt12" 
 },
 "NGA": {
- "fillKey": "lt8" 
+ "fillKey": "lt12" 
 } 
 },
 "35": {
  "GIN": {
- "fillKey": "lt8" 
+ "fillKey": "lt12" 
 },
 "LBR": {
- "fillKey": "lt8" 
+ "fillKey": "lt12" 
 },
 "SLE": {
- "fillKey": "lt8" 
+ "fillKey": "lt12" 
 },
 "NGA": {
- "fillKey": "lt8" 
+ "fillKey": "lt12" 
 } 
 },
 "36": {
  "GIN": {
- "fillKey": "lt8" 
+ "fillKey": "lt12" 
 },
 "LBR": {
- "fillKey": "lt8" 
+ "fillKey": "lt12" 
 },
 "SLE": {
- "fillKey": "lt8" 
+ "fillKey": "lt12" 
 },
 "NGA": {
- "fillKey": "lt8" 
+ "fillKey": "lt12" 
 } 
 },
 "37": {
  "GIN": {
- "fillKey": "lt8" 
+ "fillKey": "lt12" 
 },
 "LBR": {
- "fillKey": "lt8" 
+ "fillKey": "lt12" 
 },
 "SLE": {
- "fillKey": "lt8" 
+ "fillKey": "lt12" 
 },
 "NGA": {
- "fillKey": "lt8" 
+ "fillKey": "lt12" 
 } 
 },
 "38": {
  "GIN": {
- "fillKey": "lt8" 
+ "fillKey": "lt12" 
 },
 "LBR": {
- "fillKey": "lt8" 
+ "fillKey": "lt12" 
 },
 "SLE": {
- "fillKey": "lt8" 
+ "fillKey": "lt12" 
 },
 "NGA": {
- "fillKey": "lt8" 
+ "fillKey": "lt12" 
 } 
 },
 "39": {
  "GIN": {
- "fillKey": "lt8" 
+ "fillKey": "lt12" 
 },
 "LBR": {
- "fillKey": "lt8" 
+ "fillKey": "lt12" 
 },
 "SLE": {
- "fillKey": "lt8" 
+ "fillKey": "lt12" 
 },
 "NGA": {
- "fillKey": "lt8" 
+ "fillKey": "lt12" 
 } 
 },
 "40": {
  "GIN": {
- "fillKey": "lt8" 
+ "fillKey": "lt12" 
 },
 "LBR": {
- "fillKey": "lt8" 
+ "fillKey": "lt12" 
 },
 "SLE": {
- "fillKey": "lt8" 
+ "fillKey": "lt12" 
 },
 "NGA": {
- "fillKey": "lt8" 
+ "fillKey": "lt12" 
 } 
 },
 "41": {
  "GIN": {
- "fillKey": "lt8" 
+ "fillKey": "lt12" 
 },
 "LBR": {
- "fillKey": "lt8" 
+ "fillKey": "lt12" 
 },
 "SLE": {
- "fillKey": "lt8" 
+ "fillKey": "lt12" 
 },
 "NGA": {
- "fillKey": "lt8" 
+ "fillKey": "lt12" 
 } 
 },
 "42": {
  "GIN": {
- "fillKey": "lt8" 
+ "fillKey": "lt12" 
 },
 "LBR": {
- "fillKey": "lt8" 
+ "fillKey": "lt12" 
 },
 "SLE": {
- "fillKey": "lt8" 
+ "fillKey": "lt12" 
 },
 "NGA": {
- "fillKey": "lt8" 
+ "fillKey": "lt12" 
 } 
 },
 "43": {
  "GIN": {
- "fillKey": "lt8" 
+ "fillKey": "lt12" 
 },
 "LBR": {
- "fillKey": "lt8" 
+ "fillKey": "lt12" 
 },
 "SLE": {
- "fillKey": "lt8" 
+ "fillKey": "lt12" 
 },
 "NGA": {
- "fillKey": "lt8" 
+ "fillKey": "lt12" 
 } 
 },
 "44": {
  "GIN": {
- "fillKey": "lt8" 
+ "fillKey": "lt12" 
 },
 "LBR": {
- "fillKey": "lt8" 
+ "fillKey": "lt12" 
 },
 "SLE": {
- "fillKey": "lt8" 
+ "fillKey": "lt12" 
 },
 "NGA": {
- "fillKey": "lt8" 
+ "fillKey": "lt12" 
 } 
 },
 "45": {
  "GIN": {
- "fillKey": "lt8" 
+ "fillKey": "lt12" 
 },
 "LBR": {
- "fillKey": "lt8" 
+ "fillKey": "lt12" 
 },
 "SLE": {
- "fillKey": "lt8" 
+ "fillKey": "lt12" 
 },
 "NGA": {
- "fillKey": "lt8" 
+ "fillKey": "lt12" 
 } 
 },
 "46": {
  "GIN": {
- "fillKey": "lt8" 
+ "fillKey": "lt12" 
 },
 "LBR": {
- "fillKey": "lt8" 
+ "fillKey": "lt12" 
 },
 "SLE": {
- "fillKey": "lt8" 
+ "fillKey": "lt12" 
 },
 "NGA": {
- "fillKey": "lt8" 
+ "fillKey": "lt12" 
 } 
 },
 "47": {
  "GIN": {
- "fillKey": "lt8" 
+ "fillKey": "lt12" 
 },
 "LBR": {
- "fillKey": "lt8" 
+ "fillKey": "lt12" 
 },
 "SLE": {
- "fillKey": "lt8" 
+ "fillKey": "lt12" 
 },
 "NGA": {
- "fillKey": "lt8" 
+ "fillKey": "lt12" 
 } 
 },
 "48": {
  "GIN": {
- "fillKey": "lt8" 
+ "fillKey": "lt12" 
 },
 "LBR": {
- "fillKey": "lt8" 
+ "fillKey": "lt12" 
 },
 "SLE": {
- "fillKey": "lt8" 
+ "fillKey": "lt12" 
 },
 "NGA": {
- "fillKey": "lt8" 
+ "fillKey": "lt12" 
 } 
 },
 "49": {
  "GIN": {
- "fillKey": "lt8" 
+ "fillKey": "lt12" 
 },
 "LBR": {
- "fillKey": "lt8" 
+ "fillKey": "lt12" 
 },
 "SLE": {
- "fillKey": "lt8" 
+ "fillKey": "lt12" 
 },
 "NGA": {
- "fillKey": "lt8" 
+ "fillKey": "lt12" 
 } 
 },
 "50": {
  "GIN": {
- "fillKey": "lt8" 
+ "fillKey": "lt12" 
 },
 "LBR": {
- "fillKey": "lt8" 
+ "fillKey": "lt12" 
 },
 "SLE": {
- "fillKey": "lt8" 
+ "fillKey": "lt12" 
 },
 "NGA": {
- "fillKey": "lt8" 
+ "fillKey": "lt12" 
 } 
 },
 "51": {
  "GIN": {
- "fillKey": "lt8" 
+ "fillKey": "lt12" 
 },
 "LBR": {
- "fillKey": "lt8" 
+ "fillKey": "lt12" 
 },
 "SLE": {
- "fillKey": "lt8" 
+ "fillKey": "lt12" 
 },
 "NGA": {
- "fillKey": "lt8" 
+ "fillKey": "lt12" 
 } 
 },
 "52": {
  "GIN": {
- "fillKey": "lt8" 
+ "fillKey": "lt12" 
 },
 "LBR": {
- "fillKey": "lt8" 
+ "fillKey": "lt12" 
 },
 "SLE": {
- "fillKey": "lt8" 
+ "fillKey": "lt12" 
 },
 "NGA": {
- "fillKey": "lt8" 
+ "fillKey": "lt12" 
 } 
 },
 "53": {
  "GIN": {
- "fillKey": "lt8" 
+ "fillKey": "lt12" 
 },
 "LBR": {
- "fillKey": "lt8" 
+ "fillKey": "lt12" 
 },
 "SLE": {
- "fillKey": "lt8" 
+ "fillKey": "lt12" 
 },
 "NGA": {
- "fillKey": "lt8" 
+ "fillKey": "lt12" 
 } 
 },
 "54": {
  "GIN": {
- "fillKey": "lt8" 
+ "fillKey": "lt12" 
 },
 "LBR": {
- "fillKey": "lt8" 
+ "fillKey": "lt12" 
 },
 "SLE": {
- "fillKey": "lt8" 
+ "fillKey": "lt12" 
 },
 "NGA": {
- "fillKey": "lt8" 
+ "fillKey": "lt12" 
 } 
 },
 "55": {
  "GIN": {
- "fillKey": "lt8" 
+ "fillKey": "lt12" 
 },
 "LBR": {
- "fillKey": "lt8" 
+ "fillKey": "lt12" 
 },
 "SLE": {
- "fillKey": "lt8" 
+ "fillKey": "lt12" 
 },
 "NGA": {
- "fillKey": "lt8" 
+ "fillKey": "lt12" 
 } 
 },
 "56": {
  "GIN": {
- "fillKey": "lt8" 
+ "fillKey": "lt12" 
 },
 "LBR": {
- "fillKey": "lt8" 
+ "fillKey": "lt12" 
 },
 "SLE": {
- "fillKey": "lt8" 
+ "fillKey": "lt12" 
 },
 "NGA": {
- "fillKey": "lt8" 
+ "fillKey": "lt12" 
 } 
 },
 "57": {
  "GIN": {
- "fillKey": "lt8" 
+ "fillKey": "lt12" 
 },
 "LBR": {
- "fillKey": "lt8" 
+ "fillKey": "lt12" 
 },
 "SLE": {
- "fillKey": "lt8" 
+ "fillKey": "lt12" 
 },
 "NGA": {
- "fillKey": "lt8" 
+ "fillKey": "lt12" 
 } 
 },
 "58": {
  "GIN": {
- "fillKey": "lt8" 
+ "fillKey": "lt12" 
 },
 "LBR": {
- "fillKey": "lt8" 
+ "fillKey": "lt12" 
 },
 "SLE": {
- "fillKey": "lt8" 
+ "fillKey": "lt12" 
 },
 "NGA": {
- "fillKey": "lt8" 
+ "fillKey": "lt12" 
 } 
 },
 "59": {
  "GIN": {
- "fillKey": "lt8" 
+ "fillKey": "lt12" 
 },
 "LBR": {
- "fillKey": "lt8" 
+ "fillKey": "lt12" 
 },
 "SLE": {
- "fillKey": "lt8" 
+ "fillKey": "lt12" 
 },
 "NGA": {
- "fillKey": "lt8" 
+ "fillKey": "lt12" 
 } 
 },
 "60": {
  "GIN": {
- "fillKey": "lt8" 
+ "fillKey": "lt12" 
 },
 "LBR": {
- "fillKey": "lt8" 
+ "fillKey": "lt12" 
 },
 "SLE": {
- "fillKey": "lt8" 
+ "fillKey": "lt12" 
 },
 "NGA": {
- "fillKey": "lt8" 
+ "fillKey": "lt12" 
 } 
 },
 "61": {
  "GIN": {
- "fillKey": "lt8" 
+ "fillKey": "lt12" 
 },
 "LBR": {
- "fillKey": "lt8" 
+ "fillKey": "lt12" 
 },
 "SLE": {
- "fillKey": "lt8" 
+ "fillKey": "lt12" 
 },
 "NGA": {
- "fillKey": "lt8" 
+ "fillKey": "lt12" 
 } 
 },
 "62": {
  "GIN": {
- "fillKey": "lt8" 
+ "fillKey": "lt12" 
 },
 "LBR": {
- "fillKey": "lt8" 
+ "fillKey": "lt12" 
 },
 "SLE": {
- "fillKey": "lt8" 
+ "fillKey": "lt12" 
 },
 "NGA": {
- "fillKey": "lt8" 
+ "fillKey": "lt12" 
 } 
 },
 "63": {
  "GIN": {
- "fillKey": "lt8" 
+ "fillKey": "lt12" 
 },
 "LBR": {
- "fillKey": "lt8" 
+ "fillKey": "lt12" 
 },
 "SLE": {
- "fillKey": "lt8" 
+ "fillKey": "lt12" 
 },
 "NGA": {
- "fillKey": "lt8" 
+ "fillKey": "lt12" 
 } 
 },
 "64": {
  "GIN": {
- "fillKey": "lt8" 
+ "fillKey": "lt12" 
 },
 "LBR": {
- "fillKey": "lt8" 
+ "fillKey": "lt12" 
 },
 "SLE": {
- "fillKey": "lt8" 
+ "fillKey": "lt12" 
 },
 "NGA": {
- "fillKey": "lt8" 
+ "fillKey": "lt12" 
 } 
 },
 "65": {
  "GIN": {
- "fillKey": "lt8" 
+ "fillKey": "lt12" 
 },
 "LBR": {
- "fillKey": "lt8" 
+ "fillKey": "lt12" 
 },
 "SLE": {
- "fillKey": "lt8" 
+ "fillKey": "lt12" 
 },
 "NGA": {
- "fillKey": "lt8" 
+ "fillKey": "lt12" 
 } 
 },
 "66": {
  "GIN": {
- "fillKey": "lt15" 
+ "fillKey": "lt12" 
 },
 "LBR": {
- "fillKey": "lt8" 
+ "fillKey": "lt12" 
 },
 "SLE": {
- "fillKey": "lt8" 
+ "fillKey": "lt12" 
 },
 "NGA": {
- "fillKey": "lt8" 
+ "fillKey": "lt12" 
 } 
 },
 "67": {
  "GIN": {
- "fillKey": "lt8" 
+ "fillKey": "lt12" 
 },
 "LBR": {
- "fillKey": "lt8" 
+ "fillKey": "lt12" 
 },
 "SLE": {
- "fillKey": "lt38" 
+ "fillKey": "lt37" 
 },
 "NGA": {
- "fillKey": "lt8" 
+ "fillKey": "lt12" 
 } 
 },
 "68": {
  "GIN": {
- "fillKey": "lt8" 
+ "fillKey": "lt12" 
 },
 "LBR": {
- "fillKey": "lt8" 
+ "fillKey": "lt12" 
 },
 "SLE": {
- "fillKey": "lt31" 
+ "fillKey": "lt37" 
 },
 "NGA": {
- "fillKey": "lt8" 
+ "fillKey": "lt12" 
 } 
 },
 "69": {
  "GIN": {
- "fillKey": "lt15" 
+ "fillKey": "lt12" 
 },
 "LBR": {
- "fillKey": "lt8" 
+ "fillKey": "lt12" 
 },
 "SLE": {
- "fillKey": "lt23" 
+ "fillKey": "lt25" 
 },
 "NGA": {
- "fillKey": "lt8" 
+ "fillKey": "lt12" 
 } 
 },
 "70": {
  "GIN": {
- "fillKey": "lt15" 
+ "fillKey": "lt12" 
 },
 "LBR": {
- "fillKey": "lt8" 
+ "fillKey": "lt12" 
 },
 "SLE": {
- "fillKey": "lt15" 
+ "fillKey": "lt12" 
 },
 "NGA": {
- "fillKey": "lt8" 
+ "fillKey": "lt12" 
 } 
 },
 "71": {
  "GIN": {
- "fillKey": "lt15" 
+ "fillKey": "lt12" 
 },
 "LBR": {
- "fillKey": "lt8" 
+ "fillKey": "lt12" 
 },
 "SLE": {
- "fillKey": "lt8" 
+ "fillKey": "lt12" 
 },
 "NGA": {
- "fillKey": "lt8" 
+ "fillKey": "lt12" 
 } 
 },
 "72": {
  "GIN": {
- "fillKey": "lt15" 
+ "fillKey": "lt12" 
 },
 "LBR": {
- "fillKey": "lt8" 
+ "fillKey": "lt12" 
 },
 "SLE": {
- "fillKey": "lt8" 
+ "fillKey": "lt12" 
 },
 "NGA": {
- "fillKey": "lt8" 
+ "fillKey": "lt12" 
 } 
 },
 "73": {
  "GIN": {
- "fillKey": "lt8" 
+ "fillKey": "lt12" 
 },
 "LBR": {
- "fillKey": "lt8" 
+ "fillKey": "lt12" 
 },
 "SLE": {
- "fillKey": "lt8" 
+ "fillKey": "lt12" 
 },
 "NGA": {
- "fillKey": "lt8" 
+ "fillKey": "lt12" 
 } 
 },
 "74": {
  "GIN": {
- "fillKey": "lt8" 
+ "fillKey": "lt12" 
 },
 "LBR": {
- "fillKey": "lt8" 
+ "fillKey": "lt12" 
 },
 "SLE": {
- "fillKey": "lt8" 
+ "fillKey": "lt12" 
 },
 "NGA": {
- "fillKey": "lt8" 
+ "fillKey": "lt12" 
 } 
 },
 "75": {
  "GIN": {
- "fillKey": "lt8" 
+ "fillKey": "lt12" 
 },
 "LBR": {
- "fillKey": "lt8" 
+ "fillKey": "lt12" 
 },
 "SLE": {
- "fillKey": "lt15" 
+ "fillKey": "lt12" 
 },
 "NGA": {
- "fillKey": "lt8" 
+ "fillKey": "lt12" 
 } 
 },
 "76": {
  "GIN": {
- "fillKey": "lt8" 
+ "fillKey": "lt12" 
 },
 "LBR": {
- "fillKey": "lt8" 
+ "fillKey": "lt12" 
 },
 "SLE": {
- "fillKey": "lt8" 
+ "fillKey": "lt12" 
 },
 "NGA": {
- "fillKey": "lt8" 
+ "fillKey": "lt12" 
 } 
 },
 "77": {
  "GIN": {
- "fillKey": "lt8" 
+ "fillKey": "lt12" 
 },
 "LBR": {
- "fillKey": "lt8" 
+ "fillKey": "lt12" 
 },
 "SLE": {
- "fillKey": "lt8" 
+ "fillKey": "lt12" 
 },
 "NGA": {
- "fillKey": "lt8" 
+ "fillKey": "lt12" 
 } 
 },
 "78": {
  "GIN": {
- "fillKey": "lt8" 
+ "fillKey": "lt12" 
 },
 "LBR": {
- "fillKey": "lt8" 
+ "fillKey": "lt12" 
 },
 "SLE": {
- "fillKey": "lt8" 
+ "fillKey": "lt12" 
 },
 "NGA": {
- "fillKey": "lt8" 
+ "fillKey": "lt12" 
 } 
 },
 "79": {
  "GIN": {
- "fillKey": "lt8" 
+ "fillKey": "lt12" 
 },
 "LBR": {
- "fillKey": "lt8" 
+ "fillKey": "lt12" 
 },
 "SLE": {
- "fillKey": "lt8" 
+ "fillKey": "lt12" 
 },
 "NGA": {
- "fillKey": "lt8" 
+ "fillKey": "lt12" 
 } 
 },
 "80": {
  "GIN": {
- "fillKey": "lt8" 
+ "fillKey": "lt12" 
 },
 "LBR": {
- "fillKey": "lt8" 
+ "fillKey": "lt12" 
 },
 "SLE": {
- "fillKey": "lt8" 
+ "fillKey": "lt12" 
 },
 "NGA": {
- "fillKey": "lt8" 
+ "fillKey": "lt12" 
 } 
 },
 "81": {
  "GIN": {
- "fillKey": "lt8" 
+ "fillKey": "lt12" 
 },
 "LBR": {
- "fillKey": "lt8" 
+ "fillKey": "lt12" 
 },
 "SLE": {
- "fillKey": "lt8" 
+ "fillKey": "lt12" 
 },
 "NGA": {
- "fillKey": "lt8" 
+ "fillKey": "lt12" 
 } 
 },
 "82": {
  "GIN": {
- "fillKey": "lt8" 
+ "fillKey": "lt12" 
 },
 "LBR": {
- "fillKey": "lt8" 
+ "fillKey": "lt12" 
 },
 "SLE": {
- "fillKey": "lt8" 
+ "fillKey": "lt12" 
 },
 "NGA": {
- "fillKey": "lt8" 
+ "fillKey": "lt12" 
 } 
 },
 "83": {
  "GIN": {
- "fillKey": "lt8" 
+ "fillKey": "lt12" 
 },
 "LBR": {
- "fillKey": "lt8" 
+ "fillKey": "lt12" 
 },
 "SLE": {
- "fillKey": "lt8" 
+ "fillKey": "lt12" 
 },
 "NGA": {
- "fillKey": "lt8" 
+ "fillKey": "lt12" 
 } 
 },
 "84": {
  "GIN": {
- "fillKey": "lt8" 
+ "fillKey": "lt12" 
 },
 "LBR": {
- "fillKey": "lt8" 
+ "fillKey": "lt12" 
 },
 "SLE": {
- "fillKey": "lt8" 
+ "fillKey": "lt12" 
 },
 "NGA": {
- "fillKey": "lt8" 
+ "fillKey": "lt12" 
 } 
 },
 "85": {
  "GIN": {
- "fillKey": "lt8" 
+ "fillKey": "lt12" 
 },
 "LBR": {
- "fillKey": "lt8" 
+ "fillKey": "lt12" 
 },
 "SLE": {
- "fillKey": "lt8" 
+ "fillKey": "lt12" 
 },
 "NGA": {
- "fillKey": "lt8" 
+ "fillKey": "lt12" 
 } 
 },
 "86": {
  "GIN": {
- "fillKey": "lt8" 
+ "fillKey": "lt12" 
 },
 "LBR": {
- "fillKey": "lt8" 
+ "fillKey": "lt12" 
 },
 "SLE": {
- "fillKey": "lt8" 
+ "fillKey": "lt12" 
 },
 "NGA": {
- "fillKey": "lt8" 
+ "fillKey": "lt12" 
 } 
 },
 "87": {
  "GIN": {
- "fillKey": "lt8" 
+ "fillKey": "lt12" 
 },
 "LBR": {
- "fillKey": "lt8" 
+ "fillKey": "lt12" 
 },
 "SLE": {
- "fillKey": "lt15" 
+ "fillKey": "lt12" 
 },
 "NGA": {
- "fillKey": "lt8" 
+ "fillKey": "lt12" 
 } 
 },
 "88": {
  "GIN": {
- "fillKey": "lt8" 
+ "fillKey": "lt12" 
 },
 "LBR": {
- "fillKey": "lt8" 
+ "fillKey": "lt12" 
 },
 "SLE": {
- "fillKey": "lt15" 
+ "fillKey": "lt25" 
 },
 "NGA": {
- "fillKey": "lt8" 
+ "fillKey": "lt12" 
 } 
 },
 "89": {
  "GIN": {
- "fillKey": "lt8" 
+ "fillKey": "lt12" 
 },
 "LBR": {
- "fillKey": "lt8" 
+ "fillKey": "lt12" 
 },
 "SLE": {
- "fillKey": "lt23" 
+ "fillKey": "lt25" 
 },
 "NGA": {
- "fillKey": "lt8" 
+ "fillKey": "lt12" 
 } 
 },
 "90": {
  "GIN": {
- "fillKey": "lt8" 
+ "fillKey": "lt12" 
 },
 "LBR": {
- "fillKey": "lt8" 
+ "fillKey": "lt12" 
 },
 "SLE": {
- "fillKey": "lt15" 
+ "fillKey": "lt12" 
 },
 "NGA": {
- "fillKey": "lt8" 
+ "fillKey": "lt12" 
 } 
 },
 "91": {
  "GIN": {
- "fillKey": "lt8" 
+ "fillKey": "lt12" 
 },
 "LBR": {
- "fillKey": "lt15" 
+ "fillKey": "lt12" 
 },
 "SLE": {
- "fillKey": "lt8" 
+ "fillKey": "lt12" 
 },
 "NGA": {
- "fillKey": "lt8" 
+ "fillKey": "lt12" 
 } 
 },
 "92": {
  "GIN": {
- "fillKey": "lt8" 
+ "fillKey": "lt12" 
 },
 "LBR": {
- "fillKey": "lt15" 
+ "fillKey": "lt12" 
 },
 "SLE": {
- "fillKey": "lt8" 
+ "fillKey": "lt12" 
 },
 "NGA": {
- "fillKey": "lt8" 
+ "fillKey": "lt12" 
 } 
 },
 "93": {
  "GIN": {
- "fillKey": "lt8" 
+ "fillKey": "lt12" 
 },
 "LBR": {
- "fillKey": "lt15" 
+ "fillKey": "lt12" 
 },
 "SLE": {
- "fillKey": "lt8" 
+ "fillKey": "lt12" 
 },
 "NGA": {
- "fillKey": "lt8" 
+ "fillKey": "lt12" 
 } 
 },
 "94": {
  "GIN": {
- "fillKey": "lt8" 
+ "fillKey": "lt12" 
 },
 "LBR": {
- "fillKey": "lt15" 
+ "fillKey": "lt12" 
 },
 "SLE": {
- "fillKey": "lt8" 
+ "fillKey": "lt12" 
 },
 "NGA": {
- "fillKey": "lt8" 
+ "fillKey": "lt12" 
 } 
 },
 "95": {
  "GIN": {
- "fillKey": "lt8" 
+ "fillKey": "lt12" 
 },
 "LBR": {
- "fillKey": "lt15" 
+ "fillKey": "lt12" 
 },
 "SLE": {
- "fillKey": "lt8" 
+ "fillKey": "lt12" 
 },
 "NGA": {
- "fillKey": "lt8" 
+ "fillKey": "lt12" 
 } 
 },
 "96": {
  "GIN": {
- "fillKey": "lt8" 
+ "fillKey": "lt12" 
 },
 "LBR": {
- "fillKey": "lt15" 
+ "fillKey": "lt12" 
 },
 "SLE": {
- "fillKey": "lt8" 
+ "fillKey": "lt12" 
 },
 "NGA": {
- "fillKey": "lt8" 
+ "fillKey": "lt12" 
 } 
 },
 "97": {
  "GIN": {
- "fillKey": "lt8" 
+ "fillKey": "lt12" 
 },
 "LBR": {
- "fillKey": "lt8" 
+ "fillKey": "lt12" 
 },
 "SLE": {
- "fillKey": "lt8" 
+ "fillKey": "lt12" 
 },
 "NGA": {
- "fillKey": "lt8" 
+ "fillKey": "lt12" 
 } 
 },
 "98": {
  "GIN": {
- "fillKey": "lt8" 
+ "fillKey": "lt12" 
 },
 "LBR": {
- "fillKey": "lt8" 
+ "fillKey": "lt12" 
 },
 "SLE": {
- "fillKey": "lt15" 
+ "fillKey": "lt12" 
 },
 "NGA": {
- "fillKey": "lt8" 
+ "fillKey": "lt12" 
 } 
 },
 "99": {
  "GIN": {
- "fillKey": "lt8" 
+ "fillKey": "lt12" 
 },
 "LBR": {
- "fillKey": "lt8" 
+ "fillKey": "lt12" 
 },
 "SLE": {
- "fillKey": "lt15" 
+ "fillKey": "lt12" 
 },
 "NGA": {
- "fillKey": "lt8" 
+ "fillKey": "lt12" 
 } 
 },
 "100": {
  "GIN": {
- "fillKey": "lt8" 
+ "fillKey": "lt12" 
 },
 "LBR": {
- "fillKey": "lt8" 
+ "fillKey": "lt12" 
 },
 "SLE": {
- "fillKey": "lt15" 
+ "fillKey": "lt12" 
 },
 "NGA": {
- "fillKey": "lt8" 
+ "fillKey": "lt12" 
 } 
 },
 "101": {
  "GIN": {
- "fillKey": "lt8" 
+ "fillKey": "lt12" 
 },
 "LBR": {
- "fillKey": "lt8" 
+ "fillKey": "lt12" 
 },
 "SLE": {
- "fillKey": "lt8" 
+ "fillKey": "lt12" 
 },
 "NGA": {
- "fillKey": "lt8" 
+ "fillKey": "lt12" 
 } 
 },
 "102": {
  "GIN": {
- "fillKey": "lt8" 
+ "fillKey": "lt12" 
 },
 "LBR": {
- "fillKey": "lt8" 
+ "fillKey": "lt12" 
 },
 "SLE": {
- "fillKey": "lt15" 
+ "fillKey": "lt12" 
 },
 "NGA": {
- "fillKey": "lt8" 
+ "fillKey": "lt12" 
 } 
 },
 "103": {
  "GIN": {
- "fillKey": "lt8" 
+ "fillKey": "lt12" 
 },
 "LBR": {
- "fillKey": "lt8" 
+ "fillKey": "lt12" 
 },
 "SLE": {
- "fillKey": "lt15" 
+ "fillKey": "lt12" 
 },
 "NGA": {
- "fillKey": "lt8" 
+ "fillKey": "lt12" 
 } 
 },
 "104": {
  "GIN": {
- "fillKey": "lt8" 
+ "fillKey": "lt12" 
 },
 "LBR": {
- "fillKey": "lt8" 
+ "fillKey": "lt12" 
 },
 "SLE": {
- "fillKey": "lt15" 
+ "fillKey": "lt12" 
 },
 "NGA": {
- "fillKey": "lt8" 
+ "fillKey": "lt12" 
 } 
 },
 "105": {
  "GIN": {
- "fillKey": "lt8" 
+ "fillKey": "lt12" 
 },
 "LBR": {
- "fillKey": "lt8" 
+ "fillKey": "lt12" 
 },
 "SLE": {
- "fillKey": "lt15" 
+ "fillKey": "lt25" 
 },
 "NGA": {
- "fillKey": "lt8" 
+ "fillKey": "lt12" 
 } 
 },
 "106": {
  "GIN": {
- "fillKey": "lt8" 
+ "fillKey": "lt12" 
 },
 "LBR": {
- "fillKey": "lt8" 
+ "fillKey": "lt12" 
 },
 "SLE": {
- "fillKey": "lt15" 
+ "fillKey": "lt25" 
 },
 "NGA": {
- "fillKey": "lt8" 
+ "fillKey": "lt12" 
 } 
 },
 "107": {
  "GIN": {
- "fillKey": "lt8" 
+ "fillKey": "lt12" 
 },
 "LBR": {
- "fillKey": "lt8" 
+ "fillKey": "lt12" 
 },
 "SLE": {
- "fillKey": "lt23" 
+ "fillKey": "lt25" 
 },
 "NGA": {
- "fillKey": "lt8" 
+ "fillKey": "lt12" 
 } 
 },
 "108": {
  "GIN": {
- "fillKey": "lt8" 
+ "fillKey": "lt12" 
 },
 "LBR": {
- "fillKey": "lt8" 
+ "fillKey": "lt12" 
 },
 "SLE": {
- "fillKey": "lt15" 
+ "fillKey": "lt25" 
 },
 "NGA": {
- "fillKey": "lt8" 
+ "fillKey": "lt12" 
 } 
 },
 "109": {
  "GIN": {
- "fillKey": "lt8" 
+ "fillKey": "lt12" 
 },
 "LBR": {
- "fillKey": "lt8" 
+ "fillKey": "lt12" 
 },
 "SLE": {
- "fillKey": "lt15" 
+ "fillKey": "lt25" 
 },
 "NGA": {
- "fillKey": "lt8" 
+ "fillKey": "lt12" 
 } 
 },
 "110": {
  "GIN": {
- "fillKey": "lt8" 
+ "fillKey": "lt12" 
 },
 "LBR": {
- "fillKey": "lt8" 
+ "fillKey": "lt12" 
 },
 "SLE": {
- "fillKey": "lt15" 
+ "fillKey": "lt25" 
 },
 "NGA": {
- "fillKey": "lt8" 
+ "fillKey": "lt12" 
 } 
 },
 "111": {
  "GIN": {
- "fillKey": "lt8" 
+ "fillKey": "lt12" 
 },
 "LBR": {
- "fillKey": "lt8" 
+ "fillKey": "lt12" 
 },
 "SLE": {
- "fillKey": "lt15" 
+ "fillKey": "lt12" 
 },
 "NGA": {
- "fillKey": "lt8" 
+ "fillKey": "lt12" 
 } 
 },
 "112": {
  "GIN": {
- "fillKey": "lt8" 
+ "fillKey": "lt12" 
 },
 "LBR": {
- "fillKey": "lt8" 
+ "fillKey": "lt12" 
 },
 "SLE": {
- "fillKey": "lt15" 
+ "fillKey": "lt12" 
 },
 "NGA": {
- "fillKey": "lt8" 
+ "fillKey": "lt12" 
 } 
 },
 "113": {
  "GIN": {
- "fillKey": "lt8" 
+ "fillKey": "lt12" 
 },
 "LBR": {
- "fillKey": "lt8" 
+ "fillKey": "lt12" 
 },
 "SLE": {
- "fillKey": "lt8" 
+ "fillKey": "lt12" 
 },
 "NGA": {
- "fillKey": "lt8" 
+ "fillKey": "lt12" 
 } 
 },
 "114": {
  "GIN": {
- "fillKey": "lt8" 
+ "fillKey": "lt12" 
 },
 "LBR": {
- "fillKey": "lt8" 
+ "fillKey": "lt12" 
 },
 "SLE": {
- "fillKey": "lt15" 
+ "fillKey": "lt12" 
 },
 "NGA": {
- "fillKey": "lt8" 
+ "fillKey": "lt12" 
 } 
 },
 "115": {
  "GIN": {
- "fillKey": "lt8" 
+ "fillKey": "lt12" 
 },
 "LBR": {
- "fillKey": "lt8" 
+ "fillKey": "lt12" 
 },
 "SLE": {
- "fillKey": "lt15" 
+ "fillKey": "lt12" 
 },
 "NGA": {
- "fillKey": "lt8" 
+ "fillKey": "lt12" 
 } 
 },
 "116": {
  "GIN": {
- "fillKey": "lt8" 
+ "fillKey": "lt12" 
 },
 "LBR": {
- "fillKey": "lt8" 
+ "fillKey": "lt12" 
 },
 "SLE": {
- "fillKey": "lt15" 
+ "fillKey": "lt25" 
 },
 "NGA": {
- "fillKey": "lt8" 
+ "fillKey": "lt12" 
 } 
 },
 "117": {
  "GIN": {
- "fillKey": "lt8" 
+ "fillKey": "lt12" 
 },
 "LBR": {
- "fillKey": "lt15" 
+ "fillKey": "lt12" 
 },
 "SLE": {
- "fillKey": "lt15" 
+ "fillKey": "lt12" 
 },
 "NGA": {
- "fillKey": "lt8" 
+ "fillKey": "lt12" 
 } 
 },
 "118": {
  "GIN": {
- "fillKey": "lt8" 
+ "fillKey": "lt12" 
 },
 "LBR": {
- "fillKey": "lt15" 
+ "fillKey": "lt12" 
 },
 "SLE": {
- "fillKey": "lt8" 
+ "fillKey": "lt12" 
 },
 "NGA": {
- "fillKey": "lt8" 
+ "fillKey": "lt12" 
 } 
 },
 "119": {
  "GIN": {
- "fillKey": "lt8" 
+ "fillKey": "lt12" 
 },
 "LBR": {
- "fillKey": "lt15" 
+ "fillKey": "lt12" 
 },
 "SLE": {
- "fillKey": "lt8" 
+ "fillKey": "lt12" 
 },
 "NGA": {
- "fillKey": "lt8" 
+ "fillKey": "lt12" 
 } 
 },
 "120": {
  "GIN": {
- "fillKey": "lt8" 
+ "fillKey": "lt12" 
 },
 "LBR": {
- "fillKey": "lt15" 
+ "fillKey": "lt12" 
 },
 "SLE": {
- "fillKey": "lt15" 
+ "fillKey": "lt12" 
 },
 "NGA": {
- "fillKey": "lt8" 
+ "fillKey": "lt12" 
 } 
 },
 "121": {
  "GIN": {
- "fillKey": "lt8" 
+ "fillKey": "lt12" 
 },
 "LBR": {
- "fillKey": "lt15" 
+ "fillKey": "lt12" 
 },
 "SLE": {
- "fillKey": "lt23" 
+ "fillKey": "lt25" 
 },
 "NGA": {
- "fillKey": "lt8" 
+ "fillKey": "lt12" 
 } 
 },
 "122": {
  "GIN": {
- "fillKey": "lt8" 
+ "fillKey": "lt12" 
 },
 "LBR": {
- "fillKey": "lt15" 
+ "fillKey": "lt12" 
 },
 "SLE": {
- "fillKey": "lt31" 
+ "fillKey": "lt25" 
 },
 "NGA": {
- "fillKey": "lt8" 
+ "fillKey": "lt12" 
 } 
 },
 "123": {
  "GIN": {
- "fillKey": "lt8" 
+ "fillKey": "lt12" 
 },
 "LBR": {
- "fillKey": "lt15" 
+ "fillKey": "lt12" 
 },
 "SLE": {
- "fillKey": "lt23" 
+ "fillKey": "lt25" 
 },
 "NGA": {
- "fillKey": "lt8" 
+ "fillKey": "lt12" 
 } 
 },
 "124": {
  "GIN": {
- "fillKey": "lt8" 
+ "fillKey": "lt12" 
 },
 "LBR": {
- "fillKey": "lt15" 
+ "fillKey": "lt25" 
 },
 "SLE": {
- "fillKey": "lt15" 
+ "fillKey": "lt25" 
 },
 "NGA": {
- "fillKey": "lt8" 
+ "fillKey": "lt12" 
 } 
 },
 "125": {
  "GIN": {
- "fillKey": "lt8" 
+ "fillKey": "lt12" 
 },
 "LBR": {
- "fillKey": "lt23" 
+ "fillKey": "lt25" 
 },
 "SLE": {
- "fillKey": "lt8" 
+ "fillKey": "lt12" 
 },
 "NGA": {
- "fillKey": "lt8" 
+ "fillKey": "lt12" 
 } 
 },
 "126": {
  "GIN": {
- "fillKey": "lt15" 
+ "fillKey": "lt12" 
 },
 "LBR": {
- "fillKey": "lt23" 
+ "fillKey": "lt25" 
 },
 "SLE": {
- "fillKey": "lt8" 
+ "fillKey": "lt12" 
 },
 "NGA": {
- "fillKey": "lt8" 
+ "fillKey": "lt12" 
 } 
 },
 "127": {
  "GIN": {
- "fillKey": "lt8" 
+ "fillKey": "lt12" 
 },
 "LBR": {
- "fillKey": "lt23" 
+ "fillKey": "lt25" 
 },
 "SLE": {
- "fillKey": "lt8" 
+ "fillKey": "lt12" 
 },
 "NGA": {
- "fillKey": "lt8" 
+ "fillKey": "lt12" 
 } 
 },
 "128": {
  "GIN": {
- "fillKey": "lt8" 
+ "fillKey": "lt12" 
 },
 "LBR": {
- "fillKey": "lt23" 
+ "fillKey": "lt25" 
 },
 "SLE": {
- "fillKey": "lt15" 
+ "fillKey": "lt12" 
 },
 "NGA": {
- "fillKey": "lt8" 
+ "fillKey": "lt12" 
 } 
 },
 "129": {
  "GIN": {
- "fillKey": "lt8" 
+ "fillKey": "lt12" 
 },
 "LBR": {
- "fillKey": "lt23" 
+ "fillKey": "lt25" 
 },
 "SLE": {
- "fillKey": "lt15" 
+ "fillKey": "lt25" 
 },
 "NGA": {
- "fillKey": "lt8" 
+ "fillKey": "lt12" 
 } 
 },
 "130": {
  "GIN": {
- "fillKey": "lt8" 
+ "fillKey": "lt12" 
 },
 "LBR": {
- "fillKey": "lt31" 
+ "fillKey": "lt37" 
 },
 "SLE": {
- "fillKey": "lt31" 
+ "fillKey": "lt37" 
 },
 "NGA": {
- "fillKey": "lt8" 
+ "fillKey": "lt12" 
 } 
 },
 "131": {
  "GIN": {
- "fillKey": "lt8" 
+ "fillKey": "lt12" 
 },
 "LBR": {
- "fillKey": "lt46" 
+ "fillKey": "lt50" 
 },
 "SLE": {
- "fillKey": "lt38" 
+ "fillKey": "lt37" 
 },
 "NGA": {
- "fillKey": "lt8" 
+ "fillKey": "lt12" 
 } 
 },
 "132": {
  "GIN": {
- "fillKey": "lt8" 
+ "fillKey": "lt12" 
 },
 "LBR": {
- "fillKey": "lt38" 
+ "fillKey": "lt37" 
 },
 "SLE": {
- "fillKey": "lt31" 
+ "fillKey": "lt37" 
 },
 "NGA": {
- "fillKey": "lt8" 
+ "fillKey": "lt12" 
 } 
 },
 "133": {
  "GIN": {
- "fillKey": "lt8" 
+ "fillKey": "lt12" 
 },
 "LBR": {
- "fillKey": "lt31" 
+ "fillKey": "lt25" 
 },
 "SLE": {
- "fillKey": "lt23" 
+ "fillKey": "lt25" 
 },
 "NGA": {
- "fillKey": "lt8" 
+ "fillKey": "lt12" 
 } 
 },
 "134": {
  "GIN": {
- "fillKey": "lt8" 
+ "fillKey": "lt12" 
 },
 "LBR": {
- "fillKey": "lt23" 
+ "fillKey": "lt25" 
 },
 "SLE": {
- "fillKey": "lt15" 
+ "fillKey": "lt25" 
 },
 "NGA": {
- "fillKey": "lt8" 
+ "fillKey": "lt12" 
 } 
 },
 "135": {
  "GIN": {
- "fillKey": "lt8" 
+ "fillKey": "lt12" 
 },
 "LBR": {
- "fillKey": "lt23" 
+ "fillKey": "lt25" 
 },
 "SLE": {
- "fillKey": "lt15" 
+ "fillKey": "lt25" 
 },
 "NGA": {
- "fillKey": "lt8" 
+ "fillKey": "lt12" 
 } 
 },
 "136": {
  "GIN": {
- "fillKey": "lt8" 
+ "fillKey": "lt12" 
 },
 "LBR": {
- "fillKey": "lt23" 
+ "fillKey": "lt25" 
 },
 "SLE": {
- "fillKey": "lt15" 
+ "fillKey": "lt25" 
 },
 "NGA": {
- "fillKey": "lt8" 
+ "fillKey": "lt12" 
 } 
 },
 "137": {
  "GIN": {
- "fillKey": "lt8" 
+ "fillKey": "lt12" 
 },
 "LBR": {
- "fillKey": "lt23" 
+ "fillKey": "lt25" 
 },
 "SLE": {
- "fillKey": "lt15" 
+ "fillKey": "lt12" 
 },
 "NGA": {
- "fillKey": "lt8" 
+ "fillKey": "lt12" 
 } 
 },
 "138": {
  "GIN": {
- "fillKey": "lt8" 
+ "fillKey": "lt12" 
 },
 "LBR": {
- "fillKey": "lt23" 
+ "fillKey": "lt25" 
 },
 "SLE": {
- "fillKey": "lt8" 
+ "fillKey": "lt12" 
 },
 "NGA": {
- "fillKey": "lt8" 
+ "fillKey": "lt12" 
 } 
 },
 "139": {
  "GIN": {
- "fillKey": "lt8" 
+ "fillKey": "lt12" 
 },
 "LBR": {
- "fillKey": "lt15" 
+ "fillKey": "lt25" 
 },
 "SLE": {
- "fillKey": "lt8" 
+ "fillKey": "lt12" 
 },
 "NGA": {
- "fillKey": "lt8" 
+ "fillKey": "lt12" 
 } 
 },
 "140": {
  "GIN": {
- "fillKey": "lt8" 
+ "fillKey": "lt12" 
 },
 "LBR": {
- "fillKey": "lt31" 
+ "fillKey": "lt37" 
 },
 "SLE": {
- "fillKey": "lt23" 
+ "fillKey": "lt25" 
 },
 "NGA": {
- "fillKey": "lt8" 
+ "fillKey": "lt12" 
 } 
 },
 "141": {
  "GIN": {
- "fillKey": "lt8" 
+ "fillKey": "lt12" 
 },
 "LBR": {
- "fillKey": "lt38" 
+ "fillKey": "lt37" 
 },
 "SLE": {
- "fillKey": "lt31" 
+ "fillKey": "lt37" 
 },
 "NGA": {
- "fillKey": "lt8" 
+ "fillKey": "lt12" 
 } 
 },
 "142": {
  "GIN": {
- "fillKey": "lt8" 
+ "fillKey": "lt12" 
 },
 "LBR": {
- "fillKey": "lt54" 
+ "fillKey": "lt50" 
 },
 "SLE": {
- "fillKey": "lt23" 
+ "fillKey": "lt25" 
 },
 "NGA": {
- "fillKey": "lt8" 
+ "fillKey": "lt12" 
 } 
 },
 "143": {
  "GIN": {
- "fillKey": "lt8" 
+ "fillKey": "lt12" 
 },
 "LBR": {
- "fillKey": "lt61" 
+ "fillKey": "lt62" 
 },
 "SLE": {
- "fillKey": "lt15" 
+ "fillKey": "lt25" 
 },
 "NGA": {
- "fillKey": "lt8" 
+ "fillKey": "lt12" 
 } 
 },
 "144": {
  "GIN": {
- "fillKey": "lt8" 
+ "fillKey": "lt12" 
 },
 "LBR": {
- "fillKey": "lt46" 
+ "fillKey": "lt50" 
 },
 "SLE": {
- "fillKey": "lt15" 
+ "fillKey": "lt25" 
 },
 "NGA": {
- "fillKey": "lt8" 
+ "fillKey": "lt12" 
 } 
 },
 "145": {
  "GIN": {
- "fillKey": "lt8" 
+ "fillKey": "lt12" 
 },
 "LBR": {
- "fillKey": "lt31" 
+ "fillKey": "lt37" 
 },
 "SLE": {
- "fillKey": "lt15" 
+ "fillKey": "lt25" 
 },
 "NGA": {
- "fillKey": "lt8" 
+ "fillKey": "lt12" 
 } 
 },
 "146": {
  "GIN": {
- "fillKey": "lt15" 
+ "fillKey": "lt12" 
 },
 "LBR": {
- "fillKey": "lt23" 
+ "fillKey": "lt25" 
 },
 "SLE": {
- "fillKey": "lt15" 
+ "fillKey": "lt25" 
 },
 "NGA": {
- "fillKey": "lt8" 
+ "fillKey": "lt12" 
 } 
 },
 "147": {
  "GIN": {
- "fillKey": "lt15" 
+ "fillKey": "lt25" 
 },
 "LBR": {
- "fillKey": "lt46" 
+ "fillKey": "lt50" 
 },
 "SLE": {
- "fillKey": "lt23" 
+ "fillKey": "lt25" 
 },
 "NGA": {
- "fillKey": "lt8" 
+ "fillKey": "lt12" 
 } 
 },
 "148": {
  "GIN": {
- "fillKey": "lt23" 
+ "fillKey": "lt25" 
 },
 "LBR": {
- "fillKey": "lt69" 
+ "fillKey": "lt74" 
 },
 "SLE": {
- "fillKey": "lt31" 
+ "fillKey": "lt37" 
 },
 "NGA": {
- "fillKey": "lt8" 
+ "fillKey": "lt12" 
 } 
 },
 "149": {
  "GIN": {
- "fillKey": "lt23" 
+ "fillKey": "lt25" 
 },
 "LBR": {
- "fillKey": "lt69" 
+ "fillKey": "lt74" 
 },
 "SLE": {
- "fillKey": "lt23" 
+ "fillKey": "lt25" 
 },
 "NGA": {
- "fillKey": "lt8" 
+ "fillKey": "lt12" 
 } 
 },
 "150": {
  "GIN": {
- "fillKey": "lt15" 
+ "fillKey": "lt25" 
 },
 "LBR": {
- "fillKey": "lt61" 
+ "fillKey": "lt62" 
 },
 "SLE": {
- "fillKey": "lt8" 
+ "fillKey": "lt12" 
 },
 "NGA": {
- "fillKey": "lt8" 
+ "fillKey": "lt12" 
 } 
 },
 "151": {
  "GIN": {
- "fillKey": "lt15" 
+ "fillKey": "lt25" 
 },
 "LBR": {
- "fillKey": "lt61" 
+ "fillKey": "lt62" 
 },
 "SLE": {
- "fillKey": "lt8" 
+ "fillKey": "lt12" 
 },
 "NGA": {
- "fillKey": "lt8" 
+ "fillKey": "lt12" 
 } 
 },
 "152": {
  "GIN": {
- "fillKey": "lt15" 
+ "fillKey": "lt12" 
 },
 "LBR": {
- "fillKey": "lt54" 
+ "fillKey": "lt62" 
 },
 "SLE": {
- "fillKey": "lt8" 
+ "fillKey": "lt12" 
 },
 "NGA": {
- "fillKey": "lt8" 
+ "fillKey": "lt12" 
 } 
 },
 "153": {
  "GIN": {
- "fillKey": "lt15" 
+ "fillKey": "lt12" 
 },
 "LBR": {
- "fillKey": "lt54" 
+ "fillKey": "lt62" 
 },
 "SLE": {
- "fillKey": "lt15" 
+ "fillKey": "lt25" 
 },
 "NGA": {
- "fillKey": "lt8" 
+ "fillKey": "lt12" 
 } 
 },
 "154": {
  "GIN": {
- "fillKey": "lt15" 
+ "fillKey": "lt12" 
 },
 "LBR": {
- "fillKey": "lt54" 
+ "fillKey": "lt62" 
 },
 "SLE": {
- "fillKey": "lt15" 
+ "fillKey": "lt25" 
 },
 "NGA": {
- "fillKey": "lt8" 
+ "fillKey": "lt12" 
 } 
 },
 "155": {
  "GIN": {
- "fillKey": "lt15" 
+ "fillKey": "lt12" 
 },
 "LBR": {
- "fillKey": "lt54" 
+ "fillKey": "lt62" 
 },
 "SLE": {
- "fillKey": "lt23" 
+ "fillKey": "lt25" 
 },
 "NGA": {
- "fillKey": "lt8" 
+ "fillKey": "lt12" 
 } 
 },
 "156": {
  "GIN": {
- "fillKey": "lt8" 
+ "fillKey": "lt12" 
 },
 "LBR": {
- "fillKey": "lt54" 
+ "fillKey": "lt62" 
 },
 "SLE": {
- "fillKey": "lt23" 
+ "fillKey": "lt25" 
 },
 "NGA": {
- "fillKey": "lt8" 
+ "fillKey": "lt12" 
 } 
 },
 "157": {
  "GIN": {
- "fillKey": "lt15" 
+ "fillKey": "lt12" 
 },
 "LBR": {
- "fillKey": "lt54" 
+ "fillKey": "lt62" 
 },
 "SLE": {
- "fillKey": "lt31" 
+ "fillKey": "lt37" 
 },
 "NGA": {
- "fillKey": "lt8" 
+ "fillKey": "lt12" 
 } 
 },
 "158": {
  "GIN": {
- "fillKey": "lt15" 
+ "fillKey": "lt25" 
 },
 "LBR": {
- "fillKey": "lt61" 
+ "fillKey": "lt62" 
 },
 "SLE": {
- "fillKey": "lt31" 
+ "fillKey": "lt37" 
 },
 "NGA": {
- "fillKey": "lt8" 
+ "fillKey": "lt12" 
 } 
 },
 "159": {
  "GIN": {
- "fillKey": "lt23" 
+ "fillKey": "lt25" 
 },
 "LBR": {
- "fillKey": "lt61" 
+ "fillKey": "lt62" 
 },
 "SLE": {
- "fillKey": "lt31" 
+ "fillKey": "lt37" 
 },
 "NGA": {
- "fillKey": "lt8" 
+ "fillKey": "lt12" 
 } 
 },
 "160": {
  "GIN": {
- "fillKey": "lt23" 
+ "fillKey": "lt25" 
 },
 "LBR": {
- "fillKey": "lt61" 
+ "fillKey": "lt62" 
 },
 "SLE": {
- "fillKey": "lt38" 
+ "fillKey": "lt37" 
 },
 "NGA": {
- "fillKey": "lt8" 
+ "fillKey": "lt12" 
 } 
 },
 "161": {
  "GIN": {
- "fillKey": "lt31" 
+ "fillKey": "lt25" 
 },
 "LBR": {
- "fillKey": "lt69" 
+ "fillKey": "lt62" 
 },
 "SLE": {
- "fillKey": "lt38" 
+ "fillKey": "lt37" 
 },
 "NGA": {
- "fillKey": "lt8" 
+ "fillKey": "lt12" 
 } 
 },
 "162": {
  "GIN": {
- "fillKey": "lt23" 
+ "fillKey": "lt25" 
 },
 "LBR": {
- "fillKey": "lt61" 
+ "fillKey": "lt62" 
 },
 "SLE": {
- "fillKey": "lt38" 
+ "fillKey": "lt37" 
 },
 "NGA": {
- "fillKey": "lt8" 
+ "fillKey": "lt12" 
 } 
 },
 "163": {
  "GIN": {
- "fillKey": "lt23" 
+ "fillKey": "lt25" 
 },
 "LBR": {
- "fillKey": "lt54" 
+ "fillKey": "lt62" 
 },
 "SLE": {
- "fillKey": "lt31" 
+ "fillKey": "lt37" 
 },
 "NGA": {
- "fillKey": "lt8" 
+ "fillKey": "lt12" 
 } 
 },
 "164": {
  "GIN": {
- "fillKey": "lt15" 
+ "fillKey": "lt25" 
 },
 "LBR": {
- "fillKey": "lt54" 
+ "fillKey": "lt62" 
 },
 "SLE": {
- "fillKey": "lt23" 
+ "fillKey": "lt37" 
 },
 "NGA": {
- "fillKey": "lt8" 
+ "fillKey": "lt12" 
 } 
 },
 "165": {
  "GIN": {
- "fillKey": "lt15" 
+ "fillKey": "lt25" 
 },
 "LBR": {
- "fillKey": "lt46" 
+ "fillKey": "lt62" 
 },
 "SLE": {
- "fillKey": "lt15" 
+ "fillKey": "lt37" 
 },
 "NGA": {
- "fillKey": "lt8" 
+ "fillKey": "lt12" 
 } 
 },
 "166": {
  "GIN": {
- "fillKey": "lt15" 
+ "fillKey": "lt25" 
 },
 "LBR": {
- "fillKey": "lt38" 
+ "fillKey": "lt62" 
 },
 "SLE": {
- "fillKey": "lt15" 
+ "fillKey": "lt37" 
 },
 "NGA": {
- "fillKey": "lt8" 
+ "fillKey": "lt12" 
+} 
+},
+"167": {
+ "GIN": {
+ "fillKey": "lt12" 
+},
+"LBR": {
+ "fillKey": "lt62" 
+},
+"SLE": {
+ "fillKey": "lt37" 
+},
+"NGA": {
+ "fillKey": "lt12" 
+} 
+},
+"168": {
+ "GIN": {
+ "fillKey": "lt12" 
+},
+"LBR": {
+ "fillKey": "lt62" 
+},
+"SLE": {
+ "fillKey": "lt37" 
+},
+"NGA": {
+ "fillKey": "lt12" 
+} 
+},
+"169": {
+ "GIN": {
+ "fillKey": "lt12" 
+},
+"LBR": {
+ "fillKey": "lt74" 
+},
+"SLE": {
+ "fillKey": "lt37" 
+},
+"NGA": {
+ "fillKey": "lt12" 
+} 
+},
+"170": {
+ "GIN": {
+ "fillKey": "lt12" 
+},
+"LBR": {
+ "fillKey": "lt111" 
+},
+"SLE": {
+ "fillKey": "lt37" 
+},
+"NGA": {
+ "fillKey": "lt12" 
+} 
+},
+"171": {
+ "GIN": {
+ "fillKey": "lt25" 
+},
+"LBR": {
+ "fillKey": null 
+},
+"SLE": {
+ "fillKey": "lt37" 
+},
+"NGA": {
+ "fillKey": "lt12" 
 } 
 } 
 }
@@ -4026,30 +4085,30 @@ var chartParams={"dom": "zoom_map",
 "fills": 
 {
  "defaultFill": "#ffffef",
-"lt8": "#ffffef",
-"lt15": "#fff7bf",
-"lt23": "#fee39f",
-"lt31": "#fec45f",
-"lt38": "#fe993f",
-"lt46": "#ec702f",
-"lt54": "#cc4c1f",
-"lt61": "#993402",
-"lt69": "#662520" 
+"lt12": "#ffffef",
+"lt25": "#fff7bf",
+"lt37": "#fee39f",
+"lt50": "#fec45f",
+"lt62": "#fe993f",
+"lt74": "#ec702f",
+"lt99": "#cc4c1f",
+"lt111": "#993402",
+"NA": "#662520" 
 }
 ,
 "data":
 {
  "GIN": {
- "fillKey": "lt23" 
+ "fillKey": "lt25" 
 },
 "LBR": {
- "fillKey": "lt8" 
+ "fillKey": "lt12" 
 },
 "SLE": {
- "fillKey": "lt8" 
+ "fillKey": "lt12" 
 },
 "NGA": {
- "fillKey": "lt8" 
+ "fillKey": "lt12" 
 } 
 }
 ,"setProjection": function( element, options ) {
@@ -6468,10 +6527,10 @@ var alldata_pred =
  "fillKey": "lt420" 
 },
 "LBR": {
- "fillKey": "lt840" 
+ "fillKey": "lt1260" 
 },
 "SLE": {
- "fillKey": "lt420" 
+ "fillKey": "lt840" 
 },
 "NGA": {
  "fillKey": "lt420" 
@@ -6482,10 +6541,10 @@ var alldata_pred =
  "fillKey": "lt420" 
 },
 "LBR": {
- "fillKey": "lt840" 
+ "fillKey": "lt1260" 
 },
 "SLE": {
- "fillKey": "lt420" 
+ "fillKey": "lt840" 
 },
 "NGA": {
  "fillKey": "lt420" 
@@ -6569,7 +6628,7 @@ var alldata_pred =
  "fillKey": "lt1260" 
 },
 "SLE": {
- "fillKey": "lt420" 
+ "fillKey": "lt840" 
 },
 "NGA": {
  "fillKey": "lt420" 
@@ -6583,7 +6642,7 @@ var alldata_pred =
  "fillKey": "lt1260" 
 },
 "SLE": {
- "fillKey": "lt420" 
+ "fillKey": "lt840" 
 },
 "NGA": {
  "fillKey": "lt420" 
@@ -6597,7 +6656,7 @@ var alldata_pred =
  "fillKey": "lt1260" 
 },
 "SLE": {
- "fillKey": "lt420" 
+ "fillKey": "lt840" 
 },
 "NGA": {
  "fillKey": "lt420" 
@@ -6611,7 +6670,7 @@ var alldata_pred =
  "fillKey": "lt1260" 
 },
 "SLE": {
- "fillKey": "lt420" 
+ "fillKey": "lt840" 
 },
 "NGA": {
  "fillKey": "lt420" 
@@ -6625,7 +6684,7 @@ var alldata_pred =
  "fillKey": "lt1260" 
 },
 "SLE": {
- "fillKey": "lt420" 
+ "fillKey": "lt840" 
 },
 "NGA": {
  "fillKey": "lt420" 
@@ -6706,7 +6765,7 @@ var alldata_pred =
  "fillKey": "lt420" 
 },
 "LBR": {
- "fillKey": "lt1680" 
+ "fillKey": "lt1260" 
 },
 "SLE": {
  "fillKey": "lt420" 
@@ -6720,7 +6779,7 @@ var alldata_pred =
  "fillKey": "lt420" 
 },
 "LBR": {
- "fillKey": "lt1680" 
+ "fillKey": "lt1260" 
 },
 "SLE": {
  "fillKey": "lt420" 
@@ -6734,7 +6793,7 @@ var alldata_pred =
  "fillKey": "lt420" 
 },
 "LBR": {
- "fillKey": "lt1680" 
+ "fillKey": "lt1260" 
 },
 "SLE": {
  "fillKey": "lt420" 
@@ -6748,7 +6807,7 @@ var alldata_pred =
  "fillKey": "lt420" 
 },
 "LBR": {
- "fillKey": "lt1680" 
+ "fillKey": "lt1260" 
 },
 "SLE": {
  "fillKey": "lt420" 
@@ -6762,7 +6821,7 @@ var alldata_pred =
  "fillKey": "lt420" 
 },
 "LBR": {
- "fillKey": "lt2100" 
+ "fillKey": "lt1260" 
 },
 "SLE": {
  "fillKey": "lt420" 
@@ -6776,7 +6835,7 @@ var alldata_pred =
  "fillKey": "lt420" 
 },
 "LBR": {
- "fillKey": "lt2100" 
+ "fillKey": "lt1680" 
 },
 "SLE": {
  "fillKey": "lt420" 
@@ -6790,7 +6849,7 @@ var alldata_pred =
  "fillKey": "lt420" 
 },
 "LBR": {
- "fillKey": "lt2100" 
+ "fillKey": "lt1680" 
 },
 "SLE": {
  "fillKey": "lt420" 
@@ -6804,10 +6863,10 @@ var alldata_pred =
  "fillKey": "lt420" 
 },
 "LBR": {
- "fillKey": "lt2520" 
+ "fillKey": "lt1680" 
 },
 "SLE": {
- "fillKey": "lt840" 
+ "fillKey": "lt420" 
 },
 "NGA": {
  "fillKey": "lt420" 
@@ -6818,10 +6877,10 @@ var alldata_pred =
  "fillKey": "lt420" 
 },
 "LBR": {
- "fillKey": "lt2520" 
+ "fillKey": "lt1680" 
 },
 "SLE": {
- "fillKey": "lt840" 
+ "fillKey": "lt420" 
 },
 "NGA": {
  "fillKey": "lt420" 
@@ -6832,6 +6891,76 @@ var alldata_pred =
  "fillKey": "lt420" 
 },
 "LBR": {
+ "fillKey": "lt2100" 
+},
+"SLE": {
+ "fillKey": "lt420" 
+},
+"NGA": {
+ "fillKey": "lt420" 
+} 
+},
+"191": {
+ "GIN": {
+ "fillKey": "lt420" 
+},
+"LBR": {
+ "fillKey": "lt2100" 
+},
+"SLE": {
+ "fillKey": "lt420" 
+},
+"NGA": {
+ "fillKey": "lt420" 
+} 
+},
+"192": {
+ "GIN": {
+ "fillKey": "lt420" 
+},
+"LBR": {
+ "fillKey": "lt2100" 
+},
+"SLE": {
+ "fillKey": "lt420" 
+},
+"NGA": {
+ "fillKey": "lt420" 
+} 
+},
+"193": {
+ "GIN": {
+ "fillKey": "lt420" 
+},
+"LBR": {
+ "fillKey": "lt2520" 
+},
+"SLE": {
+ "fillKey": "lt840" 
+},
+"NGA": {
+ "fillKey": "lt420" 
+} 
+},
+"194": {
+ "GIN": {
+ "fillKey": "lt420" 
+},
+"LBR": {
+ "fillKey": "lt2520" 
+},
+"SLE": {
+ "fillKey": "lt840" 
+},
+"NGA": {
+ "fillKey": "lt420" 
+} 
+},
+"195": {
+ "GIN": {
+ "fillKey": "lt420" 
+},
+"LBR": {
  "fillKey": "lt2940" 
 },
 "SLE": {
@@ -6841,7 +6970,7 @@ var alldata_pred =
  "fillKey": "lt420" 
 } 
 },
-"191": {
+"196": {
  "GIN": {
  "fillKey": "lt420" 
 },
@@ -6855,7 +6984,7 @@ var alldata_pred =
  "fillKey": "lt840" 
 } 
 },
-"192": {
+"197": {
  "GIN": {
  "fillKey": "lt420" 
 },
@@ -6869,7 +6998,7 @@ var alldata_pred =
  "fillKey": "lt840" 
 } 
 },
-"193": {
+"198": {
  "GIN": {
  "fillKey": "lt420" 
 },
@@ -6883,7 +7012,7 @@ var alldata_pred =
  "fillKey": "lt840" 
 } 
 },
-"194": {
+"199": {
  "GIN": {
  "fillKey": "lt420" 
 },
@@ -7100,7 +7229,12 @@ var dayLabels=
 "196": "2014-10-05",
 "197": "2014-10-06",
 "198": "2014-10-07",
-"199": "2014-10-08" 
+"199": "2014-10-08",
+"200": "2014-10-09",
+"201": "2014-10-10",
+"202": "2014-10-11",
+"203": "2014-10-12",
+"204": "2014-10-13" 
 };
 var chartParams_pred={"dom": "zoom_map_pred",
 "scope": "world",
