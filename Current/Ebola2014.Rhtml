@@ -153,7 +153,7 @@
 <!--begin.rcode
 library(knitr)
 library(coda) # Load the coda library for MCMC convergence diagnosis
-library(spatialSEIR) # Load the spatialSEIR library to perform the modeling. 
+library(spatialSEIR)
 library(XML) # Load the XML library to read in data from Wikipedia
 library(parallel) # Load the parallel library to enable multiple chains to be run simultaneously. 
 
@@ -167,7 +167,7 @@ pred.days = 30
 ## Compute number of samples/batches
 numBurnInBatches =      ifelse(documentCompilationMode == "release", 1000,  1)
 numConvergenceBatches = ifelse(documentCompilationMode == "release", 1000,  10)
-convergenceBatchSize =  ifelse(documentCompilationMode == "release", 500, 50) 
+convergenceBatchSize =  ifelse(documentCompilationMode == "release", 600, 100) 
 extraR0Iterations =     ifelse(documentCompilationMode == "release", 500,   10)
 iterationStride =       ifelse(documentCompilationMode == "release", 500,   50)
 
@@ -670,7 +670,7 @@ buildAndRunModel = function(params)
 
 
   
-  cat(paste("Time elapsed: ", round(tm[3]/60,3), 
+  cat(paste("Time elapsed for ", proposal$outFileName," : ", round(tm[3]/60,3), 
               " minutes\n", sep = ""))
   dat = read.csv(proposal$outFileName)
   
@@ -702,7 +702,7 @@ buildAndRunModel = function(params)
 }
 
 
-cl = makeCluster(3)
+cl = makeCluster(3, outfile = "err.txt")
 clusterExport(cl, c("compMatDim",
                      "xDim",
                      "zDim",
@@ -730,11 +730,10 @@ clusterExport(cl, c("compMatDim",
                      "convergenceBatchSize",
                      "extraR0Iterations",
                      "I_star",
-                     "numBurnInBatches",
-                     "dataModel"))
+                     "numBurnInBatches"))
 
 paramsList = list(list("estimateR0"=FALSE, "traceCompartments"=TRUE, "seedVal"=123123,"chainNumber"=4),
-                  list("estimateR0"=TRUE, "traceCompartments"=FALSE, "seedVal"=123124,"chainNumber"=5),
+                  list("estimateR0"=TRUE, "traceCompartments"=FALSE, "seedVal"=1299224,"chainNumber"=5),
                   list("estimateR0"=FALSE,"traceCompartments"=FALSE, "seedVal"=123125,"chainNumber"=6))
 
 chains = parLapply(cl, paramsList, buildAndRunModel)
@@ -1096,7 +1095,7 @@ figure11 = function()
 
   ## Nigeria
   plot(rptDate, Nigeria.I.Est[1,], ylim = c(0, maxI),  xlim = pred.xlim,
-       main = "Sierra Leone Estimated Epidemic Size\n 90% Credible Interval",
+       main = "Nigeria Estimated Epidemic Size\n 90% Credible Interval",
        type = "l", lwd = 2, col = "green",ylab = "Infectious Count", 
        xlab = "Date")
   abline(h = seq(0,1000000,5000), lty = 2, col = "lightgrey")
