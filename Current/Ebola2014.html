@@ -408,7 +408,7 @@ One can also represent this data geographically to get an idea of the spatial ep
   <div class = "row">
     <div class="col-sm-3">
       <input id='zoom-map-slider' type='range' min=1 max=
-173
+176
       ng-model='Day' width=200>
        <span>Day: <span id ="zoom-map-day-counter"></span></span>
     </div>
@@ -674,7 +674,7 @@ temporal trend.
 
   <span class="hl com"># Burn in tuning parameters</span>
   <span class="hl kwd">runSimulation</span><span class="hl std">(SEIRmodel,</span> <span class="hl kwc">numBatches</span> <span class="hl std">= numBurnInBatches)</span>
-  <span class="hl std">SEIRmodel</span><span class="hl opt">$</span><span class="hl std">compartmentSamplingMode</span> <span class="hl kwb">=</span> <span class="hl num">14</span>
+  <span class="hl std">SEIRmodel</span><span class="hl opt">$</span><span class="hl std">compartmentSamplingMode</span> <span class="hl kwb">=</span> <span class="hl num">1</span>
   <span class="hl std">SEIRmodel</span><span class="hl opt">$</span><span class="hl std">useDecorrelation</span> <span class="hl kwb">=</span> <span class="hl num">25</span>
   <span class="hl com"># Run Simulation</span>
   <span class="hl kwd">cat</span><span class="hl std">(</span><span class="hl kwd">paste</span><span class="hl std">(</span><span class="hl str">&quot;Running chain &quot;</span><span class="hl std">, params[[</span><span class="hl str">&quot;chainNumber&quot;</span><span class="hl std">]],</span> <span class="hl str">&quot;\n&quot;</span><span class="hl std">,</span> <span class="hl kwc">sep</span> <span class="hl std">=</span><span class="hl str">&quot;&quot;</span><span class="hl std">))</span>
@@ -758,7 +758,11 @@ temporal trend.
                   <span class="hl kwd">list</span><span class="hl std">(</span><span class="hl str">&quot;estimateR0&quot;</span><span class="hl std">=</span><span class="hl num">FALSE</span><span class="hl std">,</span><span class="hl str">&quot;traceCompartments&quot;</span><span class="hl std">=</span><span class="hl num">FALSE</span><span class="hl std">,</span> <span class="hl str">&quot;seedVal&quot;</span><span class="hl std">=</span><span class="hl num">123125</span><span class="hl std">,</span><span class="hl str">&quot;chainNumber&quot;</span><span class="hl std">=</span><span class="hl num">6</span><span class="hl std">))</span>
 
 <span class="hl std">chains</span> <span class="hl kwb">=</span> <span class="hl kwd">parLapply</span><span class="hl std">(cl, paramsList, buildAndRunModel)</span>
-<span class="hl kwd">stopCluster</span><span class="hl std">(cl)</span>
+</pre></div>
+<div class="error"><pre class="knitr r">## Error: 3 nodes produced errors; first error: c++ exception (unknown
+## reason)
+</pre></div>
+<div class="source"><pre class="knitr r"><span class="hl kwd">stopCluster</span><span class="hl std">(cl)</span>
 
 <span class="hl std">chain1</span> <span class="hl kwb">=</span> <span class="hl std">chains[[</span><span class="hl num">1</span><span class="hl std">]]</span><span class="hl opt">$</span><span class="hl std">chainOutput</span>
 <span class="hl std">chain2</span> <span class="hl kwb">=</span> <span class="hl std">chains[[</span><span class="hl num">2</span><span class="hl std">]]</span><span class="hl opt">$</span><span class="hl std">chainOutput</span>
@@ -949,11 +953,22 @@ temporal trend.
 <span class="hl std">}</span>
 
 <span class="hl std">Guinea.I.Est</span> <span class="hl kwb">=</span> <span class="hl kwd">sapply</span><span class="hl std">(</span><span class="hl num">0</span><span class="hl opt">:</span><span class="hl std">(</span><span class="hl kwd">nrow</span><span class="hl std">(I_star)</span><span class="hl opt">-</span> <span class="hl num">1</span><span class="hl std">), getMeanAndCI,</span> <span class="hl kwc">loc</span><span class="hl std">=</span><span class="hl num">0</span><span class="hl std">)</span>
-<span class="hl std">Liberia.I.Est</span> <span class="hl kwb">=</span> <span class="hl kwd">sapply</span><span class="hl std">(</span><span class="hl num">0</span><span class="hl opt">:</span><span class="hl std">(</span><span class="hl kwd">nrow</span><span class="hl std">(I_star)</span><span class="hl opt">-</span> <span class="hl num">1</span><span class="hl std">), getMeanAndCI,</span> <span class="hl kwc">loc</span><span class="hl std">=</span><span class="hl num">1</span><span class="hl std">)</span>
-<span class="hl std">SierraLeone.I.Est</span> <span class="hl kwb">=</span> <span class="hl kwd">sapply</span><span class="hl std">(</span><span class="hl num">0</span><span class="hl opt">:</span><span class="hl std">(</span><span class="hl kwd">nrow</span><span class="hl std">(I_star)</span><span class="hl opt">-</span> <span class="hl num">1</span><span class="hl std">), getMeanAndCI,</span> <span class="hl kwc">loc</span><span class="hl std">=</span><span class="hl num">2</span><span class="hl std">)</span>
-<span class="hl std">Nigeria.I.Est</span> <span class="hl kwb">=</span> <span class="hl kwd">sapply</span><span class="hl std">(</span><span class="hl num">0</span><span class="hl opt">:</span><span class="hl std">(</span><span class="hl kwd">nrow</span><span class="hl std">(I_star)</span><span class="hl opt">-</span> <span class="hl num">1</span><span class="hl std">), getMeanAndCI,</span> <span class="hl kwc">loc</span><span class="hl std">=</span><span class="hl num">3</span><span class="hl std">)</span>
-
-<span class="hl com"># Declare prediction functions</span>
+</pre></div>
+<div class="warning"><pre class="knitr r">## Warning: argument is not numeric or logical: returning NA
+</pre></div>
+<div class="source"><pre class="knitr r"><span class="hl std">Liberia.I.Est</span> <span class="hl kwb">=</span> <span class="hl kwd">sapply</span><span class="hl std">(</span><span class="hl num">0</span><span class="hl opt">:</span><span class="hl std">(</span><span class="hl kwd">nrow</span><span class="hl std">(I_star)</span><span class="hl opt">-</span> <span class="hl num">1</span><span class="hl std">), getMeanAndCI,</span> <span class="hl kwc">loc</span><span class="hl std">=</span><span class="hl num">1</span><span class="hl std">)</span>
+</pre></div>
+<div class="warning"><pre class="knitr r">## Warning: argument is not numeric or logical: returning NA
+</pre></div>
+<div class="source"><pre class="knitr r"><span class="hl std">SierraLeone.I.Est</span> <span class="hl kwb">=</span> <span class="hl kwd">sapply</span><span class="hl std">(</span><span class="hl num">0</span><span class="hl opt">:</span><span class="hl std">(</span><span class="hl kwd">nrow</span><span class="hl std">(I_star)</span><span class="hl opt">-</span> <span class="hl num">1</span><span class="hl std">), getMeanAndCI,</span> <span class="hl kwc">loc</span><span class="hl std">=</span><span class="hl num">2</span><span class="hl std">)</span>
+</pre></div>
+<div class="warning"><pre class="knitr r">## Warning: argument is not numeric or logical: returning NA
+</pre></div>
+<div class="source"><pre class="knitr r"><span class="hl std">Nigeria.I.Est</span> <span class="hl kwb">=</span> <span class="hl kwd">sapply</span><span class="hl std">(</span><span class="hl num">0</span><span class="hl opt">:</span><span class="hl std">(</span><span class="hl kwd">nrow</span><span class="hl std">(I_star)</span><span class="hl opt">-</span> <span class="hl num">1</span><span class="hl std">), getMeanAndCI,</span> <span class="hl kwc">loc</span><span class="hl std">=</span><span class="hl num">3</span><span class="hl std">)</span>
+</pre></div>
+<div class="warning"><pre class="knitr r">## Warning: argument is not numeric or logical: returning NA
+</pre></div>
+<div class="source"><pre class="knitr r"><span class="hl com"># Declare prediction functions</span>
 <span class="hl std">predictEpidemic</span> <span class="hl kwb">=</span> <span class="hl kwa">function</span><span class="hl std">(</span><span class="hl kwc">beta.pred</span><span class="hl std">,</span>
                            <span class="hl kwc">X.pred</span><span class="hl std">,</span>
                            <span class="hl kwc">gamma.ei</span><span class="hl std">,</span>
@@ -1056,9 +1071,10 @@ temporal trend.
 
 <span class="hl std">preds</span> <span class="hl kwb">=</span> <span class="hl kwd">lapply</span><span class="hl std">((</span><span class="hl kwd">nrow</span><span class="hl std">(chain1)</span> <span class="hl opt">-</span> <span class="hl kwd">floor</span><span class="hl std">(</span><span class="hl kwd">nrow</span><span class="hl std">(chain1)</span><span class="hl opt">/</span><span class="hl num">2</span><span class="hl std">))</span><span class="hl opt">:</span>
                   <span class="hl kwd">nrow</span><span class="hl std">(chain1), predict.i)</span>
-
-
-<span class="hl std">pred.dates</span> <span class="hl kwb">=</span> <span class="hl kwd">c</span><span class="hl std">(rptDate[(</span><span class="hl kwd">which.max</span><span class="hl std">(rptDate))],</span>
+</pre></div>
+<div class="error"><pre class="knitr r">## Error: data is too long
+</pre></div>
+<div class="source"><pre class="knitr r"><span class="hl std">pred.dates</span> <span class="hl kwb">=</span> <span class="hl kwd">c</span><span class="hl std">(rptDate[(</span><span class="hl kwd">which.max</span><span class="hl std">(rptDate))],</span>
                <span class="hl std">rptDate[(</span><span class="hl kwd">which.max</span><span class="hl std">(rptDate))]</span> <span class="hl opt">+</span> <span class="hl kwd">seq</span><span class="hl std">(</span><span class="hl num">2</span><span class="hl std">,pred.days</span><span class="hl opt">-</span><span class="hl num">2</span><span class="hl std">,</span><span class="hl num">2</span><span class="hl std">))</span>
 <span class="hl std">pred.xlim</span> <span class="hl kwb">=</span> <span class="hl kwd">c</span><span class="hl std">(</span><span class="hl kwd">min</span><span class="hl std">(rptDate),</span> <span class="hl kwd">max</span><span class="hl std">(pred.dates))</span>
 <span class="hl std">lastIdx</span> <span class="hl kwb">=</span> <span class="hl kwd">nrow</span><span class="hl std">(I_star)</span>
@@ -1231,7 +1247,9 @@ Below, we will attempt to predict the course of the epidemic through early fall.
 We must be cautious when making predictions about a chaotic process this far into the future. The intensity function which drives the exposure process is based on simple smooth functions of time, rather than any external information. While this is perfectly adequate for estimation, it may or may not provide good prediction performance. 
 </p>
 
-<div class="chunk" id="unnamed-chunk-12"><div class="rimage center"><img src="figure/unnamed-chunk-12.png" title="plot of chunk unnamed-chunk-12" alt="plot of chunk unnamed-chunk-12" class="plot" /></div></div>
+<div class="chunk" id="unnamed-chunk-12"><div class="rcode"><div class="error"><pre class="knitr r">## Error: need finite 'ylim' values
+</pre></div>
+</div><div class="rimage center"><img src="figure/unnamed-chunk-12.png" title="plot of chunk unnamed-chunk-12" alt="plot of chunk unnamed-chunk-12" class="plot" /></div></div>
 
 <br/>
 <p>It can also be helpful to take a look at the data in tabular form.</p><br/>
@@ -1484,105 +1502,112 @@ We must be cautious when making predictions about a chaotic process this far int
    <td align="center"> 674 </td>
   </tr>
   <tr>
-   <td align="left"> &nbsp;2014-09-10&nbsp; </td>
+   <td align="left"> &nbsp;2014-09-13&nbsp; </td>
+   <td align="center"> NA </td>
+   <td align="center"> NA </td>
+   <td align="center"> NA </td>
+   <td align="center"> NA </td>
+  </tr>
+  <tr>
+   <td align="left"> &nbsp;2014-09-13&nbsp; </td>
    <td align="center"> 15973 </td>
    <td align="center"> 586 </td>
    <td align="center"> 661 </td>
    <td align="center"> 2020 </td>
   </tr>
   <tr>
-   <td align="left"> &nbsp;2014-09-12&nbsp; </td>
+   <td align="left"> &nbsp;2014-09-15&nbsp; </td>
    <td align="center"> 100974 </td>
    <td align="center"> 3983 </td>
    <td align="center"> 4461 </td>
    <td align="center"> 13176 </td>
   </tr>
   <tr>
-   <td align="left"> &nbsp;2014-09-14&nbsp; </td>
+   <td align="left"> &nbsp;2014-09-17&nbsp; </td>
    <td align="center"> 863752 </td>
    <td align="center"> 71360 </td>
    <td align="center"> 82297 </td>
    <td align="center"> 248023 </td>
   </tr>
   <tr>
-   <td align="left"> &nbsp;2014-09-16&nbsp; </td>
+   <td align="left"> &nbsp;2014-09-19&nbsp; </td>
    <td align="center"> 1730674 </td>
    <td align="center"> 708428 </td>
    <td align="center"> 989154 </td>
    <td align="center"> 6710476 </td>
   </tr>
   <tr>
-   <td align="left"> &nbsp;2014-09-18&nbsp; </td>
+   <td align="left"> &nbsp;2014-09-21&nbsp; </td>
    <td align="center"> 1949192 </td>
    <td align="center"> 892984 </td>
    <td align="center"> 1364969 </td>
    <td align="center"> 36984752 </td>
   </tr>
   <tr>
-   <td align="left"> &nbsp;2014-09-20&nbsp; </td>
+   <td align="left"> &nbsp;2014-09-23&nbsp; </td>
    <td align="center"> 1768047 </td>
    <td align="center"> 809125 </td>
    <td align="center"> 1237383 </td>
    <td align="center"> 36594686 </td>
   </tr>
   <tr>
-   <td align="left"> &nbsp;2014-09-22&nbsp; </td>
+   <td align="left"> &nbsp;2014-09-25&nbsp; </td>
    <td align="center"> 1371585 </td>
    <td align="center"> 625950 </td>
    <td align="center"> 956743 </td>
    <td align="center"> 34228744 </td>
   </tr>
   <tr>
-   <td align="left"> &nbsp;2014-09-24&nbsp; </td>
+   <td align="left"> &nbsp;2014-09-27&nbsp; </td>
    <td align="center"> 941549 </td>
    <td align="center"> 427925 </td>
    <td align="center"> 653775 </td>
    <td align="center"> 24370419 </td>
   </tr>
   <tr>
-   <td align="left"> &nbsp;2014-09-26&nbsp; </td>
+   <td align="left"> &nbsp;2014-09-29&nbsp; </td>
    <td align="center"> 587914 </td>
    <td align="center"> 265908 </td>
    <td align="center"> 405903 </td>
    <td align="center"> 15443229 </td>
   </tr>
   <tr>
-   <td align="left"> &nbsp;2014-09-28&nbsp; </td>
+   <td align="left"> &nbsp;2014-10-01&nbsp; </td>
    <td align="center"> 342773 </td>
    <td align="center"> 154109 </td>
    <td align="center"> 234946 </td>
    <td align="center"> 9142332 </td>
   </tr>
   <tr>
-   <td align="left"> &nbsp;2014-09-30&nbsp; </td>
+   <td align="left"> &nbsp;2014-10-03&nbsp; </td>
    <td align="center"> 190674 </td>
    <td align="center"> 85205 </td>
    <td align="center"> 129734 </td>
    <td align="center"> 5156465 </td>
   </tr>
   <tr>
-   <td align="left"> &nbsp;2014-10-02&nbsp; </td>
+   <td align="left"> &nbsp;2014-10-05&nbsp; </td>
    <td align="center"> 102688 </td>
    <td align="center"> 45622 </td>
    <td align="center"> 69375 </td>
    <td align="center"> 2804188 </td>
   </tr>
   <tr>
-   <td align="left"> &nbsp;2014-10-04&nbsp; </td>
+   <td align="left"> &nbsp;2014-10-07&nbsp; </td>
    <td align="center"> 53795 </td>
    <td align="center"> 23796 </td>
    <td align="center"> 36144 </td>
    <td align="center"> 1475667 </td>
   </tr>
   <tr>
-   <td align="left"> &nbsp;2014-10-06&nbsp; </td>
+   <td align="left"> &nbsp;2014-10-09&nbsp; </td>
    <td align="center"> 27340 </td>
    <td align="center"> 12046 </td>
    <td align="center"> 18282 </td>
    <td align="center"> 749079 </td>
   </tr>
   <tr>
-   <td align="left"> &nbsp;2014-10-08&nbsp; </td>
+   <td align="left"> &nbsp;2014-10-11&nbsp; </td>
    <td align="center"> 13380 </td>
    <td align="center"> 5884 </td>
    <td align="center"> 8918 </td>
@@ -1600,7 +1625,7 @@ We must be cautious when making predictions about a chaotic process this far int
   <div class = "row" ng-controller='rChartsCtrl_pred' >
     <div class="col-sm-3">
       <input id='zoom-map-slider-pred' type='range' min=1 max=
-203
+206
       ng-model='pred_Day' width=200>
        <span>Day: <span id ="zoom-map-day-counter-pred"></span></span>
     </div>
@@ -4037,7 +4062,7 @@ var alldata =
  "fillKey": "lt12" 
 },
 "LBR": {
- "fillKey": "lt111" 
+ "fillKey": "lt99" 
 },
 "SLE": {
  "fillKey": "lt37" 
@@ -4051,7 +4076,49 @@ var alldata =
  "fillKey": "lt25" 
 },
 "LBR": {
- "fillKey": null 
+ "fillKey": "lt111" 
+},
+"SLE": {
+ "fillKey": "lt37" 
+},
+"NGA": {
+ "fillKey": "lt12" 
+} 
+},
+"172": {
+ "GIN": {
+ "fillKey": "lt25" 
+},
+"LBR": {
+ "fillKey": "lt111" 
+},
+"SLE": {
+ "fillKey": "lt37" 
+},
+"NGA": {
+ "fillKey": "lt12" 
+} 
+},
+"173": {
+ "GIN": {
+ "fillKey": "lt25" 
+},
+"LBR": {
+ "fillKey": "lt99" 
+},
+"SLE": {
+ "fillKey": "lt37" 
+},
+"NGA": {
+ "fillKey": "lt12" 
+} 
+},
+"174": {
+ "GIN": {
+ "fillKey": "lt12" 
+},
+"LBR": {
+ "fillKey": "lt87" 
 },
 "SLE": {
  "fillKey": "lt37" 
@@ -4078,9 +4145,9 @@ var chartParams={"dom": "zoom_map",
 "lt50": "#fec45f",
 "lt62": "#fe993f",
 "lt74": "#ec702f",
-"lt99": "#cc4c1f",
-"lt111": "#993402",
-"NA": "#662520" 
+"lt87": "#cc4c1f",
+"lt99": "#993402",
+"lt111": "#662520" 
 }
 ,
 "data":
@@ -6702,7 +6769,7 @@ var alldata_pred =
  "fillKey": "lt4110000" 
 },
 "NGA": {
- "fillKey": "lt8220000" 
+ "fillKey": "lt4110000" 
 } 
 },
 "178": {
@@ -6716,7 +6783,7 @@ var alldata_pred =
  "fillKey": "lt4110000" 
 },
 "NGA": {
- "fillKey": "lt24700000" 
+ "fillKey": "lt4110000" 
 } 
 },
 "179": {
@@ -6730,7 +6797,7 @@ var alldata_pred =
  "fillKey": "lt4110000" 
 },
 "NGA": {
- "fillKey": "lt3.7e+07" 
+ "fillKey": "lt4110000" 
 } 
 },
 "180": {
@@ -6744,7 +6811,7 @@ var alldata_pred =
  "fillKey": "lt4110000" 
 },
 "NGA": {
- "fillKey": "lt3.7e+07" 
+ "fillKey": "lt8220000" 
 } 
 },
 "181": {
@@ -6758,7 +6825,7 @@ var alldata_pred =
  "fillKey": "lt4110000" 
 },
 "NGA": {
- "fillKey": "lt3.7e+07" 
+ "fillKey": "lt24700000" 
 } 
 },
 "182": {
@@ -6800,7 +6867,7 @@ var alldata_pred =
  "fillKey": "lt4110000" 
 },
 "NGA": {
- "fillKey": "lt32900000" 
+ "fillKey": "lt3.7e+07" 
 } 
 },
 "185": {
@@ -6814,7 +6881,7 @@ var alldata_pred =
  "fillKey": "lt4110000" 
 },
 "NGA": {
- "fillKey": "lt24700000" 
+ "fillKey": "lt3.7e+07" 
 } 
 },
 "186": {
@@ -6828,7 +6895,7 @@ var alldata_pred =
  "fillKey": "lt4110000" 
 },
 "NGA": {
- "fillKey": "lt20500000" 
+ "fillKey": "lt3.7e+07" 
 } 
 },
 "187": {
@@ -6842,7 +6909,7 @@ var alldata_pred =
  "fillKey": "lt4110000" 
 },
 "NGA": {
- "fillKey": "lt16400000" 
+ "fillKey": "lt32900000" 
 } 
 },
 "188": {
@@ -6856,7 +6923,7 @@ var alldata_pred =
  "fillKey": "lt4110000" 
 },
 "NGA": {
- "fillKey": "lt12300000" 
+ "fillKey": "lt24700000" 
 } 
 },
 "189": {
@@ -6870,7 +6937,7 @@ var alldata_pred =
  "fillKey": "lt4110000" 
 },
 "NGA": {
- "fillKey": "lt12300000" 
+ "fillKey": "lt20500000" 
 } 
 },
 "190": {
@@ -6884,7 +6951,7 @@ var alldata_pred =
  "fillKey": "lt4110000" 
 },
 "NGA": {
- "fillKey": "lt8220000" 
+ "fillKey": "lt16400000" 
 } 
 },
 "191": {
@@ -6898,7 +6965,7 @@ var alldata_pred =
  "fillKey": "lt4110000" 
 },
 "NGA": {
- "fillKey": "lt8220000" 
+ "fillKey": "lt12300000" 
 } 
 },
 "192": {
@@ -6912,7 +6979,7 @@ var alldata_pred =
  "fillKey": "lt4110000" 
 },
 "NGA": {
- "fillKey": "lt4110000" 
+ "fillKey": "lt12300000" 
 } 
 },
 "193": {
@@ -6926,7 +6993,7 @@ var alldata_pred =
  "fillKey": "lt4110000" 
 },
 "NGA": {
- "fillKey": "lt4110000" 
+ "fillKey": "lt8220000" 
 } 
 },
 "194": {
@@ -6940,7 +7007,7 @@ var alldata_pred =
  "fillKey": "lt4110000" 
 },
 "NGA": {
- "fillKey": "lt4110000" 
+ "fillKey": "lt8220000" 
 } 
 },
 "195": {
@@ -7000,6 +7067,48 @@ var alldata_pred =
 } 
 },
 "199": {
+ "GIN": {
+ "fillKey": "lt4110000" 
+},
+"LBR": {
+ "fillKey": "lt4110000" 
+},
+"SLE": {
+ "fillKey": "lt4110000" 
+},
+"NGA": {
+ "fillKey": "lt4110000" 
+} 
+},
+"200": {
+ "GIN": {
+ "fillKey": "lt4110000" 
+},
+"LBR": {
+ "fillKey": "lt4110000" 
+},
+"SLE": {
+ "fillKey": "lt4110000" 
+},
+"NGA": {
+ "fillKey": "lt4110000" 
+} 
+},
+"201": {
+ "GIN": {
+ "fillKey": "lt4110000" 
+},
+"LBR": {
+ "fillKey": "lt4110000" 
+},
+"SLE": {
+ "fillKey": "lt4110000" 
+},
+"NGA": {
+ "fillKey": "lt4110000" 
+} 
+},
+"202": {
  "GIN": {
  "fillKey": "lt4110000" 
 },
@@ -7221,7 +7330,10 @@ var dayLabels=
 "201": "2014-10-10",
 "202": "2014-10-11",
 "203": "2014-10-12",
-"204": "2014-10-13" 
+"204": "2014-10-13",
+"205": "2014-10-14",
+"206": "2014-10-15",
+"207": "2014-10-16" 
 };
 var chartParams_pred={"dom": "zoom_map_pred",
 "scope": "world",
