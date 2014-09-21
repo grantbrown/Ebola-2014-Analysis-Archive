@@ -45,7 +45,7 @@
           <h4>A Quick Stochastic Spatial SEIR Modeling Approach</h4>
           <h5><a href="http://www.public-health.uiowa.edu/people/grant-brown/">Grant Brown</a></h5>
           <h5><a href="http://www.public-health.uiowa.edu/people/jacob-oleson/">Jacob Oleson</a></h5>
-          <h5>Last Updated: 9/2/2014</h5>
+          <h5>Last Updated: 9/18/2014</h5>
         </div>
       </div>
     </div>
@@ -166,10 +166,10 @@ pred.days = 30
 
 ## Compute number of samples/batches
 numBurnInBatches =      ifelse(documentCompilationMode == "release", 1000,  1)
-numConvergenceBatches = ifelse(documentCompilationMode == "release", 1000,  10)
-convergenceBatchSize =  ifelse(documentCompilationMode == "release", 600, 100) 
+numConvergenceBatches = ifelse(documentCompilationMode == "release", 3000,  10)
+convergenceBatchSize =  ifelse(documentCompilationMode == "release", 1000, 100) 
 extraR0Iterations =     ifelse(documentCompilationMode == "release", 500,   10)
-iterationStride =       ifelse(documentCompilationMode == "release", 500,   50)
+iterationStride =       ifelse(documentCompilationMode == "release", 1000,   50)
 
 ## Read in the data
 url = 'http://en.wikipedia.org/wiki/West_Africa_Ebola_virus_outbreak'
@@ -495,9 +495,9 @@ X.pred = cbind(X.predict[rep(1:nrow(X.predict),
 DM1 = 0*(diag(4)); DM1[1:3,4] = 1; DM1[4,1:3] = 1
 DM2 = rbind(cbind((1-diag(3)), rep(0, 3)), rep(0,4))
 # Make row stochastic:
-#DM1 = DM1/matrix(apply(DM1, 1, sum), nrow = 4, ncol = 4)
-#DM2 = DM2/matrix(apply(DM2, 1, sum), nrow = 4, ncol = 4)
-#DM2 = ifelse(is.na(DM2), 0, DM2)
+DM1 = DM1/matrix(apply(DM1, 1, sum), nrow = 4, ncol = 4)
+DM2 = DM2/matrix(apply(DM2, 1, sum), nrow = 4, ncol = 4)
+DM2 = ifelse(is.na(DM2), 0, DM2)
 
 # Define population sizes for the three countries of interest. This data also 
 # from Wikipedia. 
@@ -509,9 +509,7 @@ offset.pred = c(1,seq(2,pred.days-2,2))
 # values for the reinfection terms. This will be changed (along with most of 
 # the R level API) Dummy covariate matrix:
 X_p_rs = matrix(0)
-# Dummy covariate matrix dimension. Why, exactly, am I not just grabbing this 
-# kind of thing from Rcpp? No good reason at all: this will be fixed. 
-xPrsDim = dim(X_p_rs)
+
 # Dummy value for reinfection params
 beta_p_rs = rep(0, ncol(X_p_rs))
 # Dummy value for reinfection params prior precision
@@ -653,7 +651,7 @@ buildAndRunModel = function(params)
   # Burn in tuning parameters
   runSimulation(SEIRmodel, numBatches = numBurnInBatches)
   SEIRmodel$compartmentSamplingMode = 14
-  SEIRmodel$useDecorrelation = 25
+  SEIRmodel$useDecorrelation = 1000
   # Run Simulation
   cat(paste("Running chain ", params[["chainNumber"]], "\n", sep =""))
 
@@ -667,8 +665,7 @@ buildAndRunModel = function(params)
 	    tolerance=0.025,
 	    proportionChange = 0.05))
 
-
-  
+ 
   cat(paste("Time elapsed for ", proposal$outFileName," : ", round(tm[3]/60,3), 
               " minutes\n", sep = ""))
   dat = read.csv(proposal$outFileName)
@@ -705,7 +702,6 @@ cl = makeCluster(3, outfile = "err.txt")
 clusterExport(cl, c("compMatDim",
                      "xDim",
                      "zDim",
-                     "xPrsDim",   
                      "offsets",
                      "X",
                      "Z",
