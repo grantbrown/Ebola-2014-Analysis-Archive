@@ -159,8 +159,8 @@ library(parallel) # Load the parallel library to enable multiple chains to be ru
 
 ## Define Document Compilation Parameters
 
-documentCompilationMode = "release"
-#documentCompilationMode = "debug"
+#documentCompilationMode = "release"
+documentCompilationMode = "debug"
 modelDF = 6
 pred.days = 30
 
@@ -488,16 +488,33 @@ Z.predict = Z.predict[rep(1:nrow(Z.predict), nrow(X)),]
 X.pred = cbind(X.predict[rep(1:nrow(X.predict), 
                              each = nrow(Z.predict)/nrow(X)),], Z.predict)
 
+# Pair-wise distance parameters.
+DM1 = matrix(c(0,1,0,0,
+               1,0,0,0,
+               0,0,0,0,
+               0,0,0,0), nrow = 4, ncol = 4, byrow = TRUE)
+DM2 = matrix(c(0,0,1,0,
+               0,0,0,0,
+               1,0,0,0,
+               0,0,0,0), nrow = 4, ncol = 4, byrow = TRUE)
+DM3 = matrix(c(0,0,0,1,
+               0,0,0,0,
+               0,0,0,0,
+               1,0,0,0), nrow = 4, ncol = 4, byrow = TRUE)
+DM4 = matrix(c(0,0,0,0,
+               0,0,1,0,
+               0,1,0,0,
+               0,0,0,0), nrow = 4, ncol = 4, byrow = TRUE)
+DM5 = matrix(c(0,0,0,0,
+               0,0,0,1,
+               0,0,0,0,
+               0,1,0,0), nrow = 4, ncol = 4, byrow = TRUE)
+DM6 = matrix(c(0,0,0,0,
+               0,0,0,0,
+               0,0,0,1,
+               0,0,1,0), nrow = 4, ncol = 4, byrow = TRUE)
 
-# Define the simple "distance" matrices. There are 4 countries, three of which 
-# share borders. Let all of the nations share an overall correlation term, and
-# let the three neighboring nations share an additional parameter
-DM1 = 0*(diag(4)); DM1[1:3,4] = 1; DM1[4,1:3] = 1
-DM2 = rbind(cbind((1-diag(3)), rep(0, 3)), rep(0,4))
-# Make row stochastic:
-DM1 = DM1/matrix(apply(DM1, 1, sum), nrow = 4, ncol = 4)
-DM2 = DM2/matrix(apply(DM2, 1, sum), nrow = 4, ncol = 4)
-DM2 = ifelse(is.na(DM2), 0, DM2)
+dmList = list(DM1,DM2,DM3,DM4,DM5,DM6)
 
 # Define population sizes for the three countries of interest. This data also 
 # from Wikipedia. 
@@ -577,7 +594,7 @@ proposeParameters = function(seedVal, chainNumber)
                                                I0 = c(86,0,0,0), 
                                                p_ir = 0.5, 
                                                p_rs = 0.00)
-    DistanceModel = buildDistanceModel(list(DM1,DM2))
+    DistanceModel = buildDistanceModel(list(DM1,DM2,DM3,DM4,DM5,DM6))
     TransitionPriors = buildTransitionPriorsManually(priorAlpha_gammaEI,priorBeta_gammaEI,
                                                      priorAlpha_gammaIR,priorBeta_gammaIR)
     return(list(DataModel=DataModel,
@@ -718,6 +735,10 @@ clusterExport(cl, c("compMatDim",
                      "N",
                      "DM1",
                      "DM2",
+                     "DM3",
+                     "DM4",
+                     "DM5",
+                     "DM6",
                      "iterationStride",
                      "proposeParameters",
                      "generateCompartmentProposal",
@@ -785,6 +806,9 @@ figure8 = function()
              chain2$BetaP_SE_3,
              chain3$BetaP_SE_3, 
              "Cubic Time Component")
+ 
+  
+  
 }
 figure9 = function()
 {
@@ -799,12 +823,31 @@ figure9 = function()
              , "I to R Transition Probability")
 }
 
+figure9_5 = function()
+{
+  #par(mfrow = c(length(dmList), 1))
+  for (i in 1:length(dmList))
+  {
+      plotChains(chain1[[paste("rho_", i-1, sep = "")]],
+                 chain2[[paste("rho_", i-1, sep = "")]],
+                 chain3[[paste("rho_", i-1, sep = "")]],
+                 paste("Spatial Parameter ", i, sep = "")
+                 )
+  }
+}
+
 ## Parameter Estimates 
 
 nbeta = ncol(X) + ncol(Z)
-c1 = chain1[floor(nrow(chain1)/2):nrow(chain1),c(1:(nbeta + 2),(nbeta+3):(nbeta+5))]
-c2 = chain2[floor(nrow(chain2)/2):nrow(chain2),c(1:(nbeta + 2),(nbeta+3):(nbeta+5))]
-c3 = chain3[floor(nrow(chain3)/2):nrow(chain3),c(1:(nbeta + 2),(nbeta+3):(nbeta+5))]
+c1 = chain1[floor(nrow(chain1)/2):nrow(chain1),c(1:(nbeta + length(dmList)),
+                                                 (nbeta+length(dmList)+1):
+                                                   (nbeta+length(dmList)+3))]
+c2 = chain2[floor(nrow(chain2)/2):nrow(chain2),c(1:(nbeta + length(dmList)),
+                                                 (nbeta+length(dmList)+1):
+                                                   (nbeta+length(dmList)+3))]
+c3 = chain3[floor(nrow(chain3)/2):nrow(chain3),c(1:(nbeta + length(dmList)),
+                                                 (nbeta+length(dmList)+1):
+                                                   (nbeta+length(dmList)+3))]
 
 c1$gamma_ei = 1-exp(-c1$gamma_ei)
 c1$gamma_ir = 1-exp(-c1$gamma_ir)
@@ -815,7 +858,7 @@ c3$gamma_ir = 1-exp(-c3$gamma_ir)
 colnames(c1) = c("Guinea Intercept", "Liberia Intercept", 
                  "Sierra Leone Intercept","Nigeria Intercept", 
                  paste("Time component ", (1:(nbeta-3)), sep = ""),
-                 "Spatial Dependence Parameter 1", "Spatial Dependence Parameter 2", 
+                 paste("Spatial Dependence Parameter", 1:length(dmList)),
                  "E to I probability", 
                  "I to R probability")
 colnames(c2) = colnames(c1)
@@ -896,9 +939,13 @@ predictEpidemic = function(beta.pred,
     I[1,] = I0
     R[1,] = R0
     S_star[1,] = rbinom(rep(1, length(S0)), R0, 0)
-    p_se[1,] = 1-exp(-offsets.pred[1]*(I[1,]/N*p_se_components[1,] + 
-                          rho[1]*(DM1 %*% (I[1,]/N*p_se_components[1,])) + 
-                          rho[2]*(DM2 %*% (I[1,]/N*p_se_components[1,]))))
+    p_se[1,] = I[1,]/N*p_se_components[1,]
+    for (i in 1:length(dmList))
+    {
+      p_se[1,] = p_se[1,] + rho[i]*(dmList[[i]] %*% (I[1,]/N*p_se_components[1,]))
+    }
+    p_se[1,] = 1-exp(-offsets.pred[1]*(p_se[1,]))
+    
     E_star[1,] = rbinom(rep(1, length(S0)), S0, p_se[1,])
     I_star[1,] = rbinom(rep(1, length(S0)), E0, p_ei[1])
     R_star[1,] = rbinom(rep(1, length(S0)), I0, p_ir[1])
@@ -911,9 +958,14 @@ predictEpidemic = function(beta.pred,
       I[i,] = I[i-1,] + I_star[i-1,] - R_star[i-1,]
       R[i,] = R[i-1,] + R_star[i-1,] - S_star[i-1,]
       
-      p_se[i,] = 1-exp(-offsets.pred[i]*(I[i,]/N*p_se_components[i,] + 
-                          rho[1]*(DM1 %*% (I[i,]/N*p_se_components[i,])) + 
-                          rho[2]*(DM2 %*% (I[i,]/N*p_se_components[i,]))))
+      p_se[i,] = I[i,]/N*p_se_components[i,]
+      for (j in 1:length(dmList))
+      {
+        p_se[i,] = p_se[i,] + rho[j]*(dmList[[j]] %*% (I[i,]/N*p_se_components[i,]))
+      }
+      p_se[i,] = 1-exp(-offsets.pred[i]*(p_se[i,]))
+    
+      
       S_star[i,] = rbinom(rep(1, length(S0)), R[i,], 0)
       E_star[i,] = rbinom(rep(1, length(S0)), S[i,], p_se[i,])
       I_star[i,] = rbinom(rep(1, length(S0)), E[i,], p_ei[i])
@@ -929,11 +981,15 @@ predictEpidemic = function(beta.pred,
 predict.i = function(i)
 {
   dataRow = chain1[i,]
-  rho = c(dataRow$rho_0, dataRow$rho_1)
-  beta = c()
+  rho = rep(0, length(dmList))
+  for (i in 1:length(dmList))
+  {
+    rho[i] = dataRow[[paste("rho_", i-1, sep = "")]]
+  }
+  beta = rep(0, modelDF+4)
   for (i in 0:(modelDF+3))
   {
-    beta = c(beta, dataRow[[paste("BetaP_SE_", i, sep = "")]])
+    beta[i+1] = dataRow[[paste("BetaP_SE_", i, sep = "")]]
   }
    
   S0 = c(dataRow[[paste("S_0_", maxIdx-1, sep = "")]],
@@ -1126,6 +1182,10 @@ end.rcode-->
 
 <!--begin.rcode dpi=150, fig.align='center', echo=FALSE
 figure9()
+end.rcode-->
+
+<!--begin.rcode dpi=150, fig.align='center', echo=FALSE, fig.width=6, fig.height=3
+figure9_5()
 end.rcode-->
 
 <br/>
