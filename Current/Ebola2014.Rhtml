@@ -174,7 +174,7 @@ iterationStride =       ifelse(documentCompilationMode == "release", 1000,   50)
 ## Read in the data
 url = 'http://en.wikipedia.org/wiki/West_Africa_Ebola_virus_outbreak'
 tbls = readHTMLTable(url)
-dat = tbls[[5]] # This line changes depending on the page formatting.
+dat = tbls[[6]] # This line changes depending on the page formatting.
 
 # One date is now duplicated on the Wikipedia page, due to using different sources. 
 # Clean that up first. 
@@ -489,32 +489,18 @@ X.pred = cbind(X.predict[rep(1:nrow(X.predict),
                              each = nrow(Z.predict)/nrow(X)),], Z.predict)
 
 # Pair-wise distance parameters.
-DM1 = matrix(c(0,1,0,0,
-               1,0,0,0,
-               0,0,0,0,
+DM1 = matrix(c(0,1,1,0,
+               1,0,1,0,
+               1,1,0,0,
                0,0,0,0), nrow = 4, ncol = 4, byrow = TRUE)
-DM2 = matrix(c(0,0,1,0,
-               0,0,0,0,
-               1,0,0,0,
-               0,0,0,0), nrow = 4, ncol = 4, byrow = TRUE)
-DM3 = matrix(c(0,0,0,1,
-               0,0,0,0,
-               0,0,0,0,
-               1,0,0,0), nrow = 4, ncol = 4, byrow = TRUE)
-DM4 = matrix(c(0,0,0,0,
-               0,0,1,0,
-               0,1,0,0,
-               0,0,0,0), nrow = 4, ncol = 4, byrow = TRUE)
-DM5 = matrix(c(0,0,0,0,
-               0,0,0,1,
-               0,0,0,0,
-               0,1,0,0), nrow = 4, ncol = 4, byrow = TRUE)
-DM6 = matrix(c(0,0,0,0,
-               0,0,0,0,
-               0,0,0,1,
-               0,0,1,0), nrow = 4, ncol = 4, byrow = TRUE)
 
-dmList = list(DM1,DM2,DM3,DM4,DM5,DM6)
+DM2 = matrix(c(0,0,0,1,
+               0,0,0,1,
+               0,0,0,1,
+               1,1,1,0), nrow = 4, ncol = 4, byrow = TRUE)
+
+
+dmList = list(DM1,DM2)
 
 # Define population sizes for the three countries of interest. This data also 
 # from Wikipedia. 
@@ -594,7 +580,7 @@ proposeParameters = function(seedVal, chainNumber)
                                                I0 = c(86,0,0,0), 
                                                p_ir = 0.5, 
                                                p_rs = 0.00)
-    DistanceModel = buildDistanceModel(list(DM1,DM2,DM3,DM4,DM5,DM6))
+    DistanceModel = buildDistanceModel(dmList)
     TransitionPriors = buildTransitionPriorsManually(priorAlpha_gammaEI,priorBeta_gammaEI,
                                                      priorAlpha_gammaIR,priorBeta_gammaIR)
     return(list(DataModel=DataModel,
@@ -733,12 +719,7 @@ clusterExport(cl, c("compMatDim",
                      "beta_p_rs",
                      "betaPrsPriorPrecision",
                      "N",
-                     "DM1",
-                     "DM2",
-                     "DM3",
-                     "DM4",
-                     "DM5",
-                     "DM6",
+                     "dmList",
                      "iterationStride",
                      "proposeParameters",
                      "generateCompartmentProposal",
