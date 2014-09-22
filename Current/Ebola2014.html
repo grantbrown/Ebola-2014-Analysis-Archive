@@ -408,7 +408,7 @@ One can also represent this data geographically to get an idea of the spatial ep
   <div class = "row">
     <div class="col-sm-3">
       <input id='zoom-map-slider' type='range' min=1 max=
-177
+180
       ng-model='Day' width=200>
        <span>Day: <span id ="zoom-map-day-counter"></span></span>
     </div>
@@ -512,16 +512,33 @@ temporal trend.
 <span class="hl std">X.pred</span> <span class="hl kwb">=</span> <span class="hl kwd">cbind</span><span class="hl std">(X.predict[</span><span class="hl kwd">rep</span><span class="hl std">(</span><span class="hl num">1</span><span class="hl opt">:</span><span class="hl kwd">nrow</span><span class="hl std">(X.predict),</span>
                              <span class="hl kwc">each</span> <span class="hl std">=</span> <span class="hl kwd">nrow</span><span class="hl std">(Z.predict)</span><span class="hl opt">/</span><span class="hl kwd">nrow</span><span class="hl std">(X)),], Z.predict)</span>
 
+<span class="hl com"># Pair-wise distance parameters.</span>
+<span class="hl std">DM1</span> <span class="hl kwb">=</span> <span class="hl kwd">matrix</span><span class="hl std">(</span><span class="hl kwd">c</span><span class="hl std">(</span><span class="hl num">0</span><span class="hl std">,</span><span class="hl num">1</span><span class="hl std">,</span><span class="hl num">0</span><span class="hl std">,</span><span class="hl num">0</span><span class="hl std">,</span>
+               <span class="hl num">1</span><span class="hl std">,</span><span class="hl num">0</span><span class="hl std">,</span><span class="hl num">0</span><span class="hl std">,</span><span class="hl num">0</span><span class="hl std">,</span>
+               <span class="hl num">0</span><span class="hl std">,</span><span class="hl num">0</span><span class="hl std">,</span><span class="hl num">0</span><span class="hl std">,</span><span class="hl num">0</span><span class="hl std">,</span>
+               <span class="hl num">0</span><span class="hl std">,</span><span class="hl num">0</span><span class="hl std">,</span><span class="hl num">0</span><span class="hl std">,</span><span class="hl num">0</span><span class="hl std">),</span> <span class="hl kwc">nrow</span> <span class="hl std">=</span> <span class="hl num">4</span><span class="hl std">,</span> <span class="hl kwc">ncol</span> <span class="hl std">=</span> <span class="hl num">4</span><span class="hl std">,</span> <span class="hl kwc">byrow</span> <span class="hl std">=</span> <span class="hl num">TRUE</span><span class="hl std">)</span>
+<span class="hl std">DM2</span> <span class="hl kwb">=</span> <span class="hl kwd">matrix</span><span class="hl std">(</span><span class="hl kwd">c</span><span class="hl std">(</span><span class="hl num">0</span><span class="hl std">,</span><span class="hl num">0</span><span class="hl std">,</span><span class="hl num">1</span><span class="hl std">,</span><span class="hl num">0</span><span class="hl std">,</span>
+               <span class="hl num">0</span><span class="hl std">,</span><span class="hl num">0</span><span class="hl std">,</span><span class="hl num">0</span><span class="hl std">,</span><span class="hl num">0</span><span class="hl std">,</span>
+               <span class="hl num">1</span><span class="hl std">,</span><span class="hl num">0</span><span class="hl std">,</span><span class="hl num">0</span><span class="hl std">,</span><span class="hl num">0</span><span class="hl std">,</span>
+               <span class="hl num">0</span><span class="hl std">,</span><span class="hl num">0</span><span class="hl std">,</span><span class="hl num">0</span><span class="hl std">,</span><span class="hl num">0</span><span class="hl std">),</span> <span class="hl kwc">nrow</span> <span class="hl std">=</span> <span class="hl num">4</span><span class="hl std">,</span> <span class="hl kwc">ncol</span> <span class="hl std">=</span> <span class="hl num">4</span><span class="hl std">,</span> <span class="hl kwc">byrow</span> <span class="hl std">=</span> <span class="hl num">TRUE</span><span class="hl std">)</span>
+<span class="hl std">DM3</span> <span class="hl kwb">=</span> <span class="hl kwd">matrix</span><span class="hl std">(</span><span class="hl kwd">c</span><span class="hl std">(</span><span class="hl num">0</span><span class="hl std">,</span><span class="hl num">0</span><span class="hl std">,</span><span class="hl num">0</span><span class="hl std">,</span><span class="hl num">1</span><span class="hl std">,</span>
+               <span class="hl num">0</span><span class="hl std">,</span><span class="hl num">0</span><span class="hl std">,</span><span class="hl num">0</span><span class="hl std">,</span><span class="hl num">0</span><span class="hl std">,</span>
+               <span class="hl num">0</span><span class="hl std">,</span><span class="hl num">0</span><span class="hl std">,</span><span class="hl num">0</span><span class="hl std">,</span><span class="hl num">0</span><span class="hl std">,</span>
+               <span class="hl num">1</span><span class="hl std">,</span><span class="hl num">0</span><span class="hl std">,</span><span class="hl num">0</span><span class="hl std">,</span><span class="hl num">0</span><span class="hl std">),</span> <span class="hl kwc">nrow</span> <span class="hl std">=</span> <span class="hl num">4</span><span class="hl std">,</span> <span class="hl kwc">ncol</span> <span class="hl std">=</span> <span class="hl num">4</span><span class="hl std">,</span> <span class="hl kwc">byrow</span> <span class="hl std">=</span> <span class="hl num">TRUE</span><span class="hl std">)</span>
+<span class="hl std">DM4</span> <span class="hl kwb">=</span> <span class="hl kwd">matrix</span><span class="hl std">(</span><span class="hl kwd">c</span><span class="hl std">(</span><span class="hl num">0</span><span class="hl std">,</span><span class="hl num">0</span><span class="hl std">,</span><span class="hl num">0</span><span class="hl std">,</span><span class="hl num">0</span><span class="hl std">,</span>
+               <span class="hl num">0</span><span class="hl std">,</span><span class="hl num">0</span><span class="hl std">,</span><span class="hl num">1</span><span class="hl std">,</span><span class="hl num">0</span><span class="hl std">,</span>
+               <span class="hl num">0</span><span class="hl std">,</span><span class="hl num">1</span><span class="hl std">,</span><span class="hl num">0</span><span class="hl std">,</span><span class="hl num">0</span><span class="hl std">,</span>
+               <span class="hl num">0</span><span class="hl std">,</span><span class="hl num">0</span><span class="hl std">,</span><span class="hl num">0</span><span class="hl std">,</span><span class="hl num">0</span><span class="hl std">),</span> <span class="hl kwc">nrow</span> <span class="hl std">=</span> <span class="hl num">4</span><span class="hl std">,</span> <span class="hl kwc">ncol</span> <span class="hl std">=</span> <span class="hl num">4</span><span class="hl std">,</span> <span class="hl kwc">byrow</span> <span class="hl std">=</span> <span class="hl num">TRUE</span><span class="hl std">)</span>
+<span class="hl std">DM5</span> <span class="hl kwb">=</span> <span class="hl kwd">matrix</span><span class="hl std">(</span><span class="hl kwd">c</span><span class="hl std">(</span><span class="hl num">0</span><span class="hl std">,</span><span class="hl num">0</span><span class="hl std">,</span><span class="hl num">0</span><span class="hl std">,</span><span class="hl num">0</span><span class="hl std">,</span>
+               <span class="hl num">0</span><span class="hl std">,</span><span class="hl num">0</span><span class="hl std">,</span><span class="hl num">0</span><span class="hl std">,</span><span class="hl num">1</span><span class="hl std">,</span>
+               <span class="hl num">0</span><span class="hl std">,</span><span class="hl num">0</span><span class="hl std">,</span><span class="hl num">0</span><span class="hl std">,</span><span class="hl num">0</span><span class="hl std">,</span>
+               <span class="hl num">0</span><span class="hl std">,</span><span class="hl num">1</span><span class="hl std">,</span><span class="hl num">0</span><span class="hl std">,</span><span class="hl num">0</span><span class="hl std">),</span> <span class="hl kwc">nrow</span> <span class="hl std">=</span> <span class="hl num">4</span><span class="hl std">,</span> <span class="hl kwc">ncol</span> <span class="hl std">=</span> <span class="hl num">4</span><span class="hl std">,</span> <span class="hl kwc">byrow</span> <span class="hl std">=</span> <span class="hl num">TRUE</span><span class="hl std">)</span>
+<span class="hl std">DM6</span> <span class="hl kwb">=</span> <span class="hl kwd">matrix</span><span class="hl std">(</span><span class="hl kwd">c</span><span class="hl std">(</span><span class="hl num">0</span><span class="hl std">,</span><span class="hl num">0</span><span class="hl std">,</span><span class="hl num">0</span><span class="hl std">,</span><span class="hl num">0</span><span class="hl std">,</span>
+               <span class="hl num">0</span><span class="hl std">,</span><span class="hl num">0</span><span class="hl std">,</span><span class="hl num">0</span><span class="hl std">,</span><span class="hl num">0</span><span class="hl std">,</span>
+               <span class="hl num">0</span><span class="hl std">,</span><span class="hl num">0</span><span class="hl std">,</span><span class="hl num">0</span><span class="hl std">,</span><span class="hl num">1</span><span class="hl std">,</span>
+               <span class="hl num">0</span><span class="hl std">,</span><span class="hl num">0</span><span class="hl std">,</span><span class="hl num">1</span><span class="hl std">,</span><span class="hl num">0</span><span class="hl std">),</span> <span class="hl kwc">nrow</span> <span class="hl std">=</span> <span class="hl num">4</span><span class="hl std">,</span> <span class="hl kwc">ncol</span> <span class="hl std">=</span> <span class="hl num">4</span><span class="hl std">,</span> <span class="hl kwc">byrow</span> <span class="hl std">=</span> <span class="hl num">TRUE</span><span class="hl std">)</span>
 
-<span class="hl com"># Define the simple &quot;distance&quot; matrices. There are 4 countries, three of which </span>
-<span class="hl com"># share borders. Let all of the nations share an overall correlation term, and</span>
-<span class="hl com"># let the three neighboring nations share an additional parameter</span>
-<span class="hl std">DM1</span> <span class="hl kwb">=</span> <span class="hl num">0</span><span class="hl opt">*</span><span class="hl std">(</span><span class="hl kwd">diag</span><span class="hl std">(</span><span class="hl num">4</span><span class="hl std">)); DM1[</span><span class="hl num">1</span><span class="hl opt">:</span><span class="hl num">3</span><span class="hl std">,</span><span class="hl num">4</span><span class="hl std">]</span> <span class="hl kwb">=</span> <span class="hl num">1</span><span class="hl std">; DM1[</span><span class="hl num">4</span><span class="hl std">,</span><span class="hl num">1</span><span class="hl opt">:</span><span class="hl num">3</span><span class="hl std">]</span> <span class="hl kwb">=</span> <span class="hl num">1</span>
-<span class="hl std">DM2</span> <span class="hl kwb">=</span> <span class="hl kwd">rbind</span><span class="hl std">(</span><span class="hl kwd">cbind</span><span class="hl std">((</span><span class="hl num">1</span><span class="hl opt">-</span><span class="hl kwd">diag</span><span class="hl std">(</span><span class="hl num">3</span><span class="hl std">)),</span> <span class="hl kwd">rep</span><span class="hl std">(</span><span class="hl num">0</span><span class="hl std">,</span> <span class="hl num">3</span><span class="hl std">)),</span> <span class="hl kwd">rep</span><span class="hl std">(</span><span class="hl num">0</span><span class="hl std">,</span><span class="hl num">4</span><span class="hl std">))</span>
-<span class="hl com"># Make row stochastic:</span>
-<span class="hl std">DM1</span> <span class="hl kwb">=</span> <span class="hl std">DM1</span><span class="hl opt">/</span><span class="hl kwd">matrix</span><span class="hl std">(</span><span class="hl kwd">apply</span><span class="hl std">(DM1,</span> <span class="hl num">1</span><span class="hl std">, sum),</span> <span class="hl kwc">nrow</span> <span class="hl std">=</span> <span class="hl num">4</span><span class="hl std">,</span> <span class="hl kwc">ncol</span> <span class="hl std">=</span> <span class="hl num">4</span><span class="hl std">)</span>
-<span class="hl std">DM2</span> <span class="hl kwb">=</span> <span class="hl std">DM2</span><span class="hl opt">/</span><span class="hl kwd">matrix</span><span class="hl std">(</span><span class="hl kwd">apply</span><span class="hl std">(DM2,</span> <span class="hl num">1</span><span class="hl std">, sum),</span> <span class="hl kwc">nrow</span> <span class="hl std">=</span> <span class="hl num">4</span><span class="hl std">,</span> <span class="hl kwc">ncol</span> <span class="hl std">=</span> <span class="hl num">4</span><span class="hl std">)</span>
-<span class="hl std">DM2</span> <span class="hl kwb">=</span> <span class="hl kwd">ifelse</span><span class="hl std">(</span><span class="hl kwd">is.na</span><span class="hl std">(DM2),</span> <span class="hl num">0</span><span class="hl std">, DM2)</span>
+<span class="hl std">dmList</span> <span class="hl kwb">=</span> <span class="hl kwd">list</span><span class="hl std">(DM1,DM2,DM3,DM4,DM5,DM6)</span>
 
 <span class="hl com"># Define population sizes for the three countries of interest. This data also </span>
 <span class="hl com"># from Wikipedia. </span>
@@ -601,7 +618,7 @@ temporal trend.
                                                <span class="hl kwc">I0</span> <span class="hl std">=</span> <span class="hl kwd">c</span><span class="hl std">(</span><span class="hl num">86</span><span class="hl std">,</span><span class="hl num">0</span><span class="hl std">,</span><span class="hl num">0</span><span class="hl std">,</span><span class="hl num">0</span><span class="hl std">),</span>
                                                <span class="hl kwc">p_ir</span> <span class="hl std">=</span> <span class="hl num">0.5</span><span class="hl std">,</span>
                                                <span class="hl kwc">p_rs</span> <span class="hl std">=</span> <span class="hl num">0.00</span><span class="hl std">)</span>
-    <span class="hl std">DistanceModel</span> <span class="hl kwb">=</span> <span class="hl kwd">buildDistanceModel</span><span class="hl std">(</span><span class="hl kwd">list</span><span class="hl std">(DM1,DM2))</span>
+    <span class="hl std">DistanceModel</span> <span class="hl kwb">=</span> <span class="hl kwd">buildDistanceModel</span><span class="hl std">(</span><span class="hl kwd">list</span><span class="hl std">(DM1,DM2,DM3,DM4,DM5,DM6))</span>
     <span class="hl std">TransitionPriors</span> <span class="hl kwb">=</span> <span class="hl kwd">buildTransitionPriorsManually</span><span class="hl std">(priorAlpha_gammaEI,priorBeta_gammaEI,</span>
                                                      <span class="hl std">priorAlpha_gammaIR,priorBeta_gammaIR)</span>
     <span class="hl kwd">return</span><span class="hl std">(</span><span class="hl kwd">list</span><span class="hl std">(</span><span class="hl kwc">DataModel</span><span class="hl std">=DataModel,</span>
@@ -739,6 +756,10 @@ temporal trend.
                      <span class="hl str">&quot;N&quot;</span><span class="hl std">,</span>
                      <span class="hl str">&quot;DM1&quot;</span><span class="hl std">,</span>
                      <span class="hl str">&quot;DM2&quot;</span><span class="hl std">,</span>
+                     <span class="hl str">&quot;DM3&quot;</span><span class="hl std">,</span>
+                     <span class="hl str">&quot;DM4&quot;</span><span class="hl std">,</span>
+                     <span class="hl str">&quot;DM5&quot;</span><span class="hl std">,</span>
+                     <span class="hl str">&quot;DM6&quot;</span><span class="hl std">,</span>
                      <span class="hl str">&quot;iterationStride&quot;</span><span class="hl std">,</span>
                      <span class="hl str">&quot;proposeParameters&quot;</span><span class="hl std">,</span>
                      <span class="hl str">&quot;generateCompartmentProposal&quot;</span><span class="hl std">,</span>
@@ -748,9 +769,9 @@ temporal trend.
                      <span class="hl str">&quot;I_star&quot;</span><span class="hl std">,</span>
                      <span class="hl str">&quot;numBurnInBatches&quot;</span><span class="hl std">))</span>
 
-<span class="hl std">paramsList</span> <span class="hl kwb">=</span> <span class="hl kwd">list</span><span class="hl std">(</span><span class="hl kwd">list</span><span class="hl std">(</span><span class="hl str">&quot;estimateR0&quot;</span><span class="hl std">=</span><span class="hl num">FALSE</span><span class="hl std">,</span> <span class="hl str">&quot;traceCompartments&quot;</span><span class="hl std">=</span><span class="hl num">TRUE</span><span class="hl std">,</span> <span class="hl str">&quot;seedVal&quot;</span><span class="hl std">=</span><span class="hl num">123123</span><span class="hl std">,</span><span class="hl str">&quot;chainNumber&quot;</span><span class="hl std">=</span><span class="hl num">4</span><span class="hl std">),</span>
+<span class="hl std">paramsList</span> <span class="hl kwb">=</span> <span class="hl kwd">list</span><span class="hl std">(</span><span class="hl kwd">list</span><span class="hl std">(</span><span class="hl str">&quot;estimateR0&quot;</span><span class="hl std">=</span><span class="hl num">FALSE</span><span class="hl std">,</span> <span class="hl str">&quot;traceCompartments&quot;</span><span class="hl std">=</span><span class="hl num">TRUE</span><span class="hl std">,</span> <span class="hl str">&quot;seedVal&quot;</span><span class="hl std">=</span><span class="hl num">12143123</span><span class="hl std">,</span><span class="hl str">&quot;chainNumber&quot;</span><span class="hl std">=</span><span class="hl num">4</span><span class="hl std">),</span>
                   <span class="hl kwd">list</span><span class="hl std">(</span><span class="hl str">&quot;estimateR0&quot;</span><span class="hl std">=</span><span class="hl num">TRUE</span><span class="hl std">,</span> <span class="hl str">&quot;traceCompartments&quot;</span><span class="hl std">=</span><span class="hl num">FALSE</span><span class="hl std">,</span> <span class="hl str">&quot;seedVal&quot;</span><span class="hl std">=</span><span class="hl num">1299224</span><span class="hl std">,</span><span class="hl str">&quot;chainNumber&quot;</span><span class="hl std">=</span><span class="hl num">5</span><span class="hl std">),</span>
-                  <span class="hl kwd">list</span><span class="hl std">(</span><span class="hl str">&quot;estimateR0&quot;</span><span class="hl std">=</span><span class="hl num">FALSE</span><span class="hl std">,</span><span class="hl str">&quot;traceCompartments&quot;</span><span class="hl std">=</span><span class="hl num">FALSE</span><span class="hl std">,</span> <span class="hl str">&quot;seedVal&quot;</span><span class="hl std">=</span><span class="hl num">123125</span><span class="hl std">,</span><span class="hl str">&quot;chainNumber&quot;</span><span class="hl std">=</span><span class="hl num">6</span><span class="hl std">))</span>
+                  <span class="hl kwd">list</span><span class="hl std">(</span><span class="hl str">&quot;estimateR0&quot;</span><span class="hl std">=</span><span class="hl num">FALSE</span><span class="hl std">,</span><span class="hl str">&quot;traceCompartments&quot;</span><span class="hl std">=</span><span class="hl num">FALSE</span><span class="hl std">,</span> <span class="hl str">&quot;seedVal&quot;</span><span class="hl std">=</span><span class="hl num">1239125</span><span class="hl std">,</span><span class="hl str">&quot;chainNumber&quot;</span><span class="hl std">=</span><span class="hl num">6</span><span class="hl std">))</span>
 
 <span class="hl std">chains</span> <span class="hl kwb">=</span> <span class="hl kwd">parLapply</span><span class="hl std">(cl, paramsList, buildAndRunModel)</span>
 <span class="hl kwd">stopCluster</span><span class="hl std">(cl)</span>
@@ -806,6 +827,9 @@ temporal trend.
              <span class="hl std">chain2</span><span class="hl opt">$</span><span class="hl std">BetaP_SE_3,</span>
              <span class="hl std">chain3</span><span class="hl opt">$</span><span class="hl std">BetaP_SE_3,</span>
              <span class="hl str">&quot;Cubic Time Component&quot;</span><span class="hl std">)</span>
+
+
+
 <span class="hl std">}</span>
 <span class="hl std">figure9</span> <span class="hl kwb">=</span> <span class="hl kwa">function</span><span class="hl std">()</span>
 <span class="hl std">{</span>
@@ -820,12 +844,31 @@ temporal trend.
              <span class="hl std">,</span> <span class="hl str">&quot;I to R Transition Probability&quot;</span><span class="hl std">)</span>
 <span class="hl std">}</span>
 
+<span class="hl std">figure9_5</span> <span class="hl kwb">=</span> <span class="hl kwa">function</span><span class="hl std">()</span>
+<span class="hl std">{</span>
+  <span class="hl com">#par(mfrow = c(length(dmList), 1))</span>
+  <span class="hl kwa">for</span> <span class="hl std">(i</span> <span class="hl kwa">in</span> <span class="hl num">1</span><span class="hl opt">:</span><span class="hl kwd">length</span><span class="hl std">(dmList))</span>
+  <span class="hl std">{</span>
+      <span class="hl kwd">plotChains</span><span class="hl std">(chain1[[</span><span class="hl kwd">paste</span><span class="hl std">(</span><span class="hl str">&quot;rho_&quot;</span><span class="hl std">, i</span><span class="hl opt">-</span><span class="hl num">1</span><span class="hl std">,</span> <span class="hl kwc">sep</span> <span class="hl std">=</span> <span class="hl str">&quot;&quot;</span><span class="hl std">)]],</span>
+                 <span class="hl std">chain2[[</span><span class="hl kwd">paste</span><span class="hl std">(</span><span class="hl str">&quot;rho_&quot;</span><span class="hl std">, i</span><span class="hl opt">-</span><span class="hl num">1</span><span class="hl std">,</span> <span class="hl kwc">sep</span> <span class="hl std">=</span> <span class="hl str">&quot;&quot;</span><span class="hl std">)]],</span>
+                 <span class="hl std">chain3[[</span><span class="hl kwd">paste</span><span class="hl std">(</span><span class="hl str">&quot;rho_&quot;</span><span class="hl std">, i</span><span class="hl opt">-</span><span class="hl num">1</span><span class="hl std">,</span> <span class="hl kwc">sep</span> <span class="hl std">=</span> <span class="hl str">&quot;&quot;</span><span class="hl std">)]],</span>
+                 <span class="hl kwd">paste</span><span class="hl std">(</span><span class="hl str">&quot;Spatial Parameter &quot;</span><span class="hl std">, i,</span> <span class="hl kwc">sep</span> <span class="hl std">=</span> <span class="hl str">&quot;&quot;</span><span class="hl std">)</span>
+                 <span class="hl std">)</span>
+  <span class="hl std">}</span>
+<span class="hl std">}</span>
+
 <span class="hl com">## Parameter Estimates </span>
 
 <span class="hl std">nbeta</span> <span class="hl kwb">=</span> <span class="hl kwd">ncol</span><span class="hl std">(X)</span> <span class="hl opt">+</span> <span class="hl kwd">ncol</span><span class="hl std">(Z)</span>
-<span class="hl std">c1</span> <span class="hl kwb">=</span> <span class="hl std">chain1[</span><span class="hl kwd">floor</span><span class="hl std">(</span><span class="hl kwd">nrow</span><span class="hl std">(chain1)</span><span class="hl opt">/</span><span class="hl num">2</span><span class="hl std">)</span><span class="hl opt">:</span><span class="hl kwd">nrow</span><span class="hl std">(chain1),</span><span class="hl kwd">c</span><span class="hl std">(</span><span class="hl num">1</span><span class="hl opt">:</span><span class="hl std">(nbeta</span> <span class="hl opt">+</span> <span class="hl num">2</span><span class="hl std">),(nbeta</span><span class="hl opt">+</span><span class="hl num">3</span><span class="hl std">)</span><span class="hl opt">:</span><span class="hl std">(nbeta</span><span class="hl opt">+</span><span class="hl num">5</span><span class="hl std">))]</span>
-<span class="hl std">c2</span> <span class="hl kwb">=</span> <span class="hl std">chain2[</span><span class="hl kwd">floor</span><span class="hl std">(</span><span class="hl kwd">nrow</span><span class="hl std">(chain2)</span><span class="hl opt">/</span><span class="hl num">2</span><span class="hl std">)</span><span class="hl opt">:</span><span class="hl kwd">nrow</span><span class="hl std">(chain2),</span><span class="hl kwd">c</span><span class="hl std">(</span><span class="hl num">1</span><span class="hl opt">:</span><span class="hl std">(nbeta</span> <span class="hl opt">+</span> <span class="hl num">2</span><span class="hl std">),(nbeta</span><span class="hl opt">+</span><span class="hl num">3</span><span class="hl std">)</span><span class="hl opt">:</span><span class="hl std">(nbeta</span><span class="hl opt">+</span><span class="hl num">5</span><span class="hl std">))]</span>
-<span class="hl std">c3</span> <span class="hl kwb">=</span> <span class="hl std">chain3[</span><span class="hl kwd">floor</span><span class="hl std">(</span><span class="hl kwd">nrow</span><span class="hl std">(chain3)</span><span class="hl opt">/</span><span class="hl num">2</span><span class="hl std">)</span><span class="hl opt">:</span><span class="hl kwd">nrow</span><span class="hl std">(chain3),</span><span class="hl kwd">c</span><span class="hl std">(</span><span class="hl num">1</span><span class="hl opt">:</span><span class="hl std">(nbeta</span> <span class="hl opt">+</span> <span class="hl num">2</span><span class="hl std">),(nbeta</span><span class="hl opt">+</span><span class="hl num">3</span><span class="hl std">)</span><span class="hl opt">:</span><span class="hl std">(nbeta</span><span class="hl opt">+</span><span class="hl num">5</span><span class="hl std">))]</span>
+<span class="hl std">c1</span> <span class="hl kwb">=</span> <span class="hl std">chain1[</span><span class="hl kwd">floor</span><span class="hl std">(</span><span class="hl kwd">nrow</span><span class="hl std">(chain1)</span><span class="hl opt">/</span><span class="hl num">2</span><span class="hl std">)</span><span class="hl opt">:</span><span class="hl kwd">nrow</span><span class="hl std">(chain1),</span><span class="hl kwd">c</span><span class="hl std">(</span><span class="hl num">1</span><span class="hl opt">:</span><span class="hl std">(nbeta</span> <span class="hl opt">+</span> <span class="hl kwd">length</span><span class="hl std">(dmList)),</span>
+                                                 <span class="hl std">(nbeta</span><span class="hl opt">+</span><span class="hl kwd">length</span><span class="hl std">(dmList)</span><span class="hl opt">+</span><span class="hl num">1</span><span class="hl std">)</span><span class="hl opt">:</span>
+                                                   <span class="hl std">(nbeta</span><span class="hl opt">+</span><span class="hl kwd">length</span><span class="hl std">(dmList)</span><span class="hl opt">+</span><span class="hl num">3</span><span class="hl std">))]</span>
+<span class="hl std">c2</span> <span class="hl kwb">=</span> <span class="hl std">chain2[</span><span class="hl kwd">floor</span><span class="hl std">(</span><span class="hl kwd">nrow</span><span class="hl std">(chain2)</span><span class="hl opt">/</span><span class="hl num">2</span><span class="hl std">)</span><span class="hl opt">:</span><span class="hl kwd">nrow</span><span class="hl std">(chain2),</span><span class="hl kwd">c</span><span class="hl std">(</span><span class="hl num">1</span><span class="hl opt">:</span><span class="hl std">(nbeta</span> <span class="hl opt">+</span> <span class="hl kwd">length</span><span class="hl std">(dmList)),</span>
+                                                 <span class="hl std">(nbeta</span><span class="hl opt">+</span><span class="hl kwd">length</span><span class="hl std">(dmList)</span><span class="hl opt">+</span><span class="hl num">1</span><span class="hl std">)</span><span class="hl opt">:</span>
+                                                   <span class="hl std">(nbeta</span><span class="hl opt">+</span><span class="hl kwd">length</span><span class="hl std">(dmList)</span><span class="hl opt">+</span><span class="hl num">3</span><span class="hl std">))]</span>
+<span class="hl std">c3</span> <span class="hl kwb">=</span> <span class="hl std">chain3[</span><span class="hl kwd">floor</span><span class="hl std">(</span><span class="hl kwd">nrow</span><span class="hl std">(chain3)</span><span class="hl opt">/</span><span class="hl num">2</span><span class="hl std">)</span><span class="hl opt">:</span><span class="hl kwd">nrow</span><span class="hl std">(chain3),</span><span class="hl kwd">c</span><span class="hl std">(</span><span class="hl num">1</span><span class="hl opt">:</span><span class="hl std">(nbeta</span> <span class="hl opt">+</span> <span class="hl kwd">length</span><span class="hl std">(dmList)),</span>
+                                                 <span class="hl std">(nbeta</span><span class="hl opt">+</span><span class="hl kwd">length</span><span class="hl std">(dmList)</span><span class="hl opt">+</span><span class="hl num">1</span><span class="hl std">)</span><span class="hl opt">:</span>
+                                                   <span class="hl std">(nbeta</span><span class="hl opt">+</span><span class="hl kwd">length</span><span class="hl std">(dmList)</span><span class="hl opt">+</span><span class="hl num">3</span><span class="hl std">))]</span>
 
 <span class="hl std">c1</span><span class="hl opt">$</span><span class="hl std">gamma_ei</span> <span class="hl kwb">=</span> <span class="hl num">1</span><span class="hl opt">-</span><span class="hl kwd">exp</span><span class="hl std">(</span><span class="hl opt">-</span><span class="hl std">c1</span><span class="hl opt">$</span><span class="hl std">gamma_ei)</span>
 <span class="hl std">c1</span><span class="hl opt">$</span><span class="hl std">gamma_ir</span> <span class="hl kwb">=</span> <span class="hl num">1</span><span class="hl opt">-</span><span class="hl kwd">exp</span><span class="hl std">(</span><span class="hl opt">-</span><span class="hl std">c1</span><span class="hl opt">$</span><span class="hl std">gamma_ir)</span>
@@ -836,7 +879,7 @@ temporal trend.
 <span class="hl kwd">colnames</span><span class="hl std">(c1)</span> <span class="hl kwb">=</span> <span class="hl kwd">c</span><span class="hl std">(</span><span class="hl str">&quot;Guinea Intercept&quot;</span><span class="hl std">,</span> <span class="hl str">&quot;Liberia Intercept&quot;</span><span class="hl std">,</span>
                  <span class="hl str">&quot;Sierra Leone Intercept&quot;</span><span class="hl std">,</span><span class="hl str">&quot;Nigeria Intercept&quot;</span><span class="hl std">,</span>
                  <span class="hl kwd">paste</span><span class="hl std">(</span><span class="hl str">&quot;Time component &quot;</span><span class="hl std">, (</span><span class="hl num">1</span><span class="hl opt">:</span><span class="hl std">(nbeta</span><span class="hl opt">-</span><span class="hl num">3</span><span class="hl std">)),</span> <span class="hl kwc">sep</span> <span class="hl std">=</span> <span class="hl str">&quot;&quot;</span><span class="hl std">),</span>
-                 <span class="hl str">&quot;Spatial Dependence Parameter 1&quot;</span><span class="hl std">,</span> <span class="hl str">&quot;Spatial Dependence Parameter 2&quot;</span><span class="hl std">,</span>
+                 <span class="hl kwd">paste</span><span class="hl std">(</span><span class="hl str">&quot;Spatial Dependence Parameter&quot;</span><span class="hl std">,</span> <span class="hl num">1</span><span class="hl opt">:</span><span class="hl kwd">length</span><span class="hl std">(dmList)),</span>
                  <span class="hl str">&quot;E to I probability&quot;</span><span class="hl std">,</span>
                  <span class="hl str">&quot;I to R probability&quot;</span><span class="hl std">)</span>
 <span class="hl kwd">colnames</span><span class="hl std">(c2)</span> <span class="hl kwb">=</span> <span class="hl kwd">colnames</span><span class="hl std">(c1)</span>
@@ -856,57 +899,69 @@ temporal trend.
 ## 1. Empirical mean and standard deviation for each variable,
 ##    plus standard error of the mean:
 ## 
-##                                    Mean       SD Naive SE Time-series SE
-## Guinea Intercept               -4.55265 1.29e+00 1.92e-02       1.10e-01
-## Liberia Intercept              -0.37647 9.01e-01 1.34e-02       1.03e-01
-## Sierra Leone Intercept         -1.57201 8.50e-01 1.26e-02       9.41e-02
-## Nigeria Intercept              -4.54915 1.98e+00 2.94e-02       2.02e-01
-## Time component 1                2.94102 1.77e+00 2.63e-02       1.67e-01
-## Time component 2                2.53646 1.15e+00 1.71e-02       1.14e-01
-## Time component 3               -1.02441 8.59e-01 1.28e-02       8.51e-02
-## Time component 4                3.34218 8.30e-01 1.23e-02       7.38e-02
-## Time component 5               -6.57739 2.38e+00 3.53e-02       3.18e-01
-## Time component 6                4.02066 1.09e+00 1.62e-02       9.43e-02
-## Time component 7                0.00015 3.88e-05 5.77e-07       1.11e-06
-## Spatial Dependence Parameter 1  0.13134 7.93e-03 1.18e-04       1.00e-03
-## Spatial Dependence Parameter 2 99.03167 3.11e+01 4.63e-01       4.77e-01
-## E to I probability              0.08089 2.47e-02 3.67e-04       1.85e-03
-## I to R probability              0.14770 1.17e-02 1.74e-04       4.35e-04
+##                                     Mean       SD Naive SE Time-series SE
+## Guinea Intercept               -6.18e+00 1.67e+00 2.48e-02       1.38e-01
+## Liberia Intercept              -2.91e-01 8.52e-01 1.27e-02       9.17e-02
+## Sierra Leone Intercept         -2.34e+00 9.03e-01 1.34e-02       9.93e-02
+## Nigeria Intercept              -4.15e+00 1.99e+00 2.96e-02       1.94e-01
+## Time component 1               -7.80e-01 1.25e+00 1.85e-02       1.05e-01
+## Time component 2                4.59e+00 1.05e+00 1.56e-02       1.02e-01
+## Time component 3               -2.09e+00 8.85e-01 1.31e-02       7.84e-02
+## Time component 4                3.60e+00 7.99e-01 1.19e-02       6.74e-02
+## Time component 5               -6.35e+00 2.36e+00 3.51e-02       2.81e-01
+## Time component 6                3.03e+00 1.13e+00 1.68e-02       9.70e-02
+## Time component 7                7.41e-02 4.30e-03 6.38e-05       3.62e-04
+## Spatial Dependence Parameter 1  3.18e-02 2.40e-02 3.57e-04       3.85e-03
+## Spatial Dependence Parameter 2  7.06e-03 6.47e-03 9.60e-05       8.33e-04
+## Spatial Dependence Parameter 3  2.33e-01 2.13e-02 3.17e-04       6.32e-03
+## Spatial Dependence Parameter 4  7.18e-05 5.09e-05 7.56e-07       1.35e-06
+## Spatial Dependence Parameter 5  6.11e-04 3.58e-04 5.32e-06       8.23e-06
+## Spatial Dependence Parameter 6  1.00e+02 3.14e+01 4.66e-01       4.66e-01
+## E to I probability              6.18e-02 8.97e-03 1.33e-04       4.80e-04
+## I to R probability              1.32e-01 1.01e-02 1.49e-04       3.91e-04
 ## 
 ## 2. Quantiles for each variable:
 ## 
 ##                                     2.5%       25%       50%       75%
-## Guinea Intercept               -7.92e+00 -5.115390 -4.397870 -3.74e+00
-## Liberia Intercept              -1.90e+00 -1.005450 -0.445420  1.31e-01
-## Sierra Leone Intercept         -3.07e+00 -2.155560 -1.622210 -1.07e+00
-## Nigeria Intercept              -8.89e+00 -5.739150 -4.307280 -3.09e+00
-## Time component 1               -6.79e-01  1.824800  3.020700  4.14e+00
-## Time component 2                4.07e-01  1.755550  2.483210  3.29e+00
-## Time component 3               -2.81e+00 -1.552060 -0.985725 -4.40e-01
-## Time component 4                1.94e+00  2.764540  3.287100  3.85e+00
-## Time component 5               -1.17e+01 -8.085260 -6.397540 -4.86e+00
-## Time component 6                1.95e+00  3.261280  3.994710  4.76e+00
-## Time component 7                7.41e-05  0.000126  0.000149  1.74e-04
-## Spatial Dependence Parameter 1  1.18e-01  0.125505  0.130639  1.37e-01
-## Spatial Dependence Parameter 2  4.86e+01 76.731900 95.808900  1.17e+02
-## E to I probability              4.76e-03  0.070998  0.084068  9.61e-02
-## I to R probability              1.25e-01  0.139749  0.147449  1.55e-01
+## Guinea Intercept               -1.03e+01 -7.033660 -5.92e+00 -4.98e+00
+## Liberia Intercept              -2.04e+00 -0.861067 -2.61e-01  3.11e-01
+## Sierra Leone Intercept         -4.26e+00 -2.905430 -2.30e+00 -1.71e+00
+## Nigeria Intercept              -8.75e+00 -5.305860 -3.85e+00 -2.71e+00
+## Time component 1               -3.03e+00 -1.676890 -8.10e-01  4.13e-02
+## Time component 2                2.62e+00  3.834440  4.55e+00  5.29e+00
+## Time component 3               -3.74e+00 -2.716010 -2.11e+00 -1.49e+00
+## Time component 4                2.19e+00  3.046110  3.54e+00  4.07e+00
+## Time component 5               -1.15e+01 -7.894480 -6.23e+00 -4.67e+00
+## Time component 6                1.06e+00  2.201430  2.92e+00  3.79e+00
+## Time component 7                6.53e-02  0.071271  7.42e-02  7.70e-02
+## Spatial Dependence Parameter 1  1.73e-03  0.013022  2.48e-02  4.68e-02
+## Spatial Dependence Parameter 2  1.84e-04  0.002042  5.15e-03  1.02e-02
+## Spatial Dependence Parameter 3  2.02e-01  0.215054  2.28e-01  2.51e-01
+## Spatial Dependence Parameter 4  2.95e-06  0.000030  6.36e-05  1.06e-04
+## Spatial Dependence Parameter 5  5.37e-05  0.000344  5.76e-04  8.33e-04
+## Spatial Dependence Parameter 6  4.81e+01 78.012000  9.74e+01  1.18e+02
+## E to I probability              4.57e-02  0.056857  6.19e-02  6.73e-02
+## I to R probability              1.13e-01  0.124959  1.32e-01  1.38e-01
 ##                                    97.5%
-## Guinea Intercept               -2.55e+00
-## Liberia Intercept               1.62e+00
-## Sierra Leone Intercept          1.80e-01
-## Nigeria Intercept              -1.42e+00
-## Time component 1                6.42e+00
-## Time component 2                4.84e+00
-## Time component 3                5.52e-01
-## Time component 4                5.24e+00
-## Time component 5               -2.54e+00
-## Time component 6                6.18e+00
-## Time component 7                2.26e-04
-## Spatial Dependence Parameter 1  1.48e-01
-## Spatial Dependence Parameter 2  1.68e+02
-## E to I probability              1.19e-01
-## I to R probability              1.72e-01
+## Guinea Intercept               -3.70e+00
+## Liberia Intercept               1.32e+00
+## Sierra Leone Intercept         -6.92e-01
+## Nigeria Intercept              -1.09e+00
+## Time component 1                1.75e+00
+## Time component 2                6.72e+00
+## Time component 3               -3.14e-01
+## Time component 4                5.38e+00
+## Time component 5               -2.08e+00
+## Time component 6                5.42e+00
+## Time component 7                8.22e-02
+## Spatial Dependence Parameter 1  8.06e-02
+## Spatial Dependence Parameter 2  2.34e-02
+## Spatial Dependence Parameter 3  2.74e-01
+## Spatial Dependence Parameter 4  1.86e-04
+## Spatial Dependence Parameter 5  1.42e-03
+## Spatial Dependence Parameter 6  1.70e+02
+## E to I probability              7.84e-02
+## I to R probability              1.52e-01
 </pre></div>
 <div class="source"><pre class="knitr r"><span class="hl com">## R0 stuff</span>
 
@@ -978,9 +1033,13 @@ temporal trend.
     <span class="hl std">I[</span><span class="hl num">1</span><span class="hl std">,]</span> <span class="hl kwb">=</span> <span class="hl std">I0</span>
     <span class="hl std">R[</span><span class="hl num">1</span><span class="hl std">,]</span> <span class="hl kwb">=</span> <span class="hl std">R0</span>
     <span class="hl std">S_star[</span><span class="hl num">1</span><span class="hl std">,]</span> <span class="hl kwb">=</span> <span class="hl kwd">rbinom</span><span class="hl std">(</span><span class="hl kwd">rep</span><span class="hl std">(</span><span class="hl num">1</span><span class="hl std">,</span> <span class="hl kwd">length</span><span class="hl std">(S0)), R0,</span> <span class="hl num">0</span><span class="hl std">)</span>
-    <span class="hl std">p_se[</span><span class="hl num">1</span><span class="hl std">,]</span> <span class="hl kwb">=</span> <span class="hl num">1</span><span class="hl opt">-</span><span class="hl kwd">exp</span><span class="hl std">(</span><span class="hl opt">-</span><span class="hl std">offsets.pred[</span><span class="hl num">1</span><span class="hl std">]</span><span class="hl opt">*</span><span class="hl std">(I[</span><span class="hl num">1</span><span class="hl std">,]</span><span class="hl opt">/</span><span class="hl std">N</span><span class="hl opt">*</span><span class="hl std">p_se_components[</span><span class="hl num">1</span><span class="hl std">,]</span> <span class="hl opt">+</span>
-                          <span class="hl std">rho[</span><span class="hl num">1</span><span class="hl std">]</span><span class="hl opt">*</span><span class="hl std">(DM1</span> <span class="hl opt">%*%</span> <span class="hl std">(I[</span><span class="hl num">1</span><span class="hl std">,]</span><span class="hl opt">/</span><span class="hl std">N</span><span class="hl opt">*</span><span class="hl std">p_se_components[</span><span class="hl num">1</span><span class="hl std">,]))</span> <span class="hl opt">+</span>
-                          <span class="hl std">rho[</span><span class="hl num">2</span><span class="hl std">]</span><span class="hl opt">*</span><span class="hl std">(DM2</span> <span class="hl opt">%*%</span> <span class="hl std">(I[</span><span class="hl num">1</span><span class="hl std">,]</span><span class="hl opt">/</span><span class="hl std">N</span><span class="hl opt">*</span><span class="hl std">p_se_components[</span><span class="hl num">1</span><span class="hl std">,]))))</span>
+    <span class="hl std">p_se[</span><span class="hl num">1</span><span class="hl std">,]</span> <span class="hl kwb">=</span> <span class="hl std">I[</span><span class="hl num">1</span><span class="hl std">,]</span><span class="hl opt">/</span><span class="hl std">N</span><span class="hl opt">*</span><span class="hl std">p_se_components[</span><span class="hl num">1</span><span class="hl std">,]</span>
+    <span class="hl kwa">for</span> <span class="hl std">(i</span> <span class="hl kwa">in</span> <span class="hl num">1</span><span class="hl opt">:</span><span class="hl kwd">length</span><span class="hl std">(dmList))</span>
+    <span class="hl std">{</span>
+      <span class="hl std">p_se[</span><span class="hl num">1</span><span class="hl std">,]</span> <span class="hl kwb">=</span> <span class="hl std">p_se[</span><span class="hl num">1</span><span class="hl std">,]</span> <span class="hl opt">+</span> <span class="hl std">rho[i]</span><span class="hl opt">*</span><span class="hl std">(dmList[[i]]</span> <span class="hl opt">%*%</span> <span class="hl std">(I[</span><span class="hl num">1</span><span class="hl std">,]</span><span class="hl opt">/</span><span class="hl std">N</span><span class="hl opt">*</span><span class="hl std">p_se_components[</span><span class="hl num">1</span><span class="hl std">,]))</span>
+    <span class="hl std">}</span>
+    <span class="hl std">p_se[</span><span class="hl num">1</span><span class="hl std">,]</span> <span class="hl kwb">=</span> <span class="hl num">1</span><span class="hl opt">-</span><span class="hl kwd">exp</span><span class="hl std">(</span><span class="hl opt">-</span><span class="hl std">offsets.pred[</span><span class="hl num">1</span><span class="hl std">]</span><span class="hl opt">*</span><span class="hl std">(p_se[</span><span class="hl num">1</span><span class="hl std">,]))</span>
+
     <span class="hl std">E_star[</span><span class="hl num">1</span><span class="hl std">,]</span> <span class="hl kwb">=</span> <span class="hl kwd">rbinom</span><span class="hl std">(</span><span class="hl kwd">rep</span><span class="hl std">(</span><span class="hl num">1</span><span class="hl std">,</span> <span class="hl kwd">length</span><span class="hl std">(S0)), S0, p_se[</span><span class="hl num">1</span><span class="hl std">,])</span>
     <span class="hl std">I_star[</span><span class="hl num">1</span><span class="hl std">,]</span> <span class="hl kwb">=</span> <span class="hl kwd">rbinom</span><span class="hl std">(</span><span class="hl kwd">rep</span><span class="hl std">(</span><span class="hl num">1</span><span class="hl std">,</span> <span class="hl kwd">length</span><span class="hl std">(S0)), E0, p_ei[</span><span class="hl num">1</span><span class="hl std">])</span>
     <span class="hl std">R_star[</span><span class="hl num">1</span><span class="hl std">,]</span> <span class="hl kwb">=</span> <span class="hl kwd">rbinom</span><span class="hl std">(</span><span class="hl kwd">rep</span><span class="hl std">(</span><span class="hl num">1</span><span class="hl std">,</span> <span class="hl kwd">length</span><span class="hl std">(S0)), I0, p_ir[</span><span class="hl num">1</span><span class="hl std">])</span>
@@ -993,9 +1052,14 @@ temporal trend.
       <span class="hl std">I[i,]</span> <span class="hl kwb">=</span> <span class="hl std">I[i</span><span class="hl opt">-</span><span class="hl num">1</span><span class="hl std">,]</span> <span class="hl opt">+</span> <span class="hl std">I_star[i</span><span class="hl opt">-</span><span class="hl num">1</span><span class="hl std">,]</span> <span class="hl opt">-</span> <span class="hl std">R_star[i</span><span class="hl opt">-</span><span class="hl num">1</span><span class="hl std">,]</span>
       <span class="hl std">R[i,]</span> <span class="hl kwb">=</span> <span class="hl std">R[i</span><span class="hl opt">-</span><span class="hl num">1</span><span class="hl std">,]</span> <span class="hl opt">+</span> <span class="hl std">R_star[i</span><span class="hl opt">-</span><span class="hl num">1</span><span class="hl std">,]</span> <span class="hl opt">-</span> <span class="hl std">S_star[i</span><span class="hl opt">-</span><span class="hl num">1</span><span class="hl std">,]</span>
 
-      <span class="hl std">p_se[i,]</span> <span class="hl kwb">=</span> <span class="hl num">1</span><span class="hl opt">-</span><span class="hl kwd">exp</span><span class="hl std">(</span><span class="hl opt">-</span><span class="hl std">offsets.pred[i]</span><span class="hl opt">*</span><span class="hl std">(I[i,]</span><span class="hl opt">/</span><span class="hl std">N</span><span class="hl opt">*</span><span class="hl std">p_se_components[i,]</span> <span class="hl opt">+</span>
-                          <span class="hl std">rho[</span><span class="hl num">1</span><span class="hl std">]</span><span class="hl opt">*</span><span class="hl std">(DM1</span> <span class="hl opt">%*%</span> <span class="hl std">(I[i,]</span><span class="hl opt">/</span><span class="hl std">N</span><span class="hl opt">*</span><span class="hl std">p_se_components[i,]))</span> <span class="hl opt">+</span>
-                          <span class="hl std">rho[</span><span class="hl num">2</span><span class="hl std">]</span><span class="hl opt">*</span><span class="hl std">(DM2</span> <span class="hl opt">%*%</span> <span class="hl std">(I[i,]</span><span class="hl opt">/</span><span class="hl std">N</span><span class="hl opt">*</span><span class="hl std">p_se_components[i,]))))</span>
+      <span class="hl std">p_se[i,]</span> <span class="hl kwb">=</span> <span class="hl std">I[i,]</span><span class="hl opt">/</span><span class="hl std">N</span><span class="hl opt">*</span><span class="hl std">p_se_components[i,]</span>
+      <span class="hl kwa">for</span> <span class="hl std">(j</span> <span class="hl kwa">in</span> <span class="hl num">1</span><span class="hl opt">:</span><span class="hl kwd">length</span><span class="hl std">(dmList))</span>
+      <span class="hl std">{</span>
+        <span class="hl std">p_se[i,]</span> <span class="hl kwb">=</span> <span class="hl std">p_se[i,]</span> <span class="hl opt">+</span> <span class="hl std">rho[j]</span><span class="hl opt">*</span><span class="hl std">(dmList[[j]]</span> <span class="hl opt">%*%</span> <span class="hl std">(I[i,]</span><span class="hl opt">/</span><span class="hl std">N</span><span class="hl opt">*</span><span class="hl std">p_se_components[i,]))</span>
+      <span class="hl std">}</span>
+      <span class="hl std">p_se[i,]</span> <span class="hl kwb">=</span> <span class="hl num">1</span><span class="hl opt">-</span><span class="hl kwd">exp</span><span class="hl std">(</span><span class="hl opt">-</span><span class="hl std">offsets.pred[i]</span><span class="hl opt">*</span><span class="hl std">(p_se[i,]))</span>
+
+
       <span class="hl std">S_star[i,]</span> <span class="hl kwb">=</span> <span class="hl kwd">rbinom</span><span class="hl std">(</span><span class="hl kwd">rep</span><span class="hl std">(</span><span class="hl num">1</span><span class="hl std">,</span> <span class="hl kwd">length</span><span class="hl std">(S0)), R[i,],</span> <span class="hl num">0</span><span class="hl std">)</span>
       <span class="hl std">E_star[i,]</span> <span class="hl kwb">=</span> <span class="hl kwd">rbinom</span><span class="hl std">(</span><span class="hl kwd">rep</span><span class="hl std">(</span><span class="hl num">1</span><span class="hl std">,</span> <span class="hl kwd">length</span><span class="hl std">(S0)), S[i,], p_se[i,])</span>
       <span class="hl std">I_star[i,]</span> <span class="hl kwb">=</span> <span class="hl kwd">rbinom</span><span class="hl std">(</span><span class="hl kwd">rep</span><span class="hl std">(</span><span class="hl num">1</span><span class="hl std">,</span> <span class="hl kwd">length</span><span class="hl std">(S0)), E[i,], p_ei[i])</span>
@@ -1011,11 +1075,15 @@ temporal trend.
 <span class="hl std">predict.i</span> <span class="hl kwb">=</span> <span class="hl kwa">function</span><span class="hl std">(</span><span class="hl kwc">i</span><span class="hl std">)</span>
 <span class="hl std">{</span>
   <span class="hl std">dataRow</span> <span class="hl kwb">=</span> <span class="hl std">chain1[i,]</span>
-  <span class="hl std">rho</span> <span class="hl kwb">=</span> <span class="hl kwd">c</span><span class="hl std">(dataRow</span><span class="hl opt">$</span><span class="hl std">rho_0, dataRow</span><span class="hl opt">$</span><span class="hl std">rho_1)</span>
-  <span class="hl std">beta</span> <span class="hl kwb">=</span> <span class="hl kwd">c</span><span class="hl std">()</span>
+  <span class="hl std">rho</span> <span class="hl kwb">=</span> <span class="hl kwd">rep</span><span class="hl std">(</span><span class="hl num">0</span><span class="hl std">,</span> <span class="hl kwd">length</span><span class="hl std">(dmList))</span>
+  <span class="hl kwa">for</span> <span class="hl std">(i</span> <span class="hl kwa">in</span> <span class="hl num">1</span><span class="hl opt">:</span><span class="hl kwd">length</span><span class="hl std">(dmList))</span>
+  <span class="hl std">{</span>
+    <span class="hl std">rho[i]</span> <span class="hl kwb">=</span> <span class="hl std">dataRow[[</span><span class="hl kwd">paste</span><span class="hl std">(</span><span class="hl str">&quot;rho_&quot;</span><span class="hl std">, i</span><span class="hl opt">-</span><span class="hl num">1</span><span class="hl std">,</span> <span class="hl kwc">sep</span> <span class="hl std">=</span> <span class="hl str">&quot;&quot;</span><span class="hl std">)]]</span>
+  <span class="hl std">}</span>
+  <span class="hl std">beta</span> <span class="hl kwb">=</span> <span class="hl kwd">rep</span><span class="hl std">(</span><span class="hl num">0</span><span class="hl std">, modelDF</span><span class="hl opt">+</span><span class="hl num">4</span><span class="hl std">)</span>
   <span class="hl kwa">for</span> <span class="hl std">(i</span> <span class="hl kwa">in</span> <span class="hl num">0</span><span class="hl opt">:</span><span class="hl std">(modelDF</span><span class="hl opt">+</span><span class="hl num">3</span><span class="hl std">))</span>
   <span class="hl std">{</span>
-    <span class="hl std">beta</span> <span class="hl kwb">=</span> <span class="hl kwd">c</span><span class="hl std">(beta, dataRow[[</span><span class="hl kwd">paste</span><span class="hl std">(</span><span class="hl str">&quot;BetaP_SE_&quot;</span><span class="hl std">, i,</span> <span class="hl kwc">sep</span> <span class="hl std">=</span> <span class="hl str">&quot;&quot;</span><span class="hl std">)]])</span>
+    <span class="hl std">beta[i</span><span class="hl opt">+</span><span class="hl num">1</span><span class="hl std">]</span> <span class="hl kwb">=</span> <span class="hl std">dataRow[[</span><span class="hl kwd">paste</span><span class="hl std">(</span><span class="hl str">&quot;BetaP_SE_&quot;</span><span class="hl std">, i,</span> <span class="hl kwc">sep</span> <span class="hl std">=</span> <span class="hl str">&quot;&quot;</span><span class="hl std">)]]</span>
   <span class="hl std">}</span>
 
   <span class="hl std">S0</span> <span class="hl kwb">=</span> <span class="hl kwd">c</span><span class="hl std">(dataRow[[</span><span class="hl kwd">paste</span><span class="hl std">(</span><span class="hl str">&quot;S_0_&quot;</span><span class="hl std">, maxIdx</span><span class="hl opt">-</span><span class="hl num">1</span><span class="hl std">,</span> <span class="hl kwc">sep</span> <span class="hl std">=</span> <span class="hl str">&quot;&quot;</span><span class="hl std">)]],</span>
@@ -1203,6 +1271,8 @@ several important parameters, and take a look at the Gelman and Rubin convergenc
 
 <div class="chunk" id="unnamed-chunk-10"><div class="rimage center"><img src="figure/unnamed-chunk-10.png" title="plot of chunk unnamed-chunk-10" alt="plot of chunk unnamed-chunk-10" class="plot" /></div></div>
 
+<div class="chunk" id="unnamed-chunk-11"><div class="rimage center"><img src="figure/unnamed-chunk-111.png" title="plot of chunk unnamed-chunk-11" alt="plot of chunk unnamed-chunk-11" class="plot" /></div><div class="rimage center"><img src="figure/unnamed-chunk-112.png" title="plot of chunk unnamed-chunk-11" alt="plot of chunk unnamed-chunk-11" class="plot" /></div><div class="rimage center"><img src="figure/unnamed-chunk-113.png" title="plot of chunk unnamed-chunk-11" alt="plot of chunk unnamed-chunk-11" class="plot" /></div><div class="rimage center"><img src="figure/unnamed-chunk-114.png" title="plot of chunk unnamed-chunk-11" alt="plot of chunk unnamed-chunk-11" class="plot" /></div><div class="rimage center"><img src="figure/unnamed-chunk-115.png" title="plot of chunk unnamed-chunk-11" alt="plot of chunk unnamed-chunk-11" class="plot" /></div><div class="rimage center"><img src="figure/unnamed-chunk-116.png" title="plot of chunk unnamed-chunk-11" alt="plot of chunk unnamed-chunk-11" class="plot" /></div></div>
+
 <br/>
 
 
@@ -1212,7 +1282,7 @@ several important parameters, and take a look at the Gelman and Rubin convergenc
 <p>
 A common tool for describing the evolution of an epidemic is a quantity known as the basic reproductive numer, the basic reproductive ratio, or one of several other variants on that theme. The basic idea is to quantify how many secondary infections a single infectious individual is expected to cause in a large, fully susceptible population. Naturally, when this ratio exceeds one we expect the epidemic to spread. Conversely, a basic reproductive number less than one indicates that a pathogen is more likely to die out.</p> <br/><br/>
 
-<div class="chunk" id="unnamed-chunk-11"><div class="rimage center"><img src="figure/unnamed-chunk-11.png" title="plot of chunk unnamed-chunk-11" alt="plot of chunk unnamed-chunk-11" class="plot" /></div></div>
+<div class="chunk" id="unnamed-chunk-12"><div class="rimage center"><img src="figure/unnamed-chunk-12.png" title="plot of chunk unnamed-chunk-12" alt="plot of chunk unnamed-chunk-12" class="plot" /></div></div>
 
 
 While the basic reproductive number is a useful quantity to know, it does not directly make any predictions about future epidemic behavior. In order to do that, we need to simulate epidemics  based on the MCMC samples we have obtained and summarize their variability over time. <br/>
@@ -1226,7 +1296,7 @@ Below, we will attempt to predict the course of the epidemic through early fall.
 We must be cautious when making predictions about a chaotic process this far into the future. The intensity function which drives the exposure process is based on simple smooth functions of time, rather than any external information. While this is perfectly adequate for estimation, it may or may not provide good prediction performance. 
 </p>
 
-<div class="chunk" id="unnamed-chunk-12"><div class="rimage center"><img src="figure/unnamed-chunk-12.png" title="plot of chunk unnamed-chunk-12" alt="plot of chunk unnamed-chunk-12" class="plot" /></div></div>
+<div class="chunk" id="unnamed-chunk-13"><div class="rimage center"><img src="figure/unnamed-chunk-13.png" title="plot of chunk unnamed-chunk-13" alt="plot of chunk unnamed-chunk-13" class="plot" /></div></div>
 
 <br/>
 <p>It can also be helpful to take a look at the data in tabular form.</p><br/>
@@ -1263,332 +1333,332 @@ We must be cautious when making predictions about a chaotic process this far int
   </tr>
   <tr>
    <td align="left"> &nbsp;2014-03-28&nbsp; </td>
-   <td align="center"> 40 </td>
+   <td align="center"> 41 </td>
    <td align="center"> 8 </td>
    <td align="center"> 0 </td>
    <td align="center"> 0 </td>
   </tr>
   <tr>
    <td align="left"> &nbsp;2014-03-31&nbsp; </td>
-   <td align="center"> 37 </td>
+   <td align="center"> 39 </td>
    <td align="center"> 6 </td>
    <td align="center"> 0 </td>
    <td align="center"> 0 </td>
   </tr>
   <tr>
    <td align="left"> &nbsp;2014-04-07&nbsp; </td>
-   <td align="center"> 41 </td>
+   <td align="center"> 43 </td>
    <td align="center"> 10 </td>
    <td align="center"> 0 </td>
    <td align="center"> 0 </td>
   </tr>
   <tr>
    <td align="left"> &nbsp;2014-04-10&nbsp; </td>
-   <td align="center"> 57 </td>
-   <td align="center"> 14 </td>
+   <td align="center"> 60 </td>
+   <td align="center"> 18 </td>
    <td align="center"> 0 </td>
    <td align="center"> 0 </td>
   </tr>
   <tr>
    <td align="left"> &nbsp;2014-04-14&nbsp; </td>
-   <td align="center"> 42 </td>
-   <td align="center"> 14 </td>
+   <td align="center"> 45 </td>
+   <td align="center"> 17 </td>
    <td align="center"> 0 </td>
    <td align="center"> 0 </td>
   </tr>
   <tr>
    <td align="left"> &nbsp;2014-04-17&nbsp; </td>
-   <td align="center"> 68 </td>
-   <td align="center"> 10 </td>
+   <td align="center"> 72 </td>
+   <td align="center"> 14 </td>
    <td align="center"> 0 </td>
    <td align="center"> 0 </td>
   </tr>
   <tr>
    <td align="left"> &nbsp;2014-04-21&nbsp; </td>
-   <td align="center"> 60 </td>
-   <td align="center"> 6 </td>
+   <td align="center"> 65 </td>
+   <td align="center"> 11 </td>
    <td align="center"> 0 </td>
    <td align="center"> 0 </td>
   </tr>
   <tr>
    <td align="left"> &nbsp;2014-04-24&nbsp; </td>
-   <td align="center"> 55 </td>
-   <td align="center"> 10 </td>
+   <td align="center"> 59 </td>
+   <td align="center"> 16 </td>
    <td align="center"> 0 </td>
    <td align="center"> 0 </td>
   </tr>
   <tr>
    <td align="left"> &nbsp;2014-05-01&nbsp; </td>
-   <td align="center"> 43 </td>
-   <td align="center"> 7 </td>
+   <td align="center"> 47 </td>
+   <td align="center"> 14 </td>
    <td align="center"> 0 </td>
    <td align="center"> 0 </td>
   </tr>
   <tr>
    <td align="left"> &nbsp;2014-05-03&nbsp; </td>
-   <td align="center"> 37 </td>
-   <td align="center"> 4 </td>
+   <td align="center"> 40 </td>
+   <td align="center"> 12 </td>
    <td align="center"> 0 </td>
    <td align="center"> 0 </td>
   </tr>
   <tr>
    <td align="left"> &nbsp;2014-05-10&nbsp; </td>
-   <td align="center"> 37 </td>
-   <td align="center"> 3 </td>
+   <td align="center"> 40 </td>
+   <td align="center"> 10 </td>
    <td align="center"> 0 </td>
    <td align="center"> 0 </td>
   </tr>
   <tr>
    <td align="left"> &nbsp;2014-05-18&nbsp; </td>
-   <td align="center"> 43 </td>
-   <td align="center"> 2 </td>
+   <td align="center"> 45 </td>
+   <td align="center"> 8 </td>
    <td align="center"> 0 </td>
    <td align="center"> 0 </td>
   </tr>
   <tr>
    <td align="left"> &nbsp;2014-05-27&nbsp; </td>
-   <td align="center"> 40 </td>
-   <td align="center"> 1 </td>
+   <td align="center"> 43 </td>
+   <td align="center"> 6 </td>
    <td align="center"> 0 </td>
    <td align="center"> 0 </td>
   </tr>
   <tr>
    <td align="left"> &nbsp;2014-05-29&nbsp; </td>
-   <td align="center"> 58 </td>
-   <td align="center"> 1 </td>
-   <td align="center"> 12 </td>
+   <td align="center"> 62 </td>
+   <td align="center"> 2 </td>
+   <td align="center"> 14 </td>
    <td align="center"> 0 </td>
   </tr>
   <tr>
    <td align="left"> &nbsp;2014-06-03&nbsp; </td>
-   <td align="center"> 78 </td>
+   <td align="center"> 84 </td>
    <td align="center"> 0 </td>
-   <td align="center"> 60 </td>
+   <td align="center"> 67 </td>
    <td align="center"> 0 </td>
   </tr>
   <tr>
    <td align="left"> &nbsp;2014-06-06&nbsp; </td>
-   <td align="center"> 77 </td>
+   <td align="center"> 84 </td>
    <td align="center"> 0 </td>
-   <td align="center"> 41 </td>
+   <td align="center"> 49 </td>
    <td align="center"> 0 </td>
   </tr>
   <tr>
    <td align="left"> &nbsp;2014-06-15&nbsp; </td>
-   <td align="center"> 77 </td>
+   <td align="center"> 85 </td>
    <td align="center"> 0 </td>
-   <td align="center"> 38 </td>
+   <td align="center"> 46 </td>
    <td align="center"> 0 </td>
   </tr>
   <tr>
    <td align="left"> &nbsp;2014-06-17&nbsp; </td>
-   <td align="center"> 78 </td>
+   <td align="center"> 87 </td>
    <td align="center"> 18 </td>
-   <td align="center"> 33 </td>
+   <td align="center"> 40 </td>
    <td align="center"> 0 </td>
   </tr>
   <tr>
    <td align="left"> &nbsp;2014-06-22&nbsp; </td>
-   <td align="center"> 57 </td>
-   <td align="center"> 13 </td>
-   <td align="center"> 87 </td>
+   <td align="center"> 66 </td>
+   <td align="center"> 14 </td>
+   <td align="center"> 93 </td>
    <td align="center"> 0 </td>
   </tr>
   <tr>
    <td align="left"> &nbsp;2014-07-02&nbsp; </td>
-   <td align="center"> 65 </td>
-   <td align="center"> 81 </td>
-   <td align="center"> 144 </td>
+   <td align="center"> 73 </td>
+   <td align="center"> 82 </td>
+   <td align="center"> 151 </td>
    <td align="center"> 0 </td>
   </tr>
   <tr>
    <td align="left"> &nbsp;2014-07-08&nbsp; </td>
-   <td align="center"> 47 </td>
-   <td align="center"> 82 </td>
-   <td align="center"> 169 </td>
+   <td align="center"> 55 </td>
+   <td align="center"> 85 </td>
+   <td align="center"> 178 </td>
    <td align="center"> 0 </td>
   </tr>
   <tr>
    <td align="left"> &nbsp;2014-07-14&nbsp; </td>
-   <td align="center"> 35 </td>
-   <td align="center"> 99 </td>
-   <td align="center"> 199 </td>
+   <td align="center"> 42 </td>
+   <td align="center"> 104 </td>
+   <td align="center"> 211 </td>
    <td align="center"> 0 </td>
   </tr>
   <tr>
    <td align="left"> &nbsp;2014-07-20&nbsp; </td>
-   <td align="center"> 30 </td>
-   <td align="center"> 95 </td>
-   <td align="center"> 199 </td>
+   <td align="center"> 36 </td>
+   <td align="center"> 102 </td>
+   <td align="center"> 213 </td>
    <td align="center"> 0 </td>
   </tr>
   <tr>
    <td align="left"> &nbsp;2014-07-27&nbsp; </td>
-   <td align="center"> 38 </td>
-   <td align="center"> 118 </td>
-   <td align="center"> 226 </td>
+   <td align="center"> 44 </td>
+   <td align="center"> 126 </td>
+   <td align="center"> 242 </td>
    <td align="center"> 0 </td>
   </tr>
   <tr>
    <td align="left"> &nbsp;2014-08-01&nbsp; </td>
-   <td align="center"> 68 </td>
-   <td align="center"> 216 </td>
-   <td align="center"> 212 </td>
+   <td align="center"> 74 </td>
+   <td align="center"> 226 </td>
+   <td align="center"> 230 </td>
    <td align="center"> 3 </td>
   </tr>
   <tr>
    <td align="left"> &nbsp;2014-08-06&nbsp; </td>
-   <td align="center"> 70 </td>
-   <td align="center"> 271 </td>
-   <td align="center"> 260 </td>
+   <td align="center"> 77 </td>
+   <td align="center"> 285 </td>
+   <td align="center"> 281 </td>
    <td align="center"> 8 </td>
   </tr>
   <tr>
    <td align="left"> &nbsp;2014-08-11&nbsp; </td>
-   <td align="center"> 62 </td>
-   <td align="center"> 274 </td>
-   <td align="center"> 225 </td>
+   <td align="center"> 69 </td>
+   <td align="center"> 293 </td>
+   <td align="center"> 248 </td>
    <td align="center"> 9 </td>
   </tr>
   <tr>
    <td align="left"> &nbsp;2014-08-16&nbsp; </td>
-   <td align="center"> 57 </td>
-   <td align="center"> 376 </td>
-   <td align="center"> 236 </td>
+   <td align="center"> 64 </td>
+   <td align="center"> 398 </td>
+   <td align="center"> 260 </td>
    <td align="center"> 7 </td>
   </tr>
   <tr>
    <td align="left"> &nbsp;2014-08-20&nbsp; </td>
-   <td align="center"> 98 </td>
-   <td align="center"> 452 </td>
-   <td align="center"> 263 </td>
-   <td align="center"> 7 </td>
-  </tr>
-  <tr>
-   <td align="left"> &nbsp;2014-08-31&nbsp; </td>
-   <td align="center"> 136 </td>
-   <td align="center"> 718 </td>
-   <td align="center"> 310 </td>
-   <td align="center"> 9 </td>
-  </tr>
-  <tr>
-   <td align="left"> &nbsp;2014-09-07&nbsp; </td>
-   <td align="center"> 256 </td>
-   <td align="center"> 960 </td>
-   <td align="center"> 463 </td>
-   <td align="center"> 9 </td>
-  </tr>
-  <tr>
-   <td align="left"> &nbsp;2014-09-14&nbsp; </td>
-   <td align="center"> 256 </td>
-   <td align="center"> 1218 </td>
-   <td align="center"> 534 </td>
-   <td align="center"> 7 </td>
-  </tr>
-  <tr>
-   <td align="left"> &nbsp;2014-09-14&nbsp; </td>
-   <td align="center"> 256 </td>
-   <td align="center"> 1218 </td>
-   <td align="center"> 534 </td>
-   <td align="center"> 7 </td>
-  </tr>
-  <tr>
-   <td align="left"> &nbsp;2014-09-16&nbsp; </td>
-   <td align="center"> 275 </td>
-   <td align="center"> 1345 </td>
-   <td align="center"> 539 </td>
+   <td align="center"> 105 </td>
+   <td align="center"> 480 </td>
+   <td align="center"> 288 </td>
    <td align="center"> 8 </td>
   </tr>
   <tr>
-   <td align="left"> &nbsp;2014-09-18&nbsp; </td>
-   <td align="center"> 314 </td>
-   <td align="center"> 1599 </td>
-   <td align="center"> 561 </td>
+   <td align="left"> &nbsp;2014-08-31&nbsp; </td>
+   <td align="center"> 145 </td>
+   <td align="center"> 753 </td>
+   <td align="center"> 336 </td>
    <td align="center"> 10 </td>
   </tr>
   <tr>
-   <td align="left"> &nbsp;2014-09-20&nbsp; </td>
-   <td align="center"> 402 </td>
-   <td align="center"> 2135 </td>
-   <td align="center"> 629 </td>
-   <td align="center"> 13 </td>
+   <td align="left"> &nbsp;2014-09-07&nbsp; </td>
+   <td align="center"> 268 </td>
+   <td align="center"> 1010 </td>
+   <td align="center"> 494 </td>
+   <td align="center"> 10 </td>
   </tr>
   <tr>
-   <td align="left"> &nbsp;2014-09-22&nbsp; </td>
-   <td align="center"> 560 </td>
-   <td align="center"> 3074 </td>
-   <td align="center"> 775 </td>
-   <td align="center"> 15 </td>
+   <td align="left"> &nbsp;2014-09-14&nbsp; </td>
+   <td align="center"> 273 </td>
+   <td align="center"> 1284 </td>
+   <td align="center"> 572 </td>
+   <td align="center"> 8 </td>
   </tr>
   <tr>
-   <td align="left"> &nbsp;2014-09-24&nbsp; </td>
-   <td align="center"> 852 </td>
-   <td align="center"> 4788 </td>
-   <td align="center"> 1043 </td>
-   <td align="center"> 18 </td>
+   <td align="left"> &nbsp;2014-09-17&nbsp; </td>
+   <td align="center"> 280 </td>
+   <td align="center"> 1419 </td>
+   <td align="center"> 643 </td>
+   <td align="center"> 7 </td>
   </tr>
   <tr>
-   <td align="left"> &nbsp;2014-09-26&nbsp; </td>
-   <td align="center"> 1397 </td>
-   <td align="center"> 7998 </td>
-   <td align="center"> 1534 </td>
-   <td align="center"> 24 </td>
+   <td align="left"> &nbsp;2014-09-19&nbsp; </td>
+   <td align="center"> 296 </td>
+   <td align="center"> 1530 </td>
+   <td align="center"> 687 </td>
+   <td align="center"> 7 </td>
   </tr>
   <tr>
-   <td align="left"> &nbsp;2014-09-28&nbsp; </td>
-   <td align="center"> 2460 </td>
-   <td align="center"> 14210 </td>
-   <td align="center"> 2472 </td>
-   <td align="center"> 37 </td>
+   <td align="left"> &nbsp;2014-09-21&nbsp; </td>
+   <td align="center"> 328 </td>
+   <td align="center"> 1743 </td>
+   <td align="center"> 772 </td>
+   <td align="center"> 9 </td>
   </tr>
   <tr>
-   <td align="left"> &nbsp;2014-09-30&nbsp; </td>
-   <td align="center"> 4609 </td>
-   <td align="center"> 26516 </td>
-   <td align="center"> 4336 </td>
-   <td align="center"> 66 </td>
+   <td align="left"> &nbsp;2014-09-23&nbsp; </td>
+   <td align="center"> 392 </td>
+   <td align="center"> 2136 </td>
+   <td align="center"> 928 </td>
+   <td align="center"> 11 </td>
   </tr>
   <tr>
-   <td align="left"> &nbsp;2014-10-02&nbsp; </td>
-   <td align="center"> 9101 </td>
-   <td align="center"> 51119 </td>
-   <td align="center"> 8183 </td>
+   <td align="left"> &nbsp;2014-09-25&nbsp; </td>
+   <td align="center"> 480 </td>
+   <td align="center"> 2653 </td>
+   <td align="center"> 1131 </td>
+   <td align="center"> 14 </td>
+  </tr>
+  <tr>
+   <td align="left"> &nbsp;2014-09-27&nbsp; </td>
+   <td align="center"> 605 </td>
+   <td align="center"> 3343 </td>
+   <td align="center"> 1399 </td>
+   <td align="center"> 16 </td>
+  </tr>
+  <tr>
+   <td align="left"> &nbsp;2014-09-29&nbsp; </td>
+   <td align="center"> 780 </td>
+   <td align="center"> 4313 </td>
+   <td align="center"> 1777 </td>
+   <td align="center"> 20 </td>
+  </tr>
+  <tr>
+   <td align="left"> &nbsp;2014-10-01&nbsp; </td>
+   <td align="center"> 1030 </td>
+   <td align="center"> 5667 </td>
+   <td align="center"> 2315 </td>
+   <td align="center"> 26 </td>
+  </tr>
+  <tr>
+   <td align="left"> &nbsp;2014-10-03&nbsp; </td>
+   <td align="center"> 1382 </td>
+   <td align="center"> 7596 </td>
+   <td align="center"> 3087 </td>
+   <td align="center"> 34 </td>
+  </tr>
+  <tr>
+   <td align="left"> &nbsp;2014-10-05&nbsp; </td>
+   <td align="center"> 1886 </td>
+   <td align="center"> 10326 </td>
+   <td align="center"> 4182 </td>
+   <td align="center"> 46 </td>
+  </tr>
+  <tr>
+   <td align="left"> &nbsp;2014-10-07&nbsp; </td>
+   <td align="center"> 2613 </td>
+   <td align="center"> 14230 </td>
+   <td align="center"> 5775 </td>
+   <td align="center"> 63 </td>
+  </tr>
+  <tr>
+   <td align="left"> &nbsp;2014-10-09&nbsp; </td>
+   <td align="center"> 3672 </td>
+   <td align="center"> 19808 </td>
+   <td align="center"> 8086 </td>
+   <td align="center"> 88 </td>
+  </tr>
+  <tr>
+   <td align="left"> &nbsp;2014-10-11&nbsp; </td>
+   <td align="center"> 5230 </td>
+   <td align="center"> 27729 </td>
+   <td align="center"> 11457 </td>
    <td align="center"> 126 </td>
   </tr>
   <tr>
-   <td align="left"> &nbsp;2014-10-04&nbsp; </td>
-   <td align="center"> 18705 </td>
-   <td align="center"> 99355 </td>
-   <td align="center"> 16352 </td>
-   <td align="center"> 259 </td>
+   <td align="left"> &nbsp;2014-10-13&nbsp; </td>
+   <td align="center"> 7512 </td>
+   <td align="center"> 38581 </td>
+   <td align="center"> 16326 </td>
+   <td align="center"> 182 </td>
   </tr>
   <tr>
-   <td align="left"> &nbsp;2014-10-06&nbsp; </td>
-   <td align="center"> 39110 </td>
-   <td align="center"> 188970 </td>
-   <td align="center"> 33653 </td>
-   <td align="center"> 549 </td>
-  </tr>
-  <tr>
-   <td align="left"> &nbsp;2014-10-08&nbsp; </td>
-   <td align="center"> 80701 </td>
-   <td align="center"> 333030 </td>
-   <td align="center"> 69089 </td>
-   <td align="center"> 1159 </td>
-  </tr>
-  <tr>
-   <td align="left"> &nbsp;2014-10-10&nbsp; </td>
-   <td align="center"> 158168 </td>
-   <td align="center"> 501513 </td>
-   <td align="center"> 136098 </td>
-   <td align="center"> 2372 </td>
-  </tr>
-  <tr>
-   <td align="left"> &nbsp;2014-10-12&nbsp; </td>
-   <td align="center"> 276329 </td>
-   <td align="center"> 607808 </td>
-   <td align="center"> 242355 </td>
-   <td align="center"> 4410 </td>
+   <td align="left"> &nbsp;2014-10-15&nbsp; </td>
+   <td align="center"> 10803 </td>
+   <td align="center"> 52429 </td>
+   <td align="center"> 23197 </td>
+   <td align="center"> 263 </td>
   </tr>
 </tbody>
 </table>
@@ -1602,7 +1672,7 @@ We must be cautious when making predictions about a chaotic process this far int
   <div class = "row" ng-controller='rChartsCtrl_pred' >
     <div class="col-sm-3">
       <input id='zoom-map-slider-pred' type='range' min=1 max=
-207
+210
       ng-model='pred_Day' width=200>
        <span>Day: <span id ="zoom-map-day-counter-pred"></span></span>
     </div>
@@ -4070,7 +4140,7 @@ var alldata =
  "fillKey": "lt111" 
 },
 "SLE": {
- "fillKey": "lt25" 
+ "fillKey": "lt37" 
 },
 "NGA": {
  "fillKey": "lt12" 
@@ -4084,7 +4154,7 @@ var alldata =
  "fillKey": "lt99" 
 },
 "SLE": {
- "fillKey": "lt25" 
+ "fillKey": "lt37" 
 },
 "NGA": {
  "fillKey": "lt12" 
@@ -4098,7 +4168,7 @@ var alldata =
  "fillKey": "lt87" 
 },
 "SLE": {
- "fillKey": "lt12" 
+ "fillKey": "lt37" 
 },
 "NGA": {
  "fillKey": "lt12" 
@@ -4112,7 +4182,49 @@ var alldata =
  "fillKey": "lt87" 
 },
 "SLE": {
+ "fillKey": "lt37" 
+},
+"NGA": {
  "fillKey": "lt12" 
+} 
+},
+"176": {
+ "GIN": {
+ "fillKey": "lt12" 
+},
+"LBR": {
+ "fillKey": "lt87" 
+},
+"SLE": {
+ "fillKey": "lt37" 
+},
+"NGA": {
+ "fillKey": "lt12" 
+} 
+},
+"177": {
+ "GIN": {
+ "fillKey": "lt12" 
+},
+"LBR": {
+ "fillKey": "lt99" 
+},
+"SLE": {
+ "fillKey": "lt37" 
+},
+"NGA": {
+ "fillKey": "lt12" 
+} 
+},
+"178": {
+ "GIN": {
+ "fillKey": "lt12" 
+},
+"LBR": {
+ "fillKey": "lt111" 
+},
+"SLE": {
+ "fillKey": "lt37" 
 },
 "NGA": {
  "fillKey": "lt12" 
@@ -4287,2844 +4399,2886 @@ var alldata_pred =
 {
  "1": {
  "GIN": {
- "fillKey": "lt67500" 
+ "fillKey": "lt5830" 
 },
 "LBR": {
- "fillKey": "lt67500" 
+ "fillKey": "lt5830" 
 },
 "SLE": {
- "fillKey": "lt67500" 
+ "fillKey": "lt5830" 
 },
 "NGA": {
- "fillKey": "lt67500" 
+ "fillKey": "lt5830" 
 } 
 },
 "2": {
  "GIN": {
- "fillKey": "lt67500" 
+ "fillKey": "lt5830" 
 },
 "LBR": {
- "fillKey": "lt67500" 
+ "fillKey": "lt5830" 
 },
 "SLE": {
- "fillKey": "lt67500" 
+ "fillKey": "lt5830" 
 },
 "NGA": {
- "fillKey": "lt67500" 
+ "fillKey": "lt5830" 
 } 
 },
 "3": {
  "GIN": {
- "fillKey": "lt67500" 
+ "fillKey": "lt5830" 
 },
 "LBR": {
- "fillKey": "lt67500" 
+ "fillKey": "lt5830" 
 },
 "SLE": {
- "fillKey": "lt67500" 
+ "fillKey": "lt5830" 
 },
 "NGA": {
- "fillKey": "lt67500" 
+ "fillKey": "lt5830" 
 } 
 },
 "4": {
  "GIN": {
- "fillKey": "lt67500" 
+ "fillKey": "lt5830" 
 },
 "LBR": {
- "fillKey": "lt67500" 
+ "fillKey": "lt5830" 
 },
 "SLE": {
- "fillKey": "lt67500" 
+ "fillKey": "lt5830" 
 },
 "NGA": {
- "fillKey": "lt67500" 
+ "fillKey": "lt5830" 
 } 
 },
 "5": {
  "GIN": {
- "fillKey": "lt67500" 
+ "fillKey": "lt5830" 
 },
 "LBR": {
- "fillKey": "lt67500" 
+ "fillKey": "lt5830" 
 },
 "SLE": {
- "fillKey": "lt67500" 
+ "fillKey": "lt5830" 
 },
 "NGA": {
- "fillKey": "lt67500" 
+ "fillKey": "lt5830" 
 } 
 },
 "6": {
  "GIN": {
- "fillKey": "lt67500" 
+ "fillKey": "lt5830" 
 },
 "LBR": {
- "fillKey": "lt67500" 
+ "fillKey": "lt5830" 
 },
 "SLE": {
- "fillKey": "lt67500" 
+ "fillKey": "lt5830" 
 },
 "NGA": {
- "fillKey": "lt67500" 
+ "fillKey": "lt5830" 
 } 
 },
 "7": {
  "GIN": {
- "fillKey": "lt67500" 
+ "fillKey": "lt5830" 
 },
 "LBR": {
- "fillKey": "lt67500" 
+ "fillKey": "lt5830" 
 },
 "SLE": {
- "fillKey": "lt67500" 
+ "fillKey": "lt5830" 
 },
 "NGA": {
- "fillKey": "lt67500" 
+ "fillKey": "lt5830" 
 } 
 },
 "8": {
  "GIN": {
- "fillKey": "lt67500" 
+ "fillKey": "lt5830" 
 },
 "LBR": {
- "fillKey": "lt67500" 
+ "fillKey": "lt5830" 
 },
 "SLE": {
- "fillKey": "lt67500" 
+ "fillKey": "lt5830" 
 },
 "NGA": {
- "fillKey": "lt67500" 
+ "fillKey": "lt5830" 
 } 
 },
 "9": {
  "GIN": {
- "fillKey": "lt67500" 
+ "fillKey": "lt5830" 
 },
 "LBR": {
- "fillKey": "lt67500" 
+ "fillKey": "lt5830" 
 },
 "SLE": {
- "fillKey": "lt67500" 
+ "fillKey": "lt5830" 
 },
 "NGA": {
- "fillKey": "lt67500" 
+ "fillKey": "lt5830" 
 } 
 },
 "10": {
  "GIN": {
- "fillKey": "lt67500" 
+ "fillKey": "lt5830" 
 },
 "LBR": {
- "fillKey": "lt67500" 
+ "fillKey": "lt5830" 
 },
 "SLE": {
- "fillKey": "lt67500" 
+ "fillKey": "lt5830" 
 },
 "NGA": {
- "fillKey": "lt67500" 
+ "fillKey": "lt5830" 
 } 
 },
 "11": {
  "GIN": {
- "fillKey": "lt67500" 
+ "fillKey": "lt5830" 
 },
 "LBR": {
- "fillKey": "lt67500" 
+ "fillKey": "lt5830" 
 },
 "SLE": {
- "fillKey": "lt67500" 
+ "fillKey": "lt5830" 
 },
 "NGA": {
- "fillKey": "lt67500" 
+ "fillKey": "lt5830" 
 } 
 },
 "12": {
  "GIN": {
- "fillKey": "lt67500" 
+ "fillKey": "lt5830" 
 },
 "LBR": {
- "fillKey": "lt67500" 
+ "fillKey": "lt5830" 
 },
 "SLE": {
- "fillKey": "lt67500" 
+ "fillKey": "lt5830" 
 },
 "NGA": {
- "fillKey": "lt67500" 
+ "fillKey": "lt5830" 
 } 
 },
 "13": {
  "GIN": {
- "fillKey": "lt67500" 
+ "fillKey": "lt5830" 
 },
 "LBR": {
- "fillKey": "lt67500" 
+ "fillKey": "lt5830" 
 },
 "SLE": {
- "fillKey": "lt67500" 
+ "fillKey": "lt5830" 
 },
 "NGA": {
- "fillKey": "lt67500" 
+ "fillKey": "lt5830" 
 } 
 },
 "14": {
  "GIN": {
- "fillKey": "lt67500" 
+ "fillKey": "lt5830" 
 },
 "LBR": {
- "fillKey": "lt67500" 
+ "fillKey": "lt5830" 
 },
 "SLE": {
- "fillKey": "lt67500" 
+ "fillKey": "lt5830" 
 },
 "NGA": {
- "fillKey": "lt67500" 
+ "fillKey": "lt5830" 
 } 
 },
 "15": {
  "GIN": {
- "fillKey": "lt67500" 
+ "fillKey": "lt5830" 
 },
 "LBR": {
- "fillKey": "lt67500" 
+ "fillKey": "lt5830" 
 },
 "SLE": {
- "fillKey": "lt67500" 
+ "fillKey": "lt5830" 
 },
 "NGA": {
- "fillKey": "lt67500" 
+ "fillKey": "lt5830" 
 } 
 },
 "16": {
  "GIN": {
- "fillKey": "lt67500" 
+ "fillKey": "lt5830" 
 },
 "LBR": {
- "fillKey": "lt67500" 
+ "fillKey": "lt5830" 
 },
 "SLE": {
- "fillKey": "lt67500" 
+ "fillKey": "lt5830" 
 },
 "NGA": {
- "fillKey": "lt67500" 
+ "fillKey": "lt5830" 
 } 
 },
 "17": {
  "GIN": {
- "fillKey": "lt67500" 
+ "fillKey": "lt5830" 
 },
 "LBR": {
- "fillKey": "lt67500" 
+ "fillKey": "lt5830" 
 },
 "SLE": {
- "fillKey": "lt67500" 
+ "fillKey": "lt5830" 
 },
 "NGA": {
- "fillKey": "lt67500" 
+ "fillKey": "lt5830" 
 } 
 },
 "18": {
  "GIN": {
- "fillKey": "lt67500" 
+ "fillKey": "lt5830" 
 },
 "LBR": {
- "fillKey": "lt67500" 
+ "fillKey": "lt5830" 
 },
 "SLE": {
- "fillKey": "lt67500" 
+ "fillKey": "lt5830" 
 },
 "NGA": {
- "fillKey": "lt67500" 
+ "fillKey": "lt5830" 
 } 
 },
 "19": {
  "GIN": {
- "fillKey": "lt67500" 
+ "fillKey": "lt5830" 
 },
 "LBR": {
- "fillKey": "lt67500" 
+ "fillKey": "lt5830" 
 },
 "SLE": {
- "fillKey": "lt67500" 
+ "fillKey": "lt5830" 
 },
 "NGA": {
- "fillKey": "lt67500" 
+ "fillKey": "lt5830" 
 } 
 },
 "20": {
  "GIN": {
- "fillKey": "lt67500" 
+ "fillKey": "lt5830" 
 },
 "LBR": {
- "fillKey": "lt67500" 
+ "fillKey": "lt5830" 
 },
 "SLE": {
- "fillKey": "lt67500" 
+ "fillKey": "lt5830" 
 },
 "NGA": {
- "fillKey": "lt67500" 
+ "fillKey": "lt5830" 
 } 
 },
 "21": {
  "GIN": {
- "fillKey": "lt67500" 
+ "fillKey": "lt5830" 
 },
 "LBR": {
- "fillKey": "lt67500" 
+ "fillKey": "lt5830" 
 },
 "SLE": {
- "fillKey": "lt67500" 
+ "fillKey": "lt5830" 
 },
 "NGA": {
- "fillKey": "lt67500" 
+ "fillKey": "lt5830" 
 } 
 },
 "22": {
  "GIN": {
- "fillKey": "lt67500" 
+ "fillKey": "lt5830" 
 },
 "LBR": {
- "fillKey": "lt67500" 
+ "fillKey": "lt5830" 
 },
 "SLE": {
- "fillKey": "lt67500" 
+ "fillKey": "lt5830" 
 },
 "NGA": {
- "fillKey": "lt67500" 
+ "fillKey": "lt5830" 
 } 
 },
 "23": {
  "GIN": {
- "fillKey": "lt67500" 
+ "fillKey": "lt5830" 
 },
 "LBR": {
- "fillKey": "lt67500" 
+ "fillKey": "lt5830" 
 },
 "SLE": {
- "fillKey": "lt67500" 
+ "fillKey": "lt5830" 
 },
 "NGA": {
- "fillKey": "lt67500" 
+ "fillKey": "lt5830" 
 } 
 },
 "24": {
  "GIN": {
- "fillKey": "lt67500" 
+ "fillKey": "lt5830" 
 },
 "LBR": {
- "fillKey": "lt67500" 
+ "fillKey": "lt5830" 
 },
 "SLE": {
- "fillKey": "lt67500" 
+ "fillKey": "lt5830" 
 },
 "NGA": {
- "fillKey": "lt67500" 
+ "fillKey": "lt5830" 
 } 
 },
 "25": {
  "GIN": {
- "fillKey": "lt67500" 
+ "fillKey": "lt5830" 
 },
 "LBR": {
- "fillKey": "lt67500" 
+ "fillKey": "lt5830" 
 },
 "SLE": {
- "fillKey": "lt67500" 
+ "fillKey": "lt5830" 
 },
 "NGA": {
- "fillKey": "lt67500" 
+ "fillKey": "lt5830" 
 } 
 },
 "26": {
  "GIN": {
- "fillKey": "lt67500" 
+ "fillKey": "lt5830" 
 },
 "LBR": {
- "fillKey": "lt67500" 
+ "fillKey": "lt5830" 
 },
 "SLE": {
- "fillKey": "lt67500" 
+ "fillKey": "lt5830" 
 },
 "NGA": {
- "fillKey": "lt67500" 
+ "fillKey": "lt5830" 
 } 
 },
 "27": {
  "GIN": {
- "fillKey": "lt67500" 
+ "fillKey": "lt5830" 
 },
 "LBR": {
- "fillKey": "lt67500" 
+ "fillKey": "lt5830" 
 },
 "SLE": {
- "fillKey": "lt67500" 
+ "fillKey": "lt5830" 
 },
 "NGA": {
- "fillKey": "lt67500" 
+ "fillKey": "lt5830" 
 } 
 },
 "28": {
  "GIN": {
- "fillKey": "lt67500" 
+ "fillKey": "lt5830" 
 },
 "LBR": {
- "fillKey": "lt67500" 
+ "fillKey": "lt5830" 
 },
 "SLE": {
- "fillKey": "lt67500" 
+ "fillKey": "lt5830" 
 },
 "NGA": {
- "fillKey": "lt67500" 
+ "fillKey": "lt5830" 
 } 
 },
 "29": {
  "GIN": {
- "fillKey": "lt67500" 
+ "fillKey": "lt5830" 
 },
 "LBR": {
- "fillKey": "lt67500" 
+ "fillKey": "lt5830" 
 },
 "SLE": {
- "fillKey": "lt67500" 
+ "fillKey": "lt5830" 
 },
 "NGA": {
- "fillKey": "lt67500" 
+ "fillKey": "lt5830" 
 } 
 },
 "30": {
  "GIN": {
- "fillKey": "lt67500" 
+ "fillKey": "lt5830" 
 },
 "LBR": {
- "fillKey": "lt67500" 
+ "fillKey": "lt5830" 
 },
 "SLE": {
- "fillKey": "lt67500" 
+ "fillKey": "lt5830" 
 },
 "NGA": {
- "fillKey": "lt67500" 
+ "fillKey": "lt5830" 
 } 
 },
 "31": {
  "GIN": {
- "fillKey": "lt67500" 
+ "fillKey": "lt5830" 
 },
 "LBR": {
- "fillKey": "lt67500" 
+ "fillKey": "lt5830" 
 },
 "SLE": {
- "fillKey": "lt67500" 
+ "fillKey": "lt5830" 
 },
 "NGA": {
- "fillKey": "lt67500" 
+ "fillKey": "lt5830" 
 } 
 },
 "32": {
  "GIN": {
- "fillKey": "lt67500" 
+ "fillKey": "lt5830" 
 },
 "LBR": {
- "fillKey": "lt67500" 
+ "fillKey": "lt5830" 
 },
 "SLE": {
- "fillKey": "lt67500" 
+ "fillKey": "lt5830" 
 },
 "NGA": {
- "fillKey": "lt67500" 
+ "fillKey": "lt5830" 
 } 
 },
 "33": {
  "GIN": {
- "fillKey": "lt67500" 
+ "fillKey": "lt5830" 
 },
 "LBR": {
- "fillKey": "lt67500" 
+ "fillKey": "lt5830" 
 },
 "SLE": {
- "fillKey": "lt67500" 
+ "fillKey": "lt5830" 
 },
 "NGA": {
- "fillKey": "lt67500" 
+ "fillKey": "lt5830" 
 } 
 },
 "34": {
  "GIN": {
- "fillKey": "lt67500" 
+ "fillKey": "lt5830" 
 },
 "LBR": {
- "fillKey": "lt67500" 
+ "fillKey": "lt5830" 
 },
 "SLE": {
- "fillKey": "lt67500" 
+ "fillKey": "lt5830" 
 },
 "NGA": {
- "fillKey": "lt67500" 
+ "fillKey": "lt5830" 
 } 
 },
 "35": {
  "GIN": {
- "fillKey": "lt67500" 
+ "fillKey": "lt5830" 
 },
 "LBR": {
- "fillKey": "lt67500" 
+ "fillKey": "lt5830" 
 },
 "SLE": {
- "fillKey": "lt67500" 
+ "fillKey": "lt5830" 
 },
 "NGA": {
- "fillKey": "lt67500" 
+ "fillKey": "lt5830" 
 } 
 },
 "36": {
  "GIN": {
- "fillKey": "lt67500" 
+ "fillKey": "lt5830" 
 },
 "LBR": {
- "fillKey": "lt67500" 
+ "fillKey": "lt5830" 
 },
 "SLE": {
- "fillKey": "lt67500" 
+ "fillKey": "lt5830" 
 },
 "NGA": {
- "fillKey": "lt67500" 
+ "fillKey": "lt5830" 
 } 
 },
 "37": {
  "GIN": {
- "fillKey": "lt67500" 
+ "fillKey": "lt5830" 
 },
 "LBR": {
- "fillKey": "lt67500" 
+ "fillKey": "lt5830" 
 },
 "SLE": {
- "fillKey": "lt67500" 
+ "fillKey": "lt5830" 
 },
 "NGA": {
- "fillKey": "lt67500" 
+ "fillKey": "lt5830" 
 } 
 },
 "38": {
  "GIN": {
- "fillKey": "lt67500" 
+ "fillKey": "lt5830" 
 },
 "LBR": {
- "fillKey": "lt67500" 
+ "fillKey": "lt5830" 
 },
 "SLE": {
- "fillKey": "lt67500" 
+ "fillKey": "lt5830" 
 },
 "NGA": {
- "fillKey": "lt67500" 
+ "fillKey": "lt5830" 
 } 
 },
 "39": {
  "GIN": {
- "fillKey": "lt67500" 
+ "fillKey": "lt5830" 
 },
 "LBR": {
- "fillKey": "lt67500" 
+ "fillKey": "lt5830" 
 },
 "SLE": {
- "fillKey": "lt67500" 
+ "fillKey": "lt5830" 
 },
 "NGA": {
- "fillKey": "lt67500" 
+ "fillKey": "lt5830" 
 } 
 },
 "40": {
  "GIN": {
- "fillKey": "lt67500" 
+ "fillKey": "lt5830" 
 },
 "LBR": {
- "fillKey": "lt67500" 
+ "fillKey": "lt5830" 
 },
 "SLE": {
- "fillKey": "lt67500" 
+ "fillKey": "lt5830" 
 },
 "NGA": {
- "fillKey": "lt67500" 
+ "fillKey": "lt5830" 
 } 
 },
 "41": {
  "GIN": {
- "fillKey": "lt67500" 
+ "fillKey": "lt5830" 
 },
 "LBR": {
- "fillKey": "lt67500" 
+ "fillKey": "lt5830" 
 },
 "SLE": {
- "fillKey": "lt67500" 
+ "fillKey": "lt5830" 
 },
 "NGA": {
- "fillKey": "lt67500" 
+ "fillKey": "lt5830" 
 } 
 },
 "42": {
  "GIN": {
- "fillKey": "lt67500" 
+ "fillKey": "lt5830" 
 },
 "LBR": {
- "fillKey": "lt67500" 
+ "fillKey": "lt5830" 
 },
 "SLE": {
- "fillKey": "lt67500" 
+ "fillKey": "lt5830" 
 },
 "NGA": {
- "fillKey": "lt67500" 
+ "fillKey": "lt5830" 
 } 
 },
 "43": {
  "GIN": {
- "fillKey": "lt67500" 
+ "fillKey": "lt5830" 
 },
 "LBR": {
- "fillKey": "lt67500" 
+ "fillKey": "lt5830" 
 },
 "SLE": {
- "fillKey": "lt67500" 
+ "fillKey": "lt5830" 
 },
 "NGA": {
- "fillKey": "lt67500" 
+ "fillKey": "lt5830" 
 } 
 },
 "44": {
  "GIN": {
- "fillKey": "lt67500" 
+ "fillKey": "lt5830" 
 },
 "LBR": {
- "fillKey": "lt67500" 
+ "fillKey": "lt5830" 
 },
 "SLE": {
- "fillKey": "lt67500" 
+ "fillKey": "lt5830" 
 },
 "NGA": {
- "fillKey": "lt67500" 
+ "fillKey": "lt5830" 
 } 
 },
 "45": {
  "GIN": {
- "fillKey": "lt67500" 
+ "fillKey": "lt5830" 
 },
 "LBR": {
- "fillKey": "lt67500" 
+ "fillKey": "lt5830" 
 },
 "SLE": {
- "fillKey": "lt67500" 
+ "fillKey": "lt5830" 
 },
 "NGA": {
- "fillKey": "lt67500" 
+ "fillKey": "lt5830" 
 } 
 },
 "46": {
  "GIN": {
- "fillKey": "lt67500" 
+ "fillKey": "lt5830" 
 },
 "LBR": {
- "fillKey": "lt67500" 
+ "fillKey": "lt5830" 
 },
 "SLE": {
- "fillKey": "lt67500" 
+ "fillKey": "lt5830" 
 },
 "NGA": {
- "fillKey": "lt67500" 
+ "fillKey": "lt5830" 
 } 
 },
 "47": {
  "GIN": {
- "fillKey": "lt67500" 
+ "fillKey": "lt5830" 
 },
 "LBR": {
- "fillKey": "lt67500" 
+ "fillKey": "lt5830" 
 },
 "SLE": {
- "fillKey": "lt67500" 
+ "fillKey": "lt5830" 
 },
 "NGA": {
- "fillKey": "lt67500" 
+ "fillKey": "lt5830" 
 } 
 },
 "48": {
  "GIN": {
- "fillKey": "lt67500" 
+ "fillKey": "lt5830" 
 },
 "LBR": {
- "fillKey": "lt67500" 
+ "fillKey": "lt5830" 
 },
 "SLE": {
- "fillKey": "lt67500" 
+ "fillKey": "lt5830" 
 },
 "NGA": {
- "fillKey": "lt67500" 
+ "fillKey": "lt5830" 
 } 
 },
 "49": {
  "GIN": {
- "fillKey": "lt67500" 
+ "fillKey": "lt5830" 
 },
 "LBR": {
- "fillKey": "lt67500" 
+ "fillKey": "lt5830" 
 },
 "SLE": {
- "fillKey": "lt67500" 
+ "fillKey": "lt5830" 
 },
 "NGA": {
- "fillKey": "lt67500" 
+ "fillKey": "lt5830" 
 } 
 },
 "50": {
  "GIN": {
- "fillKey": "lt67500" 
+ "fillKey": "lt5830" 
 },
 "LBR": {
- "fillKey": "lt67500" 
+ "fillKey": "lt5830" 
 },
 "SLE": {
- "fillKey": "lt67500" 
+ "fillKey": "lt5830" 
 },
 "NGA": {
- "fillKey": "lt67500" 
+ "fillKey": "lt5830" 
 } 
 },
 "51": {
  "GIN": {
- "fillKey": "lt67500" 
+ "fillKey": "lt5830" 
 },
 "LBR": {
- "fillKey": "lt67500" 
+ "fillKey": "lt5830" 
 },
 "SLE": {
- "fillKey": "lt67500" 
+ "fillKey": "lt5830" 
 },
 "NGA": {
- "fillKey": "lt67500" 
+ "fillKey": "lt5830" 
 } 
 },
 "52": {
  "GIN": {
- "fillKey": "lt67500" 
+ "fillKey": "lt5830" 
 },
 "LBR": {
- "fillKey": "lt67500" 
+ "fillKey": "lt5830" 
 },
 "SLE": {
- "fillKey": "lt67500" 
+ "fillKey": "lt5830" 
 },
 "NGA": {
- "fillKey": "lt67500" 
+ "fillKey": "lt5830" 
 } 
 },
 "53": {
  "GIN": {
- "fillKey": "lt67500" 
+ "fillKey": "lt5830" 
 },
 "LBR": {
- "fillKey": "lt67500" 
+ "fillKey": "lt5830" 
 },
 "SLE": {
- "fillKey": "lt67500" 
+ "fillKey": "lt5830" 
 },
 "NGA": {
- "fillKey": "lt67500" 
+ "fillKey": "lt5830" 
 } 
 },
 "54": {
  "GIN": {
- "fillKey": "lt67500" 
+ "fillKey": "lt5830" 
 },
 "LBR": {
- "fillKey": "lt67500" 
+ "fillKey": "lt5830" 
 },
 "SLE": {
- "fillKey": "lt67500" 
+ "fillKey": "lt5830" 
 },
 "NGA": {
- "fillKey": "lt67500" 
+ "fillKey": "lt5830" 
 } 
 },
 "55": {
  "GIN": {
- "fillKey": "lt67500" 
+ "fillKey": "lt5830" 
 },
 "LBR": {
- "fillKey": "lt67500" 
+ "fillKey": "lt5830" 
 },
 "SLE": {
- "fillKey": "lt67500" 
+ "fillKey": "lt5830" 
 },
 "NGA": {
- "fillKey": "lt67500" 
+ "fillKey": "lt5830" 
 } 
 },
 "56": {
  "GIN": {
- "fillKey": "lt67500" 
+ "fillKey": "lt5830" 
 },
 "LBR": {
- "fillKey": "lt67500" 
+ "fillKey": "lt5830" 
 },
 "SLE": {
- "fillKey": "lt67500" 
+ "fillKey": "lt5830" 
 },
 "NGA": {
- "fillKey": "lt67500" 
+ "fillKey": "lt5830" 
 } 
 },
 "57": {
  "GIN": {
- "fillKey": "lt67500" 
+ "fillKey": "lt5830" 
 },
 "LBR": {
- "fillKey": "lt67500" 
+ "fillKey": "lt5830" 
 },
 "SLE": {
- "fillKey": "lt67500" 
+ "fillKey": "lt5830" 
 },
 "NGA": {
- "fillKey": "lt67500" 
+ "fillKey": "lt5830" 
 } 
 },
 "58": {
  "GIN": {
- "fillKey": "lt67500" 
+ "fillKey": "lt5830" 
 },
 "LBR": {
- "fillKey": "lt67500" 
+ "fillKey": "lt5830" 
 },
 "SLE": {
- "fillKey": "lt67500" 
+ "fillKey": "lt5830" 
 },
 "NGA": {
- "fillKey": "lt67500" 
+ "fillKey": "lt5830" 
 } 
 },
 "59": {
  "GIN": {
- "fillKey": "lt67500" 
+ "fillKey": "lt5830" 
 },
 "LBR": {
- "fillKey": "lt67500" 
+ "fillKey": "lt5830" 
 },
 "SLE": {
- "fillKey": "lt67500" 
+ "fillKey": "lt5830" 
 },
 "NGA": {
- "fillKey": "lt67500" 
+ "fillKey": "lt5830" 
 } 
 },
 "60": {
  "GIN": {
- "fillKey": "lt67500" 
+ "fillKey": "lt5830" 
 },
 "LBR": {
- "fillKey": "lt67500" 
+ "fillKey": "lt5830" 
 },
 "SLE": {
- "fillKey": "lt67500" 
+ "fillKey": "lt5830" 
 },
 "NGA": {
- "fillKey": "lt67500" 
+ "fillKey": "lt5830" 
 } 
 },
 "61": {
  "GIN": {
- "fillKey": "lt67500" 
+ "fillKey": "lt5830" 
 },
 "LBR": {
- "fillKey": "lt67500" 
+ "fillKey": "lt5830" 
 },
 "SLE": {
- "fillKey": "lt67500" 
+ "fillKey": "lt5830" 
 },
 "NGA": {
- "fillKey": "lt67500" 
+ "fillKey": "lt5830" 
 } 
 },
 "62": {
  "GIN": {
- "fillKey": "lt67500" 
+ "fillKey": "lt5830" 
 },
 "LBR": {
- "fillKey": "lt67500" 
+ "fillKey": "lt5830" 
 },
 "SLE": {
- "fillKey": "lt67500" 
+ "fillKey": "lt5830" 
 },
 "NGA": {
- "fillKey": "lt67500" 
+ "fillKey": "lt5830" 
 } 
 },
 "63": {
  "GIN": {
- "fillKey": "lt67500" 
+ "fillKey": "lt5830" 
 },
 "LBR": {
- "fillKey": "lt67500" 
+ "fillKey": "lt5830" 
 },
 "SLE": {
- "fillKey": "lt67500" 
+ "fillKey": "lt5830" 
 },
 "NGA": {
- "fillKey": "lt67500" 
+ "fillKey": "lt5830" 
 } 
 },
 "64": {
  "GIN": {
- "fillKey": "lt67500" 
+ "fillKey": "lt5830" 
 },
 "LBR": {
- "fillKey": "lt67500" 
+ "fillKey": "lt5830" 
 },
 "SLE": {
- "fillKey": "lt67500" 
+ "fillKey": "lt5830" 
 },
 "NGA": {
- "fillKey": "lt67500" 
+ "fillKey": "lt5830" 
 } 
 },
 "65": {
  "GIN": {
- "fillKey": "lt67500" 
+ "fillKey": "lt5830" 
 },
 "LBR": {
- "fillKey": "lt67500" 
+ "fillKey": "lt5830" 
 },
 "SLE": {
- "fillKey": "lt67500" 
+ "fillKey": "lt5830" 
 },
 "NGA": {
- "fillKey": "lt67500" 
+ "fillKey": "lt5830" 
 } 
 },
 "66": {
  "GIN": {
- "fillKey": "lt67500" 
+ "fillKey": "lt5830" 
 },
 "LBR": {
- "fillKey": "lt67500" 
+ "fillKey": "lt5830" 
 },
 "SLE": {
- "fillKey": "lt67500" 
+ "fillKey": "lt5830" 
 },
 "NGA": {
- "fillKey": "lt67500" 
+ "fillKey": "lt5830" 
 } 
 },
 "67": {
  "GIN": {
- "fillKey": "lt67500" 
+ "fillKey": "lt5830" 
 },
 "LBR": {
- "fillKey": "lt67500" 
+ "fillKey": "lt5830" 
 },
 "SLE": {
- "fillKey": "lt67500" 
+ "fillKey": "lt5830" 
 },
 "NGA": {
- "fillKey": "lt67500" 
+ "fillKey": "lt5830" 
 } 
 },
 "68": {
  "GIN": {
- "fillKey": "lt67500" 
+ "fillKey": "lt5830" 
 },
 "LBR": {
- "fillKey": "lt67500" 
+ "fillKey": "lt5830" 
 },
 "SLE": {
- "fillKey": "lt67500" 
+ "fillKey": "lt5830" 
 },
 "NGA": {
- "fillKey": "lt67500" 
+ "fillKey": "lt5830" 
 } 
 },
 "69": {
  "GIN": {
- "fillKey": "lt67500" 
+ "fillKey": "lt5830" 
 },
 "LBR": {
- "fillKey": "lt67500" 
+ "fillKey": "lt5830" 
 },
 "SLE": {
- "fillKey": "lt67500" 
+ "fillKey": "lt5830" 
 },
 "NGA": {
- "fillKey": "lt67500" 
+ "fillKey": "lt5830" 
 } 
 },
 "70": {
  "GIN": {
- "fillKey": "lt67500" 
+ "fillKey": "lt5830" 
 },
 "LBR": {
- "fillKey": "lt67500" 
+ "fillKey": "lt5830" 
 },
 "SLE": {
- "fillKey": "lt67500" 
+ "fillKey": "lt5830" 
 },
 "NGA": {
- "fillKey": "lt67500" 
+ "fillKey": "lt5830" 
 } 
 },
 "71": {
  "GIN": {
- "fillKey": "lt67500" 
+ "fillKey": "lt5830" 
 },
 "LBR": {
- "fillKey": "lt67500" 
+ "fillKey": "lt5830" 
 },
 "SLE": {
- "fillKey": "lt67500" 
+ "fillKey": "lt5830" 
 },
 "NGA": {
- "fillKey": "lt67500" 
+ "fillKey": "lt5830" 
 } 
 },
 "72": {
  "GIN": {
- "fillKey": "lt67500" 
+ "fillKey": "lt5830" 
 },
 "LBR": {
- "fillKey": "lt67500" 
+ "fillKey": "lt5830" 
 },
 "SLE": {
- "fillKey": "lt67500" 
+ "fillKey": "lt5830" 
 },
 "NGA": {
- "fillKey": "lt67500" 
+ "fillKey": "lt5830" 
 } 
 },
 "73": {
  "GIN": {
- "fillKey": "lt67500" 
+ "fillKey": "lt5830" 
 },
 "LBR": {
- "fillKey": "lt67500" 
+ "fillKey": "lt5830" 
 },
 "SLE": {
- "fillKey": "lt67500" 
+ "fillKey": "lt5830" 
 },
 "NGA": {
- "fillKey": "lt67500" 
+ "fillKey": "lt5830" 
 } 
 },
 "74": {
  "GIN": {
- "fillKey": "lt67500" 
+ "fillKey": "lt5830" 
 },
 "LBR": {
- "fillKey": "lt67500" 
+ "fillKey": "lt5830" 
 },
 "SLE": {
- "fillKey": "lt67500" 
+ "fillKey": "lt5830" 
 },
 "NGA": {
- "fillKey": "lt67500" 
+ "fillKey": "lt5830" 
 } 
 },
 "75": {
  "GIN": {
- "fillKey": "lt67500" 
+ "fillKey": "lt5830" 
 },
 "LBR": {
- "fillKey": "lt67500" 
+ "fillKey": "lt5830" 
 },
 "SLE": {
- "fillKey": "lt67500" 
+ "fillKey": "lt5830" 
 },
 "NGA": {
- "fillKey": "lt67500" 
+ "fillKey": "lt5830" 
 } 
 },
 "76": {
  "GIN": {
- "fillKey": "lt67500" 
+ "fillKey": "lt5830" 
 },
 "LBR": {
- "fillKey": "lt67500" 
+ "fillKey": "lt5830" 
 },
 "SLE": {
- "fillKey": "lt67500" 
+ "fillKey": "lt5830" 
 },
 "NGA": {
- "fillKey": "lt67500" 
+ "fillKey": "lt5830" 
 } 
 },
 "77": {
  "GIN": {
- "fillKey": "lt67500" 
+ "fillKey": "lt5830" 
 },
 "LBR": {
- "fillKey": "lt67500" 
+ "fillKey": "lt5830" 
 },
 "SLE": {
- "fillKey": "lt67500" 
+ "fillKey": "lt5830" 
 },
 "NGA": {
- "fillKey": "lt67500" 
+ "fillKey": "lt5830" 
 } 
 },
 "78": {
  "GIN": {
- "fillKey": "lt67500" 
+ "fillKey": "lt5830" 
 },
 "LBR": {
- "fillKey": "lt67500" 
+ "fillKey": "lt5830" 
 },
 "SLE": {
- "fillKey": "lt67500" 
+ "fillKey": "lt5830" 
 },
 "NGA": {
- "fillKey": "lt67500" 
+ "fillKey": "lt5830" 
 } 
 },
 "79": {
  "GIN": {
- "fillKey": "lt67500" 
+ "fillKey": "lt5830" 
 },
 "LBR": {
- "fillKey": "lt67500" 
+ "fillKey": "lt5830" 
 },
 "SLE": {
- "fillKey": "lt67500" 
+ "fillKey": "lt5830" 
 },
 "NGA": {
- "fillKey": "lt67500" 
+ "fillKey": "lt5830" 
 } 
 },
 "80": {
  "GIN": {
- "fillKey": "lt67500" 
+ "fillKey": "lt5830" 
 },
 "LBR": {
- "fillKey": "lt67500" 
+ "fillKey": "lt5830" 
 },
 "SLE": {
- "fillKey": "lt67500" 
+ "fillKey": "lt5830" 
 },
 "NGA": {
- "fillKey": "lt67500" 
+ "fillKey": "lt5830" 
 } 
 },
 "81": {
  "GIN": {
- "fillKey": "lt67500" 
+ "fillKey": "lt5830" 
 },
 "LBR": {
- "fillKey": "lt67500" 
+ "fillKey": "lt5830" 
 },
 "SLE": {
- "fillKey": "lt67500" 
+ "fillKey": "lt5830" 
 },
 "NGA": {
- "fillKey": "lt67500" 
+ "fillKey": "lt5830" 
 } 
 },
 "82": {
  "GIN": {
- "fillKey": "lt67500" 
+ "fillKey": "lt5830" 
 },
 "LBR": {
- "fillKey": "lt67500" 
+ "fillKey": "lt5830" 
 },
 "SLE": {
- "fillKey": "lt67500" 
+ "fillKey": "lt5830" 
 },
 "NGA": {
- "fillKey": "lt67500" 
+ "fillKey": "lt5830" 
 } 
 },
 "83": {
  "GIN": {
- "fillKey": "lt67500" 
+ "fillKey": "lt5830" 
 },
 "LBR": {
- "fillKey": "lt67500" 
+ "fillKey": "lt5830" 
 },
 "SLE": {
- "fillKey": "lt67500" 
+ "fillKey": "lt5830" 
 },
 "NGA": {
- "fillKey": "lt67500" 
+ "fillKey": "lt5830" 
 } 
 },
 "84": {
  "GIN": {
- "fillKey": "lt67500" 
+ "fillKey": "lt5830" 
 },
 "LBR": {
- "fillKey": "lt67500" 
+ "fillKey": "lt5830" 
 },
 "SLE": {
- "fillKey": "lt67500" 
+ "fillKey": "lt5830" 
 },
 "NGA": {
- "fillKey": "lt67500" 
+ "fillKey": "lt5830" 
 } 
 },
 "85": {
  "GIN": {
- "fillKey": "lt67500" 
+ "fillKey": "lt5830" 
 },
 "LBR": {
- "fillKey": "lt67500" 
+ "fillKey": "lt5830" 
 },
 "SLE": {
- "fillKey": "lt67500" 
+ "fillKey": "lt5830" 
 },
 "NGA": {
- "fillKey": "lt67500" 
+ "fillKey": "lt5830" 
 } 
 },
 "86": {
  "GIN": {
- "fillKey": "lt67500" 
+ "fillKey": "lt5830" 
 },
 "LBR": {
- "fillKey": "lt67500" 
+ "fillKey": "lt5830" 
 },
 "SLE": {
- "fillKey": "lt67500" 
+ "fillKey": "lt5830" 
 },
 "NGA": {
- "fillKey": "lt67500" 
+ "fillKey": "lt5830" 
 } 
 },
 "87": {
  "GIN": {
- "fillKey": "lt67500" 
+ "fillKey": "lt5830" 
 },
 "LBR": {
- "fillKey": "lt67500" 
+ "fillKey": "lt5830" 
 },
 "SLE": {
- "fillKey": "lt67500" 
+ "fillKey": "lt5830" 
 },
 "NGA": {
- "fillKey": "lt67500" 
+ "fillKey": "lt5830" 
 } 
 },
 "88": {
  "GIN": {
- "fillKey": "lt67500" 
+ "fillKey": "lt5830" 
 },
 "LBR": {
- "fillKey": "lt67500" 
+ "fillKey": "lt5830" 
 },
 "SLE": {
- "fillKey": "lt67500" 
+ "fillKey": "lt5830" 
 },
 "NGA": {
- "fillKey": "lt67500" 
+ "fillKey": "lt5830" 
 } 
 },
 "89": {
  "GIN": {
- "fillKey": "lt67500" 
+ "fillKey": "lt5830" 
 },
 "LBR": {
- "fillKey": "lt67500" 
+ "fillKey": "lt5830" 
 },
 "SLE": {
- "fillKey": "lt67500" 
+ "fillKey": "lt5830" 
 },
 "NGA": {
- "fillKey": "lt67500" 
+ "fillKey": "lt5830" 
 } 
 },
 "90": {
  "GIN": {
- "fillKey": "lt67500" 
+ "fillKey": "lt5830" 
 },
 "LBR": {
- "fillKey": "lt67500" 
+ "fillKey": "lt5830" 
 },
 "SLE": {
- "fillKey": "lt67500" 
+ "fillKey": "lt5830" 
 },
 "NGA": {
- "fillKey": "lt67500" 
+ "fillKey": "lt5830" 
 } 
 },
 "91": {
  "GIN": {
- "fillKey": "lt67500" 
+ "fillKey": "lt5830" 
 },
 "LBR": {
- "fillKey": "lt67500" 
+ "fillKey": "lt5830" 
 },
 "SLE": {
- "fillKey": "lt67500" 
+ "fillKey": "lt5830" 
 },
 "NGA": {
- "fillKey": "lt67500" 
+ "fillKey": "lt5830" 
 } 
 },
 "92": {
  "GIN": {
- "fillKey": "lt67500" 
+ "fillKey": "lt5830" 
 },
 "LBR": {
- "fillKey": "lt67500" 
+ "fillKey": "lt5830" 
 },
 "SLE": {
- "fillKey": "lt67500" 
+ "fillKey": "lt5830" 
 },
 "NGA": {
- "fillKey": "lt67500" 
+ "fillKey": "lt5830" 
 } 
 },
 "93": {
  "GIN": {
- "fillKey": "lt67500" 
+ "fillKey": "lt5830" 
 },
 "LBR": {
- "fillKey": "lt67500" 
+ "fillKey": "lt5830" 
 },
 "SLE": {
- "fillKey": "lt67500" 
+ "fillKey": "lt5830" 
 },
 "NGA": {
- "fillKey": "lt67500" 
+ "fillKey": "lt5830" 
 } 
 },
 "94": {
  "GIN": {
- "fillKey": "lt67500" 
+ "fillKey": "lt5830" 
 },
 "LBR": {
- "fillKey": "lt67500" 
+ "fillKey": "lt5830" 
 },
 "SLE": {
- "fillKey": "lt67500" 
+ "fillKey": "lt5830" 
 },
 "NGA": {
- "fillKey": "lt67500" 
+ "fillKey": "lt5830" 
 } 
 },
 "95": {
  "GIN": {
- "fillKey": "lt67500" 
+ "fillKey": "lt5830" 
 },
 "LBR": {
- "fillKey": "lt67500" 
+ "fillKey": "lt5830" 
 },
 "SLE": {
- "fillKey": "lt67500" 
+ "fillKey": "lt5830" 
 },
 "NGA": {
- "fillKey": "lt67500" 
+ "fillKey": "lt5830" 
 } 
 },
 "96": {
  "GIN": {
- "fillKey": "lt67500" 
+ "fillKey": "lt5830" 
 },
 "LBR": {
- "fillKey": "lt67500" 
+ "fillKey": "lt5830" 
 },
 "SLE": {
- "fillKey": "lt67500" 
+ "fillKey": "lt5830" 
 },
 "NGA": {
- "fillKey": "lt67500" 
+ "fillKey": "lt5830" 
 } 
 },
 "97": {
  "GIN": {
- "fillKey": "lt67500" 
+ "fillKey": "lt5830" 
 },
 "LBR": {
- "fillKey": "lt67500" 
+ "fillKey": "lt5830" 
 },
 "SLE": {
- "fillKey": "lt67500" 
+ "fillKey": "lt5830" 
 },
 "NGA": {
- "fillKey": "lt67500" 
+ "fillKey": "lt5830" 
 } 
 },
 "98": {
  "GIN": {
- "fillKey": "lt67500" 
+ "fillKey": "lt5830" 
 },
 "LBR": {
- "fillKey": "lt67500" 
+ "fillKey": "lt5830" 
 },
 "SLE": {
- "fillKey": "lt67500" 
+ "fillKey": "lt5830" 
 },
 "NGA": {
- "fillKey": "lt67500" 
+ "fillKey": "lt5830" 
 } 
 },
 "99": {
  "GIN": {
- "fillKey": "lt67500" 
+ "fillKey": "lt5830" 
 },
 "LBR": {
- "fillKey": "lt67500" 
+ "fillKey": "lt5830" 
 },
 "SLE": {
- "fillKey": "lt67500" 
+ "fillKey": "lt5830" 
 },
 "NGA": {
- "fillKey": "lt67500" 
+ "fillKey": "lt5830" 
 } 
 },
 "100": {
  "GIN": {
- "fillKey": "lt67500" 
+ "fillKey": "lt5830" 
 },
 "LBR": {
- "fillKey": "lt67500" 
+ "fillKey": "lt5830" 
 },
 "SLE": {
- "fillKey": "lt67500" 
+ "fillKey": "lt5830" 
 },
 "NGA": {
- "fillKey": "lt67500" 
+ "fillKey": "lt5830" 
 } 
 },
 "101": {
  "GIN": {
- "fillKey": "lt67500" 
+ "fillKey": "lt5830" 
 },
 "LBR": {
- "fillKey": "lt67500" 
+ "fillKey": "lt5830" 
 },
 "SLE": {
- "fillKey": "lt67500" 
+ "fillKey": "lt5830" 
 },
 "NGA": {
- "fillKey": "lt67500" 
+ "fillKey": "lt5830" 
 } 
 },
 "102": {
  "GIN": {
- "fillKey": "lt67500" 
+ "fillKey": "lt5830" 
 },
 "LBR": {
- "fillKey": "lt67500" 
+ "fillKey": "lt5830" 
 },
 "SLE": {
- "fillKey": "lt67500" 
+ "fillKey": "lt5830" 
 },
 "NGA": {
- "fillKey": "lt67500" 
+ "fillKey": "lt5830" 
 } 
 },
 "103": {
  "GIN": {
- "fillKey": "lt67500" 
+ "fillKey": "lt5830" 
 },
 "LBR": {
- "fillKey": "lt67500" 
+ "fillKey": "lt5830" 
 },
 "SLE": {
- "fillKey": "lt67500" 
+ "fillKey": "lt5830" 
 },
 "NGA": {
- "fillKey": "lt67500" 
+ "fillKey": "lt5830" 
 } 
 },
 "104": {
  "GIN": {
- "fillKey": "lt67500" 
+ "fillKey": "lt5830" 
 },
 "LBR": {
- "fillKey": "lt67500" 
+ "fillKey": "lt5830" 
 },
 "SLE": {
- "fillKey": "lt67500" 
+ "fillKey": "lt5830" 
 },
 "NGA": {
- "fillKey": "lt67500" 
+ "fillKey": "lt5830" 
 } 
 },
 "105": {
  "GIN": {
- "fillKey": "lt67500" 
+ "fillKey": "lt5830" 
 },
 "LBR": {
- "fillKey": "lt67500" 
+ "fillKey": "lt5830" 
 },
 "SLE": {
- "fillKey": "lt67500" 
+ "fillKey": "lt5830" 
 },
 "NGA": {
- "fillKey": "lt67500" 
+ "fillKey": "lt5830" 
 } 
 },
 "106": {
  "GIN": {
- "fillKey": "lt67500" 
+ "fillKey": "lt5830" 
 },
 "LBR": {
- "fillKey": "lt67500" 
+ "fillKey": "lt5830" 
 },
 "SLE": {
- "fillKey": "lt67500" 
+ "fillKey": "lt5830" 
 },
 "NGA": {
- "fillKey": "lt67500" 
+ "fillKey": "lt5830" 
 } 
 },
 "107": {
  "GIN": {
- "fillKey": "lt67500" 
+ "fillKey": "lt5830" 
 },
 "LBR": {
- "fillKey": "lt67500" 
+ "fillKey": "lt5830" 
 },
 "SLE": {
- "fillKey": "lt67500" 
+ "fillKey": "lt5830" 
 },
 "NGA": {
- "fillKey": "lt67500" 
+ "fillKey": "lt5830" 
 } 
 },
 "108": {
  "GIN": {
- "fillKey": "lt67500" 
+ "fillKey": "lt5830" 
 },
 "LBR": {
- "fillKey": "lt67500" 
+ "fillKey": "lt5830" 
 },
 "SLE": {
- "fillKey": "lt67500" 
+ "fillKey": "lt5830" 
 },
 "NGA": {
- "fillKey": "lt67500" 
+ "fillKey": "lt5830" 
 } 
 },
 "109": {
  "GIN": {
- "fillKey": "lt67500" 
+ "fillKey": "lt5830" 
 },
 "LBR": {
- "fillKey": "lt67500" 
+ "fillKey": "lt5830" 
 },
 "SLE": {
- "fillKey": "lt67500" 
+ "fillKey": "lt5830" 
 },
 "NGA": {
- "fillKey": "lt67500" 
+ "fillKey": "lt5830" 
 } 
 },
 "110": {
  "GIN": {
- "fillKey": "lt67500" 
+ "fillKey": "lt5830" 
 },
 "LBR": {
- "fillKey": "lt67500" 
+ "fillKey": "lt5830" 
 },
 "SLE": {
- "fillKey": "lt67500" 
+ "fillKey": "lt5830" 
 },
 "NGA": {
- "fillKey": "lt67500" 
+ "fillKey": "lt5830" 
 } 
 },
 "111": {
  "GIN": {
- "fillKey": "lt67500" 
+ "fillKey": "lt5830" 
 },
 "LBR": {
- "fillKey": "lt67500" 
+ "fillKey": "lt5830" 
 },
 "SLE": {
- "fillKey": "lt67500" 
+ "fillKey": "lt5830" 
 },
 "NGA": {
- "fillKey": "lt67500" 
+ "fillKey": "lt5830" 
 } 
 },
 "112": {
  "GIN": {
- "fillKey": "lt67500" 
+ "fillKey": "lt5830" 
 },
 "LBR": {
- "fillKey": "lt67500" 
+ "fillKey": "lt5830" 
 },
 "SLE": {
- "fillKey": "lt67500" 
+ "fillKey": "lt5830" 
 },
 "NGA": {
- "fillKey": "lt67500" 
+ "fillKey": "lt5830" 
 } 
 },
 "113": {
  "GIN": {
- "fillKey": "lt67500" 
+ "fillKey": "lt5830" 
 },
 "LBR": {
- "fillKey": "lt67500" 
+ "fillKey": "lt5830" 
 },
 "SLE": {
- "fillKey": "lt67500" 
+ "fillKey": "lt5830" 
 },
 "NGA": {
- "fillKey": "lt67500" 
+ "fillKey": "lt5830" 
 } 
 },
 "114": {
  "GIN": {
- "fillKey": "lt67500" 
+ "fillKey": "lt5830" 
 },
 "LBR": {
- "fillKey": "lt67500" 
+ "fillKey": "lt5830" 
 },
 "SLE": {
- "fillKey": "lt67500" 
+ "fillKey": "lt5830" 
 },
 "NGA": {
- "fillKey": "lt67500" 
+ "fillKey": "lt5830" 
 } 
 },
 "115": {
  "GIN": {
- "fillKey": "lt67500" 
+ "fillKey": "lt5830" 
 },
 "LBR": {
- "fillKey": "lt67500" 
+ "fillKey": "lt5830" 
 },
 "SLE": {
- "fillKey": "lt67500" 
+ "fillKey": "lt5830" 
 },
 "NGA": {
- "fillKey": "lt67500" 
+ "fillKey": "lt5830" 
 } 
 },
 "116": {
  "GIN": {
- "fillKey": "lt67500" 
+ "fillKey": "lt5830" 
 },
 "LBR": {
- "fillKey": "lt67500" 
+ "fillKey": "lt5830" 
 },
 "SLE": {
- "fillKey": "lt67500" 
+ "fillKey": "lt5830" 
 },
 "NGA": {
- "fillKey": "lt67500" 
+ "fillKey": "lt5830" 
 } 
 },
 "117": {
  "GIN": {
- "fillKey": "lt67500" 
+ "fillKey": "lt5830" 
 },
 "LBR": {
- "fillKey": "lt67500" 
+ "fillKey": "lt5830" 
 },
 "SLE": {
- "fillKey": "lt67500" 
+ "fillKey": "lt5830" 
 },
 "NGA": {
- "fillKey": "lt67500" 
+ "fillKey": "lt5830" 
 } 
 },
 "118": {
  "GIN": {
- "fillKey": "lt67500" 
+ "fillKey": "lt5830" 
 },
 "LBR": {
- "fillKey": "lt67500" 
+ "fillKey": "lt5830" 
 },
 "SLE": {
- "fillKey": "lt67500" 
+ "fillKey": "lt5830" 
 },
 "NGA": {
- "fillKey": "lt67500" 
+ "fillKey": "lt5830" 
 } 
 },
 "119": {
  "GIN": {
- "fillKey": "lt67500" 
+ "fillKey": "lt5830" 
 },
 "LBR": {
- "fillKey": "lt67500" 
+ "fillKey": "lt5830" 
 },
 "SLE": {
- "fillKey": "lt67500" 
+ "fillKey": "lt5830" 
 },
 "NGA": {
- "fillKey": "lt67500" 
+ "fillKey": "lt5830" 
 } 
 },
 "120": {
  "GIN": {
- "fillKey": "lt67500" 
+ "fillKey": "lt5830" 
 },
 "LBR": {
- "fillKey": "lt67500" 
+ "fillKey": "lt5830" 
 },
 "SLE": {
- "fillKey": "lt67500" 
+ "fillKey": "lt5830" 
 },
 "NGA": {
- "fillKey": "lt67500" 
+ "fillKey": "lt5830" 
 } 
 },
 "121": {
  "GIN": {
- "fillKey": "lt67500" 
+ "fillKey": "lt5830" 
 },
 "LBR": {
- "fillKey": "lt67500" 
+ "fillKey": "lt5830" 
 },
 "SLE": {
- "fillKey": "lt67500" 
+ "fillKey": "lt5830" 
 },
 "NGA": {
- "fillKey": "lt67500" 
+ "fillKey": "lt5830" 
 } 
 },
 "122": {
  "GIN": {
- "fillKey": "lt67500" 
+ "fillKey": "lt5830" 
 },
 "LBR": {
- "fillKey": "lt67500" 
+ "fillKey": "lt5830" 
 },
 "SLE": {
- "fillKey": "lt67500" 
+ "fillKey": "lt5830" 
 },
 "NGA": {
- "fillKey": "lt67500" 
+ "fillKey": "lt5830" 
 } 
 },
 "123": {
  "GIN": {
- "fillKey": "lt67500" 
+ "fillKey": "lt5830" 
 },
 "LBR": {
- "fillKey": "lt67500" 
+ "fillKey": "lt5830" 
 },
 "SLE": {
- "fillKey": "lt67500" 
+ "fillKey": "lt5830" 
 },
 "NGA": {
- "fillKey": "lt67500" 
+ "fillKey": "lt5830" 
 } 
 },
 "124": {
  "GIN": {
- "fillKey": "lt67500" 
+ "fillKey": "lt5830" 
 },
 "LBR": {
- "fillKey": "lt67500" 
+ "fillKey": "lt5830" 
 },
 "SLE": {
- "fillKey": "lt67500" 
+ "fillKey": "lt5830" 
 },
 "NGA": {
- "fillKey": "lt67500" 
+ "fillKey": "lt5830" 
 } 
 },
 "125": {
  "GIN": {
- "fillKey": "lt67500" 
+ "fillKey": "lt5830" 
 },
 "LBR": {
- "fillKey": "lt67500" 
+ "fillKey": "lt5830" 
 },
 "SLE": {
- "fillKey": "lt67500" 
+ "fillKey": "lt5830" 
 },
 "NGA": {
- "fillKey": "lt67500" 
+ "fillKey": "lt5830" 
 } 
 },
 "126": {
  "GIN": {
- "fillKey": "lt67500" 
+ "fillKey": "lt5830" 
 },
 "LBR": {
- "fillKey": "lt67500" 
+ "fillKey": "lt5830" 
 },
 "SLE": {
- "fillKey": "lt67500" 
+ "fillKey": "lt5830" 
 },
 "NGA": {
- "fillKey": "lt67500" 
+ "fillKey": "lt5830" 
 } 
 },
 "127": {
  "GIN": {
- "fillKey": "lt67500" 
+ "fillKey": "lt5830" 
 },
 "LBR": {
- "fillKey": "lt67500" 
+ "fillKey": "lt5830" 
 },
 "SLE": {
- "fillKey": "lt67500" 
+ "fillKey": "lt5830" 
 },
 "NGA": {
- "fillKey": "lt67500" 
+ "fillKey": "lt5830" 
 } 
 },
 "128": {
  "GIN": {
- "fillKey": "lt67500" 
+ "fillKey": "lt5830" 
 },
 "LBR": {
- "fillKey": "lt67500" 
+ "fillKey": "lt5830" 
 },
 "SLE": {
- "fillKey": "lt67500" 
+ "fillKey": "lt5830" 
 },
 "NGA": {
- "fillKey": "lt67500" 
+ "fillKey": "lt5830" 
 } 
 },
 "129": {
  "GIN": {
- "fillKey": "lt67500" 
+ "fillKey": "lt5830" 
 },
 "LBR": {
- "fillKey": "lt67500" 
+ "fillKey": "lt5830" 
 },
 "SLE": {
- "fillKey": "lt67500" 
+ "fillKey": "lt5830" 
 },
 "NGA": {
- "fillKey": "lt67500" 
+ "fillKey": "lt5830" 
 } 
 },
 "130": {
  "GIN": {
- "fillKey": "lt67500" 
+ "fillKey": "lt5830" 
 },
 "LBR": {
- "fillKey": "lt67500" 
+ "fillKey": "lt5830" 
 },
 "SLE": {
- "fillKey": "lt67500" 
+ "fillKey": "lt5830" 
 },
 "NGA": {
- "fillKey": "lt67500" 
+ "fillKey": "lt5830" 
 } 
 },
 "131": {
  "GIN": {
- "fillKey": "lt67500" 
+ "fillKey": "lt5830" 
 },
 "LBR": {
- "fillKey": "lt67500" 
+ "fillKey": "lt5830" 
 },
 "SLE": {
- "fillKey": "lt67500" 
+ "fillKey": "lt5830" 
 },
 "NGA": {
- "fillKey": "lt67500" 
+ "fillKey": "lt5830" 
 } 
 },
 "132": {
  "GIN": {
- "fillKey": "lt67500" 
+ "fillKey": "lt5830" 
 },
 "LBR": {
- "fillKey": "lt67500" 
+ "fillKey": "lt5830" 
 },
 "SLE": {
- "fillKey": "lt67500" 
+ "fillKey": "lt5830" 
 },
 "NGA": {
- "fillKey": "lt67500" 
+ "fillKey": "lt5830" 
 } 
 },
 "133": {
  "GIN": {
- "fillKey": "lt67500" 
+ "fillKey": "lt5830" 
 },
 "LBR": {
- "fillKey": "lt67500" 
+ "fillKey": "lt5830" 
 },
 "SLE": {
- "fillKey": "lt67500" 
+ "fillKey": "lt5830" 
 },
 "NGA": {
- "fillKey": "lt67500" 
+ "fillKey": "lt5830" 
 } 
 },
 "134": {
  "GIN": {
- "fillKey": "lt67500" 
+ "fillKey": "lt5830" 
 },
 "LBR": {
- "fillKey": "lt67500" 
+ "fillKey": "lt5830" 
 },
 "SLE": {
- "fillKey": "lt67500" 
+ "fillKey": "lt5830" 
 },
 "NGA": {
- "fillKey": "lt67500" 
+ "fillKey": "lt5830" 
 } 
 },
 "135": {
  "GIN": {
- "fillKey": "lt67500" 
+ "fillKey": "lt5830" 
 },
 "LBR": {
- "fillKey": "lt67500" 
+ "fillKey": "lt5830" 
 },
 "SLE": {
- "fillKey": "lt67500" 
+ "fillKey": "lt5830" 
 },
 "NGA": {
- "fillKey": "lt67500" 
+ "fillKey": "lt5830" 
 } 
 },
 "136": {
  "GIN": {
- "fillKey": "lt67500" 
+ "fillKey": "lt5830" 
 },
 "LBR": {
- "fillKey": "lt67500" 
+ "fillKey": "lt5830" 
 },
 "SLE": {
- "fillKey": "lt67500" 
+ "fillKey": "lt5830" 
 },
 "NGA": {
- "fillKey": "lt67500" 
+ "fillKey": "lt5830" 
 } 
 },
 "137": {
  "GIN": {
- "fillKey": "lt67500" 
+ "fillKey": "lt5830" 
 },
 "LBR": {
- "fillKey": "lt67500" 
+ "fillKey": "lt5830" 
 },
 "SLE": {
- "fillKey": "lt67500" 
+ "fillKey": "lt5830" 
 },
 "NGA": {
- "fillKey": "lt67500" 
+ "fillKey": "lt5830" 
 } 
 },
 "138": {
  "GIN": {
- "fillKey": "lt67500" 
+ "fillKey": "lt5830" 
 },
 "LBR": {
- "fillKey": "lt67500" 
+ "fillKey": "lt5830" 
 },
 "SLE": {
- "fillKey": "lt67500" 
+ "fillKey": "lt5830" 
 },
 "NGA": {
- "fillKey": "lt67500" 
+ "fillKey": "lt5830" 
 } 
 },
 "139": {
  "GIN": {
- "fillKey": "lt67500" 
+ "fillKey": "lt5830" 
 },
 "LBR": {
- "fillKey": "lt67500" 
+ "fillKey": "lt5830" 
 },
 "SLE": {
- "fillKey": "lt67500" 
+ "fillKey": "lt5830" 
 },
 "NGA": {
- "fillKey": "lt67500" 
+ "fillKey": "lt5830" 
 } 
 },
 "140": {
  "GIN": {
- "fillKey": "lt67500" 
+ "fillKey": "lt5830" 
 },
 "LBR": {
- "fillKey": "lt67500" 
+ "fillKey": "lt5830" 
 },
 "SLE": {
- "fillKey": "lt67500" 
+ "fillKey": "lt5830" 
 },
 "NGA": {
- "fillKey": "lt67500" 
+ "fillKey": "lt5830" 
 } 
 },
 "141": {
  "GIN": {
- "fillKey": "lt67500" 
+ "fillKey": "lt5830" 
 },
 "LBR": {
- "fillKey": "lt67500" 
+ "fillKey": "lt5830" 
 },
 "SLE": {
- "fillKey": "lt67500" 
+ "fillKey": "lt5830" 
 },
 "NGA": {
- "fillKey": "lt67500" 
+ "fillKey": "lt5830" 
 } 
 },
 "142": {
  "GIN": {
- "fillKey": "lt67500" 
+ "fillKey": "lt5830" 
 },
 "LBR": {
- "fillKey": "lt67500" 
+ "fillKey": "lt5830" 
 },
 "SLE": {
- "fillKey": "lt67500" 
+ "fillKey": "lt5830" 
 },
 "NGA": {
- "fillKey": "lt67500" 
+ "fillKey": "lt5830" 
 } 
 },
 "143": {
  "GIN": {
- "fillKey": "lt67500" 
+ "fillKey": "lt5830" 
 },
 "LBR": {
- "fillKey": "lt67500" 
+ "fillKey": "lt5830" 
 },
 "SLE": {
- "fillKey": "lt67500" 
+ "fillKey": "lt5830" 
 },
 "NGA": {
- "fillKey": "lt67500" 
+ "fillKey": "lt5830" 
 } 
 },
 "144": {
  "GIN": {
- "fillKey": "lt67500" 
+ "fillKey": "lt5830" 
 },
 "LBR": {
- "fillKey": "lt67500" 
+ "fillKey": "lt5830" 
 },
 "SLE": {
- "fillKey": "lt67500" 
+ "fillKey": "lt5830" 
 },
 "NGA": {
- "fillKey": "lt67500" 
+ "fillKey": "lt5830" 
 } 
 },
 "145": {
  "GIN": {
- "fillKey": "lt67500" 
+ "fillKey": "lt5830" 
 },
 "LBR": {
- "fillKey": "lt67500" 
+ "fillKey": "lt5830" 
 },
 "SLE": {
- "fillKey": "lt67500" 
+ "fillKey": "lt5830" 
 },
 "NGA": {
- "fillKey": "lt67500" 
+ "fillKey": "lt5830" 
 } 
 },
 "146": {
  "GIN": {
- "fillKey": "lt67500" 
+ "fillKey": "lt5830" 
 },
 "LBR": {
- "fillKey": "lt67500" 
+ "fillKey": "lt5830" 
 },
 "SLE": {
- "fillKey": "lt67500" 
+ "fillKey": "lt5830" 
 },
 "NGA": {
- "fillKey": "lt67500" 
+ "fillKey": "lt5830" 
 } 
 },
 "147": {
  "GIN": {
- "fillKey": "lt67500" 
+ "fillKey": "lt5830" 
 },
 "LBR": {
- "fillKey": "lt67500" 
+ "fillKey": "lt5830" 
 },
 "SLE": {
- "fillKey": "lt67500" 
+ "fillKey": "lt5830" 
 },
 "NGA": {
- "fillKey": "lt67500" 
+ "fillKey": "lt5830" 
 } 
 },
 "148": {
  "GIN": {
- "fillKey": "lt67500" 
+ "fillKey": "lt5830" 
 },
 "LBR": {
- "fillKey": "lt67500" 
+ "fillKey": "lt5830" 
 },
 "SLE": {
- "fillKey": "lt67500" 
+ "fillKey": "lt5830" 
 },
 "NGA": {
- "fillKey": "lt67500" 
+ "fillKey": "lt5830" 
 } 
 },
 "149": {
  "GIN": {
- "fillKey": "lt67500" 
+ "fillKey": "lt5830" 
 },
 "LBR": {
- "fillKey": "lt67500" 
+ "fillKey": "lt5830" 
 },
 "SLE": {
- "fillKey": "lt67500" 
+ "fillKey": "lt5830" 
 },
 "NGA": {
- "fillKey": "lt67500" 
+ "fillKey": "lt5830" 
 } 
 },
 "150": {
  "GIN": {
- "fillKey": "lt67500" 
+ "fillKey": "lt5830" 
 },
 "LBR": {
- "fillKey": "lt67500" 
+ "fillKey": "lt5830" 
 },
 "SLE": {
- "fillKey": "lt67500" 
+ "fillKey": "lt5830" 
 },
 "NGA": {
- "fillKey": "lt67500" 
+ "fillKey": "lt5830" 
 } 
 },
 "151": {
  "GIN": {
- "fillKey": "lt67500" 
+ "fillKey": "lt5830" 
 },
 "LBR": {
- "fillKey": "lt67500" 
+ "fillKey": "lt5830" 
 },
 "SLE": {
- "fillKey": "lt67500" 
+ "fillKey": "lt5830" 
 },
 "NGA": {
- "fillKey": "lt67500" 
+ "fillKey": "lt5830" 
 } 
 },
 "152": {
  "GIN": {
- "fillKey": "lt67500" 
+ "fillKey": "lt5830" 
 },
 "LBR": {
- "fillKey": "lt67500" 
+ "fillKey": "lt5830" 
 },
 "SLE": {
- "fillKey": "lt67500" 
+ "fillKey": "lt5830" 
 },
 "NGA": {
- "fillKey": "lt67500" 
+ "fillKey": "lt5830" 
 } 
 },
 "153": {
  "GIN": {
- "fillKey": "lt67500" 
+ "fillKey": "lt5830" 
 },
 "LBR": {
- "fillKey": "lt67500" 
+ "fillKey": "lt5830" 
 },
 "SLE": {
- "fillKey": "lt67500" 
+ "fillKey": "lt5830" 
 },
 "NGA": {
- "fillKey": "lt67500" 
+ "fillKey": "lt5830" 
 } 
 },
 "154": {
  "GIN": {
- "fillKey": "lt67500" 
+ "fillKey": "lt5830" 
 },
 "LBR": {
- "fillKey": "lt67500" 
+ "fillKey": "lt5830" 
 },
 "SLE": {
- "fillKey": "lt67500" 
+ "fillKey": "lt5830" 
 },
 "NGA": {
- "fillKey": "lt67500" 
+ "fillKey": "lt5830" 
 } 
 },
 "155": {
  "GIN": {
- "fillKey": "lt67500" 
+ "fillKey": "lt5830" 
 },
 "LBR": {
- "fillKey": "lt67500" 
+ "fillKey": "lt5830" 
 },
 "SLE": {
- "fillKey": "lt67500" 
+ "fillKey": "lt5830" 
 },
 "NGA": {
- "fillKey": "lt67500" 
+ "fillKey": "lt5830" 
 } 
 },
 "156": {
  "GIN": {
- "fillKey": "lt67500" 
+ "fillKey": "lt5830" 
 },
 "LBR": {
- "fillKey": "lt67500" 
+ "fillKey": "lt5830" 
 },
 "SLE": {
- "fillKey": "lt67500" 
+ "fillKey": "lt5830" 
 },
 "NGA": {
- "fillKey": "lt67500" 
+ "fillKey": "lt5830" 
 } 
 },
 "157": {
  "GIN": {
- "fillKey": "lt67500" 
+ "fillKey": "lt5830" 
 },
 "LBR": {
- "fillKey": "lt67500" 
+ "fillKey": "lt5830" 
 },
 "SLE": {
- "fillKey": "lt67500" 
+ "fillKey": "lt5830" 
 },
 "NGA": {
- "fillKey": "lt67500" 
+ "fillKey": "lt5830" 
 } 
 },
 "158": {
  "GIN": {
- "fillKey": "lt67500" 
+ "fillKey": "lt5830" 
 },
 "LBR": {
- "fillKey": "lt67500" 
+ "fillKey": "lt5830" 
 },
 "SLE": {
- "fillKey": "lt67500" 
+ "fillKey": "lt5830" 
 },
 "NGA": {
- "fillKey": "lt67500" 
+ "fillKey": "lt5830" 
 } 
 },
 "159": {
  "GIN": {
- "fillKey": "lt67500" 
+ "fillKey": "lt5830" 
 },
 "LBR": {
- "fillKey": "lt67500" 
+ "fillKey": "lt5830" 
 },
 "SLE": {
- "fillKey": "lt67500" 
+ "fillKey": "lt5830" 
 },
 "NGA": {
- "fillKey": "lt67500" 
+ "fillKey": "lt5830" 
 } 
 },
 "160": {
  "GIN": {
- "fillKey": "lt67500" 
+ "fillKey": "lt5830" 
 },
 "LBR": {
- "fillKey": "lt67500" 
+ "fillKey": "lt5830" 
 },
 "SLE": {
- "fillKey": "lt67500" 
+ "fillKey": "lt5830" 
 },
 "NGA": {
- "fillKey": "lt67500" 
+ "fillKey": "lt5830" 
 } 
 },
 "161": {
  "GIN": {
- "fillKey": "lt67500" 
+ "fillKey": "lt5830" 
 },
 "LBR": {
- "fillKey": "lt67500" 
+ "fillKey": "lt5830" 
 },
 "SLE": {
- "fillKey": "lt67500" 
+ "fillKey": "lt5830" 
 },
 "NGA": {
- "fillKey": "lt67500" 
+ "fillKey": "lt5830" 
 } 
 },
 "162": {
  "GIN": {
- "fillKey": "lt67500" 
+ "fillKey": "lt5830" 
 },
 "LBR": {
- "fillKey": "lt67500" 
+ "fillKey": "lt5830" 
 },
 "SLE": {
- "fillKey": "lt67500" 
+ "fillKey": "lt5830" 
 },
 "NGA": {
- "fillKey": "lt67500" 
+ "fillKey": "lt5830" 
 } 
 },
 "163": {
  "GIN": {
- "fillKey": "lt67500" 
+ "fillKey": "lt5830" 
 },
 "LBR": {
- "fillKey": "lt67500" 
+ "fillKey": "lt5830" 
 },
 "SLE": {
- "fillKey": "lt67500" 
+ "fillKey": "lt5830" 
 },
 "NGA": {
- "fillKey": "lt67500" 
+ "fillKey": "lt5830" 
 } 
 },
 "164": {
  "GIN": {
- "fillKey": "lt67500" 
+ "fillKey": "lt5830" 
 },
 "LBR": {
- "fillKey": "lt67500" 
+ "fillKey": "lt5830" 
 },
 "SLE": {
- "fillKey": "lt67500" 
+ "fillKey": "lt5830" 
 },
 "NGA": {
- "fillKey": "lt67500" 
+ "fillKey": "lt5830" 
 } 
 },
 "165": {
  "GIN": {
- "fillKey": "lt67500" 
+ "fillKey": "lt5830" 
 },
 "LBR": {
- "fillKey": "lt67500" 
+ "fillKey": "lt5830" 
 },
 "SLE": {
- "fillKey": "lt67500" 
+ "fillKey": "lt5830" 
 },
 "NGA": {
- "fillKey": "lt67500" 
+ "fillKey": "lt5830" 
 } 
 },
 "166": {
  "GIN": {
- "fillKey": "lt67500" 
+ "fillKey": "lt5830" 
 },
 "LBR": {
- "fillKey": "lt67500" 
+ "fillKey": "lt5830" 
 },
 "SLE": {
- "fillKey": "lt67500" 
+ "fillKey": "lt5830" 
 },
 "NGA": {
- "fillKey": "lt67500" 
+ "fillKey": "lt5830" 
 } 
 },
 "167": {
  "GIN": {
- "fillKey": "lt67500" 
+ "fillKey": "lt5830" 
 },
 "LBR": {
- "fillKey": "lt67500" 
+ "fillKey": "lt5830" 
 },
 "SLE": {
- "fillKey": "lt67500" 
+ "fillKey": "lt5830" 
 },
 "NGA": {
- "fillKey": "lt67500" 
+ "fillKey": "lt5830" 
 } 
 },
 "168": {
  "GIN": {
- "fillKey": "lt67500" 
+ "fillKey": "lt5830" 
 },
 "LBR": {
- "fillKey": "lt67500" 
+ "fillKey": "lt5830" 
 },
 "SLE": {
- "fillKey": "lt67500" 
+ "fillKey": "lt5830" 
 },
 "NGA": {
- "fillKey": "lt67500" 
+ "fillKey": "lt5830" 
 } 
 },
 "169": {
  "GIN": {
- "fillKey": "lt67500" 
+ "fillKey": "lt5830" 
 },
 "LBR": {
- "fillKey": "lt67500" 
+ "fillKey": "lt5830" 
 },
 "SLE": {
- "fillKey": "lt67500" 
+ "fillKey": "lt5830" 
 },
 "NGA": {
- "fillKey": "lt67500" 
+ "fillKey": "lt5830" 
 } 
 },
 "170": {
  "GIN": {
- "fillKey": "lt67500" 
+ "fillKey": "lt5830" 
 },
 "LBR": {
- "fillKey": "lt67500" 
+ "fillKey": "lt5830" 
 },
 "SLE": {
- "fillKey": "lt67500" 
+ "fillKey": "lt5830" 
 },
 "NGA": {
- "fillKey": "lt67500" 
+ "fillKey": "lt5830" 
 } 
 },
 "171": {
  "GIN": {
- "fillKey": "lt67500" 
+ "fillKey": "lt5830" 
 },
 "LBR": {
- "fillKey": "lt67500" 
+ "fillKey": "lt5830" 
 },
 "SLE": {
- "fillKey": "lt67500" 
+ "fillKey": "lt5830" 
 },
 "NGA": {
- "fillKey": "lt67500" 
+ "fillKey": "lt5830" 
 } 
 },
 "172": {
  "GIN": {
- "fillKey": "lt67500" 
+ "fillKey": "lt5830" 
 },
 "LBR": {
- "fillKey": "lt67500" 
+ "fillKey": "lt5830" 
 },
 "SLE": {
- "fillKey": "lt67500" 
+ "fillKey": "lt5830" 
 },
 "NGA": {
- "fillKey": "lt67500" 
+ "fillKey": "lt5830" 
 } 
 },
 "173": {
  "GIN": {
- "fillKey": "lt67500" 
+ "fillKey": "lt5830" 
 },
 "LBR": {
- "fillKey": "lt67500" 
+ "fillKey": "lt5830" 
 },
 "SLE": {
- "fillKey": "lt67500" 
+ "fillKey": "lt5830" 
 },
 "NGA": {
- "fillKey": "lt67500" 
+ "fillKey": "lt5830" 
 } 
 },
 "174": {
  "GIN": {
- "fillKey": "lt67500" 
+ "fillKey": "lt5830" 
 },
 "LBR": {
- "fillKey": "lt67500" 
+ "fillKey": "lt5830" 
 },
 "SLE": {
- "fillKey": "lt67500" 
+ "fillKey": "lt5830" 
 },
 "NGA": {
- "fillKey": "lt67500" 
+ "fillKey": "lt5830" 
 } 
 },
 "175": {
  "GIN": {
- "fillKey": "lt67500" 
+ "fillKey": "lt5830" 
 },
 "LBR": {
- "fillKey": "lt67500" 
+ "fillKey": "lt5830" 
 },
 "SLE": {
- "fillKey": "lt67500" 
+ "fillKey": "lt5830" 
 },
 "NGA": {
- "fillKey": "lt67500" 
+ "fillKey": "lt5830" 
 } 
 },
 "176": {
  "GIN": {
- "fillKey": "lt67500" 
+ "fillKey": "lt5830" 
 },
 "LBR": {
- "fillKey": "lt67500" 
+ "fillKey": "lt5830" 
 },
 "SLE": {
- "fillKey": "lt67500" 
+ "fillKey": "lt5830" 
 },
 "NGA": {
- "fillKey": "lt67500" 
+ "fillKey": "lt5830" 
 } 
 },
 "177": {
  "GIN": {
- "fillKey": "lt67500" 
+ "fillKey": "lt5830" 
 },
 "LBR": {
- "fillKey": "lt67500" 
+ "fillKey": "lt5830" 
 },
 "SLE": {
- "fillKey": "lt67500" 
+ "fillKey": "lt5830" 
 },
 "NGA": {
- "fillKey": "lt67500" 
+ "fillKey": "lt5830" 
 } 
 },
 "178": {
  "GIN": {
- "fillKey": "lt67500" 
+ "fillKey": "lt5830" 
 },
 "LBR": {
- "fillKey": "lt67500" 
+ "fillKey": "lt5830" 
 },
 "SLE": {
- "fillKey": "lt67500" 
+ "fillKey": "lt5830" 
 },
 "NGA": {
- "fillKey": "lt67500" 
+ "fillKey": "lt5830" 
 } 
 },
 "179": {
  "GIN": {
- "fillKey": "lt67500" 
+ "fillKey": "lt5830" 
 },
 "LBR": {
- "fillKey": "lt67500" 
+ "fillKey": "lt5830" 
 },
 "SLE": {
- "fillKey": "lt67500" 
+ "fillKey": "lt5830" 
 },
 "NGA": {
- "fillKey": "lt67500" 
+ "fillKey": "lt5830" 
 } 
 },
 "180": {
  "GIN": {
- "fillKey": "lt67500" 
+ "fillKey": "lt5830" 
 },
 "LBR": {
- "fillKey": "lt67500" 
+ "fillKey": "lt5830" 
 },
 "SLE": {
- "fillKey": "lt67500" 
+ "fillKey": "lt5830" 
 },
 "NGA": {
- "fillKey": "lt67500" 
+ "fillKey": "lt5830" 
 } 
 },
 "181": {
  "GIN": {
- "fillKey": "lt67500" 
+ "fillKey": "lt5830" 
 },
 "LBR": {
- "fillKey": "lt67500" 
+ "fillKey": "lt5830" 
 },
 "SLE": {
- "fillKey": "lt67500" 
+ "fillKey": "lt5830" 
 },
 "NGA": {
- "fillKey": "lt67500" 
+ "fillKey": "lt5830" 
 } 
 },
 "182": {
  "GIN": {
- "fillKey": "lt67500" 
+ "fillKey": "lt5830" 
 },
 "LBR": {
- "fillKey": "lt67500" 
+ "fillKey": "lt5830" 
 },
 "SLE": {
- "fillKey": "lt67500" 
+ "fillKey": "lt5830" 
 },
 "NGA": {
- "fillKey": "lt67500" 
+ "fillKey": "lt5830" 
 } 
 },
 "183": {
  "GIN": {
- "fillKey": "lt67500" 
+ "fillKey": "lt5830" 
 },
 "LBR": {
- "fillKey": "lt67500" 
+ "fillKey": "lt5830" 
 },
 "SLE": {
- "fillKey": "lt67500" 
+ "fillKey": "lt5830" 
 },
 "NGA": {
- "fillKey": "lt67500" 
+ "fillKey": "lt5830" 
 } 
 },
 "184": {
  "GIN": {
- "fillKey": "lt67500" 
+ "fillKey": "lt5830" 
 },
 "LBR": {
- "fillKey": "lt67500" 
+ "fillKey": "lt5830" 
 },
 "SLE": {
- "fillKey": "lt67500" 
+ "fillKey": "lt5830" 
 },
 "NGA": {
- "fillKey": "lt67500" 
+ "fillKey": "lt5830" 
 } 
 },
 "185": {
  "GIN": {
- "fillKey": "lt67500" 
+ "fillKey": "lt5830" 
 },
 "LBR": {
- "fillKey": "lt67500" 
+ "fillKey": "lt5830" 
 },
 "SLE": {
- "fillKey": "lt67500" 
+ "fillKey": "lt5830" 
 },
 "NGA": {
- "fillKey": "lt67500" 
+ "fillKey": "lt5830" 
 } 
 },
 "186": {
  "GIN": {
- "fillKey": "lt67500" 
+ "fillKey": "lt5830" 
 },
 "LBR": {
- "fillKey": "lt67500" 
+ "fillKey": "lt5830" 
 },
 "SLE": {
- "fillKey": "lt67500" 
+ "fillKey": "lt5830" 
 },
 "NGA": {
- "fillKey": "lt67500" 
+ "fillKey": "lt5830" 
 } 
 },
 "187": {
  "GIN": {
- "fillKey": "lt67500" 
+ "fillKey": "lt5830" 
 },
 "LBR": {
- "fillKey": "lt67500" 
+ "fillKey": "lt5830" 
 },
 "SLE": {
- "fillKey": "lt67500" 
+ "fillKey": "lt5830" 
 },
 "NGA": {
- "fillKey": "lt67500" 
+ "fillKey": "lt5830" 
 } 
 },
 "188": {
  "GIN": {
- "fillKey": "lt67500" 
+ "fillKey": "lt5830" 
 },
 "LBR": {
- "fillKey": "lt67500" 
+ "fillKey": "lt5830" 
 },
 "SLE": {
- "fillKey": "lt67500" 
+ "fillKey": "lt5830" 
 },
 "NGA": {
- "fillKey": "lt67500" 
+ "fillKey": "lt5830" 
 } 
 },
 "189": {
  "GIN": {
- "fillKey": "lt67500" 
+ "fillKey": "lt5830" 
 },
 "LBR": {
- "fillKey": "lt67500" 
+ "fillKey": "lt5830" 
 },
 "SLE": {
- "fillKey": "lt67500" 
+ "fillKey": "lt5830" 
 },
 "NGA": {
- "fillKey": "lt67500" 
+ "fillKey": "lt5830" 
 } 
 },
 "190": {
  "GIN": {
- "fillKey": "lt67500" 
+ "fillKey": "lt5830" 
 },
 "LBR": {
- "fillKey": "lt67500" 
+ "fillKey": "lt5830" 
 },
 "SLE": {
- "fillKey": "lt67500" 
+ "fillKey": "lt5830" 
 },
 "NGA": {
- "fillKey": "lt67500" 
+ "fillKey": "lt5830" 
 } 
 },
 "191": {
  "GIN": {
- "fillKey": "lt67500" 
+ "fillKey": "lt5830" 
 },
 "LBR": {
- "fillKey": "lt67500" 
+ "fillKey": "lt5830" 
 },
 "SLE": {
- "fillKey": "lt67500" 
+ "fillKey": "lt5830" 
 },
 "NGA": {
- "fillKey": "lt67500" 
+ "fillKey": "lt5830" 
 } 
 },
 "192": {
  "GIN": {
- "fillKey": "lt67500" 
+ "fillKey": "lt5830" 
 },
 "LBR": {
- "fillKey": "lt67500" 
+ "fillKey": "lt5830" 
 },
 "SLE": {
- "fillKey": "lt67500" 
+ "fillKey": "lt5830" 
 },
 "NGA": {
- "fillKey": "lt67500" 
+ "fillKey": "lt5830" 
 } 
 },
 "193": {
  "GIN": {
- "fillKey": "lt67500" 
+ "fillKey": "lt5830" 
 },
 "LBR": {
- "fillKey": "lt67500" 
+ "fillKey": "lt11700" 
 },
 "SLE": {
- "fillKey": "lt67500" 
+ "fillKey": "lt5830" 
 },
 "NGA": {
- "fillKey": "lt67500" 
+ "fillKey": "lt5830" 
 } 
 },
 "194": {
  "GIN": {
- "fillKey": "lt67500" 
+ "fillKey": "lt5830" 
 },
 "LBR": {
- "fillKey": "lt135000" 
+ "fillKey": "lt11700" 
 },
 "SLE": {
- "fillKey": "lt67500" 
+ "fillKey": "lt5830" 
 },
 "NGA": {
- "fillKey": "lt67500" 
+ "fillKey": "lt5830" 
 } 
 },
 "195": {
  "GIN": {
- "fillKey": "lt67500" 
+ "fillKey": "lt5830" 
 },
 "LBR": {
- "fillKey": "lt135000" 
+ "fillKey": "lt11700" 
 },
 "SLE": {
- "fillKey": "lt67500" 
+ "fillKey": "lt5830" 
 },
 "NGA": {
- "fillKey": "lt67500" 
+ "fillKey": "lt5830" 
 } 
 },
 "196": {
  "GIN": {
- "fillKey": "lt67500" 
+ "fillKey": "lt5830" 
 },
 "LBR": {
- "fillKey": "lt203000" 
+ "fillKey": "lt11700" 
 },
 "SLE": {
- "fillKey": "lt67500" 
+ "fillKey": "lt5830" 
 },
 "NGA": {
- "fillKey": "lt67500" 
+ "fillKey": "lt5830" 
 } 
 },
 "197": {
  "GIN": {
- "fillKey": "lt67500" 
+ "fillKey": "lt5830" 
 },
 "LBR": {
- "fillKey": "lt203000" 
+ "fillKey": "lt17500" 
 },
 "SLE": {
- "fillKey": "lt67500" 
+ "fillKey": "lt5830" 
 },
 "NGA": {
- "fillKey": "lt67500" 
+ "fillKey": "lt5830" 
 } 
 },
 "198": {
  "GIN": {
- "fillKey": "lt67500" 
+ "fillKey": "lt5830" 
 },
 "LBR": {
- "fillKey": "lt270000" 
+ "fillKey": "lt17500" 
 },
 "SLE": {
- "fillKey": "lt67500" 
+ "fillKey": "lt5830" 
 },
 "NGA": {
- "fillKey": "lt67500" 
+ "fillKey": "lt5830" 
 } 
 },
 "199": {
  "GIN": {
- "fillKey": "lt135000" 
+ "fillKey": "lt5830" 
 },
 "LBR": {
- "fillKey": "lt338000" 
+ "fillKey": "lt17500" 
 },
 "SLE": {
- "fillKey": "lt135000" 
+ "fillKey": "lt11700" 
 },
 "NGA": {
- "fillKey": "lt67500" 
+ "fillKey": "lt5830" 
 } 
 },
 "200": {
  "GIN": {
- "fillKey": "lt135000" 
+ "fillKey": "lt5830" 
 },
 "LBR": {
- "fillKey": "lt473000" 
+ "fillKey": "lt23300" 
 },
 "SLE": {
- "fillKey": "lt135000" 
+ "fillKey": "lt11700" 
 },
 "NGA": {
- "fillKey": "lt67500" 
+ "fillKey": "lt5830" 
 } 
 },
 "201": {
  "GIN": {
- "fillKey": "lt203000" 
+ "fillKey": "lt5830" 
 },
 "LBR": {
- "fillKey": "lt540000" 
+ "fillKey": "lt29100" 
 },
 "SLE": {
- "fillKey": "lt203000" 
+ "fillKey": "lt11700" 
 },
 "NGA": {
- "fillKey": "lt67500" 
+ "fillKey": "lt5830" 
 } 
 },
 "202": {
  "GIN": {
- "fillKey": "lt270000" 
+ "fillKey": "lt5830" 
 },
 "LBR": {
- "fillKey": "lt608000" 
+ "fillKey": "lt29100" 
 },
 "SLE": {
- "fillKey": "lt203000" 
+ "fillKey": "lt11700" 
 },
 "NGA": {
- "fillKey": "lt67500" 
+ "fillKey": "lt5830" 
 } 
 },
 "203": {
  "GIN": {
- "fillKey": "lt338000" 
+ "fillKey": "lt11700" 
 },
 "LBR": {
- "fillKey": "lt608000" 
+ "fillKey": "lt35000" 
 },
 "SLE": {
- "fillKey": "lt270000" 
+ "fillKey": "lt17500" 
 },
 "NGA": {
- "fillKey": "lt67500" 
+ "fillKey": "lt5830" 
+} 
+},
+"204": {
+ "GIN": {
+ "fillKey": "lt11700" 
+},
+"LBR": {
+ "fillKey": "lt40800" 
+},
+"SLE": {
+ "fillKey": "lt17500" 
+},
+"NGA": {
+ "fillKey": "lt5830" 
+} 
+},
+"205": {
+ "GIN": {
+ "fillKey": "lt11700" 
+},
+"LBR": {
+ "fillKey": "lt46600" 
+},
+"SLE": {
+ "fillKey": "lt23300" 
+},
+"NGA": {
+ "fillKey": "lt5830" 
+} 
+},
+"206": {
+ "GIN": {
+ "fillKey": "lt11700" 
+},
+"LBR": {
+ "fillKey": "lt52500" 
+},
+"SLE": {
+ "fillKey": "lt23300" 
+},
+"NGA": {
+ "fillKey": "lt5830" 
 } 
 } 
 }
@@ -7339,7 +7493,10 @@ var dayLabels=
 "205": "2014-10-14",
 "206": "2014-10-15",
 "207": "2014-10-16",
-"208": "2014-10-17" 
+"208": "2014-10-17",
+"209": "2014-10-18",
+"210": "2014-10-19",
+"211": "2014-10-20" 
 };
 var chartParams_pred={"dom": "zoom_map_pred",
 "scope": "world",
@@ -7350,30 +7507,30 @@ var chartParams_pred={"dom": "zoom_map_pred",
 "fills": 
 {
  "defaultFill": "#ffffef",
-"lt67500": "#ffffef",
-"lt135000": "#fff7bf",
-"lt203000": "#fee39f",
-"lt270000": "#fec45f",
-"lt338000": "#fe993f",
-"lt405000": "#ec702f",
-"lt473000": "#cc4c1f",
-"lt540000": "#993402",
-"lt608000": "#662520" 
+"lt5830": "#ffffef",
+"lt11700": "#fff7bf",
+"lt17500": "#fee39f",
+"lt23300": "#fec45f",
+"lt29100": "#fe993f",
+"lt35000": "#ec702f",
+"lt40800": "#cc4c1f",
+"lt46600": "#993402",
+"lt52500": "#662520" 
 }
 ,
 "data":
 {
  "GIN": {
- "fillKey": "lt67500" 
+ "fillKey": "lt5830" 
 },
 "LBR": {
- "fillKey": "lt67500" 
+ "fillKey": "lt5830" 
 },
 "SLE": {
- "fillKey": "lt67500" 
+ "fillKey": "lt5830" 
 },
 "NGA": {
- "fillKey": "lt67500" 
+ "fillKey": "lt5830" 
 } 
 }
 ,"setProjection": function( element, options ) {
