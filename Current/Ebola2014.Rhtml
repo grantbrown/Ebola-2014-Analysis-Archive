@@ -653,7 +653,7 @@ buildAndRunModel = function(params)
 
   # Burn in tuning parameters
   runSimulation(SEIRmodel, numBatches = numBurnInBatches)
-  SEIRmodel$compartmentSamplingMode = 14
+  SEIRmodel$compartmentSamplingMode = 16
   SEIRmodel$useDecorrelation = 1000
   # Run Simulation
   cat(paste("Running chain ", params[["chainNumber"]], "\n", sep =""))
@@ -1145,6 +1145,83 @@ figure11 = function()
 }
 
 
+figure11_5 = function()
+{
+  
+  ## Guinea 
+  par(mfrow = c(2,2))
+  plot(rptDate, Guinea.I.Est[1,] + 1, ylim = c(1, maxI), xlim = pred.xlim,
+       main = "Guinea Estimated Epidemic Size\n 90% Credible Interval (log scale)",
+       type = "l", lwd = 2, ylab = "Infectious Count", xlab = "Date", log ="y")
+  abline(h = 10^seq(0,100), lty = 2, col = "lightgrey")
+  lines(rptDate, Guinea.I.Est[1,] + 1, lty = 2)
+  lines(rptDate, Guinea.I.Est[2,] + 1, lty = 2)
+  lines(rptDate, Guinea.I.Est[3,] + 1, lty = 2)
+  
+  lines(pred.dates,Guinea.mean + 1, 
+          lty=1, col = "black", lwd = 1)
+  lines(pred.dates,Guinea.LB + 1, 
+          lty=2, col = "black", lwd = 1)
+  lines(pred.dates,Guinea.UB + 1, 
+          lty=2, col = "black", lwd = 1)
+  abline(v = breakpoint, lty = 3, col= "lightgrey")
+  
+  ## Liberia 
+  plot(rptDate, Liberia.I.Est[1,] + 1, ylim = c(1, maxI),  xlim = pred.xlim,
+       main = "Liberia Estimated Epidemic Size\n 90% Credible Interval (log scale)",
+       type = "l", lwd = 2, col = "blue", ylab = "Infectious Count", 
+       xlab = "Date", log ="y")
+  abline(h = 10^seq(0,100), lty = 2, col = "lightgrey")
+  lines(rptDate, Liberia.I.Est[1,] + 1, lty = 2, col = "blue")
+  lines(rptDate, Liberia.I.Est[2,] + 1, lty = 2, col = "blue")
+  lines(rptDate, Liberia.I.Est[3,] + 1, lty = 2, col = "blue")
+  
+  lines(pred.dates,Liberia.mean + 1, 
+          lty=1, col = "blue", lwd = 1)
+  lines(pred.dates,Liberia.LB + 1, 
+          lty=2, col = "blue", lwd = 1)
+  lines(pred.dates,Liberia.UB + 1, 
+          lty=2, col = "blue", lwd = 1)
+  abline(v = breakpoint, lty = 3, col= "lightgrey")
+  
+  ## Sierra Leone
+  plot(rptDate, SierraLeone.I.Est[1,] + 1, ylim = c(1, maxI),  xlim = pred.xlim,
+       main = "Sierra Leone Estimated Epidemic Size\n 90% Credible Interval (log scale)",
+       type = "l", lwd = 2, col = "red",ylab = "Infectious Count", 
+       xlab = "Date", log ="y")
+  abline(h = 10^seq(0,100), lty = 2, col = "lightgrey")
+  lines(rptDate, SierraLeone.I.Est[1,] + 1, lty = 2, col = "red")
+  lines(rptDate, SierraLeone.I.Est[2,] + 1, lty = 2, col = "red")
+  lines(rptDate, SierraLeone.I.Est[3,] + 1, lty = 2, col ="red")
+  
+  lines(pred.dates,SierraLeone.mean + 1, 
+          lty=1, col = "red", lwd = 1)
+  lines(pred.dates,SierraLeone.LB + 1, 
+          lty=2, col = "red", lwd = 1)
+  lines(pred.dates,SierraLeone.UB + 1, 
+          lty=2, col = "red", lwd = 1)
+  abline(v = breakpoint, lty = 3, col= "lightgrey")
+  
+
+  ## Nigeria
+  plot(rptDate, Nigeria.I.Est[1,] + 1, ylim = c(1, maxI),  xlim = pred.xlim,
+       main = "Nigeria Estimated Epidemic Size\n 90% Credible Interval (log scale)",
+       type = "l", lwd = 2, col = "green",ylab = "Infectious Count", 
+       xlab = "Date", log ="y")
+  abline(h = 10^seq(0,100), lty = 2, col = "lightgrey")
+  lines(rptDate, Nigeria.I.Est[1,] + 1, lty = 2, col = "green")
+  lines(rptDate, Nigeria.I.Est[2,] + 1, lty = 2, col = "green")
+  lines(rptDate, Nigeria.I.Est[3,] + 1, lty = 2, col ="green")
+  
+  lines(pred.dates,Nigeria.mean + 1, 
+          lty=1, col = "green", lwd = 1)
+  lines(pred.dates,Nigeria.LB + 1, 
+          lty=2, col = "green", lwd = 1)
+  lines(pred.dates,Nigeria.UB + 1, 
+          lty=2, col = "green", lwd = 1)
+  abline(v = breakpoint, lty = 3, col= "lightgrey")  
+}
+
 
 
 end.rcode-->
@@ -1197,6 +1274,13 @@ We must be cautious when making predictions about a chaotic process this far int
 <!--begin.rcode dpi=150, fig.align='center', echo=FALSE
 figure11()
 end.rcode-->
+
+It is sometimes helpful to visualize exponential growth on the log scale. 
+
+<!--begin.rcode dpi=150, fig.align='center', echo=FALSE
+figure11_5()
+end.rcode-->
+
 
 <br/>
 <p>It can also be helpful to take a look at the data in tabular form.</p><br/>
