@@ -166,9 +166,9 @@ pred.days = 30
 
 ## Compute number of samples/batches
 numBurnInBatches =      ifelse(documentCompilationMode == "release", 1000,  1)
-numConvergenceBatches = ifelse(documentCompilationMode == "release", 1500,  10)
+numConvergenceBatches = ifelse(documentCompilationMode == "release", 500,  10)
 convergenceBatchSize =  ifelse(documentCompilationMode == "release", 1000, 100) 
-extraR0Iterations =     ifelse(documentCompilationMode == "release", 500,   10)
+extraR0Iterations =     ifelse(documentCompilationMode == "release", 250,   10)
 iterationStride =       ifelse(documentCompilationMode == "release", 1000,   50)
 
 ## Read in the data
@@ -489,18 +489,15 @@ X.pred = cbind(X.predict[rep(1:nrow(X.predict),
                              each = nrow(Z.predict)/nrow(X)),], Z.predict)
 
 # Pair-wise distance parameters.
-DM1 = matrix(c(0,1,1,0,
-               1,0,1,0,
-               1,1,0,0,
-               0,0,0,0), nrow = 4, ncol = 4, byrow = TRUE)
-
-DM2 = matrix(c(0,0,0,1,
-               0,0,0,1,
-               0,0,0,1,
+# parameter magnitude chosen by previous work with multiple distance 
+# params. 
+DM1 = matrix(c(0,1,1,1/250,
+               1,0,1,1/250,
+               1,1,0,1/250,
                1,1,1,0), nrow = 4, ncol = 4, byrow = TRUE)
+DM1 = DM1/matrix(apply(DM1, 1, sum), nrow =4 , ncol = 4)
 
-
-dmList = list(DM1,DM2)
+dmList = list(DM1)
 
 # Define population sizes for the three countries of interest. This data also 
 # from Wikipedia. 
