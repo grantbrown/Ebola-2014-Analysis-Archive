@@ -166,9 +166,9 @@ pred.days = 30
 
 ## Compute number of samples/batches
 numBurnInBatches =      ifelse(documentCompilationMode == "release", 1000,  1)
-numConvergenceBatches = ifelse(documentCompilationMode == "release", 6000,  10)
+numConvergenceBatches = ifelse(documentCompilationMode == "release", 500,  10)
 convergenceBatchSize =  ifelse(documentCompilationMode == "release", 1000, 100) 
-extraR0Iterations =     ifelse(documentCompilationMode == "release", 1000,   10)
+extraR0Iterations =     ifelse(documentCompilationMode == "release", 100,   10)
 iterationStride =       ifelse(documentCompilationMode == "release", 1000,   50)
 
 ## Read in the data
@@ -666,7 +666,7 @@ buildAndRunModel = function(params)
 
   # Burn in tuning parameters
   runSimulation(SEIRmodel, numBatches = numBurnInBatches)
-  #SEIRmodel$compartmentSamplingMode = 14
+  SEIRmodel$compartmentSamplingMode = 16
   #SEIRmodel$useDecorrelation = 1000
   # Run Simulation
   cat(paste("Running chain ", params[["chainNumber"]], "\n", sep =""))
