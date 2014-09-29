@@ -181,14 +181,15 @@ table2 = tbls[[8]]
 dat = rbind(table1[2:nrow(table1),c(1, 4, 6, 8, 10,12)],
             table2[2:nrow(table2),c(1, 4, 6, 8, 10,12)])
 
-# One date is now duplicated on the Wikipedia page, due to using different sources. 
+# One date is now (sometimes) duplicated on the Wikipedia page, due to using different sources. 
 # Clean that up first. 
 dup.indices = which(as.Date(dat[,1], "%d %b %Y") == as.Date("2014-06-05"))
 
-
-dat[dup.indices[1],4] = dat[dup.indices[2],4]
-dat = rbind(dat[1:dup.indices[1],], dat[(dup.indices[2]+1):nrow(dat),])
-
+if (length(dup.indices) > 1)
+{
+  dat[dup.indices[1],4] = dat[dup.indices[2],4]
+  dat = rbind(dat[1:dup.indices[1],], dat[(dup.indices[2]+1):nrow(dat),])
+}
 
 charDate = as.character(dat[2:nrow(dat),1])
 for (i in 1:length(charDate))
