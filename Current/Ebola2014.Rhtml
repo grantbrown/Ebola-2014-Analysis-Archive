@@ -159,8 +159,8 @@ library(parallel) # Load the parallel library to enable multiple chains to be ru
 
 ## Define Document Compilation Parameters
 
-documentCompilationMode = "release"
-#documentCompilationMode = "debug"
+#documentCompilationMode = "release"
+documentCompilationMode = "debug"
 modelDF = 6
 pred.days = 30
 
@@ -695,7 +695,7 @@ buildAndRunModel = function(params)
         SEIRmodel$simulate(iterationStride)
         for (j in 0:(nrow(I_star)-1))
         {
-            R0[j,,i] = apply(SEIRmodel$getIntegratedGenerationMatrix(j), 2, sum)
+            R0[j,,i] = SEIRmodel$estimateEffectiveR0(j)
         }
     }
     
