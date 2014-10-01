@@ -161,17 +161,17 @@ library(parallel) # Load the parallel library to enable multiple chains to be ru
 
 documentCompilationMode = "release"
 #documentCompilationMode = "debug"
-modelDF = 3
+modelDF = 4
 pred.days = 30
 
 
 ## Compute number of samples/batches
 numBurnInBatches =      ifelse(documentCompilationMode == "release", 1000,  1)
-numConvergenceBatches = ifelse(documentCompilationMode == "release", 50,  10)
+numConvergenceBatches = ifelse(documentCompilationMode == "release", 2000,  10)
 convergenceBatchSize =  ifelse(documentCompilationMode == "release", 1000, 100) 
-extraR0Iterations =     ifelse(documentCompilationMode == "release", 100,   10)
-iterationStride =       ifelse(documentCompilationMode == "release", 500,   50)
-targetDaysPerRecord = 5
+extraR0Iterations =     ifelse(documentCompilationMode == "release", 200,   10)
+iterationStride =       ifelse(documentCompilationMode == "release", 750,   50)
+targetDaysPerRecord = 6
 
 ## Read in the data
 url = 'http://en.wikipedia.org/wiki/West_Africa_Ebola_virus_outbreak'
