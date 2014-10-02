@@ -45,7 +45,11 @@
           <h4>A Quick Stochastic Spatial SEIR Modeling Approach</h4>
           <h5><a href="http://www.public-health.uiowa.edu/people/grant-brown/">Grant Brown</a></h5>
           <h5><a href="http://www.public-health.uiowa.edu/people/jacob-oleson/">Jacob Oleson</a></h5>
-          <h5>Last Updated: 9/18/2014</h5>
+          <h5>Last Updated:
+<!--begin.rcode echo=FALSE, results='asis'
+cat(as.character(Sys.Date()))
+end.rcode-->
+</h5>
         </div>
       </div>
     </div>
@@ -159,15 +163,15 @@ library(parallel) # Load the parallel library to enable multiple chains to be ru
 
 ## Define Document Compilation Parameters
 
-documentCompilationMode = "release"
-#documentCompilationMode = "debug"
+#documentCompilationMode = "release"
+documentCompilationMode = "debug"
 modelDF = 4
 pred.days = 30
 
 
 ## Compute number of samples/batches
 numBurnInBatches =      ifelse(documentCompilationMode == "release", 1000,  1)
-numConvergenceBatches = ifelse(documentCompilationMode == "release", 2000,  10)
+numConvergenceBatches = ifelse(documentCompilationMode == "release", 3000,  10)
 convergenceBatchSize =  ifelse(documentCompilationMode == "release", 1000, 100) 
 extraR0Iterations =     ifelse(documentCompilationMode == "release", 200,   10)
 iterationStride =       ifelse(documentCompilationMode == "release", 750,   50)
@@ -177,8 +181,8 @@ targetDaysPerRecord = 6
 url = 'http://en.wikipedia.org/wiki/West_Africa_Ebola_virus_outbreak'
 tbls = readHTMLTable(url)
 # These lines changes depending on the page formatting.
-table1 = tbls[[7]] 
-table2 = tbls[[8]]
+table1 = tbls[[8]] 
+table2 = tbls[[9]]
 
 dat = rbind(table1[2:nrow(table1),c(1, 4, 6, 8, 10,12)],
             table2[2:nrow(table2),c(1, 4, 6, 8, 10,12)])
@@ -713,9 +717,9 @@ buildAndRunModel = function(params)
 
   # Burn in tuning parameters
   runSimulation(SEIRmodel, numBatches = numBurnInBatches)
-  SEIRmodel$compartmentSamplingMode = 14
-  SEIRmodel$parameterSamplingMode = 7
-  SEIRmodel$useDecorrelation = 100
+  SEIRmodel$compartmentSamplingMode = 16
+  SEIRmodel$parameterSamplingMode = 8
+  SEIRmodel$useDecorrelation = 500
   # Run Simulation
   cat(paste("Running chain ", params[["chainNumber"]], "\n", sep =""))
 
