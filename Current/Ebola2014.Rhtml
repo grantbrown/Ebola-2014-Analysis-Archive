@@ -163,8 +163,8 @@ library(parallel) # Load the parallel library to enable multiple chains to be ru
 
 ## Define Document Compilation Parameters
 
-#documentCompilationMode = "release"
-documentCompilationMode = "debug"
+documentCompilationMode = "release"
+#documentCompilationMode = "debug"
 modelDF = 4
 pred.days = 30
 
@@ -555,16 +555,20 @@ Z.predict = Z.predict[rep(1:nrow(Z.predict), nrow(X)),,drop=FALSE]
 X.pred = cbind(X.predict[rep(1:nrow(X.predict), 
                              each = nrow(Z.predict)/nrow(X)),], Z.predict)
 
-# Pair-wise distance parameters.
-# parameter magnitude chosen by previous work with multiple distance 
-# params. 
-DM1 = matrix(c(0,1,1,1/100,
-               1,0,1,1/100,
-               1,1,0,1/100,
-               1,1,1,0), nrow = 4, ncol = 4, byrow = TRUE)
+DM1 = matrix(c(0,1,1,0,
+               1,0,1,0,
+               1,1,0,0,
+               0,0,0,0), nrow = 4, ncol = 4, byrow = TRUE)
+DM2 = matrix(c(0,0,0,1,
+	       0,0,0,1,
+               0,0,0,1,
+	       1,1,1,0), nrow = 4, ncol = 4, byrow = TRUE)
 DM1 = DM1/matrix(apply(DM1, 1, sum), nrow =4 , ncol = 4)
+DM1[4,] = c(0,0,0,0) # get rid of NA's
+DM2 = DM2/matrix(apply(DM2, 1, sum), nrow =4 , ncol = 4)
 
-dmList = list(DM1)
+
+dmList = list(DM1, DM2)
 
 # Define population sizes for the three countries of interest. This data also 
 # from Wikipedia. 
