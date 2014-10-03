@@ -1,0 +1,1421 @@
+starting worker pid=21480 on localhost:11986 at 10:20:00.994
+starting worker pid=21489 on localhost:11986 at 10:20:01.188
+starting worker pid=21499 on localhost:11986 at 10:20:01.370
+Loading required package: Rcpp
+Loading required package: Rcpp
+Loading required package: Rcpp
+[1] "Creating E0"
+Building Model.
+   Number of Locations: 4
+   Number of Time Points: 68
+[1] "Creating E0"
+[1] "Creating E0"
+Building Model.
+   Number of Locations: 4
+   Number of Time Points: 68
+Building Model.
+   Number of Locations: 4
+   Number of Time Points: 68
+Setting compartment sampling mode to Metropolis with chain binomial proposal.
+Running chain 6
+Setting compartment sampling mode to Metropolis with chain binomial proposal.
+Running chain 5
+Setting compartment sampling mode to Metropolis with chain binomial proposal.
+Running chain 4
+Time elapsed for ./chain_output_ebola_6.txt : 0.716 minutes
+Time elapsed for ./chain_output_ebola_5.txt : 0.829 minutes
+Time elapsed for ./chain_output_ebola_4.txt : 0.851 minutes
+starting worker pid=21670 on localhost:11334 at 10:22:58.117
+starting worker pid=21679 on localhost:11334 at 10:22:58.286
+starting worker pid=21688 on localhost:11334 at 10:22:58.467
+Loading required package: Rcpp
+Loading required package: Rcpp
+Loading required package: Rcpp
+[1] "Creating E0"
+Building Model.
+   Number of Locations: 4
+   Number of Time Points: 68
+[1] "Creating E0"
+[1] "Creating E0"
+Building Model.
+   Number of Locations: 4
+   Number of Time Points: 68
+Building Model.
+   Number of Locations: 4
+   Number of Time Points: 68
+Setting compartment sampling mode to Metropolis with chain binomial proposal.
+Running chain 5
+Setting compartment sampling mode to Metropolis with chain binomial proposal.
+Running chain 6
+Setting compartment sampling mode to Metropolis with chain binomial proposal.
+Running chain 4
+Time elapsed for ./chain_output_ebola_5.txt : 0.741 minutes
+Time elapsed for ./chain_output_ebola_6.txt : 0.768 minutes
+Time elapsed for ./chain_output_ebola_4.txt : 0.782 minutes
+starting worker pid=21909 on localhost:11336 at 10:34:15.061
+starting worker pid=21918 on localhost:11336 at 10:34:15.235
+starting worker pid=21927 on localhost:11336 at 10:34:15.413
+Loading required package: Rcpp
+Loading required package: Rcpp
+Loading required package: Rcpp
+[1] "Creating E0"
+[1] "Creating E0"
+[1] "Creating E0"
+Building Model.
+   Number of Locations: 4
+   Number of Time Points: 68
+Building Model.
+   Number of Locations: 4
+   Number of Time Points: 68
+Building Model.
+   Number of Locations: 4
+   Number of Time Points: 68
+Setting compartment sampling mode to Metropolis with chain binomial proposal.
+Running chain 5
+Setting compartment sampling mode to Metropolis with chain binomial proposal.
+Running chain 6
+Setting compartment sampling mode to Metropolis with chain binomial proposal.
+Running chain 4
+Time elapsed for ./chain_output_ebola_4.txt : 0.734 minutes
+Time elapsed for ./chain_output_ebola_5.txt : 0.796 minutes
+Time elapsed for ./chain_output_ebola_6.txt : 0.838 minutes
+starting worker pid=22170 on localhost:11516 at 10:49:53.629
+starting worker pid=22179 on localhost:11516 at 10:49:53.809
+starting worker pid=22188 on localhost:11516 at 10:49:53.990
+Loading required package: Rcpp
+Loading required package: Rcpp
+Loading required package: Rcpp
+[1] "Creating E0"
+Building Model.
+   Number of Locations: 4
+   Number of Time Points: 68
+[1] "Creating E0"
+[1] "Creating E0"
+Building Model.
+   Number of Locations: 4
+   Number of Time Points: 68
+Building Model.
+   Number of Locations: 4
+   Number of Time Points: 68
+Setting compartment sampling mode to Metropolis with chain binomial proposal.
+Running chain 4
+Setting compartment sampling mode to Metropolis with chain binomial proposal.
+Running chain 5
+Setting compartment sampling mode to Metropolis with chain binomial proposal.
+Running chain 6
+Time elapsed for ./chain_output_ebola_4.txt : 0.595 minutes
+Time elapsed for ./chain_output_ebola_6.txt : 0.838 minutes
+Time elapsed for ./chain_output_ebola_5.txt : 0.84 minutes
+starting worker pid=30612 on localhost:11107 at 12:35:53.428
+starting worker pid=30621 on localhost:11107 at 12:35:53.611
+starting worker pid=30630 on localhost:11107 at 12:35:53.788
+Loading required package: Rcpp
+Loading required package: Rcpp
+Loading required package: Rcpp
+starting worker pid=30717 on localhost:11291 at 12:36:15.216
+starting worker pid=30726 on localhost:11291 at 12:36:15.401
+starting worker pid=30735 on localhost:11291 at 12:36:15.577
+Loading required package: Rcpp
+Loading required package: Rcpp
+Loading required package: Rcpp
+starting worker pid=30780 on localhost:11048 at 12:37:27.358
+starting worker pid=30789 on localhost:11048 at 12:37:27.539
+starting worker pid=30798 on localhost:11048 at 12:37:27.712
+Loading required package: Rcpp
+Loading required package: Rcpp
+Loading required package: Rcpp
+[1] "Creating E0"
+Building Model.
+   Number of Locations: 4
+   Number of Time Points: 68
+[1] "Creating E0"
+[1] "Creating E0"
+Building Model.
+   Number of Locations: 4
+   Number of Time Points: 68
+Building Model.
+   Number of Locations: 4
+   Number of Time Points: 68
+Setting compartment sampling mode to Metropolis with chain binomial proposal.
+Running chain 6
+Setting compartment sampling mode to Metropolis with chain binomial proposal.
+Running chain 5
+Setting compartment sampling mode to Metropolis with chain binomial proposal.
+Running chain 4
+Time elapsed for ./chain_output_ebola_5.txt : 0.564 minutes
+Time elapsed for ./chain_output_ebola_6.txt : 0.817 minutes
+Time elapsed for ./chain_output_ebola_4.txt : 0.83 minutes
+starting worker pid=1799 on localhost:11805 at 13:56:03.747
+starting worker pid=1809 on localhost:11805 at 13:56:03.926
+starting worker pid=1818 on localhost:11805 at 13:56:04.109
+Loading required package: Rcpp
+Loading required package: Rcpp
+Loading required package: Rcpp
+starting worker pid=1943 on localhost:11589 at 13:59:20.204
+starting worker pid=1952 on localhost:11589 at 13:59:20.376
+starting worker pid=1961 on localhost:11589 at 13:59:20.566
+Loading required package: Rcpp
+Loading required package: Rcpp
+Loading required package: Rcpp
+[1] "Creating E0"
+Building Model.
+   Number of Locations: 4
+   Number of Time Points: 69
+[1][1] "Creating E0"
+ "Creating E0"
+Building Model.
+   Number of Locations: Building Model.
+   Number of Locations: 4
+   Number of Time Points: 69
+4
+   Number of Time Points: 69
+Setting compartment sampling mode to Metropolis with chain binomial proposal.
+Running chain 6
+Setting compartment sampling mode to Metropolis with chain binomial proposal.
+Running chain 5
+Setting compartment sampling mode to Metropolis with chain binomial proposal.
+Running chain 4
+Time elapsed for ./chain_output_ebola_4.txt : 0.587 minutes
+Time elapsed for ./chain_output_ebola_6.txt : 0.849 minutes
+Time elapsed for ./chain_output_ebola_5.txt : 0.844 minutes
+starting worker pid=15280 on localhost:11861 at 13:17:14.098
+starting worker pid=15289 on localhost:11861 at 13:17:14.263
+starting worker pid=15298 on localhost:11861 at 13:17:14.433
+Loading required package: Rcpp
+Loading required package: Rcpp
+Loading required package: Rcpp
+[1] "Creating E0"
+[1] "Creating E0"
+[1] "Creating E0"
+Building Model.
+   Number of Locations: 4
+   Number of Time Points: 69
+Building Model.
+   Number of Locations: 4
+   Number of Time Points: 69
+Building Model.
+   Number of Locations: 4
+   Number of Time Points: 69
+Setting compartment sampling mode to Metropolis with chain binomial proposal.
+Running chain 6
+Setting compartment sampling mode to Metropolis with chain binomial proposal.
+Running chain 5
+Setting compartment sampling mode to Metropolis with chain binomial proposal.
+Running chain 4
+Time elapsed for ./chain_output_ebola_6.txt : 1.092 minutes
+Time elapsed for ./chain_output_ebola_4.txt : 1.089 minutes
+Time elapsed for ./chain_output_ebola_5.txt : 1.096 minutes
+starting worker pid=16162 on localhost:11479 at 13:39:39.633
+starting worker pid=16171 on localhost:11479 at 13:39:39.803
+starting worker pid=16180 on localhost:11479 at 13:39:39.973
+Loading required package: Rcpp
+Loading required package: Rcpp
+Loading required package: Rcpp
+[1] "Creating E0"
+[1] "Creating E0"
+[1] "Creating E0"
+Building Model.
+   Number of Locations: 4
+   Number of Time Points: 69
+Building Model.
+   Number of Locations: 4
+   Number of Time Points: 69
+Building Model.
+   Number of Locations: 4
+   Number of Time Points: 69
+Setting compartment sampling mode to Metropolis with chain binomial proposal.
+Running chain 5
+Setting compartment sampling mode to Metropolis with chain binomial proposal.
+Running chain 6
+Setting compartment sampling mode to Metropolis with chain binomial proposal.
+Running chain 4
+Time elapsed for ./chain_output_ebola_6.txt : 1.159 minutes
+Time elapsed for ./chain_output_ebola_5.txt : 1.168 minutes
+Time elapsed for ./chain_output_ebola_4.txt : 1.167 minutes
+starting worker pid=16382 on localhost:11931 at 13:44:21.424
+starting worker pid=16391 on localhost:11931 at 13:44:21.615
+starting worker pid=16400 on localhost:11931 at 13:44:21.847
+Loading required package: Rcpp
+Loading required package: Rcpp
+Loading required package: Rcpp
+[1] "Creating E0"
+Building Model.
+   Number of Locations: 4
+   Number of Time Points: 69
+[1] "Creating E0"
+[1] "Creating E0"
+Building Model.
+   Number of Locations: 4
+   Number of Time Points: 69
+Building Model.
+   Number of Locations: 4
+   Number of Time Points: 69
+Setting compartment sampling mode to Metropolis with chain binomial proposal.
+Running chain 6
+Setting compartment sampling mode to Metropolis with chain binomial proposal.
+Running chain 5
+Setting compartment sampling mode to Metropolis with chain binomial proposal.
+Running chain 4
+Time elapsed for ./chain_output_ebola_6.txt : 1.043 minutes
+Time elapsed for ./chain_output_ebola_4.txt : 1.057 minutes
+Time elapsed for ./chain_output_ebola_5.txt : 1.073 minutes
+starting worker pid=16471 on localhost:11659 at 13:48:48.656
+starting worker pid=16480 on localhost:11659 at 13:48:48.844
+starting worker pid=16489 on localhost:11659 at 13:48:49.021
+Loading required package: Rcpp
+Loading required package: Rcpp
+Loading required package: Rcpp
+[1] "Creating E0"
+[1] "Creating E0"
+Building Model.
+   Number of Locations: 4
+   Number of Time Points: 69
+[1] "Creating E0"
+Building Model.
+   Number of Locations: 4
+   Number of Time Points: 69
+Building Model.
+   Number of Locations: 4
+   Number of Time Points: 69
+Setting compartment sampling mode to Metropolis with chain binomial proposal.
+Running chain 5
+Setting compartment sampling mode to Metropolis with chain binomial proposal.
+Running chain 6
+Setting compartment sampling mode to Metropolis with chain binomial proposal.
+Running chain 4
+Time elapsed for ./chain_output_ebola_6.txt : 1.157 minutes
+Time elapsed for ./chain_output_ebola_4.txt : 1.172 minutes
+Time elapsed for ./chain_output_ebola_5.txt : 1.19 minutes
+starting worker pid=16651 on localhost:11224 at 14:03:51.375
+starting worker pid=16660 on localhost:11224 at 14:03:51.539
+starting worker pid=16669 on localhost:11224 at 14:03:51.705
+Loading required package: Rcpp
+Loading required package: Rcpp
+Loading required package: Rcpp
+[1] "Creating E0"
+[1] "Creating E0"
+Building Model.
+   Number of Locations: 4
+   Number of Time Points: 69
+Building Model.
+   Number of Locations: 4
+   Number of Time Points: 69
+[1] "Creating E0"
+Building Model.
+   Number of Locations: 4
+   Number of Time Points: 69
+Setting compartment sampling mode to Metropolis with chain binomial proposal.
+Running chain 5
+Setting compartment sampling mode to Metropolis with chain binomial proposal.
+Running chain 6
+Setting compartment sampling mode to Metropolis with chain binomial proposal.
+Running chain 4
+Time elapsed for ./chain_output_ebola_5.txt : 1.174 minutes
+Time elapsed for ./chain_output_ebola_6.txt : 1.185 minutes
+Time elapsed for ./chain_output_ebola_4.txt : 1.199 minutes
+starting worker pid=16774 on localhost:11460 at 14:08:00.280
+starting worker pid=16783 on localhost:11460 at 14:08:00.454
+starting worker pid=16792 on localhost:11460 at 14:08:00.638
+Loading required package: Rcpp
+Loading required package: Rcpp
+Loading required package: Rcpp
+[1] "Creating E0"
+Building Model.
+   Number of Locations: 4
+   Number of Time Points: 69
+[1] "Creating E0"
+Building Model.
+   Number of Locations: 4
+   Number of Time Points: 69
+[1] "Creating E0"
+Building Model.
+   Number of Locations: 4
+   Number of Time Points: 69
+Setting compartment sampling mode to Metropolis with chain binomial proposal.
+Running chain 6
+Setting compartment sampling mode to Metropolis with chain binomial proposal.
+Running chain 5
+Setting compartment sampling mode to Metropolis with chain binomial proposal.
+Running chain 4
+Time elapsed for ./chain_output_ebola_5.txt : 1.019 minutes
+Time elapsed for ./chain_output_ebola_6.txt : 1.021 minutes
+Time elapsed for ./chain_output_ebola_4.txt : 1.017 minutes
+starting worker pid=10203 on localhost:11215 at 11:52:36.526
+starting worker pid=10212 on localhost:11215 at 11:52:36.702
+starting worker pid=10221 on localhost:11215 at 11:52:36.880
+Loading required package: Rcpp
+Loading required package: Rcpp
+Loading required package: Rcpp
+starting worker pid=14812 on localhost:11966 at 16:10:42.965
+starting worker pid=14821 on localhost:11966 at 16:10:43.145
+starting worker pid=14830 on localhost:11966 at 16:10:43.338
+Loading required package: Rcpp
+Loading required package: Rcpp
+[1] "Creating E0"
+Building Model.
+   Number of Locations: 4
+   Number of Time Points: 19
+Loading required package: Rcpp
+[1] "Creating E0"
+Building Model.
+   Number of Locations: 4
+   Number of Time Points: 19
+[1] "Creating E0"
+Building Model.
+   Number of Locations: 4
+   Number of Time Points: 19
+Setting compartment sampling mode to indexed Metropolis with chain binomial proposal.
+Running chain 4
+Setting compartment sampling mode to indexed Metropolis with chain binomial proposal.
+Running chain 5
+Setting compartment sampling mode to indexed Metropolis with chain binomial proposal.
+Running chain 6
+Time elapsed for ./chain_output_ebola_4.txt : 0.017 minutes
+Time elapsed for ./chain_output_ebola_6.txt : 0.024 minutes
+Time elapsed for ./chain_output_ebola_5.txt : 0.025 minutes
+starting worker pid=14893 on localhost:11839 at 16:12:54.802
+starting worker pid=14902 on localhost:11839 at 16:12:54.980
+starting worker pid=14911 on localhost:11839 at 16:12:55.165
+Loading required package: Rcpp
+Loading required package: Rcpp
+Loading required package: Rcpp
+[1] "Creating E0"
+Building Model.
+   Number of Locations: 4
+   Number of Time Points: 19
+[1] "Creating E0"
+[1] "Creating E0"
+Building Model.
+   Number of Locations: 4
+   Number of Time Points: 19
+Building Model.
+   Number of Locations: 4
+   Number of Time Points: 19
+Setting compartment sampling mode to indexed Metropolis with chain binomial proposal.
+Running chain 5
+Setting compartment sampling mode to indexed Metropolis with chain binomial proposal.
+Running chain 6
+Setting compartment sampling mode to indexed Metropolis with chain binomial proposal.
+Running chain 4
+Time elapsed for ./chain_output_ebola_5.txt : 0.02 minutes
+Time elapsed for ./chain_output_ebola_4.txt : 0.021 minutes
+Time elapsed for ./chain_output_ebola_6.txt : 0.024 minutes
+starting worker pid=15052 on localhost:11397 at 16:18:04.609
+starting worker pid=15061 on localhost:11397 at 16:18:04.803
+starting worker pid=15070 on localhost:11397 at 16:18:04.994
+Loading required package: Rcpp
+Loading required package: Rcpp
+Loading required package: Rcpp
+[1] "Creating E0"
+Building Model.
+   Number of Locations: 4
+   Number of Time Points: 19
+[1] "Creating E0"
+[1] "Creating E0"
+Building Model.
+   Number of Locations: 4
+   Number of Time Points: 19
+Building Model.
+   Number of Locations: 4
+   Number of Time Points: 19
+Setting compartment sampling mode to indexed Metropolis with chain binomial proposal.
+Running chain 6
+Setting compartment sampling mode to indexed Metropolis with chain binomial proposal.
+Running chain 5
+Setting compartment sampling mode to indexed Metropolis with chain binomial proposal.
+Running chain 4
+Time elapsed for ./chain_output_ebola_6.txt : 0.02 minutes
+Time elapsed for ./chain_output_ebola_5.txt : 0.024 minutes
+Time elapsed for ./chain_output_ebola_4.txt : 0.026 minutes
+starting worker pid=15142 on localhost:11676 at 16:19:26.358
+starting worker pid=15151 on localhost:11676 at 16:19:26.538
+starting worker pid=15160 on localhost:11676 at 16:19:26.713
+Loading required package: Rcpp
+Loading required package: Rcpp
+Loading required package: Rcpp
+[1] "Creating E0"
+Building Model.
+   Number of Locations: 4
+   Number of Time Points: 19
+[1] "Creating E0"
+Building Model.
+   Number of Locations: 4
+   Number of Time Points: 19
+[1] "Creating E0"
+Building Model.
+   Number of Locations: 4
+   Number of Time Points: 19
+Setting compartment sampling mode to Metropolis with chain binomial proposal.
+Running chain 5
+Setting compartment sampling mode to Metropolis with chain binomial proposal.
+Running chain 4
+Setting compartment sampling mode to Metropolis with chain binomial proposal.
+Running chain 6
+Time elapsed for ./chain_output_ebola_5.txt : 19.688 minutes
+Time elapsed for ./chain_output_ebola_4.txt : 19.739 minutes
+Time elapsed for ./chain_output_ebola_6.txt : 19.884 minutes
+starting worker pid=16097 on localhost:11241 at 16:50:06.751
+starting worker pid=16106 on localhost:11241 at 16:50:06.938
+starting worker pid=16115 on localhost:11241 at 16:50:07.115
+Loading required package: Rcpp
+Loading required package: Rcpp
+Loading required package: Rcpp
+[1] "Creating E0"
+Building Model.
+   Number of Locations: 4
+   Number of Time Points: 19
+[1] "Creating E0"
+Building Model.
+   Number of Locations: 4
+   Number of Time Points: 19
+[1] "Creating E0"
+Building Model.
+   Number of Locations: 4
+   Number of Time Points: 19
+Setting compartment sampling mode to Metropolis
+Setting parameter sampling mode to single Metropolis
+Running chain 5
+Setting compartment sampling mode to Metropolis
+Setting parameter sampling mode to single Metropolis
+Running chain 6
+Setting compartment sampling mode to Metropolis
+Setting parameter sampling mode to single Metropolis
+Running chain 4
+Time elapsed for ./chain_output_ebola_5.txt : 6.924 minutes
+Time elapsed for ./chain_output_ebola_6.txt : 6.869 minutes
+Time elapsed for ./chain_output_ebola_4.txt : 6.974 minutes
+starting worker pid=16316 on localhost:11439 at 17:01:22.142
+starting worker pid=16325 on localhost:11439 at 17:01:22.332
+starting worker pid=16334 on localhost:11439 at 17:01:22.526
+Loading required package: Rcpp
+Loading required package: Rcpp
+Loading required package: Rcpp
+[1] "Creating E0"
+Building Model.
+   Number of Locations: 4
+   Number of Time Points: 19
+[1] "Creating E0"
+[1] "Creating E0"
+Building Model.
+   Number of Locations: 4
+   Number of Time Points: 19
+Building Model.
+   Number of Locations: 4
+   Number of Time Points: 19
+Setting compartment sampling mode to Metropolis with chain binomial proposal.
+Setting parameter sampling mode to single Metropolis
+Running chain 6
+Setting compartment sampling mode to Metropolis with chain binomial proposal.
+Setting parameter sampling mode to single Metropolis
+Running chain 5
+Setting compartment sampling mode to Metropolis with chain binomial proposal.
+Setting parameter sampling mode to single Metropolis
+Running chain 4
+Time elapsed for ./chain_output_ebola_5.txt : 22.615 minutes
+Time elapsed for ./chain_output_ebola_4.txt : 24.111 minutes
+Time elapsed for ./chain_output_ebola_6.txt : 24.465 minutes
+starting worker pid=16770 on localhost:11346 at 17:32:51.940
+starting worker pid=16779 on localhost:11346 at 17:32:52.113
+starting worker pid=16788 on localhost:11346 at 17:32:52.293
+Loading required package: Rcpp
+Loading required package: Rcpp
+Loading required package: Rcpp
+[1] "Creating E0"
+Building Model.
+   Number of Locations: 4
+   Number of Time Points: 19
+[1] "Creating E0"
+[1] "Creating E0"
+Building Model.
+   Number of Locations: 4
+   Number of Time Points: 19
+Building Model.
+   Number of Locations: 4
+   Number of Time Points: 19
+Setting compartment sampling mode to Metropolis with chain binomial proposal.
+Setting parameter sampling mode to single Metropolis
+Running chain 6
+Setting compartment sampling mode to Metropolis with chain binomial proposal.
+Setting parameter sampling mode to single Metropolis
+Running chain 4
+Setting compartment sampling mode to Metropolis with chain binomial proposal.
+Setting parameter sampling mode to single Metropolis
+Running chain 5
+Time elapsed for ./chain_output_ebola_6.txt : 25.473 minutes
+Time elapsed for ./chain_output_ebola_5.txt : 25.878 minutes
+Time elapsed for ./chain_output_ebola_4.txt : 25.947 minutes
+starting worker pid=18144 on localhost:11465 at 19:58:08.748
+starting worker pid=18153 on localhost:11465 at 19:58:08.936
+starting worker pid=18162 on localhost:11465 at 19:58:09.116
+Loading required package: Rcpp
+Loading required package: Rcpp
+Loading required package: Rcpp
+[1] "Creating E0"
+Building Model.
+   Number of Locations: 4
+   Number of Time Points: 13
+[1] "Creating E0"
+Building Model.
+   Number of Locations: 4
+   Number of Time Points: 13
+[1] "Creating E0"
+Building Model.
+   Number of Locations: 4
+   Number of Time Points: 13
+Setting compartment sampling mode to Metropolis with chain binomial proposal.
+Setting parameter sampling mode to single Metropolis
+Running chain 4
+Setting compartment sampling mode to Metropolis with chain binomial proposal.
+Setting compartment sampling mode to Metropolis with chain binomial proposal.
+Setting parameter sampling mode to single Metropolis
+Setting parameter sampling mode to single Metropolis
+Running chain 5
+Running chain 6
+Time elapsed for ./chain_output_ebola_4.txt : 10.924 minutes
+Time elapsed for ./chain_output_ebola_6.txt : 11.499 minutes
+starting worker pid=18291 on localhost:11790 at 20:12:21.198
+starting worker pid=18301 on localhost:11790 at 20:12:21.387
+starting worker pid=18310 on localhost:11790 at 20:12:21.572
+Loading required package: Rcpp
+Loading required package: Rcpp
+Loading required package: Rcpp
+[1] "Creating E0"
+Building Model.
+   Number of Locations: 4
+   Number of Time Points: 13
+[1] "Creating E0"
+[1] "Creating E0"
+Building Model.
+   Number of Locations: 4
+   Number of Time Points: 13
+Building Model.
+   Number of Locations: 4
+   Number of Time Points: 13
+Setting compartment sampling mode to Metropolis with chain binomial proposal.
+Setting parameter sampling mode to single Metropolis
+Running chain 5
+Setting compartment sampling mode to Metropolis with chain binomial proposal.
+Setting parameter sampling mode to single Metropolis
+Running chain 6
+Setting compartment sampling mode to Metropolis with chain binomial proposal.
+Setting parameter sampling mode to single Metropolis
+Running chain 4
+Time elapsed for ./chain_output_ebola_5.txt : 11.586 minutes
+Time elapsed for ./chain_output_ebola_4.txt : 12.542 minutes
+Time elapsed for ./chain_output_ebola_6.txt : 13.49 minutes
+starting worker pid=18735 on localhost:11585 at 20:34:09.150
+starting worker pid=18744 on localhost:11585 at 20:34:09.338
+starting worker pid=18753 on localhost:11585 at 20:34:09.513
+Loading required package: Rcpp
+Loading required package: Rcpp
+Loading required package: Rcpp
+[1] "Creating E0"
+Building Model.
+   Number of Locations: 4
+   Number of Time Points: 13
+[1] "Creating E0"
+Building Model.
+   Number of Locations: 4
+   Number of Time Points: 13
+[1] "Creating E0"
+Building Model.
+   Number of Locations: 4
+   Number of Time Points: 13
+Setting compartment sampling mode to Metropolis with chain binomial proposal.
+Setting parameter sampling mode to single Metropolis
+Running chain 4
+Setting compartment sampling mode to Metropolis with chain binomial proposal.
+Setting parameter sampling mode to single Metropolis
+Running chain 6
+Setting compartment sampling mode to Metropolis with chain binomial proposal.
+Setting parameter sampling mode to single Metropolis
+Running chain 5
+Time elapsed for ./chain_output_ebola_5.txt : 2.191 minutes
+Time elapsed for ./chain_output_ebola_4.txt : 2.333 minutes
+Time elapsed for ./chain_output_ebola_6.txt : 2.563 minutes
+starting worker pid=19008 on localhost:11038 at 20:48:38.398
+starting worker pid=19017 on localhost:11038 at 20:48:38.591
+starting worker pid=19026 on localhost:11038 at 20:48:38.773
+Loading required package: Rcpp
+Loading required package: Rcpp
+Loading required package: Rcpp
+[1] "Creating E0"
+Building Model.
+   Number of Locations: 4
+   Number of Time Points: 13
+[1] "Creating E0"
+[1] "Creating E0"
+Building Model.
+   Number of Locations: 4
+   Number of Time Points: 13
+Building Model.
+   Number of Locations: 4
+   Number of Time Points: 13
+Setting compartment sampling mode to Metropolis with chain binomial proposal.
+Setting parameter sampling mode to single Metropolis
+Running chain 5
+Setting compartment sampling mode to Metropolis with chain binomial proposal.
+Setting parameter sampling mode to single Metropolis
+Running chain 6
+Setting compartment sampling mode to Metropolis with chain binomial proposal.
+Setting parameter sampling mode to single Metropolis
+Running chain 4
+Time elapsed for ./chain_output_ebola_5.txt : 0.03 minutes
+Time elapsed for ./chain_output_ebola_6.txt : 0.044 minutes
+Time elapsed for ./chain_output_ebola_4.txt : 0.045 minutes
+starting worker pid=19074 on localhost:11414 at 20:49:34.853
+starting worker pid=19083 on localhost:11414 at 20:49:35.035
+starting worker pid=19092 on localhost:11414 at 20:49:35.207
+Loading required package: Rcpp
+Loading required package: Rcpp
+Loading required package: Rcpp
+[1] "Creating E0"
+Building Model.
+   Number of Locations: 4
+   Number of Time Points: 13
+[1] "Creating E0"
+[1] "Creating E0"
+Building Model.
+   Number of Locations: 4
+   Number of Time Points: 13
+Building Model.
+   Number of Locations: 4
+   Number of Time Points: 13
+Setting compartment sampling mode to Metropolis with chain binomial proposal.
+Setting parameter sampling mode to single Metropolis
+Running chain 4
+Setting compartment sampling mode to Metropolis with chain binomial proposal.
+Setting compartment sampling mode to Metropolis with chain binomial proposal.
+Setting parameter sampling mode to single Metropolis
+Setting parameter sampling mode to single Metropolis
+Running chain 6
+Running chain 5
+Time elapsed for ./chain_output_ebola_4.txt : 0.03 minutes
+Time elapsed for ./chain_output_ebola_5.txt : 0.043 minutes
+Time elapsed for ./chain_output_ebola_6.txt : 0.044 minutes
+starting worker pid=19145 on localhost:11432 at 20:52:22.828
+starting worker pid=19154 on localhost:11432 at 20:52:23.006
+starting worker pid=19163 on localhost:11432 at 20:52:23.190
+Loading required package: Rcpp
+Loading required package: Rcpp
+Loading required package: Rcpp
+[1] "Creating E0"
+Building Model.
+   Number of Locations: 4
+   Number of Time Points: 13
+[1] "Creating E0"
+[1] "Creating E0"
+Building Model.
+   Number of Locations: 4
+   Number of Time Points: 13
+Building Model.
+   Number of Locations: 4
+   Number of Time Points: 13
+Setting compartment sampling mode to Metropolis with chain binomial proposal.
+Setting parameter sampling mode to single Metropolis
+Running chain 6
+Setting compartment sampling mode to Metropolis with chain binomial proposal.
+Setting parameter sampling mode to single Metropolis
+Running chain 5
+Setting compartment sampling mode to Metropolis with chain binomial proposal.
+Setting parameter sampling mode to single Metropolis
+Running chain 4
+Time elapsed for ./chain_output_ebola_6.txt : 0.03 minutes
+Time elapsed for ./chain_output_ebola_4.txt : 0.038 minutes
+Time elapsed for ./chain_output_ebola_5.txt : 0.039 minutes
+starting worker pid=19189 on localhost:11686 at 20:52:57.897
+starting worker pid=19198 on localhost:11686 at 20:52:58.083
+starting worker pid=19207 on localhost:11686 at 20:52:58.257
+Loading required package: Rcpp
+Loading required package: Rcpp
+Loading required package: Rcpp
+[1] "Creating E0"
+Building Model.
+   Number of Locations: 4
+   Number of Time Points: 13
+[1] "Creating E0"
+[1] "Creating E0"
+Building Model.
+   Number of Locations: 4
+   Number of Time Points: 13
+Building Model.
+   Number of Locations: 4
+   Number of Time Points: 13
+Setting compartment sampling mode to Metropolis with chain binomial proposal.
+Setting parameter sampling mode to single Metropolis
+Running chain 5
+Setting compartment sampling mode to Metropolis with chain binomial proposal.
+Setting parameter sampling mode to single Metropolis
+Running chain 6
+Setting compartment sampling mode to Metropolis with chain binomial proposal.
+Setting parameter sampling mode to single Metropolis
+Running chain 4
+Time elapsed for ./chain_output_ebola_4.txt : 2.13 minutes
+Time elapsed for ./chain_output_ebola_5.txt : 2.203 minutes
+Time elapsed for ./chain_output_ebola_6.txt : 2.588 minutes
+starting worker pid=19300 on localhost:11496 at 20:58:38.502
+starting worker pid=19309 on localhost:11496 at 20:58:38.678
+starting worker pid=19318 on localhost:11496 at 20:58:38.864
+Loading required package: Rcpp
+Loading required package: Rcpp
+Loading required package: Rcpp
+[1] "Creating E0"
+Building Model.
+   Number of Locations: 4
+   Number of Time Points: 13
+[1] "Creating E0"
+[1] "Creating E0"
+Building Model.
+   Number of Locations: 4
+   Number of Time Points: 13
+Building Model.
+   Number of Locations: 4
+   Number of Time Points: 13
+Setting compartment sampling mode to Metropolis with chain binomial proposal.
+Setting parameter sampling mode to single Metropolis
+Running chain 5
+Setting compartment sampling mode to Metropolis with chain binomial proposal.
+Setting parameter sampling mode to single Metropolis
+Running chain 6
+Setting compartment sampling mode to Metropolis with chain binomial proposal.
+Setting parameter sampling mode to single Metropolis
+Running chain 4
+Time elapsed for ./chain_output_ebola_6.txt : 2.68 minutes
+Time elapsed for ./chain_output_ebola_4.txt : 2.75 minutes
+Time elapsed for ./chain_output_ebola_5.txt : 2.896 minutes
+starting worker pid=19466 on localhost:11242 at 21:07:40.090
+starting worker pid=19475 on localhost:11242 at 21:07:40.272
+starting worker pid=19484 on localhost:11242 at 21:07:40.455
+Loading required package: Rcpp
+Loading required package: Rcpp
+Loading required package: Rcpp
+[1] "Creating E0"
+Building Model.
+   Number of Locations: 4
+   Number of Time Points: 13
+[1] "Creating E0"
+[1] "Creating E0"
+Building Model.
+   Number of Locations: 4
+   Number of Time Points: 13
+Building Model.
+   Number of Locations: 4
+   Number of Time Points: 13
+Setting compartment sampling mode to Metropolis with chain binomial proposal.
+Setting parameter sampling mode to single Metropolis
+Running chain 5
+Setting compartment sampling mode to Metropolis with chain binomial proposal.
+Setting parameter sampling mode to single Metropolis
+Running chain 4
+Setting compartment sampling mode to Metropolis with chain binomial proposal.
+Setting parameter sampling mode to single Metropolis
+Running chain 6
+Time elapsed for ./chain_output_ebola_4.txt : 2.4 minutes
+Time elapsed for ./chain_output_ebola_6.txt : 2.54 minutes
+Time elapsed for ./chain_output_ebola_5.txt : 2.615 minutes
+starting worker pid=19634 on localhost:11144 at 21:14:21.097
+starting worker pid=19643 on localhost:11144 at 21:14:21.279
+starting worker pid=19652 on localhost:11144 at 21:14:21.472
+Loading required package: Rcpp
+Loading required package: Rcpp
+Loading required package: Rcpp
+[1] "Creating E0"
+Building Model.
+   Number of Locations: 4
+   Number of Time Points: 13
+[1][1] "Creating E0" "Creating E0"
+
+Building Model.
+   Number of Locations: Building Model.
+   Number of Locations: 44
+
+   Number of Time Points:    Number of Time Points: 1313
+
+Setting compartment sampling mode to Metropolis with chain binomial proposal.
+Setting parameter sampling mode to single Metropolis
+Running chain 6
+Setting compartment sampling mode to Metropolis with chain binomial proposal.
+Setting parameter sampling mode to single Metropolis
+Running chain 4
+Setting compartment sampling mode to Metropolis with chain binomial proposal.
+Setting parameter sampling mode to single Metropolis
+Running chain 5
+Time elapsed for ./chain_output_ebola_6.txt : 2.038 minutes
+Time elapsed for ./chain_output_ebola_5.txt : 2.415 minutes
+Time elapsed for ./chain_output_ebola_4.txt : 2.464 minutes
+starting worker pid=19777 on localhost:11154 at 21:20:05.248
+starting worker pid=19786 on localhost:11154 at 21:20:05.425
+starting worker pid=19795 on localhost:11154 at 21:20:05.603
+Loading required package: Rcpp
+Loading required package: Rcpp
+Loading required package: Rcpp
+[1] "Creating E0"
+Building Model.
+   Number of Locations: 4
+   Number of Time Points: 13
+[1] "Creating E0"
+[1] "Creating E0"
+Building Model.
+   Number of Locations: 4
+   Number of Time Points: 13
+Building Model.
+   Number of Locations: 4
+   Number of Time Points: 13
+Setting compartment sampling mode to Metropolis with chain binomial proposal.
+Setting parameter sampling mode to single Metropolis
+Running chain 6
+Setting compartment sampling mode to Metropolis with chain binomial proposal.
+Setting parameter sampling mode to single Metropolis
+Running chain 5
+Setting compartment sampling mode to Metropolis with chain binomial proposal.
+Setting parameter sampling mode to single Metropolis
+Running chain 4
+Time elapsed for ./chain_output_ebola_6.txt : 1.823 minutes
+Time elapsed for ./chain_output_ebola_5.txt : 2.282 minutes
+Time elapsed for ./chain_output_ebola_4.txt : 2.329 minutes
+starting worker pid=19951 on localhost:11220 at 21:40:16.011
+starting worker pid=19960 on localhost:11220 at 21:40:16.199
+starting worker pid=19969 on localhost:11220 at 21:40:16.391
+Loading required package: Rcpp
+Loading required package: Rcpp
+Loading required package: Rcpp
+[1] "Creating E0"
+Building Model.
+   Number of Locations: 4
+   Number of Time Points: 13
+[1] "Creating E0"
+[1] "Creating E0"
+Building Model.
+   Number of Locations: 4
+   Number of Time Points: 13
+Building Model.
+   Number of Locations: 4
+   Number of Time Points: 13
+Setting compartment sampling mode to Metropolis with chain binomial proposal.
+Setting parameter sampling mode to single Metropolis
+Running chain 5
+Setting compartment sampling mode to Metropolis with chain binomial proposal.
+Setting parameter sampling mode to single Metropolis
+Running chain 4
+Setting compartment sampling mode to Metropolis with chain binomial proposal.
+Setting parameter sampling mode to single Metropolis
+Running chain 6
+Time elapsed for ./chain_output_ebola_5.txt : 1.885 minutes
+Time elapsed for ./chain_output_ebola_6.txt : 2.921 minutes
+Time elapsed for ./chain_output_ebola_4.txt : 2.926 minutes
+starting worker pid=20081 on localhost:11433 at 21:47:53.019
+starting worker pid=20090 on localhost:11433 at 21:47:53.203
+starting worker pid=20099 on localhost:11433 at 21:47:53.387
+Loading required package: Rcpp
+Loading required package: Rcpp
+Loading required package: Rcpp
+[1] "Creating E0"
+Building Model.
+   Number of Locations: 4
+   Number of Time Points: 13
+[1] "Creating E0"
+[1] "Creating E0"
+Building Model.
+   Number of Locations: 4
+   Number of Time Points: 13
+Building Model.
+   Number of Locations: 4
+   Number of Time Points: 13
+Setting compartment sampling mode to Metropolis with chain binomial proposal.
+Setting parameter sampling mode to single Metropolis
+Running chain 6
+Setting compartment sampling mode to Metropolis with chain binomial proposal.
+Setting parameter sampling mode to single Metropolis
+Running chain 4
+Setting compartment sampling mode to Metropolis with chain binomial proposal.
+Setting parameter sampling mode to single Metropolis
+Running chain 5
+Time elapsed for ./chain_output_ebola_6.txt : 2.123 minutes
+Time elapsed for ./chain_output_ebola_4.txt : 2.315 minutes
+Time elapsed for ./chain_output_ebola_5.txt : 2.443 minutes
+starting worker pid=21332 on localhost:11506 at 07:36:27.848
+starting worker pid=21342 on localhost:11506 at 07:36:28.027
+starting worker pid=21351 on localhost:11506 at 07:36:28.280
+Loading required package: Rcpp
+Loading required package: Rcpp
+Loading required package: Rcpp
+starting worker pid=21487 on localhost:11380 at 07:42:49.217
+starting worker pid=21497 on localhost:11380 at 07:42:49.408
+starting worker pid=21507 on localhost:11380 at 07:42:49.617
+Loading required package: Rcpp
+Loading required package: Rcpp
+Loading required package: Rcpp
+starting worker pid=21611 on localhost:11594 at 07:45:23.772
+starting worker pid=21620 on localhost:11594 at 07:45:23.955
+starting worker pid=21629 on localhost:11594 at 07:45:24.138
+Loading required package: Rcpp
+Loading required package: Rcpp
+Loading required package: Rcpp
+starting worker pid=21658 on localhost:11173 at 07:47:43.590
+starting worker pid=21667 on localhost:11173 at 07:47:43.800
+starting worker pid=21676 on localhost:11173 at 07:47:43.979
+Loading required package: Rcpp
+Loading required package: Rcpp
+Loading required package: Rcpp
+[1] "Creating E0"
+Building Model.
+   Number of Locations: 4
+   Number of Time Points: 23
+[1] "Creating E0"
+[1] "Creating E0"
+Building Model.
+   Number of Locations: 4
+   Number of Time Points: 23
+Building Model.
+   Number of Locations: 4
+   Number of Time Points: 23
+Setting compartment sampling mode to Metropolis with chain binomial proposal.
+Setting parameter sampling mode to single Metropolis
+Running chain 5
+Setting compartment sampling mode to Metropolis with chain binomial proposal.
+Setting parameter sampling mode to single Metropolis
+Running chain 6
+Setting compartment sampling mode to Metropolis with chain binomial proposal.
+Setting parameter sampling mode to single Metropolis
+Running chain 4
+Time elapsed for ./chain_output_ebola_6.txt : 0.079 minutes
+Time elapsed for ./chain_output_ebola_5.txt : 0.105 minutes
+Time elapsed for ./chain_output_ebola_4.txt : 0.113 minutes
+starting worker pid=21767 on localhost:11642 at 07:48:54.675
+starting worker pid=21776 on localhost:11642 at 07:48:54.857
+starting worker pid=21785 on localhost:11642 at 07:48:55.036
+Loading required package: Rcpp
+Loading required package: Rcpp
+Loading required package: Rcpp
+[1] "Creating E0"
+Building Model.
+   Number of Locations: 4
+   Number of Time Points: 23
+[1] "Creating E0"
+[1] "Creating E0"
+Building Model.
+   Number of Locations: 4
+   Number of Time Points: 23
+Building Model.
+   Number of Locations: 4
+   Number of Time Points: 23
+Setting compartment sampling mode to Metropolis with chain binomial proposal.
+Setting parameter sampling mode to single Metropolis
+Running chain 6
+Setting compartment sampling mode to Metropolis with chain binomial proposal.
+Setting parameter sampling mode to single Metropolis
+Running chain 5
+Setting compartment sampling mode to Metropolis with chain binomial proposal.
+Setting parameter sampling mode to single Metropolis
+Running chain 4
+Time elapsed for ./chain_output_ebola_6.txt : 4.822 minutes
+Time elapsed for ./chain_output_ebola_5.txt : 6.39 minutes
+Time elapsed for ./chain_output_ebola_4.txt : 6.461 minutes
+starting worker pid=23360 on localhost:11673 at 11:58:36.644
+starting worker pid=23369 on localhost:11673 at 11:58:36.824
+starting worker pid=23378 on localhost:11673 at 11:58:37.004
+Loading required package: Rcpp
+Loading required package: Rcpp
+Loading required package: Rcpp
+[1] "Creating E0"
+Building Model.
+   Number of Locations: 4
+   Number of Time Points: 23
+[1] "Creating E0"
+[1] "Creating E0"
+Building Model.
+   Number of Locations: 4
+   Number of Time Points: 23
+Building Model.
+   Number of Locations: 4
+   Number of Time Points: 23
+Warning messages:
+Warning messages:
+1: In if (is.na(offset)) { :
+  the condition has length > 1 and only the first element will be used
+Warning messages:
+2: In if (!is.na(offset)) { :
+  the condition has length > 1 and only the first element will be used
+1: In if (is.na(offset)) { :
+  the condition has length > 1 and only the first element will be used
+1: In if (is.na(offset)) { :
+  the condition has length > 1 and only the first element will be used
+2: In if (!is.na(offset)) { :
+  the condition has length > 1 and only the first element will be used
+2: In if (!is.na(offset)) { :
+  the condition has length > 1 and only the first element will be used
+starting worker pid=25029 on localhost:11762 at 12:30:41.418
+starting worker pid=25038 on localhost:11762 at 12:30:41.603
+starting worker pid=25047 on localhost:11762 at 12:30:41.782
+Loading required package: Rcpp
+Loading required package: Rcpp
+Loading required package: Rcpp
+Warning message:
+In if (!is.na(offset)) { :
+  the condition has length > 1 and only the first element will be used
+Warning message:
+In if (!is.na(offset)) { :
+  the condition has length > 1 and only the first element will be used
+Warning message:
+In if (!is.na(offset)) { :
+  the condition has length > 1 and only the first element will be used
+starting worker pid=25170 on localhost:11733 at 12:32:18.188
+starting worker pid=25179 on localhost:11733 at 12:32:18.365
+starting worker pid=25188 on localhost:11733 at 12:32:18.537
+Loading required package: Rcpp
+Loading required package: Rcpp
+Loading required package: Rcpp
+[1] "Creating E0"
+Building Model.
+   Number of Locations: 4
+   Number of Time Points: 23
+[1] "Creating E0"
+[1] "Creating E0"
+Building Model.
+   Number of Locations: 4
+   Number of Time Points: 23
+Building Model.
+   Number of Locations: 4
+   Number of Time Points: 23
+Setting compartment sampling mode to Metropolis with chain binomial proposal.
+Setting parameter sampling mode to single Metropolis
+Running chain 4
+Setting compartment sampling mode to Metropolis with chain binomial proposal.
+Setting parameter sampling mode to single Metropolis
+Running chain 5
+Setting compartment sampling mode to Metropolis with chain binomial proposal.
+Setting parameter sampling mode to single Metropolis
+Running chain 6
+Time elapsed for ./chain_output_ebola_6.txt : 5.328 minutes
+Time elapsed for ./chain_output_ebola_4.txt : 5.854 minutes
+Time elapsed for ./chain_output_ebola_5.txt : 5.881 minutes
+Warning message:
+In if (!is.na(offset)) { :
+  the condition has length > 1 and only the first element will be used
+Warning message:
+Warning message:
+In if (!is.na(offset)) { :
+  the condition has length > 1 and only the first element will be used
+In if (!is.na(offset)) { :
+  the condition has length > 1 and only the first element will be used
+starting worker pid=27323 on localhost:11317 at 12:47:09.199
+starting worker pid=27332 on localhost:11317 at 12:47:09.383
+starting worker pid=27341 on localhost:11317 at 12:47:09.555
+Loading required package: Rcpp
+Loading required package: Rcpp
+Loading required package: Rcpp
+[1] "Creating E0"
+Building Model.
+   Number of Locations: 4
+   Number of Time Points: 30
+[1] "Creating E0"
+[1] "Creating E0"
+Building Model.
+   Number of Locations: 4
+   Number of Time Points: 30
+Building Model.
+   Number of Locations: 4
+   Number of Time Points: 30
+Setting compartment sampling mode to Metropolis with chain binomial proposal.
+Setting parameter sampling mode to single Metropolis
+Running chain 4
+Setting compartment sampling mode to Metropolis with chain binomial proposal.
+Setting parameter sampling mode to single Metropolis
+Running chain 5
+Setting compartment sampling mode to Metropolis with chain binomial proposal.
+Setting parameter sampling mode to single Metropolis
+Running chain 6
+Time elapsed for ./chain_output_ebola_5.txt : 9.778 minutes
+Time elapsed for ./chain_output_ebola_4.txt : 10.194 minutes
+Time elapsed for ./chain_output_ebola_6.txt : 10.209 minutes
+Warning message:
+In if (!is.na(offset)) { :
+  the condition has length > 1 and only the first element will be used
+Warning message:
+Warning message:
+In if (!is.na(offset)) { :
+  the condition has length > 1 and only the first element will be used
+In if (!is.na(offset)) { :
+  the condition has length > 1 and only the first element will be used
+starting worker pid=6043 on localhost:11159 at 18:59:42.850
+starting worker pid=6052 on localhost:11159 at 18:59:43.046
+starting worker pid=6061 on localhost:11159 at 18:59:43.238
+Loading required package: Rcpp
+Loading required package: Rcpp
+Loading required package: Rcpp
+[1] "Creating E0"
+Building Model.
+   Number of Locations: 4
+   Number of Time Points: 26
+[1] "Creating E0"
+[1] "Creating E0"
+Building Model.
+   Number of Locations: 4
+   Number of Time Points: 26
+Building Model.
+   Number of Locations: 4
+   Number of Time Points: 26
+Setting compartment sampling mode to Metropolis with chain binomial proposal.
+Setting parameter sampling mode to single Metropolis
+Running chain 5
+Setting compartment sampling mode to Metropolis with chain binomial proposal.
+Setting parameter sampling mode to single Metropolis
+Running chain 6
+Setting compartment sampling mode to Metropolis with chain binomial proposal.
+Setting parameter sampling mode to single Metropolis
+Running chain 4
+Time elapsed for ./chain_output_ebola_5.txt : 0.094 minutes
+Time elapsed for ./chain_output_ebola_6.txt : 0.142 minutes
+Time elapsed for ./chain_output_ebola_4.txt : 0.142 minutes
+Warning message:
+Warning message:
+In if (!is.na(offset)) { :
+  the condition has length > 1 and only the first element will be used
+In if (!is.na(offset)) { :
+  the condition has length > 1 and only the first element will be used
+Warning message:
+In if (!is.na(offset)) { :
+  the condition has length > 1 and only the first element will be used
+starting worker pid=6172 on localhost:11406 at 19:01:53.594
+starting worker pid=6181 on localhost:11406 at 19:01:53.776
+starting worker pid=6190 on localhost:11406 at 19:01:53.952
+Loading required package: Rcpp
+Loading required package: Rcpp
+Loading required package: Rcpp
+[1] "Creating E0"
+Building Model.
+   Number of Locations: 4
+   Number of Time Points: 26
+[1] "Creating E0"
+[1] "Creating E0"
+Building Model.
+   Number of Locations: 4
+   Number of Time Points: 26
+Building Model.
+   Number of Locations: 4
+   Number of Time Points: 26
+Setting compartment sampling mode to Metropolis with chain binomial proposal.
+Setting parameter sampling mode to single Metropolis
+Running chain 5
+Setting compartment sampling mode to Metropolis with chain binomial proposal.
+Setting parameter sampling mode to single Metropolis
+Running chain 6
+Setting compartment sampling mode to Metropolis with chain binomial proposal.
+Setting parameter sampling mode to single Metropolis
+Running chain 4
+Time elapsed for ./chain_output_ebola_6.txt : 0.106 minutes
+Time elapsed for ./chain_output_ebola_4.txt : 0.128 minutes
+Time elapsed for ./chain_output_ebola_5.txt : 0.131 minutes
+Warning message:
+In if (!is.na(offset)) { :
+  the condition has length > 1 and only the first element will be used
+Warning message:
+In if (!is.na(offset)) { :
+  the condition has length > 1 and only the first element will be used
+Warning message:
+In if (!is.na(offset)) { :
+  the condition has length > 1 and only the first element will be used
+starting worker pid=12217 on localhost:11783 at 13:30:55.710
+starting worker pid=12226 on localhost:11783 at 13:30:55.895
+starting worker pid=12235 on localhost:11783 at 13:30:56.071
+Loading required package: Rcpp
+Loading required package: Rcpp
+Loading required package: Rcpp
+[1] "Creating E0"
+Building Model.
+   Number of Locations: 4
+   Number of Time Points: 26
+[1] "Creating E0"
+[1] "Creating E0"
+Building Model.
+   Number of Locations: 4
+   Number of Time Points: 26
+Building Model.
+   Number of Locations: 4
+   Number of Time Points: 26
+Setting compartment sampling mode to indexed Metropolis with chain binomial proposal.
+Setting parameter sampling mode to joint Metropolis
+Setting compartment sampling mode to indexed Metropolis with chain binomial proposal.
+Setting parameter sampling mode to joint Metropolis
+Setting compartment sampling mode to indexed Metropolis with chain binomial proposal.
+Setting parameter sampling mode to joint Metropolis
+starting worker pid=12345 on localhost:11316 at 13:34:40.092
+starting worker pid=12354 on localhost:11316 at 13:34:40.276
+starting worker pid=12363 on localhost:11316 at 13:34:40.451
+Loading required package: Rcpp
+Loading required package: Rcpp
+Loading required package: Rcpp
+[1] "Creating E0"
+Building Model.
+   Number of Locations: 4
+   Number of Time Points: 26
+[1] "Creating E0"
+Building Model.
+   Number of Locations: 4
+   Number of Time Points: 26
+[1] "Creating E0"
+Building Model.
+   Number of Locations: 4
+   Number of Time Points: 26
+Setting compartment sampling mode to indexed Metropolis with chain binomial proposal.
+Setting parameter sampling mode to joint Metropolis
+Running chain 5
+Setting compartment sampling mode to indexed Metropolis with chain binomial proposal.
+Setting parameter sampling mode to joint Metropolis
+Running chain 6
+Setting compartment sampling mode to indexed Metropolis with chain binomial proposal.
+Setting parameter sampling mode to joint Metropolis
+Running chain 4
+Time elapsed for ./chain_output_ebola_5.txt : 0.026 minutes
+Time elapsed for ./chain_output_ebola_6.txt : 0.04 minutes
+Time elapsed for ./chain_output_ebola_4.txt : 0.039 minutes
+starting worker pid=12469 on localhost:11708 at 13:37:44.686
+starting worker pid=12478 on localhost:11708 at 13:37:44.866
+starting worker pid=12487 on localhost:11708 at 13:37:45.049
+Loading required package: Rcpp
+Loading required package: Rcpp
+Loading required package: Rcpp
+[1] "Creating E0"
+Building Model.
+   Number of Locations: 4
+   Number of Time Points: 26
+[1] "Creating E0"
+[1] "Creating E0"
+Building Model.
+   Number of Locations: 4
+   Number of Time Points: 26
+Building Model.
+   Number of Locations: 4
+   Number of Time Points: 26
+Setting compartment sampling mode to indexed Metropolis with chain binomial proposal.
+Setting parameter sampling mode to joint Metropolis
+Running chain 5
+Setting compartment sampling mode to indexed Metropolis with chain binomial proposal.
+Setting parameter sampling mode to joint Metropolis
+Running chain 6
+Setting compartment sampling mode to indexed Metropolis with chain binomial proposal.
+Setting parameter sampling mode to joint Metropolis
+Running chain 4
+Time elapsed for ./chain_output_ebola_6.txt : 0.026 minutes
+Time elapsed for ./chain_output_ebola_5.txt : 0.038 minutes
+Time elapsed for ./chain_output_ebola_4.txt : 0.039 minutes
+starting worker pid=12688 on localhost:11635 at 13:45:57.015
+starting worker pid=12697 on localhost:11635 at 13:45:57.200
+starting worker pid=12706 on localhost:11635 at 13:45:57.376
+Loading required package: Rcpp
+Loading required package: Rcpp
+Loading required package: Rcpp
+[1] "Creating E0"
+Building Model.
+   Number of Locations: 4
+   Number of Time Points: 26
+[1] "Creating E0"
+[1] "Creating E0"
+Building Model.
+   Number of Locations: 4
+   Number of Time Points: 26
+Building Model.
+   Number of Locations: 4
+   Number of Time Points: 26
+Setting compartment sampling mode to indexed Metropolis with chain binomial proposal.
+Setting parameter sampling mode to joint Metropolis
+Running chain 5
+Setting compartment sampling mode to indexed Metropolis with chain binomial proposal.
+Setting parameter sampling mode to joint Metropolis
+Running chain 6
+Setting compartment sampling mode to indexed Metropolis with chain binomial proposal.
+Setting parameter sampling mode to joint Metropolis
+Running chain 4
+Time elapsed for ./chain_output_ebola_6.txt : 0.029 minutes
+Time elapsed for ./chain_output_ebola_5.txt : 0.035 minutes
+Time elapsed for ./chain_output_ebola_4.txt : 0.038 minutes
+starting worker pid=12887 on localhost:11498 at 14:02:52.104
+starting worker pid=12896 on localhost:11498 at 14:02:52.280
+starting worker pid=12905 on localhost:11498 at 14:02:52.460
+Loading required package: Rcpp
+Loading required package: Rcpp
+Loading required package: Rcpp
+[1] "Creating E0"
+Building Model.
+   Number of Locations: 4
+   Number of Time Points: 26
+[1] "Creating E0"
+[1] "Creating E0"
+Building Model.
+   Number of Locations: 4
+   Number of Time Points: 26
+Building Model.
+   Number of Locations: 4
+   Number of Time Points: 26
+Setting compartment sampling mode to indexed Metropolis with chain binomial proposal.
+Setting parameter sampling mode to joint Metropolis
+Running chain 4
+Setting compartment sampling mode to indexed Metropolis with chain binomial proposal.
+Setting parameter sampling mode to joint Metropolis
+Running chain 6
+Setting compartment sampling mode to indexed Metropolis with chain binomial proposal.
+Setting parameter sampling mode to joint Metropolis
+Running chain 5
+Time elapsed for ./chain_output_ebola_6.txt : 0.026 minutes
+Time elapsed for ./chain_output_ebola_5.txt : 0.038 minutes
+Time elapsed for ./chain_output_ebola_4.txt : 0.039 minutes
+starting worker pid=13069 on localhost:11716 at 14:10:43.571
+starting worker pid=13078 on localhost:11716 at 14:10:43.752
+starting worker pid=13087 on localhost:11716 at 14:10:43.932
+Loading required package: Rcpp
+Loading required package: Rcpp
+Loading required package: Rcpp
+[1] "Creating E0"
+Building Model.
+   Number of Locations: 4
+   Number of Time Points: 26
+[1] "Creating E0"
+[1] "Creating E0"
+Building Model.
+   Number of Locations: 4
+   Number of Time Points: 26
+Building Model.
+   Number of Locations: 4
+   Number of Time Points: 26
+Setting compartment sampling mode to indexed Metropolis with chain binomial proposal.
+Setting parameter sampling mode to joint Metropolis
+Running chain 5
+Setting compartment sampling mode to indexed Metropolis with chain binomial proposal.
+Setting parameter sampling mode to joint Metropolis
+Running chain 6
+Setting compartment sampling mode to indexed Metropolis with chain binomial proposal.
+Setting parameter sampling mode to joint Metropolis
+Running chain 4
+Time elapsed for ./chain_output_ebola_5.txt : 0.026 minutes
+Time elapsed for ./chain_output_ebola_6.txt : 0.038 minutes
+Time elapsed for ./chain_output_ebola_4.txt : 0.038 minutes
+starting worker pid=14531 on localhost:11599 at 14:59:33.128
+starting worker pid=14540 on localhost:11599 at 14:59:33.308
+starting worker pid=14549 on localhost:11599 at 14:59:33.510
+Loading required package: Rcpp
+Loading required package: Rcpp
+[1] "Creating E0"
+[1] "Creating E0"
+Building Model.
+   Number of Locations: 4
+   Number of Time Points: 26
+Building Model.
+   Number of Locations: 4
+   Number of Time Points: 26
+Loading required package: Rcpp
+[1] "Creating E0"
+Setting compartment sampling mode to indexed Metropolis with chain binomial proposal.
+Setting parameter sampling mode to joint Metropolis
+Running chain 5
+Building Model.
+   Number of Locations: 4
+   Number of Time Points: 26
+Setting compartment sampling mode to indexed Metropolis with chain binomial proposal.
+Setting parameter sampling mode to joint Metropolis
+Running chain 4
+Setting compartment sampling mode to indexed Metropolis with chain binomial proposal.
+Setting parameter sampling mode to joint Metropolis
+Running chain 6
+Time elapsed for ./chain_output_ebola_4.txt : 0.035 minutes
+Time elapsed for ./chain_output_ebola_5.txt : 0.037 minutes
+Time elapsed for ./chain_output_ebola_6.txt : 0.042 minutes
