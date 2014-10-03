@@ -105,7 +105,7 @@
         <div class="col-sm-12">
           <h1>Estimating and Predicting Epidemic Behavior for the 2014 West African Ebola Outbreak</h1>
           <h4>A Quick Stochastic Spatial SEIR Modeling Approach</h4>
-          <h5><a href="http://www.public-health.uiowa.edu/people/grant-brown/">Grant Brown</a></h5>
+          <h5><a href="https://grantbrown.github.io">Grant Brown</a></h5>
           <h5><a href="http://www.public-health.uiowa.edu/people/jacob-oleson/">Jacob Oleson</a></h5>
           <h5>Last Updated:
 2014-10-02
@@ -158,11 +158,12 @@
           <p>
           Past versions of this analysis are cached in a repository on Github, and remain available: 
           <ul>
+            <li><a href="http://grantbrown.github.io/Ebola-2014-Analysis-Archive/Sep_08_2014/Ebola2014/Ebola2014.html">Sep  8, 2014</a></li>
             <li><a href="http://grantbrown.github.io/Ebola-2014-Analysis-Archive/Aug_28_2014/Ebola2014/Ebola2014.html">Aug 28, 2014</a></li>
             <li><a href="http://grantbrown.github.io/Ebola-2014-Analysis-Archive/Aug_12_2014/Ebola2014/Ebola2014.html">Aug 12, 2014</a></li>
             <li><a href="http://grantbrown.github.io/Ebola-2014-Analysis-Archive/Aug_10_2014/Ebola2014/Ebola2014.html">Aug 10, 2014</a></li>
-            <li><a href="http://grantbrown.github.io/Ebola-2014-Analysis-Archive/Aug_05_2014/Ebola2014/Ebola2014.html">Aug 5, 2014</a></li>
-            <li><a href="http://grantbrown.github.io/Ebola-2014-Analysis-Archive/Aug_03_2014/Ebola2014/Ebola2014.html">Aug 3, 2014</a></li>
+            <li><a href="http://grantbrown.github.io/Ebola-2014-Analysis-Archive/Aug_05_2014/Ebola2014/Ebola2014.html">Aug  5, 2014</a></li>
+            <li><a href="http://grantbrown.github.io/Ebola-2014-Analysis-Archive/Aug_03_2014/Ebola2014/Ebola2014.html">Aug  3, 2014</a></li>
             <li><a href="http://grantbrown.github.io/Ebola-2014-Analysis-Archive/Jul_30_2014/Ebola2014/Ebola2014.html">Jul 30, 2014</a></li>
             <li><a href="http://grantbrown.github.io/Ebola-2014-Analysis-Archive/Jul_29_2014/Ebola2014/Ebola2014.html">Jul 29, 2014</a></li>
             <li><a href="http://grantbrown.github.io/Ebola-2014-Analysis-Archive/Jul_25_2014/Ebola2014/Ebola2014.html">Jul 25, 2014</a></li>
@@ -178,6 +179,8 @@
           <h3>Summary of Recent Changes</h3>
           </a>
           <ul>
+            <li><strong>Oct 2</strong> There have been a lot of changes for this release. The temporal component was dramatically simplified, so we're fitting a baseline SEIR model with a different intensity parameter for each nation. In addition, the spatial structure was generalized to allow a separate mixing parameter for each pair of countries. Finally, three different methods of calculating R0 are compared, and a lot of behind the scenes changes to libspatialSEIR and the R API took place. Upcoming changes include the introduction of "hybrid" samplers which may help deal with some of the autocorrelation, seen for example in the E to I transition probability chains. Despite the model changes, we continue to see a dramatic and prolonged predicted increase in cases.  </li>
+            <li><strong>Sep 8</strong> Fixed R0 calculations, which were showing the per-report R0 components, but didn't account for infection length. They have now been appropriately integrated over time.</li>
             <li><strong>Sep 4</strong> The situation continues to worsen, which is especially worrying given that the data used are almost certainly undercounts. Removed the polynomial analysis in favor of the spline basis analysis to save on computation time. </li>
             <li><strong>Aug 31</strong> Basic reproductive number clearly very heterogenous between countries. Other interpretations TBD.</li>
             <li><strong>Aug 28</strong> With the addition of Nigeria and new data, the situation appears dire across the board, especially in Liberia. The basic reproductive number calculations no longer look reasonable, so more must be done to estimate them separately for each country. The changes may also be due to recent changes to the R0 estimation code, which must now be reevaluated. This work is underway. </li>
@@ -412,10 +415,10 @@ With data in hand, let's begin where every analysis should begin: graphs.
  <thead>
   <tr>
    <th align="left">   </th>
-   <th align="right"> &nbsp;&nbsp Guinea &nbsp;&nbsp; </th>
-   <th align="right"> &nbsp;&nbsp Liberia &nbsp;&nbsp; </th>
-   <th align="right"> &nbsp;&nbsp Sierra Leone &nbsp;&nbsp; </th>
-   <th align="right"> &nbsp;&nbsp Nigeria &nbsp;&nbsp; </th>
+   <th align="right"> &nbsp;&nbsp; Guinea &nbsp;&nbsp; </th>
+   <th align="right"> &nbsp;&nbsp; Liberia &nbsp;&nbsp; </th>
+   <th align="right"> &nbsp;&nbsp; Sierra Leone &nbsp;&nbsp; </th>
+   <th align="right"> &nbsp;&nbsp; Nigeria &nbsp;&nbsp; </th>
   </tr>
  </thead>
 <tbody>
