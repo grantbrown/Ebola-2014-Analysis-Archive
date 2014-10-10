@@ -164,15 +164,15 @@ library(parallel) # Load the parallel library to enable multiple chains to be ru
 
 ## Define Document Compilation Parameters
 
-#documentCompilationMode = "release"
-documentCompilationMode = "debug"
+documentCompilationMode = "release"
+#documentCompilationMode = "debug"
 modelDF = 0
 pred.days = 30
 
 
 ## Compute number of samples/batches
 numBurnInBatches =      ifelse(documentCompilationMode == "release", 1000,  1)
-numConvergenceBatches = ifelse(documentCompilationMode == "release", 3000,  10)
+numConvergenceBatches = ifelse(documentCompilationMode == "release", 1000,  10)
 convergenceBatchSize =  ifelse(documentCompilationMode == "release", 1000, 100) 
 extraR0Iterations =     ifelse(documentCompilationMode == "release", 200,   10)
 iterationStride =       ifelse(documentCompilationMode == "release", 750,   50)
@@ -182,8 +182,8 @@ targetDaysPerRecord = 6
 url = 'http://en.wikipedia.org/wiki/West_Africa_Ebola_virus_outbreak'
 tbls = readHTMLTable(url)
 # These lines changes depending on the page formatting.
-table1 = tbls[[8]] 
-table2 = tbls[[9]]
+table1 = tbls[[7]] 
+table2 = tbls[[8]]
 
 dat = rbind(table1[2:nrow(table1),c(1, 4, 6, 8, 10,12)],
             table2[2:nrow(table2),c(1, 4, 6, 8, 10,12)])
@@ -218,6 +218,7 @@ cleanData = function(dataColumn, ascendingOrder)
 {
     # Remove commas
     dataColumn = gsub(",", "", dataColumn, fixed = TRUE)
+    dataColumn = gsub("≥", "", dataColumn, fixed = TRUE)
     # Remove +1 -1 stuff
     charCol = as.character(
       lapply(
@@ -762,6 +763,7 @@ buildAndRunModel = function(params)
   if (modelDF > 0)
   {
       SEIRmodel$useDecorrelation = 500
+      SEIRmodel$performHybridStep = 10
   }
   # Run Simulation
   cat(paste("Running chain ", params[["chainNumber"]], "\n", sep =""))
