@@ -164,8 +164,8 @@ library(parallel) # Load the parallel library to enable multiple chains to be ru
 
 ## Define Document Compilation Parameters
 
-documentCompilationMode = "release"
-#documentCompilationMode = "debug"
+#documentCompilationMode = "release"
+documentCompilationMode = "debug"
 modelDF = 0
 pred.days = 15
 
@@ -182,8 +182,8 @@ targetDaysPerRecord = 6
 url = 'http://en.wikipedia.org/w/index.php?title=Ebola_virus_epidemic_in_West_Africa&redirect=no'
 tbls = readHTMLTable(url)
 # These lines changes depending on the page formatting.
-table1 = tbls[[6]] 
-table2 = tbls[[7]]
+table1 = tbls[[7]] 
+table2 = tbls[[8]]
 
 dat = rbind(table1[2:nrow(table1),c(1, 4, 6, 8, 10,12)],
             table2[2:nrow(table2),c(1, 4, 6, 8, 10,12)])
