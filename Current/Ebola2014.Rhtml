@@ -164,17 +164,17 @@ library(parallel) # Load the parallel library to enable multiple chains to be ru
 
 ## Define Document Compilation Parameters
 
-#documentCompilationMode = "release"
-documentCompilationMode = "debug"
+documentCompilationMode = "release"
+#documentCompilationMode = "debug"
 modelDF = 0
 pred.days = 15
 
 
 ## Compute number of samples/batches
 numBurnInBatches =      ifelse(documentCompilationMode == "release", 1000,  1)
-numConvergenceBatches = ifelse(documentCompilationMode == "release", 3000,  10)
+numConvergenceBatches = ifelse(documentCompilationMode == "release", 6000,  10)
 convergenceBatchSize =  ifelse(documentCompilationMode == "release", 1000, 100) 
-extraR0Iterations =     ifelse(documentCompilationMode == "release", 300,   10)
+extraR0Iterations =     ifelse(documentCompilationMode == "release", 500,   10)
 iterationStride =       ifelse(documentCompilationMode == "release", 750,   50)
 targetDaysPerRecord = 6
 
@@ -759,11 +759,11 @@ buildAndRunModel = function(params)
   # Burn in tuning parameters
   runSimulation(SEIRmodel, numBatches = numBurnInBatches)
   SEIRmodel$compartmentSamplingMode = 16
-  SEIRmodel$parameterSamplingMode = 8
+  SEIRmodel$parameterSamplingMode = 7
   if (modelDF > 0)
   {
       SEIRmodel$useDecorrelation = 0
-      SEIRmodel$performHybridStep = 0
+      SEIRmodel$performHybridStep = 100
   }
   # Run Simulation
   cat(paste("Running chain ", params[["chainNumber"]], "\n", sep =""))
