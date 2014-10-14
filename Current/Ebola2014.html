@@ -108,7 +108,7 @@
           <h5><a href="https://grantbrown.github.io">Grant Brown</a></h5>
           <h5><a href="http://www.public-health.uiowa.edu/people/jacob-oleson/">Jacob Oleson</a></h5>
           <h5>Last Updated:
-2014-10-12
+2014-10-14
 </h5>
         </div>
       </div>
@@ -253,8 +253,8 @@
 <span class="hl std">url</span> <span class="hl kwb">=</span> <span class="hl str">'http://en.wikipedia.org/w/index.php?title=Ebola_virus_epidemic_in_West_Africa&amp;redirect=no'</span>
 <span class="hl std">tbls</span> <span class="hl kwb">=</span> <span class="hl kwd">readHTMLTable</span><span class="hl std">(url)</span>
 <span class="hl com"># These lines changes depending on the page formatting.</span>
-<span class="hl std">table1</span> <span class="hl kwb">=</span> <span class="hl std">tbls[[</span><span class="hl num">6</span><span class="hl std">]]</span>
-<span class="hl std">table2</span> <span class="hl kwb">=</span> <span class="hl std">tbls[[</span><span class="hl num">7</span><span class="hl std">]]</span>
+<span class="hl std">table1</span> <span class="hl kwb">=</span> <span class="hl std">tbls[[</span><span class="hl num">7</span><span class="hl std">]]</span>
+<span class="hl std">table2</span> <span class="hl kwb">=</span> <span class="hl std">tbls[[</span><span class="hl num">8</span><span class="hl std">]]</span>
 
 <span class="hl std">dat</span> <span class="hl kwb">=</span> <span class="hl kwd">rbind</span><span class="hl std">(table1[</span><span class="hl num">2</span><span class="hl opt">:</span><span class="hl kwd">nrow</span><span class="hl std">(table1),</span><span class="hl kwd">c</span><span class="hl std">(</span><span class="hl num">1</span><span class="hl std">,</span> <span class="hl num">4</span><span class="hl std">,</span> <span class="hl num">6</span><span class="hl std">,</span> <span class="hl num">8</span><span class="hl std">,</span> <span class="hl num">10</span><span class="hl std">,</span><span class="hl num">12</span><span class="hl std">)],</span>
             <span class="hl std">table2[</span><span class="hl num">2</span><span class="hl opt">:</span><span class="hl kwd">nrow</span><span class="hl std">(table2),</span><span class="hl kwd">c</span><span class="hl std">(</span><span class="hl num">1</span><span class="hl std">,</span> <span class="hl num">4</span><span class="hl std">,</span> <span class="hl num">6</span><span class="hl std">,</span> <span class="hl num">8</span><span class="hl std">,</span> <span class="hl num">10</span><span class="hl std">,</span><span class="hl num">12</span><span class="hl std">)])</span>
@@ -1322,7 +1322,7 @@ temporal trend.
   <span class="hl kwa">if</span> <span class="hl std">(modelDF</span> <span class="hl opt">&gt;</span> <span class="hl num">0</span><span class="hl std">)</span>
   <span class="hl std">{</span>
       <span class="hl std">SEIRmodel</span><span class="hl opt">$</span><span class="hl std">useDecorrelation</span> <span class="hl kwb">=</span> <span class="hl num">0</span>
-      <span class="hl std">SEIRmodel</span><span class="hl opt">$</span><span class="hl std">performHybridStep</span> <span class="hl kwb">=</span> <span class="hl num">1000</span>
+      <span class="hl std">SEIRmodel</span><span class="hl opt">$</span><span class="hl std">performHybridStep</span> <span class="hl kwb">=</span> <span class="hl num">0</span>
   <span class="hl std">}</span>
   <span class="hl com"># Run Simulation</span>
   <span class="hl kwd">cat</span><span class="hl std">(</span><span class="hl kwd">paste</span><span class="hl std">(</span><span class="hl str">&quot;Running chain &quot;</span><span class="hl std">, params[[</span><span class="hl str">&quot;chainNumber&quot;</span><span class="hl std">]],</span> <span class="hl str">&quot;\n&quot;</span><span class="hl std">,</span> <span class="hl kwc">sep</span> <span class="hl std">=</span><span class="hl str">&quot;&quot;</span><span class="hl std">))</span>
@@ -2158,14 +2158,14 @@ It is sometimes helpful to visualize exponential growth on the log scale.
    <td align="left"> &nbsp;2014-10-07&nbsp; </td>
    <td align="center"> 260 </td>
    <td align="center"> 900 </td>
-   <td align="center"> 796 </td>
+   <td align="center"> 795 </td>
    <td align="center"> 0 </td>
   </tr>
   <tr>
    <td align="left"> &nbsp;2014-10-09&nbsp; </td>
    <td align="center"> 287 </td>
    <td align="center"> 900 </td>
-   <td align="center"> 887 </td>
+   <td align="center"> 886 </td>
    <td align="center"> 1 </td>
   </tr>
   <tr>
@@ -2179,21 +2179,21 @@ It is sometimes helpful to visualize exponential growth on the log scale.
    <td align="left"> &nbsp;2014-10-13&nbsp; </td>
    <td align="center"> 334 </td>
    <td align="center"> 884 </td>
-   <td align="center"> 937 </td>
+   <td align="center"> 936 </td>
    <td align="center"> 3 </td>
   </tr>
   <tr>
    <td align="left"> &nbsp;2014-10-15&nbsp; </td>
-   <td align="center"> 391 </td>
+   <td align="center"> 390 </td>
    <td align="center"> 948 </td>
-   <td align="center"> 998 </td>
+   <td align="center"> 997 </td>
    <td align="center"> 5 </td>
   </tr>
   <tr>
    <td align="left"> &nbsp;2014-10-17&nbsp; </td>
-   <td align="center"> 472 </td>
-   <td align="center"> 1067 </td>
-   <td align="center"> 1118 </td>
+   <td align="center"> 471 </td>
+   <td align="center"> 1065 </td>
+   <td align="center"> 1117 </td>
    <td align="center"> 7 </td>
   </tr>
 </tbody>
@@ -6954,7 +6954,7 @@ var alldata_pred =
  "fillKey": "lt124" 
 },
 "LBR": {
- "fillKey": "lt373" 
+ "fillKey": "lt372" 
 },
 "SLE": {
  "fillKey": "lt248" 
@@ -6968,7 +6968,7 @@ var alldata_pred =
  "fillKey": "lt124" 
 },
 "LBR": {
- "fillKey": "lt373" 
+ "fillKey": "lt372" 
 },
 "SLE": {
  "fillKey": "lt248" 
@@ -6982,7 +6982,7 @@ var alldata_pred =
  "fillKey": "lt124" 
 },
 "LBR": {
- "fillKey": "lt373" 
+ "fillKey": "lt372" 
 },
 "SLE": {
  "fillKey": "lt248" 
@@ -6996,7 +6996,7 @@ var alldata_pred =
  "fillKey": "lt124" 
 },
 "LBR": {
- "fillKey": "lt373" 
+ "fillKey": "lt372" 
 },
 "SLE": {
  "fillKey": "lt248" 
@@ -7010,7 +7010,7 @@ var alldata_pred =
  "fillKey": "lt124" 
 },
 "LBR": {
- "fillKey": "lt373" 
+ "fillKey": "lt372" 
 },
 "SLE": {
  "fillKey": "lt248" 
@@ -7024,7 +7024,7 @@ var alldata_pred =
  "fillKey": "lt124" 
 },
 "LBR": {
- "fillKey": "lt373" 
+ "fillKey": "lt372" 
 },
 "SLE": {
  "fillKey": "lt248" 
@@ -7038,7 +7038,7 @@ var alldata_pred =
  "fillKey": "lt124" 
 },
 "LBR": {
- "fillKey": "lt373" 
+ "fillKey": "lt372" 
 },
 "SLE": {
  "fillKey": "lt248" 
@@ -7052,7 +7052,7 @@ var alldata_pred =
  "fillKey": "lt124" 
 },
 "LBR": {
- "fillKey": "lt373" 
+ "fillKey": "lt372" 
 },
 "SLE": {
  "fillKey": "lt248" 
@@ -7066,7 +7066,7 @@ var alldata_pred =
  "fillKey": "lt124" 
 },
 "LBR": {
- "fillKey": "lt373" 
+ "fillKey": "lt372" 
 },
 "SLE": {
  "fillKey": "lt248" 
@@ -7080,7 +7080,7 @@ var alldata_pred =
  "fillKey": "lt124" 
 },
 "LBR": {
- "fillKey": "lt497" 
+ "fillKey": "lt496" 
 },
 "SLE": {
  "fillKey": "lt248" 
@@ -7094,7 +7094,7 @@ var alldata_pred =
  "fillKey": "lt124" 
 },
 "LBR": {
- "fillKey": "lt497" 
+ "fillKey": "lt496" 
 },
 "SLE": {
  "fillKey": "lt248" 
@@ -7108,7 +7108,7 @@ var alldata_pred =
  "fillKey": "lt124" 
 },
 "LBR": {
- "fillKey": "lt497" 
+ "fillKey": "lt496" 
 },
 "SLE": {
  "fillKey": "lt248" 
@@ -7122,7 +7122,7 @@ var alldata_pred =
  "fillKey": "lt124" 
 },
 "LBR": {
- "fillKey": "lt497" 
+ "fillKey": "lt496" 
 },
 "SLE": {
  "fillKey": "lt248" 
@@ -7136,7 +7136,7 @@ var alldata_pred =
  "fillKey": "lt124" 
 },
 "LBR": {
- "fillKey": "lt497" 
+ "fillKey": "lt496" 
 },
 "SLE": {
  "fillKey": "lt248" 
@@ -7150,7 +7150,7 @@ var alldata_pred =
  "fillKey": "lt124" 
 },
 "LBR": {
- "fillKey": "lt497" 
+ "fillKey": "lt496" 
 },
 "SLE": {
  "fillKey": "lt248" 
@@ -7164,7 +7164,7 @@ var alldata_pred =
  "fillKey": "lt124" 
 },
 "LBR": {
- "fillKey": "lt497" 
+ "fillKey": "lt496" 
 },
 "SLE": {
  "fillKey": "lt248" 
@@ -7178,7 +7178,7 @@ var alldata_pred =
  "fillKey": "lt124" 
 },
 "LBR": {
- "fillKey": "lt497" 
+ "fillKey": "lt496" 
 },
 "SLE": {
  "fillKey": "lt248" 
@@ -7192,7 +7192,7 @@ var alldata_pred =
  "fillKey": "lt124" 
 },
 "LBR": {
- "fillKey": "lt497" 
+ "fillKey": "lt496" 
 },
 "SLE": {
  "fillKey": "lt248" 
@@ -7209,7 +7209,7 @@ var alldata_pred =
  "fillKey": "lt621" 
 },
 "SLE": {
- "fillKey": "lt373" 
+ "fillKey": "lt372" 
 },
 "NGA": {
  "fillKey": "lt124" 
@@ -7223,7 +7223,7 @@ var alldata_pred =
  "fillKey": "lt621" 
 },
 "SLE": {
- "fillKey": "lt373" 
+ "fillKey": "lt372" 
 },
 "NGA": {
  "fillKey": "lt124" 
@@ -7237,7 +7237,7 @@ var alldata_pred =
  "fillKey": "lt621" 
 },
 "SLE": {
- "fillKey": "lt373" 
+ "fillKey": "lt372" 
 },
 "NGA": {
  "fillKey": "lt124" 
@@ -7251,7 +7251,7 @@ var alldata_pred =
  "fillKey": "lt621" 
 },
 "SLE": {
- "fillKey": "lt373" 
+ "fillKey": "lt372" 
 },
 "NGA": {
  "fillKey": "lt124" 
@@ -7265,7 +7265,7 @@ var alldata_pred =
  "fillKey": "lt621" 
 },
 "SLE": {
- "fillKey": "lt373" 
+ "fillKey": "lt372" 
 },
 "NGA": {
  "fillKey": "lt124" 
@@ -7279,7 +7279,7 @@ var alldata_pred =
  "fillKey": "lt745" 
 },
 "SLE": {
- "fillKey": "lt373" 
+ "fillKey": "lt372" 
 },
 "NGA": {
  "fillKey": "lt124" 
@@ -7293,7 +7293,7 @@ var alldata_pred =
  "fillKey": "lt745" 
 },
 "SLE": {
- "fillKey": "lt373" 
+ "fillKey": "lt372" 
 },
 "NGA": {
  "fillKey": "lt124" 
@@ -7307,7 +7307,7 @@ var alldata_pred =
  "fillKey": "lt745" 
 },
 "SLE": {
- "fillKey": "lt373" 
+ "fillKey": "lt372" 
 },
 "NGA": {
  "fillKey": "lt124" 
@@ -7321,7 +7321,7 @@ var alldata_pred =
  "fillKey": "lt745" 
 },
 "SLE": {
- "fillKey": "lt373" 
+ "fillKey": "lt372" 
 },
 "NGA": {
  "fillKey": "lt124" 
@@ -7335,7 +7335,7 @@ var alldata_pred =
  "fillKey": "lt869" 
 },
 "SLE": {
- "fillKey": "lt373" 
+ "fillKey": "lt372" 
 },
 "NGA": {
  "fillKey": "lt124" 
@@ -7349,7 +7349,7 @@ var alldata_pred =
  "fillKey": "lt869" 
 },
 "SLE": {
- "fillKey": "lt373" 
+ "fillKey": "lt372" 
 },
 "NGA": {
  "fillKey": "lt124" 
@@ -7363,7 +7363,7 @@ var alldata_pred =
  "fillKey": "lt869" 
 },
 "SLE": {
- "fillKey": "lt373" 
+ "fillKey": "lt372" 
 },
 "NGA": {
  "fillKey": "lt124" 
@@ -7377,7 +7377,7 @@ var alldata_pred =
  "fillKey": "lt869" 
 },
 "SLE": {
- "fillKey": "lt373" 
+ "fillKey": "lt372" 
 },
 "NGA": {
  "fillKey": "lt124" 
@@ -7391,7 +7391,7 @@ var alldata_pred =
  "fillKey": "lt869" 
 },
 "SLE": {
- "fillKey": "lt373" 
+ "fillKey": "lt372" 
 },
 "NGA": {
  "fillKey": "lt124" 
@@ -7405,7 +7405,7 @@ var alldata_pred =
  "fillKey": "lt869" 
 },
 "SLE": {
- "fillKey": "lt373" 
+ "fillKey": "lt372" 
 },
 "NGA": {
  "fillKey": "lt124" 
@@ -7419,7 +7419,7 @@ var alldata_pred =
  "fillKey": "lt869" 
 },
 "SLE": {
- "fillKey": "lt373" 
+ "fillKey": "lt372" 
 },
 "NGA": {
  "fillKey": "lt124" 
@@ -7433,7 +7433,7 @@ var alldata_pred =
  "fillKey": "lt869" 
 },
 "SLE": {
- "fillKey": "lt373" 
+ "fillKey": "lt372" 
 },
 "NGA": {
  "fillKey": "lt124" 
@@ -7447,7 +7447,7 @@ var alldata_pred =
  "fillKey": "lt869" 
 },
 "SLE": {
- "fillKey": "lt373" 
+ "fillKey": "lt372" 
 },
 "NGA": {
  "fillKey": "lt124" 
@@ -7461,7 +7461,7 @@ var alldata_pred =
  "fillKey": "lt869" 
 },
 "SLE": {
- "fillKey": "lt497" 
+ "fillKey": "lt496" 
 },
 "NGA": {
  "fillKey": "lt124" 
@@ -7475,7 +7475,7 @@ var alldata_pred =
  "fillKey": "lt869" 
 },
 "SLE": {
- "fillKey": "lt497" 
+ "fillKey": "lt496" 
 },
 "NGA": {
  "fillKey": "lt124" 
@@ -7489,7 +7489,7 @@ var alldata_pred =
  "fillKey": "lt869" 
 },
 "SLE": {
- "fillKey": "lt497" 
+ "fillKey": "lt496" 
 },
 "NGA": {
  "fillKey": "lt124" 
@@ -7503,7 +7503,7 @@ var alldata_pred =
  "fillKey": "lt869" 
 },
 "SLE": {
- "fillKey": "lt497" 
+ "fillKey": "lt496" 
 },
 "NGA": {
  "fillKey": "lt124" 
@@ -7514,10 +7514,10 @@ var alldata_pred =
  "fillKey": "lt248" 
 },
 "LBR": {
- "fillKey": "lt994" 
+ "fillKey": "lt993" 
 },
 "SLE": {
- "fillKey": "lt497" 
+ "fillKey": "lt496" 
 },
 "NGA": {
  "fillKey": "lt124" 
@@ -7528,10 +7528,10 @@ var alldata_pred =
  "fillKey": "lt248" 
 },
 "LBR": {
- "fillKey": "lt994" 
+ "fillKey": "lt993" 
 },
 "SLE": {
- "fillKey": "lt497" 
+ "fillKey": "lt496" 
 },
 "NGA": {
  "fillKey": "lt124" 
@@ -7542,10 +7542,10 @@ var alldata_pred =
  "fillKey": "lt248" 
 },
 "LBR": {
- "fillKey": "lt994" 
+ "fillKey": "lt993" 
 },
 "SLE": {
- "fillKey": "lt497" 
+ "fillKey": "lt496" 
 },
 "NGA": {
  "fillKey": "lt124" 
@@ -7556,10 +7556,10 @@ var alldata_pred =
  "fillKey": "lt248" 
 },
 "LBR": {
- "fillKey": "lt994" 
+ "fillKey": "lt993" 
 },
 "SLE": {
- "fillKey": "lt497" 
+ "fillKey": "lt496" 
 },
 "NGA": {
  "fillKey": "lt124" 
@@ -7570,10 +7570,10 @@ var alldata_pred =
  "fillKey": "lt248" 
 },
 "LBR": {
- "fillKey": "lt994" 
+ "fillKey": "lt993" 
 },
 "SLE": {
- "fillKey": "lt497" 
+ "fillKey": "lt496" 
 },
 "NGA": {
  "fillKey": "lt124" 
@@ -7584,10 +7584,10 @@ var alldata_pred =
  "fillKey": "lt248" 
 },
 "LBR": {
- "fillKey": "lt994" 
+ "fillKey": "lt993" 
 },
 "SLE": {
- "fillKey": "lt497" 
+ "fillKey": "lt496" 
 },
 "NGA": {
  "fillKey": "lt124" 
@@ -7598,10 +7598,10 @@ var alldata_pred =
  "fillKey": "lt248" 
 },
 "LBR": {
- "fillKey": "lt994" 
+ "fillKey": "lt993" 
 },
 "SLE": {
- "fillKey": "lt497" 
+ "fillKey": "lt496" 
 },
 "NGA": {
  "fillKey": "lt124" 
@@ -7615,7 +7615,7 @@ var alldata_pred =
  "fillKey": "lt1120" 
 },
 "SLE": {
- "fillKey": "lt497" 
+ "fillKey": "lt496" 
 },
 "NGA": {
  "fillKey": "lt124" 
@@ -7629,7 +7629,7 @@ var alldata_pred =
  "fillKey": "lt1120" 
 },
 "SLE": {
- "fillKey": "lt497" 
+ "fillKey": "lt496" 
 },
 "NGA": {
  "fillKey": "lt124" 
@@ -7643,7 +7643,7 @@ var alldata_pred =
  "fillKey": "lt1120" 
 },
 "SLE": {
- "fillKey": "lt497" 
+ "fillKey": "lt496" 
 },
 "NGA": {
  "fillKey": "lt124" 
@@ -7657,7 +7657,7 @@ var alldata_pred =
  "fillKey": "lt1120" 
 },
 "SLE": {
- "fillKey": "lt497" 
+ "fillKey": "lt496" 
 },
 "NGA": {
  "fillKey": "lt124" 
@@ -7671,7 +7671,7 @@ var alldata_pred =
  "fillKey": "lt1120" 
 },
 "SLE": {
- "fillKey": "lt497" 
+ "fillKey": "lt621" 
 },
 "NGA": {
  "fillKey": "lt124" 
@@ -7696,7 +7696,7 @@ var alldata_pred =
  "fillKey": "lt248" 
 },
 "LBR": {
- "fillKey": "lt994" 
+ "fillKey": "lt993" 
 },
 "SLE": {
  "fillKey": "lt621" 
@@ -7710,7 +7710,7 @@ var alldata_pred =
  "fillKey": "lt248" 
 },
 "LBR": {
- "fillKey": "lt994" 
+ "fillKey": "lt993" 
 },
 "SLE": {
  "fillKey": "lt621" 
@@ -7724,7 +7724,7 @@ var alldata_pred =
  "fillKey": "lt248" 
 },
 "LBR": {
- "fillKey": "lt994" 
+ "fillKey": "lt993" 
 },
 "SLE": {
  "fillKey": "lt621" 
@@ -7738,7 +7738,7 @@ var alldata_pred =
  "fillKey": "lt248" 
 },
 "LBR": {
- "fillKey": "lt994" 
+ "fillKey": "lt993" 
 },
 "SLE": {
  "fillKey": "lt621" 
@@ -7752,7 +7752,7 @@ var alldata_pred =
  "fillKey": "lt248" 
 },
 "LBR": {
- "fillKey": "lt994" 
+ "fillKey": "lt993" 
 },
 "SLE": {
  "fillKey": "lt621" 
@@ -7766,7 +7766,7 @@ var alldata_pred =
  "fillKey": "lt248" 
 },
 "LBR": {
- "fillKey": "lt994" 
+ "fillKey": "lt993" 
 },
 "SLE": {
  "fillKey": "lt621" 
@@ -7780,7 +7780,7 @@ var alldata_pred =
  "fillKey": "lt248" 
 },
 "LBR": {
- "fillKey": "lt994" 
+ "fillKey": "lt993" 
 },
 "SLE": {
  "fillKey": "lt621" 
@@ -7794,7 +7794,7 @@ var alldata_pred =
  "fillKey": "lt248" 
 },
 "LBR": {
- "fillKey": "lt994" 
+ "fillKey": "lt993" 
 },
 "SLE": {
  "fillKey": "lt745" 
@@ -7808,7 +7808,7 @@ var alldata_pred =
  "fillKey": "lt248" 
 },
 "LBR": {
- "fillKey": "lt994" 
+ "fillKey": "lt993" 
 },
 "SLE": {
  "fillKey": "lt745" 
@@ -7822,7 +7822,7 @@ var alldata_pred =
  "fillKey": "lt248" 
 },
 "LBR": {
- "fillKey": "lt994" 
+ "fillKey": "lt993" 
 },
 "SLE": {
  "fillKey": "lt745" 
@@ -7836,7 +7836,7 @@ var alldata_pred =
  "fillKey": "lt248" 
 },
 "LBR": {
- "fillKey": "lt994" 
+ "fillKey": "lt993" 
 },
 "SLE": {
  "fillKey": "lt745" 
@@ -7847,10 +7847,10 @@ var alldata_pred =
 },
 "194": {
  "GIN": {
- "fillKey": "lt373" 
+ "fillKey": "lt372" 
 },
 "LBR": {
- "fillKey": "lt994" 
+ "fillKey": "lt993" 
 },
 "SLE": {
  "fillKey": "lt869" 
@@ -7861,10 +7861,10 @@ var alldata_pred =
 },
 "195": {
  "GIN": {
- "fillKey": "lt373" 
+ "fillKey": "lt372" 
 },
 "LBR": {
- "fillKey": "lt994" 
+ "fillKey": "lt993" 
 },
 "SLE": {
  "fillKey": "lt869" 
@@ -7875,10 +7875,10 @@ var alldata_pred =
 },
 "196": {
  "GIN": {
- "fillKey": "lt373" 
+ "fillKey": "lt372" 
 },
 "LBR": {
- "fillKey": "lt994" 
+ "fillKey": "lt993" 
 },
 "SLE": {
  "fillKey": "lt869" 
@@ -7889,13 +7889,13 @@ var alldata_pred =
 },
 "197": {
  "GIN": {
- "fillKey": "lt373" 
+ "fillKey": "lt372" 
 },
 "LBR": {
- "fillKey": "lt994" 
+ "fillKey": "lt993" 
 },
 "SLE": {
- "fillKey": "lt994" 
+ "fillKey": "lt993" 
 },
 "NGA": {
  "fillKey": "lt124" 
@@ -7903,13 +7903,13 @@ var alldata_pred =
 },
 "198": {
  "GIN": {
- "fillKey": "lt373" 
+ "fillKey": "lt372" 
 },
 "LBR": {
- "fillKey": "lt994" 
+ "fillKey": "lt993" 
 },
 "SLE": {
- "fillKey": "lt994" 
+ "fillKey": "lt993" 
 },
 "NGA": {
  "fillKey": "lt124" 
@@ -7917,13 +7917,13 @@ var alldata_pred =
 },
 "199": {
  "GIN": {
- "fillKey": "lt373" 
+ "fillKey": "lt372" 
 },
 "LBR": {
- "fillKey": "lt994" 
+ "fillKey": "lt993" 
 },
 "SLE": {
- "fillKey": "lt994" 
+ "fillKey": "lt993" 
 },
 "NGA": {
  "fillKey": "lt124" 
@@ -7931,13 +7931,13 @@ var alldata_pred =
 },
 "200": {
  "GIN": {
- "fillKey": "lt373" 
+ "fillKey": "lt372" 
 },
 "LBR": {
- "fillKey": "lt994" 
+ "fillKey": "lt993" 
 },
 "SLE": {
- "fillKey": "lt994" 
+ "fillKey": "lt993" 
 },
 "NGA": {
  "fillKey": "lt124" 
@@ -7945,13 +7945,13 @@ var alldata_pred =
 },
 "201": {
  "GIN": {
- "fillKey": "lt373" 
+ "fillKey": "lt372" 
 },
 "LBR": {
- "fillKey": "lt994" 
+ "fillKey": "lt993" 
 },
 "SLE": {
- "fillKey": "lt994" 
+ "fillKey": "lt993" 
 },
 "NGA": {
  "fillKey": "lt124" 
@@ -7959,13 +7959,13 @@ var alldata_pred =
 },
 "202": {
  "GIN": {
- "fillKey": "lt373" 
+ "fillKey": "lt372" 
 },
 "LBR": {
- "fillKey": "lt994" 
+ "fillKey": "lt993" 
 },
 "SLE": {
- "fillKey": "lt994" 
+ "fillKey": "lt993" 
 },
 "NGA": {
  "fillKey": "lt124" 
@@ -7973,10 +7973,10 @@ var alldata_pred =
 },
 "203": {
  "GIN": {
- "fillKey": "lt497" 
+ "fillKey": "lt496" 
 },
 "LBR": {
- "fillKey": "lt994" 
+ "fillKey": "lt993" 
 },
 "SLE": {
  "fillKey": "lt1120" 
@@ -7987,7 +7987,7 @@ var alldata_pred =
 },
 "204": {
  "GIN": {
- "fillKey": "lt497" 
+ "fillKey": "lt496" 
 },
 "LBR": {
  "fillKey": "lt1120" 
@@ -8001,7 +8001,7 @@ var alldata_pred =
 },
 "205": {
  "GIN": {
- "fillKey": "lt497" 
+ "fillKey": "lt496" 
 },
 "LBR": {
  "fillKey": "lt1120" 
@@ -8244,12 +8244,12 @@ var chartParams_pred={"dom": "zoom_map_pred",
  "defaultFill": "#ffffef",
 "lt124": "#ffffef",
 "lt248": "#fff7bf",
-"lt373": "#fee39f",
-"lt497": "#fec45f",
+"lt372": "#fee39f",
+"lt496": "#fec45f",
 "lt621": "#fe993f",
 "lt745": "#ec702f",
 "lt869": "#cc4c1f",
-"lt994": "#993402",
+"lt993": "#993402",
 "lt1120": "#662520" 
 }
 ,
