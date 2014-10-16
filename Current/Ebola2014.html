@@ -108,7 +108,7 @@
           <h5><a href="https://grantbrown.github.io">Grant Brown</a></h5>
           <h5><a href="http://www.public-health.uiowa.edu/people/jacob-oleson/">Jacob Oleson</a></h5>
           <h5>Last Updated:
-2014-10-15
+2014-10-16
 </h5>
         </div>
       </div>
@@ -243,7 +243,7 @@
 
 <span class="hl com">## Compute number of samples/batches</span>
 <span class="hl std">numBurnInBatches</span> <span class="hl kwb">=</span>      <span class="hl kwd">ifelse</span><span class="hl std">(documentCompilationMode</span> <span class="hl opt">==</span> <span class="hl str">&quot;release&quot;</span><span class="hl std">,</span> <span class="hl num">1000</span><span class="hl std">,</span>  <span class="hl num">1</span><span class="hl std">)</span>
-<span class="hl std">numConvergenceBatches</span> <span class="hl kwb">=</span> <span class="hl kwd">ifelse</span><span class="hl std">(documentCompilationMode</span> <span class="hl opt">==</span> <span class="hl str">&quot;release&quot;</span><span class="hl std">,</span> <span class="hl num">6000</span><span class="hl std">,</span>  <span class="hl num">10</span><span class="hl std">)</span>
+<span class="hl std">numConvergenceBatches</span> <span class="hl kwb">=</span> <span class="hl kwd">ifelse</span><span class="hl std">(documentCompilationMode</span> <span class="hl opt">==</span> <span class="hl str">&quot;release&quot;</span><span class="hl std">,</span> <span class="hl num">3000</span><span class="hl std">,</span>  <span class="hl num">10</span><span class="hl std">)</span>
 <span class="hl std">convergenceBatchSize</span> <span class="hl kwb">=</span>  <span class="hl kwd">ifelse</span><span class="hl std">(documentCompilationMode</span> <span class="hl opt">==</span> <span class="hl str">&quot;release&quot;</span><span class="hl std">,</span> <span class="hl num">1000</span><span class="hl std">,</span> <span class="hl num">100</span><span class="hl std">)</span>
 <span class="hl std">extraR0Iterations</span> <span class="hl kwb">=</span>     <span class="hl kwd">ifelse</span><span class="hl std">(documentCompilationMode</span> <span class="hl opt">==</span> <span class="hl str">&quot;release&quot;</span><span class="hl std">,</span> <span class="hl num">500</span><span class="hl std">,</span>   <span class="hl num">10</span><span class="hl std">)</span>
 <span class="hl std">iterationStride</span> <span class="hl kwb">=</span>       <span class="hl kwd">ifelse</span><span class="hl std">(documentCompilationMode</span> <span class="hl opt">==</span> <span class="hl str">&quot;release&quot;</span><span class="hl std">,</span> <span class="hl num">750</span><span class="hl std">,</span>   <span class="hl num">50</span><span class="hl std">)</span>
@@ -323,7 +323,10 @@
 <span class="hl std">}</span>
 
 <span class="hl std">Guinea</span> <span class="hl kwb">=</span> <span class="hl kwd">cleanData</span><span class="hl std">(dat[,</span><span class="hl num">2</span><span class="hl std">], ascendingOrder)</span>
-<span class="hl std">Liberia</span> <span class="hl kwb">=</span> <span class="hl kwd">cleanData</span><span class="hl std">(dat[,</span><span class="hl num">3</span><span class="hl std">], ascendingOrder)</span>
+</pre></div>
+<div class="warning"><pre class="knitr r">## Warning: NAs introduced by coercion
+</pre></div>
+<div class="source"><pre class="knitr r"><span class="hl std">Liberia</span> <span class="hl kwb">=</span> <span class="hl kwd">cleanData</span><span class="hl std">(dat[,</span><span class="hl num">3</span><span class="hl std">], ascendingOrder)</span>
 <span class="hl std">Sierra.Leone</span> <span class="hl kwb">=</span> <span class="hl kwd">cleanData</span><span class="hl std">(dat[,</span><span class="hl num">4</span><span class="hl std">], ascendingOrder)</span>
 </pre></div>
 <div class="warning"><pre class="knitr r">## Warning: NAs introduced by coercion
@@ -727,233 +730,233 @@ With data in hand, let's begin where every analysis should begin: graphs.
   <tr>
    <td align="left"> 2014-07-02 </td>
    <td align="right"> 406 </td>
-   <td align="right"> 305 </td>
+   <td align="right"> 255 </td>
    <td align="right"> 131 </td>
    <td align="right"> 0 </td>
   </tr>
   <tr>
    <td align="left"> 2014-07-06 </td>
    <td align="right"> 406 </td>
-   <td align="right"> 337 </td>
+   <td align="right"> 255 </td>
    <td align="right"> 142 </td>
    <td align="right"> 0 </td>
   </tr>
   <tr>
    <td align="left"> 2014-07-08 </td>
    <td align="right"> 406 </td>
-   <td align="right"> 386 </td>
+   <td align="right"> 255 </td>
    <td align="right"> 172 </td>
    <td align="right"> 0 </td>
   </tr>
   <tr>
    <td align="left"> 2014-07-12 </td>
    <td align="right"> 410 </td>
-   <td align="right"> 397 </td>
+   <td align="right"> 255 </td>
    <td align="right"> 174 </td>
    <td align="right"> 0 </td>
   </tr>
   <tr>
    <td align="left"> 2014-07-14 </td>
    <td align="right"> 410 </td>
-   <td align="right"> 442 </td>
+   <td align="right"> 255 </td>
    <td align="right"> 196 </td>
    <td align="right"> 0 </td>
   </tr>
   <tr>
    <td align="left"> 2014-07-17 </td>
    <td align="right"> 415 </td>
-   <td align="right"> 454 </td>
+   <td align="right"> 255 </td>
    <td align="right"> 224 </td>
    <td align="right"> 0 </td>
   </tr>
   <tr>
    <td align="left"> 2014-07-20 </td>
    <td align="right"> 427 </td>
-   <td align="right"> 525 </td>
+   <td align="right"> 255 </td>
    <td align="right"> 249 </td>
    <td align="right"> 0 </td>
   </tr>
   <tr>
    <td align="left"> 2014-07-23 </td>
    <td align="right"> 460 </td>
-   <td align="right"> 533 </td>
+   <td align="right"> 255 </td>
    <td align="right"> 329 </td>
    <td align="right"> 1 </td>
   </tr>
   <tr>
    <td align="left"> 2014-07-27 </td>
    <td align="right"> 472 </td>
-   <td align="right"> 574 </td>
-   <td align="right"> 391 </td>
+   <td align="right"> 255 </td>
+   <td align="right"> 358 </td>
    <td align="right"> 3 </td>
   </tr>
   <tr>
    <td align="left"> 2014-07-30 </td>
-   <td align="right"> 485 </td>
-   <td align="right"> 646 </td>
-   <td align="right"> 468 </td>
-   <td align="right"> 4 </td>
+   <td align="right"> 472 </td>
+   <td align="right"> 255 </td>
+   <td align="right"> 358 </td>
+   <td align="right"> 273 </td>
   </tr>
   <tr>
    <td align="left"> 2014-08-01 </td>
-   <td align="right"> 495 </td>
-   <td align="right"> 691 </td>
-   <td align="right"> 516 </td>
-   <td align="right"> 9 </td>
+   <td align="right"> 472 </td>
+   <td align="right"> 282 </td>
+   <td align="right"> 363 </td>
+   <td align="right"> 286 </td>
   </tr>
   <tr>
    <td align="left"> 2014-08-04 </td>
-   <td align="right"> 495 </td>
-   <td align="right"> 717 </td>
-   <td align="right"> 554 </td>
-   <td align="right"> 12 </td>
+   <td align="right"> 472 </td>
+   <td align="right"> 294 </td>
+   <td align="right"> 367 </td>
+   <td align="right"> 298 </td>
   </tr>
   <tr>
    <td align="left"> 2014-08-06 </td>
-   <td align="right"> 506 </td>
-   <td align="right"> 730 </td>
-   <td align="right"> 599 </td>
-   <td align="right"> 12 </td>
+   <td align="right"> 472 </td>
+   <td align="right"> 323 </td>
+   <td align="right"> 373 </td>
+   <td align="right"> 315 </td>
   </tr>
   <tr>
    <td align="left"> 2014-08-09 </td>
-   <td align="right"> 510 </td>
-   <td align="right"> 783 </td>
-   <td align="right"> 670 </td>
-   <td align="right"> 12 </td>
+   <td align="right"> 472 </td>
+   <td align="right"> 355 </td>
+   <td align="right"> 377 </td>
+   <td align="right"> 334 </td>
   </tr>
   <tr>
    <td align="left"> 2014-08-11 </td>
-   <td align="right"> 519 </td>
-   <td align="right"> 810 </td>
-   <td align="right"> 786 </td>
-   <td align="right"> 12 </td>
+   <td align="right"> 472 </td>
+   <td align="right"> 413 </td>
+   <td align="right"> 380 </td>
+   <td align="right"> 348 </td>
   </tr>
   <tr>
    <td align="left"> 2014-08-13 </td>
-   <td align="right"> 543 </td>
-   <td align="right"> 848 </td>
-   <td align="right"> 834 </td>
-   <td align="right"> 15 </td>
+   <td align="right"> 472 </td>
+   <td align="right"> 466 </td>
+   <td align="right"> 394 </td>
+   <td align="right"> 365 </td>
   </tr>
   <tr>
    <td align="left"> 2014-08-16 </td>
-   <td align="right"> 579 </td>
-   <td align="right"> 907 </td>
-   <td align="right"> 972 </td>
-   <td align="right"> 15 </td>
+   <td align="right"> 472 </td>
+   <td align="right"> 576 </td>
+   <td align="right"> 396 </td>
+   <td align="right"> 374 </td>
   </tr>
   <tr>
    <td align="left"> 2014-08-18 </td>
-   <td align="right"> 607 </td>
-   <td align="right"> 910 </td>
-   <td align="right"> 1082 </td>
-   <td align="right"> 16 </td>
+   <td align="right"> 472 </td>
+   <td align="right"> 624 </td>
+   <td align="right"> 406 </td>
+   <td align="right"> 392 </td>
   </tr>
   <tr>
    <td align="left"> 2014-08-20 </td>
-   <td align="right"> 648 </td>
-   <td align="right"> 1026 </td>
-   <td align="right"> 1378 </td>
-   <td align="right"> 19 </td>
+   <td align="right"> 472 </td>
+   <td align="right"> 694 </td>
+   <td align="right"> 430 </td>
+   <td align="right"> 422 </td>
   </tr>
   <tr>
    <td align="left"> 2014-08-25 </td>
-   <td align="right"> 771 </td>
-   <td align="right"> 1216 </td>
-   <td align="right"> 1698 </td>
-   <td align="right"> 20 </td>
+   <td align="right"> 472 </td>
+   <td align="right"> 871 </td>
+   <td align="right"> 494 </td>
+   <td align="right"> 436 </td>
   </tr>
   <tr>
    <td align="left"> 2014-08-31 </td>
-   <td align="right"> 823 </td>
-   <td align="right"> 1292 </td>
-   <td align="right"> 1863 </td>
-   <td align="right"> 20 </td>
+   <td align="right"> 472 </td>
+   <td align="right"> 1078 </td>
+   <td align="right"> 522 </td>
+   <td align="right"> 452 </td>
   </tr>
   <tr>
    <td align="left"> 2014-09-03 </td>
-   <td align="right"> 861 </td>
-   <td align="right"> 1424 </td>
-   <td align="right"> 2081 </td>
-   <td align="right"> 20 </td>
+   <td align="right"> 472 </td>
+   <td align="right"> 1137 </td>
+   <td align="right"> 557 </td>
+   <td align="right"> 476 </td>
   </tr>
   <tr>
    <td align="left"> 2014-09-07 </td>
-   <td align="right"> 899 </td>
-   <td align="right"> 1509 </td>
-   <td align="right"> 2415 </td>
-   <td align="right"> 20 </td>
+   <td align="right"> 472 </td>
+   <td align="right"> 1307 </td>
+   <td align="right"> 568 </td>
+   <td align="right"> 493 </td>
   </tr>
   <tr>
    <td align="left"> 2014-09-10 </td>
-   <td align="right"> 942 </td>
-   <td align="right"> 1655 </td>
-   <td align="right"> 2720 </td>
-   <td align="right"> 20 </td>
+   <td align="right"> 472 </td>
+   <td align="right"> 1461 </td>
+   <td align="right"> 601 </td>
+   <td align="right"> 516 </td>
   </tr>
   <tr>
    <td align="left"> 2014-09-14 </td>
-   <td align="right"> 965 </td>
-   <td align="right"> 1753 </td>
-   <td align="right"> 3022 </td>
-   <td align="right"> 20 </td>
+   <td align="right"> 472 </td>
+   <td align="right"> 1578 </td>
+   <td align="right"> 623 </td>
+   <td align="right"> 537 </td>
   </tr>
   <tr>
    <td align="left"> 2014-09-17 </td>
-   <td align="right"> 1022 </td>
-   <td align="right"> 1940 </td>
-   <td align="right"> 3280 </td>
-   <td align="right"> 20 </td>
+   <td align="right"> 472 </td>
+   <td align="right"> 1707 </td>
+   <td align="right"> 635 </td>
+   <td align="right"> 550 </td>
   </tr>
   <tr>
    <td align="left"> 2014-09-21 </td>
-   <td align="right"> 1074 </td>
-   <td align="right"> 2021 </td>
-   <td align="right"> 3458 </td>
-   <td align="right"> 20 </td>
+   <td align="right"> 472 </td>
+   <td align="right"> 1830 </td>
+   <td align="right"> 648 </td>
+   <td align="right"> 557 </td>
   </tr>
   <tr>
    <td align="left"> 2014-09-23 </td>
-   <td align="right"> 1103 </td>
-   <td align="right"> 2120 </td>
-   <td align="right"> 3564 </td>
-   <td align="right"> 20 </td>
+   <td align="right"> 472 </td>
+   <td align="right"> 1922 </td>
+   <td align="right"> 668 </td>
+   <td align="right"> 561 </td>
   </tr>
   <tr>
    <td align="left"> 2014-09-25 </td>
-   <td align="right"> 1157 </td>
-   <td align="right"> 2317 </td>
-   <td align="right"> 3696 </td>
-   <td align="right"> 20 </td>
+   <td align="right"> 472 </td>
+   <td align="right"> 1998 </td>
+   <td align="right"> 710 </td>
+   <td align="right"> 570 </td>
   </tr>
   <tr>
    <td align="left"> 2014-09-28 </td>
-   <td align="right"> 1199 </td>
-   <td align="right"> 2437 </td>
-   <td align="right"> 3834 </td>
-   <td align="right"> 20 </td>
+   <td align="right"> 472 </td>
+   <td align="right"> 2069 </td>
+   <td align="right"> 739 </td>
+   <td align="right"> 623 </td>
   </tr>
   <tr>
    <td align="left"> 2014-10-01 </td>
-   <td align="right"> 1298 </td>
-   <td align="right"> 2789 </td>
-   <td align="right"> 3924 </td>
-   <td align="right"> 20 </td>
+   <td align="right"> 472 </td>
+   <td align="right"> 2210 </td>
+   <td align="right"> 768 </td>
+   <td align="right"> 879 </td>
   </tr>
   <tr>
    <td align="left"> 2014-10-05 </td>
-   <td align="right"> 1350 </td>
-   <td align="right"> 2950 </td>
-   <td align="right"> 4076 </td>
-   <td align="right"> 20 </td>
+   <td align="right"> 472 </td>
+   <td align="right"> 2316 </td>
+   <td align="right"> 778 </td>
+   <td align="right"> 885 </td>
   </tr>
   <tr>
-   <td align="left"> 2014-10-08 </td>
-   <td align="right"> 1427 </td>
-   <td align="right"> 3252 </td>
-   <td align="right"> 4249 </td>
-   <td align="right"> 20 </td>
+   <td align="left"> 2014-10-07 </td>
+   <td align="right"> 472 </td>
+   <td align="right"> 2458 </td>
+   <td align="right"> 843 </td>
+   <td align="right"> 1183 </td>
   </tr>
 </tbody>
 </table>
@@ -1035,7 +1038,7 @@ One can also represent this data geographically to get an idea of the spatial ep
   <div class = "row">
     <div class="col-sm-3">
       <input id='zoom-map-slider' type='range' min=1 max=
-201
+200
       ng-model='Day' width=200>
        <span>Day: <span id ="zoom-map-day-counter"></span></span>
     </div>
@@ -1326,7 +1329,7 @@ temporal trend.
   <span class="hl kwd">runSimulation</span><span class="hl std">(SEIRmodel,</span> <span class="hl kwc">numBatches</span> <span class="hl std">= numBurnInBatches)</span>
   <span class="hl std">SEIRmodel</span><span class="hl opt">$</span><span class="hl std">compartmentSamplingMode</span> <span class="hl kwb">=</span> <span class="hl num">16</span>
   <span class="hl std">SEIRmodel</span><span class="hl opt">$</span><span class="hl std">parameterSamplingMode</span> <span class="hl kwb">=</span> <span class="hl num">7</span>
-  <span class="hl std">SEIRmodel</span><span class="hl opt">$</span><span class="hl std">performHybridStep</span> <span class="hl kwb">=</span> <span class="hl num">10</span>
+  <span class="hl std">SEIRmodel</span><span class="hl opt">$</span><span class="hl std">performHybridStep</span> <span class="hl kwb">=</span> <span class="hl num">5</span>
   <span class="hl kwa">if</span> <span class="hl std">(modelDF</span> <span class="hl opt">&gt;</span> <span class="hl num">0</span><span class="hl std">)</span>
   <span class="hl std">{</span>
       <span class="hl std">SEIRmodel</span><span class="hl opt">$</span><span class="hl std">useDecorrelation</span> <span class="hl kwb">=</span> <span class="hl num">0</span>
@@ -1552,59 +1555,59 @@ temporal trend.
 <span class="hl kwd">summary</span><span class="hl std">(mcl)</span>
 </pre></div>
 <div class="output"><pre class="knitr r">## 
-## Iterations = 1:4015
+## Iterations = 1:2015
 ## Thinning interval = 1 
 ## Number of chains = 3 
-## Sample size per chain = 4015 
+## Sample size per chain = 2015 
 ## 
 ## 1. Empirical mean and standard deviation for each variable,
 ##    plus standard error of the mean:
 ## 
 ##                                     Mean       SD Naive SE Time-series SE
-## Guinea Intercept               -2.74e+00 6.20e-02 5.65e-04       7.36e-04
-## Liberia Intercept              -2.46e+00 2.94e-02 2.68e-04       9.22e-04
-## Sierra Leone Intercept         -2.59e+00 6.67e-02 6.08e-04       1.66e-03
-## Nigeria Intercept              -3.82e+00 8.09e-01 7.37e-03       8.12e-03
-## Overdispersion Precision        1.79e-03 1.74e-03 1.59e-05       1.61e-05
-## Spatial Dependence Parameter 1  1.66e-01 1.66e-02 1.51e-04       1.62e-04
-## Spatial Dependence Parameter 2  1.31e-04 1.30e-04 1.19e-06       1.18e-06
-## Spatial Dependence Parameter 3  1.81e-01 2.12e-02 1.93e-04       3.28e-04
-## Spatial Dependence Parameter 4  1.83e-05 1.78e-05 1.63e-07       1.63e-07
-## Spatial Dependence Parameter 5  2.04e-04 8.95e-05 8.16e-07       8.08e-07
-## Spatial Dependence Parameter 6  9.99e+01 3.17e+01 2.89e-01       2.89e-01
-## E to I probability              3.01e-01 9.53e-03 8.69e-05       4.46e-04
-## I to R probability              9.18e-02 3.87e-03 3.52e-05       1.41e-04
+## Guinea Intercept               -2.66e+00 6.52e-02 8.38e-04       2.30e-03
+## Liberia Intercept              -2.49e+00 7.19e-02 9.25e-04       3.45e-03
+## Sierra Leone Intercept         -3.10e+00 2.63e-01 3.38e-03       5.93e-03
+## Nigeria Intercept              -7.48e+00 8.51e-01 1.09e-02       1.07e-02
+## Overdispersion Precision        9.64e-04 9.97e-04 1.28e-05       1.26e-05
+## Spatial Dependence Parameter 1  7.63e-04 7.77e-04 9.99e-06       9.81e-06
+## Spatial Dependence Parameter 2  1.86e-04 1.86e-04 2.39e-06       2.38e-06
+## Spatial Dependence Parameter 3  8.03e-01 1.68e-01 2.16e-03       3.88e-03
+## Spatial Dependence Parameter 4  3.00e-02 2.94e-03 3.78e-05       7.97e-05
+## Spatial Dependence Parameter 5  7.52e-03 3.07e-03 3.94e-05       1.19e-04
+## Spatial Dependence Parameter 6  1.01e+02 3.17e+01 4.07e-01       3.70e-01
+## E to I probability              2.93e-01 1.40e-02 1.80e-04       2.40e-04
+## I to R probability              9.63e-02 5.54e-03 7.13e-05       2.51e-04
 ## 
 ## 2. Quantiles for each variable:
 ## 
 ##                                     2.5%       25%       50%       75%
-## Guinea Intercept               -2.87e+00 -2.79e+00 -2.74e+00 -2.70e+00
-## Liberia Intercept              -2.52e+00 -2.48e+00 -2.46e+00 -2.44e+00
-## Sierra Leone Intercept         -2.73e+00 -2.63e+00 -2.59e+00 -2.54e+00
-## Nigeria Intercept              -5.85e+00 -4.21e+00 -3.69e+00 -3.26e+00
-## Overdispersion Precision        4.53e-05  5.27e-04  1.26e-03  2.48e-03
-## Spatial Dependence Parameter 1  1.35e-01  1.55e-01  1.66e-01  1.77e-01
-## Spatial Dependence Parameter 2  3.09e-06  3.63e-05  8.97e-05  1.83e-04
-## Spatial Dependence Parameter 3  1.40e-01  1.67e-01  1.81e-01  1.96e-01
-## Spatial Dependence Parameter 4  4.70e-07  5.51e-06  1.28e-05  2.57e-05
-## Spatial Dependence Parameter 5  5.37e-05  1.40e-04  1.97e-04  2.61e-04
-## Spatial Dependence Parameter 6  4.74e+01  7.70e+01  9.64e+01  1.19e+02
-## E to I probability              2.82e-01  2.95e-01  3.01e-01  3.08e-01
-## I to R probability              8.44e-02  8.91e-02  9.17e-02  9.44e-02
+## Guinea Intercept               -2.79e+00 -2.70e+00 -2.655420 -2.61e+00
+## Liberia Intercept              -2.64e+00 -2.53e+00 -2.483830 -2.44e+00
+## Sierra Leone Intercept         -3.46e+00 -3.32e+00 -3.206520 -2.81e+00
+## Nigeria Intercept              -9.42e+00 -7.99e+00 -7.385720 -6.88e+00
+## Overdispersion Precision        2.36e-05  2.72e-04  0.000645  1.34e-03
+## Spatial Dependence Parameter 1  2.09e-05  2.13e-04  0.000526  1.04e-03
+## Spatial Dependence Parameter 2  5.43e-06  5.64e-05  0.000131  2.56e-04
+## Spatial Dependence Parameter 3  5.12e-01  6.15e-01  0.909037  9.47e-01
+## Spatial Dependence Parameter 4  2.47e-02  2.80e-02  0.029914  3.20e-02
+## Spatial Dependence Parameter 5  9.13e-04  5.63e-03  0.007857  9.58e-03
+## Spatial Dependence Parameter 6  4.98e+01  7.85e+01 97.172600  1.20e+02
+## E to I probability              2.70e-01  2.82e-01  0.291269  3.05e-01
+## I to R probability              8.56e-02  9.24e-02  0.096390  1.00e-01
 ##                                    97.5%
-## Guinea Intercept               -2.63e+00
-## Liberia Intercept              -2.41e+00
-## Sierra Leone Intercept         -2.46e+00
-## Nigeria Intercept              -2.66e+00
-## Overdispersion Precision        6.35e-03
-## Spatial Dependence Parameter 1  2.00e-01
-## Spatial Dependence Parameter 2  4.79e-04
-## Spatial Dependence Parameter 3  2.23e-01
-## Spatial Dependence Parameter 4  6.59e-05
-## Spatial Dependence Parameter 5  4.00e-04
+## Guinea Intercept               -2.53e+00
+## Liberia Intercept              -2.36e+00
+## Sierra Leone Intercept         -2.68e+00
+## Nigeria Intercept              -6.10e+00
+## Overdispersion Precision        3.66e-03
+## Spatial Dependence Parameter 1  2.90e-03
+## Spatial Dependence Parameter 2  6.77e-04
+## Spatial Dependence Parameter 3  9.61e-01
+## Spatial Dependence Parameter 4  3.60e-02
+## Spatial Dependence Parameter 5  1.31e-02
 ## Spatial Dependence Parameter 6  1.72e+02
 ## E to I probability              3.19e-01
-## I to R probability              9.96e-02
+## I to R probability              1.07e-01
 </pre></div>
 <div class="source"><pre class="knitr r"><span class="hl com">## R0 stuff</span>
 
@@ -2073,191 +2076,191 @@ It is sometimes helpful to visualize exponential growth on the log scale.
   <tr>
    <td align="left"> &nbsp;2014-04-30&nbsp; </td>
    <td align="center"> 43 </td>
-   <td align="center"> 3 </td>
+   <td align="center"> 5 </td>
    <td align="center"> 0 </td>
    <td align="center"> 0 </td>
   </tr>
   <tr>
    <td align="left"> &nbsp;2014-05-18&nbsp; </td>
-   <td align="center"> 39 </td>
-   <td align="center"> 2 </td>
+   <td align="center"> 29 </td>
+   <td align="center"> 5 </td>
    <td align="center"> 0 </td>
    <td align="center"> 0 </td>
   </tr>
   <tr>
    <td align="left"> &nbsp;2014-05-29&nbsp; </td>
-   <td align="center"> 52 </td>
-   <td align="center"> 2 </td>
+   <td align="center"> 46 </td>
+   <td align="center"> 3 </td>
    <td align="center"> 16 </td>
    <td align="center"> 0 </td>
   </tr>
   <tr>
    <td align="left"> &nbsp;2014-06-15&nbsp; </td>
-   <td align="center"> 46 </td>
-   <td align="center"> 2 </td>
-   <td align="center"> 62 </td>
+   <td align="center"> 57 </td>
+   <td align="center"> 1 </td>
+   <td align="center"> 61 </td>
    <td align="center"> 0 </td>
   </tr>
   <tr>
    <td align="left"> &nbsp;2014-06-30&nbsp; </td>
-   <td align="center"> 34 </td>
-   <td align="center"> 18 </td>
-   <td align="center"> 99 </td>
+   <td align="center"> 40 </td>
+   <td align="center"> 8 </td>
+   <td align="center"> 92 </td>
    <td align="center"> 0 </td>
   </tr>
   <tr>
    <td align="left"> &nbsp;2014-07-12&nbsp; </td>
-   <td align="center"> 13 </td>
-   <td align="center"> 83 </td>
-   <td align="center"> 153 </td>
+   <td align="center"> 22 </td>
+   <td align="center"> 55 </td>
+   <td align="center"> 59 </td>
    <td align="center"> 0 </td>
   </tr>
   <tr>
    <td align="left"> &nbsp;2014-07-23&nbsp; </td>
-   <td align="center"> 13 </td>
-   <td align="center"> 131 </td>
-   <td align="center"> 156 </td>
+   <td align="center"> 17 </td>
+   <td align="center"> 98 </td>
+   <td align="center"> 19 </td>
    <td align="center"> 0 </td>
   </tr>
   <tr>
    <td align="left"> &nbsp;2014-08-06&nbsp; </td>
-   <td align="center"> 55 </td>
-   <td align="center"> 285 </td>
-   <td align="center"> 199 </td>
-   <td align="center"> 4 </td>
+   <td align="center"> 32 </td>
+   <td align="center"> 105 </td>
+   <td align="center"> 6 </td>
+   <td align="center"> 273 </td>
   </tr>
   <tr>
    <td align="left"> &nbsp;2014-08-20&nbsp; </td>
-   <td align="center"> 74 </td>
-   <td align="center"> 432 </td>
-   <td align="center"> 230 </td>
-   <td align="center"> 7 </td>
+   <td align="center"> 3 </td>
+   <td align="center"> 78 </td>
+   <td align="center"> 186 </td>
+   <td align="center"> 141 </td>
   </tr>
   <tr>
    <td align="left"> &nbsp;2014-09-03&nbsp; </td>
-   <td align="center"> 216 </td>
-   <td align="center"> 806 </td>
-   <td align="center"> 356 </td>
-   <td align="center"> 3 </td>
+   <td align="center"> 0 </td>
+   <td align="center"> 114 </td>
+   <td align="center"> 496 </td>
+   <td align="center"> 74 </td>
   </tr>
   <tr>
    <td align="left"> &nbsp;2014-09-17&nbsp; </td>
-   <td align="center"> 173 </td>
-   <td align="center"> 970 </td>
-   <td align="center"> 415 </td>
-   <td align="center"> 1 </td>
-  </tr>
-  <tr>
-   <td align="left"> &nbsp;2014-10-01&nbsp; </td>
-   <td align="center"> 175 </td>
-   <td align="center"> 789 </td>
-   <td align="center"> 475 </td>
    <td align="center"> 0 </td>
-  </tr>
-  <tr>
-   <td align="left"> &nbsp;2014-10-08&nbsp; </td>
-   <td align="center"> 277 </td>
-   <td align="center"> 728 </td>
-   <td align="center"> 891 </td>
-   <td align="center"> 0 </td>
-  </tr>
-  <tr>
-   <td align="left"> &nbsp;2014-10-10&nbsp; </td>
-   <td align="center"> 295 </td>
-   <td align="center"> 773 </td>
-   <td align="center"> 962 </td>
-   <td align="center"> 0 </td>
-  </tr>
-  <tr>
-   <td align="left"> &nbsp;2014-10-12&nbsp; </td>
-   <td align="center"> 314 </td>
-   <td align="center"> 807 </td>
-   <td align="center"> 1018 </td>
-   <td align="center"> 0 </td>
-  </tr>
-  <tr>
-   <td align="left"> &nbsp;2014-10-14&nbsp; </td>
-   <td align="center"> 324 </td>
-   <td align="center"> 785 </td>
-   <td align="center"> 994 </td>
-   <td align="center"> 1 </td>
-  </tr>
-  <tr>
-   <td align="left"> &nbsp;2014-10-16&nbsp; </td>
-   <td align="center"> 358 </td>
-   <td align="center"> 782 </td>
-   <td align="center"> 982 </td>
-   <td align="center"> 3 </td>
-  </tr>
-  <tr>
-   <td align="left"> &nbsp;2014-10-18&nbsp; </td>
-   <td align="center"> 422 </td>
-   <td align="center"> 835 </td>
-   <td align="center"> 1041 </td>
-   <td align="center"> 5 </td>
-  </tr>
-  <tr>
-   <td align="left"> &nbsp;2014-10-20&nbsp; </td>
-   <td align="center"> 513 </td>
-   <td align="center"> 934 </td>
-   <td align="center"> 1159 </td>
-   <td align="center"> 7 </td>
-  </tr>
-  <tr>
-   <td align="left"> &nbsp;2014-10-22&nbsp; </td>
-   <td align="center"> 651 </td>
-   <td align="center"> 1107 </td>
-   <td align="center"> 1368 </td>
-   <td align="center"> 9 </td>
-  </tr>
-  <tr>
-   <td align="left"> &nbsp;2014-10-24&nbsp; </td>
-   <td align="center"> 854 </td>
-   <td align="center"> 1372 </td>
-   <td align="center"> 1692 </td>
-   <td align="center"> 12 </td>
-  </tr>
-  <tr>
-   <td align="left"> &nbsp;2014-10-26&nbsp; </td>
-   <td align="center"> 1167 </td>
-   <td align="center"> 1789 </td>
-   <td align="center"> 2207 </td>
-   <td align="center"> 16 </td>
-  </tr>
-  <tr>
-   <td align="left"> &nbsp;2014-10-28&nbsp; </td>
-   <td align="center"> 1646 </td>
-   <td align="center"> 2430 </td>
-   <td align="center"> 2998 </td>
-   <td align="center"> 23 </td>
-  </tr>
-  <tr>
-   <td align="left"> &nbsp;2014-10-30&nbsp; </td>
-   <td align="center"> 2414 </td>
-   <td align="center"> 3450 </td>
-   <td align="center"> 4269 </td>
-   <td align="center"> 34 </td>
-  </tr>
-  <tr>
-   <td align="left"> &nbsp;2014-11-01&nbsp; </td>
-   <td align="center"> 3645 </td>
-   <td align="center"> 5083 </td>
-   <td align="center"> 6300 </td>
-   <td align="center"> 52 </td>
-  </tr>
-  <tr>
-   <td align="left"> &nbsp;2014-11-03&nbsp; </td>
-   <td align="center"> 5715 </td>
-   <td align="center"> 7787 </td>
-   <td align="center"> 9685 </td>
+   <td align="center"> 114 </td>
+   <td align="center"> 526 </td>
    <td align="center"> 81 </td>
   </tr>
   <tr>
-   <td align="left"> &nbsp;2014-11-05&nbsp; </td>
-   <td align="center"> 9211 </td>
-   <td align="center"> 12318 </td>
-   <td align="center"> 15358 </td>
-   <td align="center"> 130 </td>
+   <td align="left"> &nbsp;2014-10-01&nbsp; </td>
+   <td align="center"> 0 </td>
+   <td align="center"> 122 </td>
+   <td align="center"> 510 </td>
+   <td align="center"> 53 </td>
+  </tr>
+  <tr>
+   <td align="left"> &nbsp;2014-10-07&nbsp; </td>
+   <td align="center"> 0 </td>
+   <td align="center"> 156 </td>
+   <td align="center"> 524 </td>
+   <td align="center"> 343 </td>
+  </tr>
+  <tr>
+   <td align="left"> &nbsp;2014-10-09&nbsp; </td>
+   <td align="center"> 0 </td>
+   <td align="center"> 170 </td>
+   <td align="center"> 556 </td>
+   <td align="center"> 403 </td>
+  </tr>
+  <tr>
+   <td align="left"> &nbsp;2014-10-11&nbsp; </td>
+   <td align="center"> 0 </td>
+   <td align="center"> 187 </td>
+   <td align="center"> 576 </td>
+   <td align="center"> 456 </td>
+  </tr>
+  <tr>
+   <td align="left"> &nbsp;2014-10-13&nbsp; </td>
+   <td align="center"> 0 </td>
+   <td align="center"> 204 </td>
+   <td align="center"> 544 </td>
+   <td align="center"> 442 </td>
+  </tr>
+  <tr>
+   <td align="left"> &nbsp;2014-10-15&nbsp; </td>
+   <td align="center"> 0 </td>
+   <td align="center"> 239 </td>
+   <td align="center"> 503 </td>
+   <td align="center"> 376 </td>
+  </tr>
+  <tr>
+   <td align="left"> &nbsp;2014-10-17&nbsp; </td>
+   <td align="center"> 1 </td>
+   <td align="center"> 294 </td>
+   <td align="center"> 508 </td>
+   <td align="center"> 342 </td>
+  </tr>
+  <tr>
+   <td align="left"> &nbsp;2014-10-19&nbsp; </td>
+   <td align="center"> 1 </td>
+   <td align="center"> 371 </td>
+   <td align="center"> 576 </td>
+   <td align="center"> 375 </td>
+  </tr>
+  <tr>
+   <td align="left"> &nbsp;2014-10-21&nbsp; </td>
+   <td align="center"> 2 </td>
+   <td align="center"> 487 </td>
+   <td align="center"> 724 </td>
+   <td align="center"> 482 </td>
+  </tr>
+  <tr>
+   <td align="left"> &nbsp;2014-10-23&nbsp; </td>
+   <td align="center"> 2 </td>
+   <td align="center"> 667 </td>
+   <td align="center"> 976 </td>
+   <td align="center"> 668 </td>
+  </tr>
+  <tr>
+   <td align="left"> &nbsp;2014-10-25&nbsp; </td>
+   <td align="center"> 4 </td>
+   <td align="center"> 958 </td>
+   <td align="center"> 1399 </td>
+   <td align="center"> 969 </td>
+  </tr>
+  <tr>
+   <td align="left"> &nbsp;2014-10-27&nbsp; </td>
+   <td align="center"> 6 </td>
+   <td align="center"> 1438 </td>
+   <td align="center"> 2096 </td>
+   <td align="center"> 1458 </td>
+  </tr>
+  <tr>
+   <td align="left"> &nbsp;2014-10-29&nbsp; </td>
+   <td align="center"> 10 </td>
+   <td align="center"> 2260 </td>
+   <td align="center"> 3290 </td>
+   <td align="center"> 2296 </td>
+  </tr>
+  <tr>
+   <td align="left"> &nbsp;2014-10-31&nbsp; </td>
+   <td align="center"> 16 </td>
+   <td align="center"> 3688 </td>
+   <td align="center"> 5368 </td>
+   <td align="center"> 3751 </td>
+  </tr>
+  <tr>
+   <td align="left"> &nbsp;2014-11-02&nbsp; </td>
+   <td align="center"> 28 </td>
+   <td align="center"> 6265 </td>
+   <td align="center"> 9128 </td>
+   <td align="center"> 6379 </td>
+  </tr>
+  <tr>
+   <td align="left"> &nbsp;2014-11-04&nbsp; </td>
+   <td align="center"> 51 </td>
+   <td align="center"> 10996 </td>
+   <td align="center"> 16027 </td>
+   <td align="center"> 11220 </td>
   </tr>
 </tbody>
 </table>
@@ -2271,7 +2274,7 @@ It is sometimes helpful to visualize exponential growth on the log scale.
   <div class = "row" ng-controller='rChartsCtrl_pred' >
     <div class="col-sm-3">
       <input id='zoom-map-slider-pred' type='range' min=1 max=
-231
+230
       ng-model='pred_Day' width=200>
        <span>Day: <span id ="zoom-map-day-counter-pred"></span></span>
     </div>
@@ -2339,2746 +2342,2732 @@ var alldata =
 {
  "1": {
  "GIN": {
- "fillKey": "lt10" 
+ "fillKey": "lt11" 
 },
 "LBR": {
- "fillKey": "lt10" 
+ "fillKey": "lt6" 
 },
 "SLE": {
- "fillKey": "lt10" 
+ "fillKey": "lt6" 
 },
 "NGA": {
- "fillKey": "lt10" 
+ "fillKey": "lt6" 
 } 
 },
 "2": {
  "GIN": {
- "fillKey": "lt10" 
+ "fillKey": "lt11" 
 },
 "LBR": {
- "fillKey": "lt10" 
+ "fillKey": "lt6" 
 },
 "SLE": {
- "fillKey": "lt10" 
+ "fillKey": "lt6" 
 },
 "NGA": {
- "fillKey": "lt10" 
+ "fillKey": "lt6" 
 } 
 },
 "3": {
  "GIN": {
- "fillKey": "lt10" 
+ "fillKey": "lt11" 
 },
 "LBR": {
- "fillKey": "lt10" 
+ "fillKey": "lt6" 
 },
 "SLE": {
- "fillKey": "lt10" 
+ "fillKey": "lt6" 
 },
 "NGA": {
- "fillKey": "lt10" 
+ "fillKey": "lt6" 
 } 
 },
 "4": {
  "GIN": {
- "fillKey": "lt10" 
+ "fillKey": "lt11" 
 },
 "LBR": {
- "fillKey": "lt10" 
+ "fillKey": "lt6" 
 },
 "SLE": {
- "fillKey": "lt10" 
+ "fillKey": "lt6" 
 },
 "NGA": {
- "fillKey": "lt10" 
+ "fillKey": "lt6" 
 } 
 },
 "5": {
  "GIN": {
- "fillKey": "lt10" 
+ "fillKey": "lt11" 
 },
 "LBR": {
- "fillKey": "lt10" 
+ "fillKey": "lt6" 
 },
 "SLE": {
- "fillKey": "lt10" 
+ "fillKey": "lt6" 
 },
 "NGA": {
- "fillKey": "lt10" 
+ "fillKey": "lt6" 
 } 
 },
 "6": {
  "GIN": {
- "fillKey": "lt10" 
+ "fillKey": "lt11" 
 },
 "LBR": {
- "fillKey": "lt10" 
+ "fillKey": "lt6" 
 },
 "SLE": {
- "fillKey": "lt10" 
+ "fillKey": "lt6" 
 },
 "NGA": {
- "fillKey": "lt10" 
+ "fillKey": "lt6" 
 } 
 },
 "7": {
  "GIN": {
- "fillKey": "lt10" 
+ "fillKey": "lt11" 
 },
 "LBR": {
- "fillKey": "lt10" 
+ "fillKey": "lt6" 
 },
 "SLE": {
- "fillKey": "lt10" 
+ "fillKey": "lt6" 
 },
 "NGA": {
- "fillKey": "lt10" 
+ "fillKey": "lt6" 
 } 
 },
 "8": {
  "GIN": {
- "fillKey": "lt10" 
+ "fillKey": "lt11" 
 },
 "LBR": {
- "fillKey": "lt10" 
+ "fillKey": "lt6" 
 },
 "SLE": {
- "fillKey": "lt10" 
+ "fillKey": "lt6" 
 },
 "NGA": {
- "fillKey": "lt10" 
+ "fillKey": "lt6" 
 } 
 },
 "9": {
  "GIN": {
- "fillKey": "lt10" 
+ "fillKey": "lt6" 
 },
 "LBR": {
- "fillKey": "lt10" 
+ "fillKey": "lt6" 
 },
 "SLE": {
- "fillKey": "lt10" 
+ "fillKey": "lt6" 
 },
 "NGA": {
- "fillKey": "lt10" 
+ "fillKey": "lt6" 
 } 
 },
 "10": {
  "GIN": {
- "fillKey": "lt10" 
+ "fillKey": "lt6" 
 },
 "LBR": {
- "fillKey": "lt10" 
+ "fillKey": "lt6" 
 },
 "SLE": {
- "fillKey": "lt10" 
+ "fillKey": "lt6" 
 },
 "NGA": {
- "fillKey": "lt10" 
+ "fillKey": "lt6" 
 } 
 },
 "11": {
  "GIN": {
- "fillKey": "lt10" 
+ "fillKey": "lt6" 
 },
 "LBR": {
- "fillKey": "lt10" 
+ "fillKey": "lt6" 
 },
 "SLE": {
- "fillKey": "lt10" 
+ "fillKey": "lt6" 
 },
 "NGA": {
- "fillKey": "lt10" 
+ "fillKey": "lt6" 
 } 
 },
 "12": {
  "GIN": {
- "fillKey": "lt10" 
+ "fillKey": "lt6" 
 },
 "LBR": {
- "fillKey": "lt10" 
+ "fillKey": "lt6" 
 },
 "SLE": {
- "fillKey": "lt10" 
+ "fillKey": "lt6" 
 },
 "NGA": {
- "fillKey": "lt10" 
+ "fillKey": "lt6" 
 } 
 },
 "13": {
  "GIN": {
- "fillKey": "lt10" 
+ "fillKey": "lt6" 
 },
 "LBR": {
- "fillKey": "lt10" 
+ "fillKey": "lt6" 
 },
 "SLE": {
- "fillKey": "lt10" 
+ "fillKey": "lt6" 
 },
 "NGA": {
- "fillKey": "lt10" 
+ "fillKey": "lt6" 
 } 
 },
 "14": {
  "GIN": {
- "fillKey": "lt10" 
+ "fillKey": "lt6" 
 },
 "LBR": {
- "fillKey": "lt10" 
+ "fillKey": "lt6" 
 },
 "SLE": {
- "fillKey": "lt10" 
+ "fillKey": "lt6" 
 },
 "NGA": {
- "fillKey": "lt10" 
+ "fillKey": "lt6" 
 } 
 },
 "15": {
  "GIN": {
- "fillKey": "lt10" 
+ "fillKey": "lt6" 
 },
 "LBR": {
- "fillKey": "lt10" 
+ "fillKey": "lt6" 
 },
 "SLE": {
- "fillKey": "lt10" 
+ "fillKey": "lt6" 
 },
 "NGA": {
- "fillKey": "lt10" 
+ "fillKey": "lt6" 
 } 
 },
 "16": {
  "GIN": {
- "fillKey": "lt10" 
+ "fillKey": "lt6" 
 },
 "LBR": {
- "fillKey": "lt10" 
+ "fillKey": "lt6" 
 },
 "SLE": {
- "fillKey": "lt10" 
+ "fillKey": "lt6" 
 },
 "NGA": {
- "fillKey": "lt10" 
+ "fillKey": "lt6" 
 } 
 },
 "17": {
  "GIN": {
- "fillKey": "lt10" 
+ "fillKey": "lt6" 
 },
 "LBR": {
- "fillKey": "lt10" 
+ "fillKey": "lt6" 
 },
 "SLE": {
- "fillKey": "lt10" 
+ "fillKey": "lt6" 
 },
 "NGA": {
- "fillKey": "lt10" 
+ "fillKey": "lt6" 
 } 
 },
 "18": {
  "GIN": {
- "fillKey": "lt10" 
+ "fillKey": "lt6" 
 },
 "LBR": {
- "fillKey": "lt10" 
+ "fillKey": "lt6" 
 },
 "SLE": {
- "fillKey": "lt10" 
+ "fillKey": "lt6" 
 },
 "NGA": {
- "fillKey": "lt10" 
+ "fillKey": "lt6" 
 } 
 },
 "19": {
  "GIN": {
- "fillKey": "lt10" 
+ "fillKey": "lt6" 
 },
 "LBR": {
- "fillKey": "lt10" 
+ "fillKey": "lt6" 
 },
 "SLE": {
- "fillKey": "lt10" 
+ "fillKey": "lt6" 
 },
 "NGA": {
- "fillKey": "lt10" 
+ "fillKey": "lt6" 
 } 
 },
 "20": {
  "GIN": {
- "fillKey": "lt10" 
+ "fillKey": "lt6" 
 },
 "LBR": {
- "fillKey": "lt10" 
+ "fillKey": "lt6" 
 },
 "SLE": {
- "fillKey": "lt10" 
+ "fillKey": "lt6" 
 },
 "NGA": {
- "fillKey": "lt10" 
+ "fillKey": "lt6" 
 } 
 },
 "21": {
  "GIN": {
- "fillKey": "lt10" 
+ "fillKey": "lt6" 
 },
 "LBR": {
- "fillKey": "lt10" 
+ "fillKey": "lt6" 
 },
 "SLE": {
- "fillKey": "lt10" 
+ "fillKey": "lt6" 
 },
 "NGA": {
- "fillKey": "lt10" 
+ "fillKey": "lt6" 
 } 
 },
 "22": {
  "GIN": {
- "fillKey": "lt10" 
+ "fillKey": "lt6" 
 },
 "LBR": {
- "fillKey": "lt10" 
+ "fillKey": "lt6" 
 },
 "SLE": {
- "fillKey": "lt10" 
+ "fillKey": "lt6" 
 },
 "NGA": {
- "fillKey": "lt10" 
+ "fillKey": "lt6" 
 } 
 },
 "23": {
  "GIN": {
- "fillKey": "lt10" 
+ "fillKey": "lt6" 
 },
 "LBR": {
- "fillKey": "lt10" 
+ "fillKey": "lt6" 
 },
 "SLE": {
- "fillKey": "lt10" 
+ "fillKey": "lt6" 
 },
 "NGA": {
- "fillKey": "lt10" 
+ "fillKey": "lt6" 
 } 
 },
 "24": {
  "GIN": {
- "fillKey": "lt10" 
+ "fillKey": "lt6" 
 },
 "LBR": {
- "fillKey": "lt10" 
+ "fillKey": "lt6" 
 },
 "SLE": {
- "fillKey": "lt10" 
+ "fillKey": "lt6" 
 },
 "NGA": {
- "fillKey": "lt10" 
+ "fillKey": "lt6" 
 } 
 },
 "25": {
  "GIN": {
- "fillKey": "lt10" 
+ "fillKey": "lt6" 
 },
 "LBR": {
- "fillKey": "lt10" 
+ "fillKey": "lt6" 
 },
 "SLE": {
- "fillKey": "lt10" 
+ "fillKey": "lt6" 
 },
 "NGA": {
- "fillKey": "lt10" 
+ "fillKey": "lt6" 
 } 
 },
 "26": {
  "GIN": {
- "fillKey": "lt10" 
+ "fillKey": "lt6" 
 },
 "LBR": {
- "fillKey": "lt10" 
+ "fillKey": "lt6" 
 },
 "SLE": {
- "fillKey": "lt10" 
+ "fillKey": "lt6" 
 },
 "NGA": {
- "fillKey": "lt10" 
+ "fillKey": "lt6" 
 } 
 },
 "27": {
  "GIN": {
- "fillKey": "lt10" 
+ "fillKey": "lt6" 
 },
 "LBR": {
- "fillKey": "lt10" 
+ "fillKey": "lt6" 
 },
 "SLE": {
- "fillKey": "lt10" 
+ "fillKey": "lt6" 
 },
 "NGA": {
- "fillKey": "lt10" 
+ "fillKey": "lt6" 
 } 
 },
 "28": {
  "GIN": {
- "fillKey": "lt10" 
+ "fillKey": "lt6" 
 },
 "LBR": {
- "fillKey": "lt10" 
+ "fillKey": "lt6" 
 },
 "SLE": {
- "fillKey": "lt10" 
+ "fillKey": "lt6" 
 },
 "NGA": {
- "fillKey": "lt10" 
+ "fillKey": "lt6" 
 } 
 },
 "29": {
  "GIN": {
- "fillKey": "lt10" 
+ "fillKey": "lt6" 
 },
 "LBR": {
- "fillKey": "lt10" 
+ "fillKey": "lt6" 
 },
 "SLE": {
- "fillKey": "lt10" 
+ "fillKey": "lt6" 
 },
 "NGA": {
- "fillKey": "lt10" 
+ "fillKey": "lt6" 
 } 
 },
 "30": {
  "GIN": {
- "fillKey": "lt10" 
+ "fillKey": "lt6" 
 },
 "LBR": {
- "fillKey": "lt10" 
+ "fillKey": "lt6" 
 },
 "SLE": {
- "fillKey": "lt10" 
+ "fillKey": "lt6" 
 },
 "NGA": {
- "fillKey": "lt10" 
+ "fillKey": "lt6" 
 } 
 },
 "31": {
  "GIN": {
- "fillKey": "lt10" 
+ "fillKey": "lt6" 
 },
 "LBR": {
- "fillKey": "lt10" 
+ "fillKey": "lt6" 
 },
 "SLE": {
- "fillKey": "lt10" 
+ "fillKey": "lt6" 
 },
 "NGA": {
- "fillKey": "lt10" 
+ "fillKey": "lt6" 
 } 
 },
 "32": {
  "GIN": {
- "fillKey": "lt10" 
+ "fillKey": "lt6" 
 },
 "LBR": {
- "fillKey": "lt10" 
+ "fillKey": "lt6" 
 },
 "SLE": {
- "fillKey": "lt10" 
+ "fillKey": "lt6" 
 },
 "NGA": {
- "fillKey": "lt10" 
+ "fillKey": "lt6" 
 } 
 },
 "33": {
  "GIN": {
- "fillKey": "lt10" 
+ "fillKey": "lt6" 
 },
 "LBR": {
- "fillKey": "lt10" 
+ "fillKey": "lt6" 
 },
 "SLE": {
- "fillKey": "lt10" 
+ "fillKey": "lt6" 
 },
 "NGA": {
- "fillKey": "lt10" 
+ "fillKey": "lt6" 
 } 
 },
 "34": {
  "GIN": {
- "fillKey": "lt10" 
+ "fillKey": "lt6" 
 },
 "LBR": {
- "fillKey": "lt10" 
+ "fillKey": "lt6" 
 },
 "SLE": {
- "fillKey": "lt10" 
+ "fillKey": "lt6" 
 },
 "NGA": {
- "fillKey": "lt10" 
+ "fillKey": "lt6" 
 } 
 },
 "35": {
  "GIN": {
- "fillKey": "lt10" 
+ "fillKey": "lt6" 
 },
 "LBR": {
- "fillKey": "lt10" 
+ "fillKey": "lt6" 
 },
 "SLE": {
- "fillKey": "lt10" 
+ "fillKey": "lt6" 
 },
 "NGA": {
- "fillKey": "lt10" 
+ "fillKey": "lt6" 
 } 
 },
 "36": {
  "GIN": {
- "fillKey": "lt10" 
+ "fillKey": "lt6" 
 },
 "LBR": {
- "fillKey": "lt10" 
+ "fillKey": "lt6" 
 },
 "SLE": {
- "fillKey": "lt10" 
+ "fillKey": "lt6" 
 },
 "NGA": {
- "fillKey": "lt10" 
+ "fillKey": "lt6" 
 } 
 },
 "37": {
  "GIN": {
- "fillKey": "lt10" 
+ "fillKey": "lt6" 
 },
 "LBR": {
- "fillKey": "lt10" 
+ "fillKey": "lt6" 
 },
 "SLE": {
- "fillKey": "lt10" 
+ "fillKey": "lt6" 
 },
 "NGA": {
- "fillKey": "lt10" 
+ "fillKey": "lt6" 
 } 
 },
 "38": {
  "GIN": {
- "fillKey": "lt10" 
+ "fillKey": "lt6" 
 },
 "LBR": {
- "fillKey": "lt10" 
+ "fillKey": "lt6" 
 },
 "SLE": {
- "fillKey": "lt10" 
+ "fillKey": "lt6" 
 },
 "NGA": {
- "fillKey": "lt10" 
+ "fillKey": "lt6" 
 } 
 },
 "39": {
  "GIN": {
- "fillKey": "lt10" 
+ "fillKey": "lt6" 
 },
 "LBR": {
- "fillKey": "lt10" 
+ "fillKey": "lt6" 
 },
 "SLE": {
- "fillKey": "lt10" 
+ "fillKey": "lt6" 
 },
 "NGA": {
- "fillKey": "lt10" 
+ "fillKey": "lt6" 
 } 
 },
 "40": {
  "GIN": {
- "fillKey": "lt10" 
+ "fillKey": "lt6" 
 },
 "LBR": {
- "fillKey": "lt10" 
+ "fillKey": "lt6" 
 },
 "SLE": {
- "fillKey": "lt10" 
+ "fillKey": "lt6" 
 },
 "NGA": {
- "fillKey": "lt10" 
+ "fillKey": "lt6" 
 } 
 },
 "41": {
  "GIN": {
- "fillKey": "lt10" 
+ "fillKey": "lt6" 
 },
 "LBR": {
- "fillKey": "lt10" 
+ "fillKey": "lt6" 
 },
 "SLE": {
- "fillKey": "lt10" 
+ "fillKey": "lt6" 
 },
 "NGA": {
- "fillKey": "lt10" 
+ "fillKey": "lt6" 
 } 
 },
 "42": {
  "GIN": {
- "fillKey": "lt10" 
+ "fillKey": "lt6" 
 },
 "LBR": {
- "fillKey": "lt10" 
+ "fillKey": "lt6" 
 },
 "SLE": {
- "fillKey": "lt10" 
+ "fillKey": "lt6" 
 },
 "NGA": {
- "fillKey": "lt10" 
+ "fillKey": "lt6" 
 } 
 },
 "43": {
  "GIN": {
- "fillKey": "lt10" 
+ "fillKey": "lt6" 
 },
 "LBR": {
- "fillKey": "lt10" 
+ "fillKey": "lt6" 
 },
 "SLE": {
- "fillKey": "lt10" 
+ "fillKey": "lt6" 
 },
 "NGA": {
- "fillKey": "lt10" 
+ "fillKey": "lt6" 
 } 
 },
 "44": {
  "GIN": {
- "fillKey": "lt10" 
+ "fillKey": "lt6" 
 },
 "LBR": {
- "fillKey": "lt10" 
+ "fillKey": "lt6" 
 },
 "SLE": {
- "fillKey": "lt10" 
+ "fillKey": "lt6" 
 },
 "NGA": {
- "fillKey": "lt10" 
+ "fillKey": "lt6" 
 } 
 },
 "45": {
  "GIN": {
- "fillKey": "lt10" 
+ "fillKey": "lt6" 
 },
 "LBR": {
- "fillKey": "lt10" 
+ "fillKey": "lt6" 
 },
 "SLE": {
- "fillKey": "lt10" 
+ "fillKey": "lt6" 
 },
 "NGA": {
- "fillKey": "lt10" 
+ "fillKey": "lt6" 
 } 
 },
 "46": {
  "GIN": {
- "fillKey": "lt10" 
+ "fillKey": "lt6" 
 },
 "LBR": {
- "fillKey": "lt10" 
+ "fillKey": "lt6" 
 },
 "SLE": {
- "fillKey": "lt10" 
+ "fillKey": "lt6" 
 },
 "NGA": {
- "fillKey": "lt10" 
+ "fillKey": "lt6" 
 } 
 },
 "47": {
  "GIN": {
- "fillKey": "lt10" 
+ "fillKey": "lt6" 
 },
 "LBR": {
- "fillKey": "lt10" 
+ "fillKey": "lt6" 
 },
 "SLE": {
- "fillKey": "lt10" 
+ "fillKey": "lt6" 
 },
 "NGA": {
- "fillKey": "lt10" 
+ "fillKey": "lt6" 
 } 
 },
 "48": {
  "GIN": {
- "fillKey": "lt10" 
+ "fillKey": "lt6" 
 },
 "LBR": {
- "fillKey": "lt10" 
+ "fillKey": "lt6" 
 },
 "SLE": {
- "fillKey": "lt10" 
+ "fillKey": "lt6" 
 },
 "NGA": {
- "fillKey": "lt10" 
+ "fillKey": "lt6" 
 } 
 },
 "49": {
  "GIN": {
- "fillKey": "lt10" 
+ "fillKey": "lt6" 
 },
 "LBR": {
- "fillKey": "lt10" 
+ "fillKey": "lt6" 
 },
 "SLE": {
- "fillKey": "lt10" 
+ "fillKey": "lt6" 
 },
 "NGA": {
- "fillKey": "lt10" 
+ "fillKey": "lt6" 
 } 
 },
 "50": {
  "GIN": {
- "fillKey": "lt10" 
+ "fillKey": "lt6" 
 },
 "LBR": {
- "fillKey": "lt10" 
+ "fillKey": "lt6" 
 },
 "SLE": {
- "fillKey": "lt10" 
+ "fillKey": "lt6" 
 },
 "NGA": {
- "fillKey": "lt10" 
+ "fillKey": "lt6" 
 } 
 },
 "51": {
  "GIN": {
- "fillKey": "lt10" 
+ "fillKey": "lt6" 
 },
 "LBR": {
- "fillKey": "lt10" 
+ "fillKey": "lt6" 
 },
 "SLE": {
- "fillKey": "lt10" 
+ "fillKey": "lt6" 
 },
 "NGA": {
- "fillKey": "lt10" 
+ "fillKey": "lt6" 
 } 
 },
 "52": {
  "GIN": {
- "fillKey": "lt10" 
+ "fillKey": "lt6" 
 },
 "LBR": {
- "fillKey": "lt10" 
+ "fillKey": "lt6" 
 },
 "SLE": {
- "fillKey": "lt10" 
+ "fillKey": "lt6" 
 },
 "NGA": {
- "fillKey": "lt10" 
+ "fillKey": "lt6" 
 } 
 },
 "53": {
  "GIN": {
- "fillKey": "lt10" 
+ "fillKey": "lt6" 
 },
 "LBR": {
- "fillKey": "lt10" 
+ "fillKey": "lt6" 
 },
 "SLE": {
- "fillKey": "lt10" 
+ "fillKey": "lt6" 
 },
 "NGA": {
- "fillKey": "lt10" 
+ "fillKey": "lt6" 
 } 
 },
 "54": {
  "GIN": {
- "fillKey": "lt10" 
+ "fillKey": "lt6" 
 },
 "LBR": {
- "fillKey": "lt10" 
+ "fillKey": "lt6" 
 },
 "SLE": {
- "fillKey": "lt10" 
+ "fillKey": "lt6" 
 },
 "NGA": {
- "fillKey": "lt10" 
+ "fillKey": "lt6" 
 } 
 },
 "55": {
  "GIN": {
- "fillKey": "lt10" 
+ "fillKey": "lt6" 
 },
 "LBR": {
- "fillKey": "lt10" 
+ "fillKey": "lt6" 
 },
 "SLE": {
- "fillKey": "lt10" 
+ "fillKey": "lt6" 
 },
 "NGA": {
- "fillKey": "lt10" 
+ "fillKey": "lt6" 
 } 
 },
 "56": {
  "GIN": {
- "fillKey": "lt10" 
+ "fillKey": "lt6" 
 },
 "LBR": {
- "fillKey": "lt10" 
+ "fillKey": "lt6" 
 },
 "SLE": {
- "fillKey": "lt10" 
+ "fillKey": "lt6" 
 },
 "NGA": {
- "fillKey": "lt10" 
+ "fillKey": "lt6" 
 } 
 },
 "57": {
  "GIN": {
- "fillKey": "lt10" 
+ "fillKey": "lt6" 
 },
 "LBR": {
- "fillKey": "lt10" 
+ "fillKey": "lt6" 
 },
 "SLE": {
- "fillKey": "lt10" 
+ "fillKey": "lt6" 
 },
 "NGA": {
- "fillKey": "lt10" 
+ "fillKey": "lt6" 
 } 
 },
 "58": {
  "GIN": {
- "fillKey": "lt10" 
+ "fillKey": "lt6" 
 },
 "LBR": {
- "fillKey": "lt10" 
+ "fillKey": "lt6" 
 },
 "SLE": {
- "fillKey": "lt10" 
+ "fillKey": "lt6" 
 },
 "NGA": {
- "fillKey": "lt10" 
+ "fillKey": "lt6" 
 } 
 },
 "59": {
  "GIN": {
- "fillKey": "lt10" 
+ "fillKey": "lt6" 
 },
 "LBR": {
- "fillKey": "lt10" 
+ "fillKey": "lt6" 
 },
 "SLE": {
- "fillKey": "lt10" 
+ "fillKey": "lt6" 
 },
 "NGA": {
- "fillKey": "lt10" 
+ "fillKey": "lt6" 
 } 
 },
 "60": {
  "GIN": {
- "fillKey": "lt10" 
+ "fillKey": "lt11" 
 },
 "LBR": {
- "fillKey": "lt10" 
+ "fillKey": "lt6" 
 },
 "SLE": {
- "fillKey": "lt10" 
+ "fillKey": "lt11" 
 },
 "NGA": {
- "fillKey": "lt10" 
+ "fillKey": "lt6" 
 } 
 },
 "61": {
  "GIN": {
- "fillKey": "lt10" 
+ "fillKey": "lt11" 
 },
 "LBR": {
- "fillKey": "lt10" 
+ "fillKey": "lt6" 
 },
 "SLE": {
- "fillKey": "lt10" 
+ "fillKey": "lt11" 
 },
 "NGA": {
- "fillKey": "lt10" 
+ "fillKey": "lt6" 
 } 
 },
 "62": {
  "GIN": {
- "fillKey": "lt10" 
+ "fillKey": "lt11" 
 },
 "LBR": {
- "fillKey": "lt10" 
+ "fillKey": "lt6" 
 },
 "SLE": {
- "fillKey": "lt10" 
+ "fillKey": "lt11" 
 },
 "NGA": {
- "fillKey": "lt10" 
+ "fillKey": "lt6" 
 } 
 },
 "63": {
  "GIN": {
- "fillKey": "lt10" 
+ "fillKey": "lt11" 
 },
 "LBR": {
- "fillKey": "lt10" 
+ "fillKey": "lt6" 
 },
 "SLE": {
- "fillKey": "lt10" 
+ "fillKey": "lt11" 
 },
 "NGA": {
- "fillKey": "lt10" 
+ "fillKey": "lt6" 
 } 
 },
 "64": {
  "GIN": {
- "fillKey": "lt10" 
+ "fillKey": "lt11" 
 },
 "LBR": {
- "fillKey": "lt10" 
+ "fillKey": "lt6" 
 },
 "SLE": {
- "fillKey": "lt20" 
+ "fillKey": "lt11" 
 },
 "NGA": {
- "fillKey": "lt10" 
+ "fillKey": "lt6" 
 } 
 },
 "65": {
  "GIN": {
- "fillKey": "lt10" 
+ "fillKey": "lt11" 
 },
 "LBR": {
- "fillKey": "lt10" 
+ "fillKey": "lt6" 
 },
 "SLE": {
- "fillKey": "lt10" 
+ "fillKey": "lt11" 
 },
 "NGA": {
- "fillKey": "lt10" 
+ "fillKey": "lt6" 
 } 
 },
 "66": {
  "GIN": {
- "fillKey": "lt10" 
+ "fillKey": "lt11" 
 },
 "LBR": {
- "fillKey": "lt10" 
+ "fillKey": "lt6" 
 },
 "SLE": {
- "fillKey": "lt10" 
+ "fillKey": "lt11" 
 },
 "NGA": {
- "fillKey": "lt10" 
+ "fillKey": "lt6" 
 } 
 },
 "67": {
  "GIN": {
- "fillKey": "lt10" 
+ "fillKey": "lt11" 
 },
 "LBR": {
- "fillKey": "lt10" 
+ "fillKey": "lt6" 
 },
 "SLE": {
- "fillKey": "lt10" 
+ "fillKey": "lt11" 
 },
 "NGA": {
- "fillKey": "lt10" 
+ "fillKey": "lt6" 
 } 
 },
 "68": {
  "GIN": {
- "fillKey": "lt10" 
+ "fillKey": "lt6" 
 },
 "LBR": {
- "fillKey": "lt10" 
+ "fillKey": "lt6" 
 },
 "SLE": {
- "fillKey": "lt10" 
+ "fillKey": "lt6" 
 },
 "NGA": {
- "fillKey": "lt10" 
+ "fillKey": "lt6" 
 } 
 },
 "69": {
  "GIN": {
- "fillKey": "lt10" 
+ "fillKey": "lt6" 
 },
 "LBR": {
- "fillKey": "lt10" 
+ "fillKey": "lt6" 
 },
 "SLE": {
- "fillKey": "lt10" 
+ "fillKey": "lt6" 
 },
 "NGA": {
- "fillKey": "lt10" 
+ "fillKey": "lt6" 
 } 
 },
 "70": {
  "GIN": {
- "fillKey": "lt10" 
+ "fillKey": "lt6" 
 },
 "LBR": {
- "fillKey": "lt10" 
+ "fillKey": "lt6" 
 },
 "SLE": {
- "fillKey": "lt10" 
+ "fillKey": "lt6" 
 },
 "NGA": {
- "fillKey": "lt10" 
+ "fillKey": "lt6" 
 } 
 },
 "71": {
  "GIN": {
- "fillKey": "lt10" 
+ "fillKey": "lt6" 
 },
 "LBR": {
- "fillKey": "lt10" 
+ "fillKey": "lt6" 
 },
 "SLE": {
- "fillKey": "lt10" 
+ "fillKey": "lt6" 
 },
 "NGA": {
- "fillKey": "lt10" 
+ "fillKey": "lt6" 
 } 
 },
 "72": {
  "GIN": {
- "fillKey": "lt10" 
+ "fillKey": "lt6" 
 },
 "LBR": {
- "fillKey": "lt10" 
+ "fillKey": "lt6" 
 },
 "SLE": {
- "fillKey": "lt10" 
+ "fillKey": "lt6" 
 },
 "NGA": {
- "fillKey": "lt10" 
+ "fillKey": "lt6" 
 } 
 },
 "73": {
  "GIN": {
- "fillKey": "lt10" 
+ "fillKey": "lt6" 
 },
 "LBR": {
- "fillKey": "lt10" 
+ "fillKey": "lt6" 
 },
 "SLE": {
- "fillKey": "lt10" 
+ "fillKey": "lt6" 
 },
 "NGA": {
- "fillKey": "lt10" 
+ "fillKey": "lt6" 
 } 
 },
 "74": {
  "GIN": {
- "fillKey": "lt10" 
+ "fillKey": "lt6" 
 },
 "LBR": {
- "fillKey": "lt10" 
+ "fillKey": "lt6" 
 },
 "SLE": {
- "fillKey": "lt10" 
+ "fillKey": "lt6" 
 },
 "NGA": {
- "fillKey": "lt10" 
+ "fillKey": "lt6" 
 } 
 },
 "75": {
  "GIN": {
- "fillKey": "lt10" 
+ "fillKey": "lt6" 
 },
 "LBR": {
- "fillKey": "lt10" 
+ "fillKey": "lt6" 
 },
 "SLE": {
- "fillKey": "lt10" 
+ "fillKey": "lt6" 
 },
 "NGA": {
- "fillKey": "lt10" 
+ "fillKey": "lt6" 
 } 
 },
 "76": {
  "GIN": {
- "fillKey": "lt10" 
+ "fillKey": "lt6" 
 },
 "LBR": {
- "fillKey": "lt10" 
+ "fillKey": "lt6" 
 },
 "SLE": {
- "fillKey": "lt10" 
+ "fillKey": "lt6" 
 },
 "NGA": {
- "fillKey": "lt10" 
+ "fillKey": "lt6" 
 } 
 },
 "77": {
  "GIN": {
- "fillKey": "lt10" 
+ "fillKey": "lt6" 
 },
 "LBR": {
- "fillKey": "lt10" 
+ "fillKey": "lt6" 
 },
 "SLE": {
- "fillKey": "lt10" 
+ "fillKey": "lt6" 
 },
 "NGA": {
- "fillKey": "lt10" 
+ "fillKey": "lt6" 
 } 
 },
 "78": {
  "GIN": {
- "fillKey": "lt10" 
+ "fillKey": "lt6" 
 },
 "LBR": {
- "fillKey": "lt10" 
+ "fillKey": "lt6" 
 },
 "SLE": {
- "fillKey": "lt10" 
+ "fillKey": "lt6" 
 },
 "NGA": {
- "fillKey": "lt10" 
+ "fillKey": "lt6" 
 } 
 },
 "79": {
  "GIN": {
- "fillKey": "lt10" 
+ "fillKey": "lt6" 
 },
 "LBR": {
- "fillKey": "lt10" 
+ "fillKey": "lt6" 
 },
 "SLE": {
- "fillKey": "lt10" 
+ "fillKey": "lt6" 
 },
 "NGA": {
- "fillKey": "lt10" 
+ "fillKey": "lt6" 
 } 
 },
 "80": {
  "GIN": {
- "fillKey": "lt10" 
+ "fillKey": "lt6" 
 },
 "LBR": {
- "fillKey": "lt10" 
+ "fillKey": "lt6" 
 },
 "SLE": {
- "fillKey": "lt10" 
+ "fillKey": "lt6" 
 },
 "NGA": {
- "fillKey": "lt10" 
+ "fillKey": "lt6" 
 } 
 },
 "81": {
  "GIN": {
- "fillKey": "lt10" 
+ "fillKey": "lt6" 
 },
 "LBR": {
- "fillKey": "lt10" 
+ "fillKey": "lt6" 
 },
 "SLE": {
- "fillKey": "lt10" 
+ "fillKey": "lt6" 
 },
 "NGA": {
- "fillKey": "lt10" 
+ "fillKey": "lt6" 
 } 
 },
 "82": {
  "GIN": {
- "fillKey": "lt10" 
+ "fillKey": "lt6" 
 },
 "LBR": {
- "fillKey": "lt10" 
+ "fillKey": "lt6" 
 },
 "SLE": {
- "fillKey": "lt20" 
+ "fillKey": "lt17" 
 },
 "NGA": {
- "fillKey": "lt10" 
+ "fillKey": "lt6" 
 } 
 },
 "83": {
  "GIN": {
- "fillKey": "lt10" 
+ "fillKey": "lt6" 
 },
 "LBR": {
- "fillKey": "lt10" 
+ "fillKey": "lt6" 
 },
 "SLE": {
- "fillKey": "lt41" 
+ "fillKey": "lt34" 
 },
 "NGA": {
- "fillKey": "lt10" 
+ "fillKey": "lt6" 
 } 
 },
 "84": {
  "GIN": {
- "fillKey": "lt10" 
+ "fillKey": "lt6" 
 },
 "LBR": {
- "fillKey": "lt10" 
+ "fillKey": "lt6" 
 },
 "SLE": {
- "fillKey": "lt30" 
+ "fillKey": "lt34" 
 },
 "NGA": {
- "fillKey": "lt10" 
+ "fillKey": "lt6" 
 } 
 },
 "85": {
  "GIN": {
- "fillKey": "lt10" 
+ "fillKey": "lt6" 
 },
 "LBR": {
- "fillKey": "lt10" 
+ "fillKey": "lt6" 
 },
 "SLE": {
- "fillKey": "lt30" 
+ "fillKey": "lt28" 
 },
 "NGA": {
- "fillKey": "lt10" 
+ "fillKey": "lt6" 
 } 
 },
 "86": {
  "GIN": {
- "fillKey": "lt10" 
+ "fillKey": "lt6" 
 },
 "LBR": {
- "fillKey": "lt10" 
+ "fillKey": "lt6" 
 },
 "SLE": {
- "fillKey": "lt30" 
+ "fillKey": "lt28" 
 },
 "NGA": {
- "fillKey": "lt10" 
+ "fillKey": "lt6" 
 } 
 },
 "87": {
  "GIN": {
- "fillKey": "lt10" 
+ "fillKey": "lt6" 
 },
 "LBR": {
- "fillKey": "lt10" 
+ "fillKey": "lt6" 
 },
 "SLE": {
- "fillKey": "lt30" 
+ "fillKey": "lt28" 
 },
 "NGA": {
- "fillKey": "lt10" 
+ "fillKey": "lt6" 
 } 
 },
 "88": {
  "GIN": {
- "fillKey": "lt10" 
+ "fillKey": "lt6" 
 },
 "LBR": {
- "fillKey": "lt10" 
+ "fillKey": "lt6" 
 },
 "SLE": {
- "fillKey": "lt30" 
+ "fillKey": "lt22" 
 },
 "NGA": {
- "fillKey": "lt10" 
+ "fillKey": "lt6" 
 } 
 },
 "89": {
  "GIN": {
- "fillKey": "lt10" 
+ "fillKey": "lt6" 
 },
 "LBR": {
- "fillKey": "lt10" 
+ "fillKey": "lt6" 
 },
 "SLE": {
- "fillKey": "lt30" 
+ "fillKey": "lt22" 
 },
 "NGA": {
- "fillKey": "lt10" 
+ "fillKey": "lt6" 
 } 
 },
 "90": {
  "GIN": {
- "fillKey": "lt10" 
+ "fillKey": "lt6" 
 },
 "LBR": {
- "fillKey": "lt10" 
+ "fillKey": "lt6" 
 },
 "SLE": {
- "fillKey": "lt20" 
+ "fillKey": "lt22" 
 },
 "NGA": {
- "fillKey": "lt10" 
+ "fillKey": "lt6" 
 } 
 },
 "91": {
  "GIN": {
- "fillKey": "lt10" 
+ "fillKey": "lt6" 
 },
 "LBR": {
- "fillKey": "lt10" 
+ "fillKey": "lt6" 
 },
 "SLE": {
- "fillKey": "lt20" 
+ "fillKey": "lt17" 
 },
 "NGA": {
- "fillKey": "lt10" 
+ "fillKey": "lt6" 
 } 
 },
 "92": {
  "GIN": {
- "fillKey": "lt10" 
+ "fillKey": "lt6" 
 },
 "LBR": {
- "fillKey": "lt10" 
+ "fillKey": "lt6" 
 },
 "SLE": {
- "fillKey": "lt20" 
+ "fillKey": "lt17" 
 },
 "NGA": {
- "fillKey": "lt10" 
+ "fillKey": "lt6" 
 } 
 },
 "93": {
  "GIN": {
- "fillKey": "lt10" 
+ "fillKey": "lt6" 
 },
 "LBR": {
- "fillKey": "lt10" 
+ "fillKey": "lt6" 
 },
 "SLE": {
- "fillKey": "lt20" 
+ "fillKey": "lt17" 
 },
 "NGA": {
- "fillKey": "lt10" 
+ "fillKey": "lt6" 
 } 
 },
 "94": {
  "GIN": {
- "fillKey": "lt10" 
+ "fillKey": "lt6" 
 },
 "LBR": {
- "fillKey": "lt10" 
+ "fillKey": "lt6" 
 },
 "SLE": {
- "fillKey": "lt20" 
+ "fillKey": "lt11" 
 },
 "NGA": {
- "fillKey": "lt10" 
+ "fillKey": "lt6" 
 } 
 },
 "95": {
  "GIN": {
- "fillKey": "lt10" 
+ "fillKey": "lt6" 
 },
 "LBR": {
- "fillKey": "lt10" 
+ "fillKey": "lt11" 
 },
 "SLE": {
- "fillKey": "lt10" 
+ "fillKey": "lt11" 
 },
 "NGA": {
- "fillKey": "lt10" 
+ "fillKey": "lt6" 
 } 
 },
 "96": {
  "GIN": {
- "fillKey": "lt10" 
+ "fillKey": "lt6" 
 },
 "LBR": {
- "fillKey": "lt10" 
+ "fillKey": "lt11" 
 },
 "SLE": {
- "fillKey": "lt10" 
+ "fillKey": "lt11" 
 },
 "NGA": {
- "fillKey": "lt10" 
+ "fillKey": "lt6" 
 } 
 },
 "97": {
  "GIN": {
- "fillKey": "lt10" 
+ "fillKey": "lt6" 
 },
 "LBR": {
- "fillKey": "lt10" 
+ "fillKey": "lt11" 
 },
 "SLE": {
- "fillKey": "lt10" 
+ "fillKey": "lt11" 
 },
 "NGA": {
- "fillKey": "lt10" 
+ "fillKey": "lt6" 
 } 
 },
 "98": {
  "GIN": {
- "fillKey": "lt10" 
+ "fillKey": "lt6" 
 },
 "LBR": {
- "fillKey": "lt10" 
+ "fillKey": "lt11" 
 },
 "SLE": {
- "fillKey": "lt10" 
+ "fillKey": "lt6" 
 },
 "NGA": {
- "fillKey": "lt10" 
+ "fillKey": "lt6" 
 } 
 },
 "99": {
  "GIN": {
- "fillKey": "lt10" 
+ "fillKey": "lt6" 
 },
 "LBR": {
- "fillKey": "lt10" 
+ "fillKey": "lt6" 
 },
 "SLE": {
- "fillKey": "lt20" 
+ "fillKey": "lt6" 
 },
 "NGA": {
- "fillKey": "lt10" 
+ "fillKey": "lt6" 
 } 
 },
 "100": {
  "GIN": {
- "fillKey": "lt10" 
+ "fillKey": "lt6" 
 },
 "LBR": {
- "fillKey": "lt10" 
+ "fillKey": "lt6" 
 },
 "SLE": {
- "fillKey": "lt20" 
+ "fillKey": "lt6" 
 },
 "NGA": {
- "fillKey": "lt10" 
+ "fillKey": "lt6" 
 } 
 },
 "101": {
  "GIN": {
- "fillKey": "lt10" 
+ "fillKey": "lt6" 
 },
 "LBR": {
- "fillKey": "lt10" 
+ "fillKey": "lt6" 
 },
 "SLE": {
- "fillKey": "lt20" 
+ "fillKey": "lt6" 
 },
 "NGA": {
- "fillKey": "lt10" 
+ "fillKey": "lt6" 
 } 
 },
 "102": {
  "GIN": {
- "fillKey": "lt10" 
+ "fillKey": "lt6" 
 },
 "LBR": {
- "fillKey": "lt10" 
+ "fillKey": "lt6" 
 },
 "SLE": {
- "fillKey": "lt20" 
+ "fillKey": "lt6" 
 },
 "NGA": {
- "fillKey": "lt10" 
+ "fillKey": "lt6" 
 } 
 },
 "103": {
  "GIN": {
- "fillKey": "lt10" 
+ "fillKey": "lt6" 
 },
 "LBR": {
- "fillKey": "lt10" 
+ "fillKey": "lt6" 
 },
 "SLE": {
- "fillKey": "lt20" 
+ "fillKey": "lt6" 
 },
 "NGA": {
- "fillKey": "lt10" 
+ "fillKey": "lt6" 
 } 
 },
 "104": {
  "GIN": {
- "fillKey": "lt10" 
+ "fillKey": "lt6" 
 },
 "LBR": {
- "fillKey": "lt10" 
+ "fillKey": "lt6" 
 },
 "SLE": {
- "fillKey": "lt20" 
+ "fillKey": "lt6" 
 },
 "NGA": {
- "fillKey": "lt10" 
+ "fillKey": "lt6" 
 } 
 },
 "105": {
  "GIN": {
- "fillKey": "lt10" 
+ "fillKey": "lt6" 
 },
 "LBR": {
- "fillKey": "lt10" 
+ "fillKey": "lt6" 
 },
 "SLE": {
- "fillKey": "lt20" 
+ "fillKey": "lt6" 
 },
 "NGA": {
- "fillKey": "lt10" 
+ "fillKey": "lt6" 
 } 
 },
 "106": {
  "GIN": {
- "fillKey": "lt10" 
+ "fillKey": "lt6" 
 },
 "LBR": {
- "fillKey": "lt10" 
+ "fillKey": "lt6" 
 },
 "SLE": {
- "fillKey": "lt20" 
+ "fillKey": "lt6" 
 },
 "NGA": {
- "fillKey": "lt10" 
+ "fillKey": "lt6" 
 } 
 },
 "107": {
  "GIN": {
- "fillKey": "lt10" 
+ "fillKey": "lt6" 
 },
 "LBR": {
- "fillKey": "lt10" 
+ "fillKey": "lt6" 
 },
 "SLE": {
- "fillKey": "lt20" 
+ "fillKey": "lt6" 
 },
 "NGA": {
- "fillKey": "lt10" 
+ "fillKey": "lt6" 
 } 
 },
 "108": {
  "GIN": {
- "fillKey": "lt10" 
+ "fillKey": "lt6" 
 },
 "LBR": {
- "fillKey": "lt10" 
+ "fillKey": "lt6" 
 },
 "SLE": {
- "fillKey": "lt10" 
+ "fillKey": "lt6" 
 },
 "NGA": {
- "fillKey": "lt10" 
+ "fillKey": "lt6" 
 } 
 },
 "109": {
  "GIN": {
- "fillKey": "lt10" 
+ "fillKey": "lt6" 
 },
 "LBR": {
- "fillKey": "lt10" 
+ "fillKey": "lt11" 
 },
 "SLE": {
- "fillKey": "lt20" 
+ "fillKey": "lt6" 
 },
 "NGA": {
- "fillKey": "lt10" 
+ "fillKey": "lt6" 
 } 
 },
 "110": {
  "GIN": {
- "fillKey": "lt10" 
+ "fillKey": "lt6" 
 },
 "LBR": {
- "fillKey": "lt10" 
+ "fillKey": "lt11" 
 },
 "SLE": {
- "fillKey": "lt20" 
+ "fillKey": "lt6" 
 },
 "NGA": {
- "fillKey": "lt10" 
+ "fillKey": "lt6" 
 } 
 },
 "111": {
  "GIN": {
- "fillKey": "lt10" 
+ "fillKey": "lt6" 
 },
 "LBR": {
- "fillKey": "lt10" 
+ "fillKey": "lt11" 
 },
 "SLE": {
- "fillKey": "lt20" 
+ "fillKey": "lt6" 
 },
 "NGA": {
- "fillKey": "lt10" 
+ "fillKey": "lt6" 
 } 
 },
 "112": {
  "GIN": {
- "fillKey": "lt10" 
+ "fillKey": "lt6" 
 },
 "LBR": {
- "fillKey": "lt10" 
+ "fillKey": "lt11" 
 },
 "SLE": {
- "fillKey": "lt20" 
+ "fillKey": "lt6" 
 },
 "NGA": {
- "fillKey": "lt10" 
+ "fillKey": "lt6" 
 } 
 },
 "113": {
  "GIN": {
- "fillKey": "lt10" 
+ "fillKey": "lt6" 
 },
 "LBR": {
- "fillKey": "lt10" 
+ "fillKey": "lt11" 
 },
 "SLE": {
- "fillKey": "lt20" 
+ "fillKey": "lt6" 
 },
 "NGA": {
- "fillKey": "lt10" 
+ "fillKey": "lt6" 
 } 
 },
 "114": {
  "GIN": {
- "fillKey": "lt10" 
+ "fillKey": "lt6" 
 },
 "LBR": {
- "fillKey": "lt20" 
+ "fillKey": "lt11" 
 },
 "SLE": {
- "fillKey": "lt20" 
+ "fillKey": "lt6" 
 },
 "NGA": {
- "fillKey": "lt10" 
+ "fillKey": "lt6" 
 } 
 },
 "115": {
  "GIN": {
- "fillKey": "lt10" 
+ "fillKey": "lt6" 
 },
 "LBR": {
- "fillKey": "lt20" 
+ "fillKey": "lt17" 
 },
 "SLE": {
- "fillKey": "lt20" 
+ "fillKey": "lt6" 
 },
 "NGA": {
- "fillKey": "lt10" 
+ "fillKey": "lt6" 
 } 
 },
 "116": {
  "GIN": {
- "fillKey": "lt10" 
+ "fillKey": "lt6" 
 },
 "LBR": {
- "fillKey": "lt20" 
+ "fillKey": "lt17" 
 },
 "SLE": {
- "fillKey": "lt20" 
+ "fillKey": "lt6" 
 },
 "NGA": {
- "fillKey": "lt10" 
+ "fillKey": "lt6" 
 } 
 },
 "117": {
  "GIN": {
- "fillKey": "lt10" 
+ "fillKey": "lt6" 
 },
 "LBR": {
- "fillKey": "lt20" 
+ "fillKey": "lt17" 
 },
 "SLE": {
- "fillKey": "lt20" 
+ "fillKey": "lt6" 
 },
 "NGA": {
- "fillKey": "lt10" 
+ "fillKey": "lt6" 
 } 
 },
 "118": {
  "GIN": {
- "fillKey": "lt10" 
+ "fillKey": "lt11" 
 },
 "LBR": {
- "fillKey": "lt20" 
+ "fillKey": "lt17" 
 },
 "SLE": {
- "fillKey": "lt20" 
+ "fillKey": "lt6" 
 },
 "NGA": {
- "fillKey": "lt10" 
+ "fillKey": "lt6" 
 } 
 },
 "119": {
  "GIN": {
- "fillKey": "lt10" 
+ "fillKey": "lt11" 
 },
 "LBR": {
- "fillKey": "lt20" 
+ "fillKey": "lt22" 
 },
 "SLE": {
- "fillKey": "lt20" 
+ "fillKey": "lt6" 
 },
 "NGA": {
- "fillKey": "lt10" 
+ "fillKey": "lt6" 
 } 
 },
 "120": {
  "GIN": {
- "fillKey": "lt10" 
+ "fillKey": "lt11" 
 },
 "LBR": {
- "fillKey": "lt20" 
+ "fillKey": "lt17" 
 },
 "SLE": {
- "fillKey": "lt20" 
+ "fillKey": "lt6" 
 },
 "NGA": {
- "fillKey": "lt10" 
+ "fillKey": "lt11" 
 } 
 },
 "121": {
  "GIN": {
- "fillKey": "lt10" 
+ "fillKey": "lt11" 
 },
 "LBR": {
- "fillKey": "lt20" 
+ "fillKey": "lt17" 
 },
 "SLE": {
- "fillKey": "lt20" 
+ "fillKey": "lt6" 
 },
 "NGA": {
- "fillKey": "lt10" 
+ "fillKey": "lt11" 
 } 
 },
 "122": {
  "GIN": {
- "fillKey": "lt10" 
+ "fillKey": "lt6" 
 },
 "LBR": {
- "fillKey": "lt20" 
+ "fillKey": "lt17" 
 },
 "SLE": {
- "fillKey": "lt20" 
+ "fillKey": "lt6" 
 },
 "NGA": {
- "fillKey": "lt10" 
+ "fillKey": "lt17" 
 } 
 },
 "123": {
  "GIN": {
- "fillKey": "lt10" 
+ "fillKey": "lt6" 
 },
 "LBR": {
- "fillKey": "lt20" 
+ "fillKey": "lt11" 
 },
 "SLE": {
- "fillKey": "lt20" 
+ "fillKey": "lt6" 
 },
 "NGA": {
- "fillKey": "lt10" 
+ "fillKey": "lt22" 
 } 
 },
 "124": {
  "GIN": {
- "fillKey": "lt10" 
+ "fillKey": "lt6" 
 },
 "LBR": {
- "fillKey": "lt20" 
+ "fillKey": "lt11" 
 },
 "SLE": {
- "fillKey": "lt20" 
+ "fillKey": "lt6" 
 },
 "NGA": {
- "fillKey": "lt10" 
+ "fillKey": "lt28" 
 } 
 },
 "125": {
  "GIN": {
- "fillKey": "lt10" 
+ "fillKey": "lt6" 
 },
 "LBR": {
- "fillKey": "lt20" 
+ "fillKey": "lt11" 
 },
 "SLE": {
- "fillKey": "lt20" 
+ "fillKey": "lt6" 
 },
 "NGA": {
- "fillKey": "lt10" 
+ "fillKey": "lt34" 
 } 
 },
 "126": {
  "GIN": {
- "fillKey": "lt10" 
+ "fillKey": "lt6" 
 },
 "LBR": {
- "fillKey": "lt20" 
+ "fillKey": "lt6" 
 },
 "SLE": {
- "fillKey": "lt20" 
+ "fillKey": "lt6" 
 },
 "NGA": {
- "fillKey": "lt10" 
+ "fillKey": "lt39" 
 } 
 },
 "127": {
  "GIN": {
- "fillKey": "lt10" 
+ "fillKey": "lt6" 
 },
 "LBR": {
- "fillKey": "lt20" 
+ "fillKey": "lt6" 
 },
 "SLE": {
- "fillKey": "lt20" 
+ "fillKey": "lt6" 
 },
 "NGA": {
- "fillKey": "lt10" 
+ "fillKey": "lt39" 
 } 
 },
 "128": {
  "GIN": {
- "fillKey": "lt10" 
+ "fillKey": "lt6" 
 },
 "LBR": {
- "fillKey": "lt20" 
+ "fillKey": "lt6" 
 },
 "SLE": {
- "fillKey": "lt20" 
+ "fillKey": "lt6" 
 },
 "NGA": {
- "fillKey": "lt10" 
+ "fillKey": "lt34" 
 } 
 },
 "129": {
  "GIN": {
- "fillKey": "lt10" 
+ "fillKey": "lt6" 
 },
 "LBR": {
- "fillKey": "lt20" 
+ "fillKey": "lt6" 
 },
 "SLE": {
- "fillKey": "lt20" 
+ "fillKey": "lt6" 
 },
 "NGA": {
- "fillKey": "lt10" 
+ "fillKey": "lt28" 
 } 
 },
 "130": {
  "GIN": {
- "fillKey": "lt10" 
+ "fillKey": "lt6" 
 },
 "LBR": {
- "fillKey": "lt20" 
+ "fillKey": "lt6" 
 },
 "SLE": {
- "fillKey": "lt20" 
+ "fillKey": "lt6" 
 },
 "NGA": {
- "fillKey": "lt10" 
+ "fillKey": "lt22" 
 } 
 },
 "131": {
  "GIN": {
- "fillKey": "lt10" 
+ "fillKey": "lt6" 
 },
 "LBR": {
- "fillKey": "lt20" 
+ "fillKey": "lt6" 
 },
 "SLE": {
- "fillKey": "lt20" 
+ "fillKey": "lt11" 
 },
 "NGA": {
- "fillKey": "lt10" 
+ "fillKey": "lt17" 
 } 
 },
 "132": {
  "GIN": {
- "fillKey": "lt10" 
+ "fillKey": "lt6" 
 },
 "LBR": {
- "fillKey": "lt20" 
+ "fillKey": "lt6" 
 },
 "SLE": {
- "fillKey": "lt20" 
+ "fillKey": "lt11" 
 },
 "NGA": {
- "fillKey": "lt10" 
+ "fillKey": "lt11" 
 } 
 },
 "133": {
  "GIN": {
- "fillKey": "lt10" 
+ "fillKey": "lt6" 
 },
 "LBR": {
- "fillKey": "lt20" 
+ "fillKey": "lt6" 
 },
 "SLE": {
- "fillKey": "lt20" 
+ "fillKey": "lt11" 
 },
 "NGA": {
- "fillKey": "lt10" 
+ "fillKey": "lt11" 
 } 
 },
 "134": {
  "GIN": {
- "fillKey": "lt10" 
+ "fillKey": "lt6" 
 },
 "LBR": {
- "fillKey": "lt30" 
+ "fillKey": "lt6" 
 },
 "SLE": {
- "fillKey": "lt20" 
+ "fillKey": "lt11" 
 },
 "NGA": {
- "fillKey": "lt10" 
+ "fillKey": "lt11" 
 } 
 },
 "135": {
  "GIN": {
- "fillKey": "lt10" 
+ "fillKey": "lt6" 
 },
 "LBR": {
- "fillKey": "lt30" 
+ "fillKey": "lt6" 
 },
 "SLE": {
- "fillKey": "lt20" 
+ "fillKey": "lt17" 
 },
 "NGA": {
- "fillKey": "lt10" 
+ "fillKey": "lt11" 
 } 
 },
 "136": {
  "GIN": {
- "fillKey": "lt10" 
+ "fillKey": "lt6" 
 },
 "LBR": {
- "fillKey": "lt30" 
+ "fillKey": "lt6" 
 },
 "SLE": {
- "fillKey": "lt20" 
+ "fillKey": "lt17" 
 },
 "NGA": {
- "fillKey": "lt10" 
+ "fillKey": "lt11" 
 } 
 },
 "137": {
  "GIN": {
- "fillKey": "lt10" 
+ "fillKey": "lt6" 
 },
 "LBR": {
- "fillKey": "lt30" 
+ "fillKey": "lt6" 
 },
 "SLE": {
- "fillKey": "lt20" 
+ "fillKey": "lt17" 
 },
 "NGA": {
- "fillKey": "lt10" 
+ "fillKey": "lt11" 
 } 
 },
 "138": {
  "GIN": {
- "fillKey": "lt10" 
+ "fillKey": "lt6" 
 },
 "LBR": {
- "fillKey": "lt30" 
+ "fillKey": "lt6" 
 },
 "SLE": {
- "fillKey": "lt20" 
+ "fillKey": "lt22" 
 },
 "NGA": {
- "fillKey": "lt10" 
+ "fillKey": "lt11" 
 } 
 },
 "139": {
  "GIN": {
- "fillKey": "lt10" 
+ "fillKey": "lt6" 
 },
 "LBR": {
- "fillKey": "lt41" 
+ "fillKey": "lt6" 
 },
 "SLE": {
- "fillKey": "lt20" 
+ "fillKey": "lt22" 
 },
 "NGA": {
- "fillKey": "lt10" 
+ "fillKey": "lt11" 
 } 
 },
 "140": {
  "GIN": {
- "fillKey": "lt10" 
+ "fillKey": "lt6" 
 },
 "LBR": {
- "fillKey": "lt41" 
+ "fillKey": "lt6" 
 },
 "SLE": {
- "fillKey": "lt20" 
+ "fillKey": "lt22" 
 },
 "NGA": {
- "fillKey": "lt10" 
+ "fillKey": "lt11" 
 } 
 },
 "141": {
  "GIN": {
- "fillKey": "lt10" 
+ "fillKey": "lt6" 
 },
 "LBR": {
- "fillKey": "lt41" 
+ "fillKey": "lt6" 
 },
 "SLE": {
- "fillKey": "lt20" 
+ "fillKey": "lt22" 
 },
 "NGA": {
- "fillKey": "lt10" 
+ "fillKey": "lt11" 
 } 
 },
 "142": {
  "GIN": {
- "fillKey": "lt10" 
+ "fillKey": "lt6" 
 },
 "LBR": {
- "fillKey": "lt51" 
+ "fillKey": "lt6" 
 },
 "SLE": {
- "fillKey": "lt20" 
+ "fillKey": "lt28" 
 },
 "NGA": {
- "fillKey": "lt10" 
+ "fillKey": "lt11" 
 } 
 },
 "143": {
  "GIN": {
- "fillKey": "lt10" 
+ "fillKey": "lt6" 
 },
 "LBR": {
- "fillKey": "lt61" 
+ "fillKey": "lt6" 
 },
 "SLE": {
- "fillKey": "lt30" 
+ "fillKey": "lt28" 
 },
 "NGA": {
- "fillKey": "lt10" 
+ "fillKey": "lt11" 
 } 
 },
 "144": {
  "GIN": {
- "fillKey": "lt20" 
+ "fillKey": "lt6" 
 },
 "LBR": {
- "fillKey": "lt61" 
+ "fillKey": "lt6" 
 },
 "SLE": {
- "fillKey": "lt30" 
+ "fillKey": "lt28" 
 },
 "NGA": {
- "fillKey": "lt10" 
+ "fillKey": "lt11" 
 } 
 },
 "145": {
  "GIN": {
- "fillKey": "lt20" 
+ "fillKey": "lt6" 
 },
 "LBR": {
- "fillKey": "lt71" 
+ "fillKey": "lt6" 
 },
 "SLE": {
- "fillKey": "lt30" 
+ "fillKey": "lt34" 
 },
 "NGA": {
- "fillKey": "lt10" 
+ "fillKey": "lt11" 
 } 
 },
 "146": {
  "GIN": {
- "fillKey": "lt20" 
+ "fillKey": "lt6" 
 },
 "LBR": {
- "fillKey": "lt81" 
+ "fillKey": "lt6" 
 },
 "SLE": {
- "fillKey": "lt30" 
+ "fillKey": "lt34" 
 },
 "NGA": {
- "fillKey": "lt10" 
+ "fillKey": "lt11" 
 } 
 },
 "147": {
  "GIN": {
- "fillKey": "lt20" 
+ "fillKey": "lt6" 
 },
 "LBR": {
- "fillKey": "lt81" 
+ "fillKey": "lt6" 
 },
 "SLE": {
- "fillKey": "lt30" 
+ "fillKey": "lt34" 
 },
 "NGA": {
- "fillKey": "lt10" 
+ "fillKey": "lt11" 
 } 
 },
 "148": {
  "GIN": {
- "fillKey": "lt20" 
+ "fillKey": "lt6" 
 },
 "LBR": {
- "fillKey": "lt81" 
+ "fillKey": "lt6" 
 },
 "SLE": {
- "fillKey": "lt30" 
+ "fillKey": "lt34" 
 },
 "NGA": {
- "fillKey": "lt10" 
+ "fillKey": "lt11" 
 } 
 },
 "149": {
  "GIN": {
- "fillKey": "lt20" 
+ "fillKey": "lt6" 
 },
 "LBR": {
- "fillKey": "lt81" 
+ "fillKey": "lt11" 
 },
 "SLE": {
- "fillKey": "lt30" 
+ "fillKey": "lt34" 
 },
 "NGA": {
- "fillKey": "lt10" 
+ "fillKey": "lt11" 
 } 
 },
 "150": {
  "GIN": {
- "fillKey": "lt20" 
+ "fillKey": "lt6" 
 },
 "LBR": {
- "fillKey": "lt71" 
+ "fillKey": "lt11" 
 },
 "SLE": {
- "fillKey": "lt30" 
+ "fillKey": "lt34" 
 },
 "NGA": {
- "fillKey": "lt10" 
+ "fillKey": "lt11" 
 } 
 },
 "151": {
  "GIN": {
- "fillKey": "lt20" 
+ "fillKey": "lt6" 
 },
 "LBR": {
- "fillKey": "lt71" 
+ "fillKey": "lt11" 
 },
 "SLE": {
- "fillKey": "lt30" 
+ "fillKey": "lt34" 
 },
 "NGA": {
- "fillKey": "lt10" 
+ "fillKey": "lt11" 
 } 
 },
 "152": {
  "GIN": {
- "fillKey": "lt20" 
+ "fillKey": "lt6" 
 },
 "LBR": {
- "fillKey": "lt71" 
+ "fillKey": "lt11" 
 },
 "SLE": {
- "fillKey": "lt30" 
+ "fillKey": "lt34" 
 },
 "NGA": {
- "fillKey": "lt10" 
+ "fillKey": "lt11" 
 } 
 },
 "153": {
  "GIN": {
- "fillKey": "lt20" 
+ "fillKey": "lt6" 
 },
 "LBR": {
- "fillKey": "lt61" 
+ "fillKey": "lt11" 
 },
 "SLE": {
- "fillKey": "lt30" 
+ "fillKey": "lt39" 
 },
 "NGA": {
- "fillKey": "lt10" 
+ "fillKey": "lt6" 
 } 
 },
 "154": {
  "GIN": {
- "fillKey": "lt20" 
+ "fillKey": "lt6" 
 },
 "LBR": {
- "fillKey": "lt61" 
+ "fillKey": "lt11" 
 },
 "SLE": {
- "fillKey": "lt30" 
+ "fillKey": "lt39" 
 },
 "NGA": {
- "fillKey": "lt10" 
+ "fillKey": "lt6" 
 } 
 },
 "155": {
  "GIN": {
- "fillKey": "lt20" 
+ "fillKey": "lt6" 
 },
 "LBR": {
- "fillKey": "lt61" 
+ "fillKey": "lt11" 
 },
 "SLE": {
- "fillKey": "lt30" 
+ "fillKey": "lt39" 
 },
 "NGA": {
- "fillKey": "lt10" 
+ "fillKey": "lt6" 
 } 
 },
 "156": {
  "GIN": {
- "fillKey": "lt20" 
+ "fillKey": "lt6" 
 },
 "LBR": {
- "fillKey": "lt51" 
+ "fillKey": "lt11" 
 },
 "SLE": {
- "fillKey": "lt30" 
+ "fillKey": "lt39" 
 },
 "NGA": {
- "fillKey": "lt10" 
+ "fillKey": "lt6" 
 } 
 },
 "157": {
  "GIN": {
- "fillKey": "lt20" 
+ "fillKey": "lt6" 
 },
 "LBR": {
- "fillKey": "lt51" 
+ "fillKey": "lt11" 
 },
 "SLE": {
- "fillKey": "lt30" 
+ "fillKey": "lt39" 
 },
 "NGA": {
- "fillKey": "lt10" 
+ "fillKey": "lt6" 
 } 
 },
 "158": {
  "GIN": {
- "fillKey": "lt20" 
+ "fillKey": "lt6" 
 },
 "LBR": {
- "fillKey": "lt51" 
+ "fillKey": "lt11" 
 },
 "SLE": {
- "fillKey": "lt30" 
+ "fillKey": "lt39" 
 },
 "NGA": {
- "fillKey": "lt10" 
+ "fillKey": "lt6" 
 } 
 },
 "159": {
  "GIN": {
- "fillKey": "lt20" 
+ "fillKey": "lt6" 
 },
 "LBR": {
- "fillKey": "lt61" 
+ "fillKey": "lt11" 
 },
 "SLE": {
- "fillKey": "lt41" 
+ "fillKey": "lt34" 
 },
 "NGA": {
- "fillKey": "lt10" 
+ "fillKey": "lt6" 
 } 
 },
 "160": {
  "GIN": {
- "fillKey": "lt20" 
+ "fillKey": "lt6" 
 },
 "LBR": {
- "fillKey": "lt71" 
+ "fillKey": "lt11" 
 },
 "SLE": {
- "fillKey": "lt41" 
+ "fillKey": "lt28" 
 },
 "NGA": {
- "fillKey": "lt10" 
+ "fillKey": "lt11" 
 } 
 },
 "161": {
  "GIN": {
- "fillKey": "lt20" 
+ "fillKey": "lt6" 
 },
 "LBR": {
- "fillKey": "lt81" 
+ "fillKey": "lt17" 
 },
 "SLE": {
- "fillKey": "lt51" 
+ "fillKey": "lt22" 
 },
 "NGA": {
- "fillKey": "lt10" 
+ "fillKey": "lt11" 
 } 
 },
 "162": {
  "GIN": {
- "fillKey": "lt20" 
+ "fillKey": "lt6" 
 },
 "LBR": {
- "fillKey": "lt81" 
+ "fillKey": "lt11" 
 },
 "SLE": {
- "fillKey": "lt51" 
+ "fillKey": "lt28" 
 },
 "NGA": {
- "fillKey": "lt10" 
+ "fillKey": "lt11" 
 } 
 },
 "163": {
  "GIN": {
- "fillKey": "lt20" 
+ "fillKey": "lt6" 
 },
 "LBR": {
- "fillKey": "lt81" 
+ "fillKey": "lt11" 
 },
 "SLE": {
- "fillKey": "lt51" 
+ "fillKey": "lt28" 
 },
 "NGA": {
- "fillKey": "lt10" 
+ "fillKey": "lt11" 
 } 
 },
 "164": {
  "GIN": {
- "fillKey": "lt20" 
+ "fillKey": "lt6" 
 },
 "LBR": {
- "fillKey": "lt81" 
+ "fillKey": "lt11" 
 },
 "SLE": {
- "fillKey": "lt41" 
+ "fillKey": "lt34" 
 },
 "NGA": {
- "fillKey": "lt10" 
+ "fillKey": "lt11" 
 } 
 },
 "165": {
  "GIN": {
- "fillKey": "lt20" 
+ "fillKey": "lt6" 
 },
 "LBR": {
- "fillKey": "lt91" 
+ "fillKey": "lt11" 
 },
 "SLE": {
- "fillKey": "lt41" 
+ "fillKey": "lt39" 
 },
 "NGA": {
- "fillKey": "lt10" 
+ "fillKey": "lt11" 
 } 
 },
 "166": {
  "GIN": {
- "fillKey": "lt20" 
+ "fillKey": "lt6" 
 },
 "LBR": {
- "fillKey": "lt91" 
+ "fillKey": "lt11" 
 },
 "SLE": {
- "fillKey": "lt41" 
+ "fillKey": "lt39" 
 },
 "NGA": {
- "fillKey": "lt10" 
+ "fillKey": "lt11" 
 } 
 },
 "167": {
  "GIN": {
- "fillKey": "lt20" 
+ "fillKey": "lt6" 
 },
 "LBR": {
- "fillKey": "lt91" 
+ "fillKey": "lt11" 
 },
 "SLE": {
- "fillKey": "lt41" 
+ "fillKey": "lt45" 
 },
 "NGA": {
- "fillKey": "lt10" 
+ "fillKey": "lt11" 
 } 
 },
 "168": {
  "GIN": {
- "fillKey": "lt20" 
+ "fillKey": "lt6" 
 },
 "LBR": {
- "fillKey": "lt91" 
+ "fillKey": "lt11" 
 },
 "SLE": {
- "fillKey": "lt41" 
+ "fillKey": "lt51" 
 },
 "NGA": {
- "fillKey": "lt10" 
+ "fillKey": "lt11" 
 } 
 },
 "169": {
  "GIN": {
- "fillKey": "lt20" 
+ "fillKey": "lt6" 
 },
 "LBR": {
- "fillKey": "lt91" 
+ "fillKey": "lt11" 
 },
 "SLE": {
- "fillKey": "lt41" 
+ "fillKey": "lt45" 
 },
 "NGA": {
- "fillKey": "lt10" 
+ "fillKey": "lt6" 
 } 
 },
 "170": {
  "GIN": {
- "fillKey": "lt20" 
+ "fillKey": "lt6" 
 },
 "LBR": {
- "fillKey": "lt91" 
+ "fillKey": "lt11" 
 },
 "SLE": {
- "fillKey": "lt41" 
+ "fillKey": "lt45" 
 },
 "NGA": {
- "fillKey": "lt10" 
+ "fillKey": "lt6" 
 } 
 },
 "171": {
  "GIN": {
- "fillKey": "lt20" 
+ "fillKey": "lt6" 
 },
 "LBR": {
- "fillKey": "lt91" 
+ "fillKey": "lt11" 
 },
 "SLE": {
- "fillKey": "lt41" 
+ "fillKey": "lt45" 
 },
 "NGA": {
- "fillKey": "lt10" 
+ "fillKey": "lt6" 
 } 
 },
 "172": {
  "GIN": {
- "fillKey": "lt20" 
+ "fillKey": "lt6" 
 },
 "LBR": {
- "fillKey": "lt91" 
+ "fillKey": "lt6" 
 },
 "SLE": {
- "fillKey": "lt41" 
+ "fillKey": "lt45" 
 },
 "NGA": {
- "fillKey": "lt10" 
+ "fillKey": "lt6" 
 } 
 },
 "173": {
  "GIN": {
- "fillKey": "lt20" 
+ "fillKey": "lt6" 
 },
 "LBR": {
- "fillKey": "lt91" 
+ "fillKey": "lt6" 
 },
 "SLE": {
- "fillKey": "lt41" 
+ "fillKey": "lt39" 
 },
 "NGA": {
- "fillKey": "lt10" 
+ "fillKey": "lt6" 
 } 
 },
 "174": {
  "GIN": {
- "fillKey": "lt20" 
+ "fillKey": "lt6" 
 },
 "LBR": {
- "fillKey": "lt91" 
+ "fillKey": "lt6" 
 },
 "SLE": {
- "fillKey": "lt41" 
+ "fillKey": "lt39" 
 },
 "NGA": {
- "fillKey": "lt10" 
+ "fillKey": "lt6" 
 } 
 },
 "175": {
  "GIN": {
- "fillKey": "lt20" 
+ "fillKey": "lt6" 
 },
 "LBR": {
- "fillKey": "lt81" 
+ "fillKey": "lt6" 
 },
 "SLE": {
- "fillKey": "lt51" 
+ "fillKey": "lt39" 
 },
 "NGA": {
- "fillKey": "lt10" 
+ "fillKey": "lt6" 
 } 
 },
 "176": {
  "GIN": {
- "fillKey": "lt20" 
+ "fillKey": "lt6" 
 },
 "LBR": {
- "fillKey": "lt81" 
+ "fillKey": "lt6" 
 },
 "SLE": {
- "fillKey": "lt41" 
+ "fillKey": "lt39" 
 },
 "NGA": {
- "fillKey": "lt10" 
+ "fillKey": "lt6" 
 } 
 },
 "177": {
  "GIN": {
- "fillKey": "lt20" 
+ "fillKey": "lt6" 
 },
 "LBR": {
- "fillKey": "lt71" 
+ "fillKey": "lt6" 
 },
 "SLE": {
- "fillKey": "lt41" 
+ "fillKey": "lt39" 
 },
 "NGA": {
- "fillKey": "lt10" 
+ "fillKey": "lt6" 
 } 
 },
 "178": {
  "GIN": {
- "fillKey": "lt20" 
+ "fillKey": "lt6" 
 },
 "LBR": {
- "fillKey": "lt71" 
+ "fillKey": "lt6" 
 },
 "SLE": {
- "fillKey": "lt41" 
+ "fillKey": "lt39" 
 },
 "NGA": {
- "fillKey": "lt10" 
+ "fillKey": "lt6" 
 } 
 },
 "179": {
  "GIN": {
- "fillKey": "lt20" 
+ "fillKey": "lt6" 
 },
 "LBR": {
- "fillKey": "lt61" 
+ "fillKey": "lt6" 
 },
 "SLE": {
- "fillKey": "lt41" 
+ "fillKey": "lt39" 
 },
 "NGA": {
- "fillKey": "lt10" 
+ "fillKey": "lt6" 
 } 
 },
 "180": {
  "GIN": {
- "fillKey": "lt20" 
+ "fillKey": "lt6" 
 },
 "LBR": {
- "fillKey": "lt61" 
+ "fillKey": "lt6" 
 },
 "SLE": {
- "fillKey": "lt41" 
+ "fillKey": "lt39" 
 },
 "NGA": {
- "fillKey": "lt10" 
+ "fillKey": "lt6" 
 } 
 },
 "181": {
  "GIN": {
- "fillKey": "lt20" 
+ "fillKey": "lt6" 
 },
 "LBR": {
- "fillKey": "lt51" 
+ "fillKey": "lt6" 
 },
 "SLE": {
- "fillKey": "lt30" 
+ "fillKey": "lt39" 
 },
 "NGA": {
- "fillKey": "lt10" 
+ "fillKey": "lt6" 
 } 
 },
 "182": {
  "GIN": {
- "fillKey": "lt20" 
+ "fillKey": "lt6" 
 },
 "LBR": {
- "fillKey": "lt51" 
+ "fillKey": "lt11" 
 },
 "SLE": {
- "fillKey": "lt41" 
+ "fillKey": "lt39" 
 },
 "NGA": {
- "fillKey": "lt10" 
+ "fillKey": "lt11" 
 } 
 },
 "183": {
  "GIN": {
- "fillKey": "lt20" 
+ "fillKey": "lt6" 
 },
 "LBR": {
- "fillKey": "lt51" 
+ "fillKey": "lt11" 
 },
 "SLE": {
- "fillKey": "lt51" 
+ "fillKey": "lt39" 
 },
 "NGA": {
- "fillKey": "lt10" 
+ "fillKey": "lt17" 
 } 
 },
 "184": {
  "GIN": {
- "fillKey": "lt20" 
+ "fillKey": "lt6" 
 },
 "LBR": {
- "fillKey": "lt51" 
+ "fillKey": "lt11" 
 },
 "SLE": {
- "fillKey": "lt51" 
+ "fillKey": "lt39" 
 },
 "NGA": {
- "fillKey": "lt10" 
+ "fillKey": "lt17" 
 } 
 },
 "185": {
  "GIN": {
- "fillKey": "lt20" 
+ "fillKey": "lt6" 
 },
 "LBR": {
- "fillKey": "lt51" 
+ "fillKey": "lt11" 
 },
 "SLE": {
- "fillKey": "lt61" 
+ "fillKey": "lt39" 
 },
 "NGA": {
- "fillKey": "lt10" 
+ "fillKey": "lt22" 
 } 
 },
 "186": {
  "GIN": {
- "fillKey": "lt30" 
+ "fillKey": "lt6" 
 },
 "LBR": {
- "fillKey": "lt51" 
+ "fillKey": "lt11" 
 },
 "SLE": {
- "fillKey": "lt71" 
+ "fillKey": "lt39" 
 },
 "NGA": {
- "fillKey": "lt10" 
+ "fillKey": "lt28" 
 } 
 },
 "187": {
  "GIN": {
- "fillKey": "lt30" 
+ "fillKey": "lt6" 
 },
 "LBR": {
- "fillKey": "lt51" 
+ "fillKey": "lt11" 
 },
 "SLE": {
- "fillKey": "lt71" 
+ "fillKey": "lt39" 
 },
 "NGA": {
- "fillKey": "lt10" 
+ "fillKey": "lt34" 
 } 
 },
 "188": {
  "GIN": {
- "fillKey": "lt30" 
+ "fillKey": "lt6" 
 },
 "LBR": {
- "fillKey": "lt51" 
+ "fillKey": "lt17" 
 },
 "SLE": {
- "fillKey": "lt81" 
+ "fillKey": "lt39" 
 },
 "NGA": {
- "fillKey": "lt10" 
+ "fillKey": "lt39" 
 } 
 },
 "189": {
  "GIN": {
- "fillKey": "lt30" 
+ "fillKey": "lt6" 
 },
 "LBR": {
- "fillKey": "lt51" 
+ "fillKey": "lt17" 
 },
 "SLE": {
- "fillKey": "lt91" 
+ "fillKey": "lt39" 
 },
 "NGA": {
- "fillKey": "lt10" 
+ "fillKey": "lt45" 
 } 
 },
 "190": {
  "GIN": {
- "fillKey": "lt30" 
+ "fillKey": "lt6" 
 },
 "LBR": {
- "fillKey": "lt51" 
+ "fillKey": "lt17" 
 },
 "SLE": {
- "fillKey": "lt81" 
+ "fillKey": "lt39" 
 },
 "NGA": {
- "fillKey": "lt10" 
+ "fillKey": "lt45" 
 } 
 },
 "191": {
  "GIN": {
- "fillKey": "lt30" 
+ "fillKey": "lt6" 
 },
 "LBR": {
- "fillKey": "lt51" 
+ "fillKey": "lt17" 
 },
 "SLE": {
- "fillKey": "lt81" 
+ "fillKey": "lt39" 
 },
 "NGA": {
- "fillKey": "lt10" 
+ "fillKey": "lt45" 
 } 
 },
 "192": {
  "GIN": {
- "fillKey": "lt30" 
+ "fillKey": "lt6" 
 },
 "LBR": {
- "fillKey": "lt51" 
+ "fillKey": "lt17" 
 },
 "SLE": {
- "fillKey": "lt81" 
+ "fillKey": "lt39" 
 },
 "NGA": {
- "fillKey": "lt10" 
+ "fillKey": "lt51" 
 } 
 },
 "193": {
  "GIN": {
- "fillKey": "lt30" 
+ "fillKey": "lt6" 
 },
 "LBR": {
- "fillKey": "lt51" 
+ "fillKey": "lt17" 
 },
 "SLE": {
- "fillKey": "lt81" 
+ "fillKey": "lt45" 
 },
 "NGA": {
- "fillKey": "lt10" 
+ "fillKey": "lt51" 
 } 
 },
 "194": {
  "GIN": {
- "fillKey": "lt20" 
+ "fillKey": "lt6" 
 },
 "LBR": {
- "fillKey": "lt51" 
+ "fillKey": "lt17" 
 },
 "SLE": {
- "fillKey": "lt81" 
+ "fillKey": "lt45" 
 },
 "NGA": {
- "fillKey": "lt10" 
+ "fillKey": "lt51" 
 } 
 },
 "195": {
  "GIN": {
- "fillKey": "lt20" 
+ "fillKey": "lt6" 
 },
 "LBR": {
- "fillKey": "lt51" 
+ "fillKey": "lt17" 
 },
 "SLE": {
- "fillKey": "lt71" 
+ "fillKey": "lt45" 
 },
 "NGA": {
- "fillKey": "lt10" 
-} 
-},
-"196": {
- "GIN": {
- "fillKey": "lt20" 
-},
-"LBR": {
  "fillKey": "lt51" 
-},
-"SLE": {
- "fillKey": "lt71" 
-},
-"NGA": {
- "fillKey": "lt10" 
 } 
 } 
 }
@@ -5093,30 +5082,30 @@ var chartParams={"dom": "zoom_map",
 "fills": 
 {
  "defaultFill": "#ffffef",
-"lt10": "#ffffef",
-"lt20": "#fff7bf",
-"lt30": "#fee39f",
-"lt41": "#fec45f",
-"lt51": "#fe993f",
-"lt61": "#ec702f",
-"lt71": "#cc4c1f",
-"lt81": "#993402",
-"lt91": "#662520" 
+"lt6": "#ffffef",
+"lt11": "#fff7bf",
+"lt17": "#fee39f",
+"lt22": "#fec45f",
+"lt28": "#fe993f",
+"lt34": "#ec702f",
+"lt39": "#cc4c1f",
+"lt45": "#993402",
+"lt51": "#662520" 
 }
 ,
 "data":
 {
  "GIN": {
- "fillKey": "lt10" 
+ "fillKey": "lt11" 
 },
 "LBR": {
- "fillKey": "lt10" 
+ "fillKey": "lt6" 
 },
 "SLE": {
- "fillKey": "lt10" 
+ "fillKey": "lt6" 
 },
 "NGA": {
- "fillKey": "lt10" 
+ "fillKey": "lt6" 
 } 
 }
 ,"setProjection": function( element, options ) {
@@ -5250,3138 +5239,3124 @@ var alldata_pred =
 {
  "1": {
  "GIN": {
- "fillKey": "lt1710" 
+ "fillKey": "lt1780" 
 },
 "LBR": {
- "fillKey": "lt1710" 
+ "fillKey": "lt1780" 
 },
 "SLE": {
- "fillKey": "lt1710" 
+ "fillKey": "lt1780" 
 },
 "NGA": {
- "fillKey": "lt1710" 
+ "fillKey": "lt1780" 
 } 
 },
 "2": {
  "GIN": {
- "fillKey": "lt1710" 
+ "fillKey": "lt1780" 
 },
 "LBR": {
- "fillKey": "lt1710" 
+ "fillKey": "lt1780" 
 },
 "SLE": {
- "fillKey": "lt1710" 
+ "fillKey": "lt1780" 
 },
 "NGA": {
- "fillKey": "lt1710" 
+ "fillKey": "lt1780" 
 } 
 },
 "3": {
  "GIN": {
- "fillKey": "lt1710" 
+ "fillKey": "lt1780" 
 },
 "LBR": {
- "fillKey": "lt1710" 
+ "fillKey": "lt1780" 
 },
 "SLE": {
- "fillKey": "lt1710" 
+ "fillKey": "lt1780" 
 },
 "NGA": {
- "fillKey": "lt1710" 
+ "fillKey": "lt1780" 
 } 
 },
 "4": {
  "GIN": {
- "fillKey": "lt1710" 
+ "fillKey": "lt1780" 
 },
 "LBR": {
- "fillKey": "lt1710" 
+ "fillKey": "lt1780" 
 },
 "SLE": {
- "fillKey": "lt1710" 
+ "fillKey": "lt1780" 
 },
 "NGA": {
- "fillKey": "lt1710" 
+ "fillKey": "lt1780" 
 } 
 },
 "5": {
  "GIN": {
- "fillKey": "lt1710" 
+ "fillKey": "lt1780" 
 },
 "LBR": {
- "fillKey": "lt1710" 
+ "fillKey": "lt1780" 
 },
 "SLE": {
- "fillKey": "lt1710" 
+ "fillKey": "lt1780" 
 },
 "NGA": {
- "fillKey": "lt1710" 
+ "fillKey": "lt1780" 
 } 
 },
 "6": {
  "GIN": {
- "fillKey": "lt1710" 
+ "fillKey": "lt1780" 
 },
 "LBR": {
- "fillKey": "lt1710" 
+ "fillKey": "lt1780" 
 },
 "SLE": {
- "fillKey": "lt1710" 
+ "fillKey": "lt1780" 
 },
 "NGA": {
- "fillKey": "lt1710" 
+ "fillKey": "lt1780" 
 } 
 },
 "7": {
  "GIN": {
- "fillKey": "lt1710" 
+ "fillKey": "lt1780" 
 },
 "LBR": {
- "fillKey": "lt1710" 
+ "fillKey": "lt1780" 
 },
 "SLE": {
- "fillKey": "lt1710" 
+ "fillKey": "lt1780" 
 },
 "NGA": {
- "fillKey": "lt1710" 
+ "fillKey": "lt1780" 
 } 
 },
 "8": {
  "GIN": {
- "fillKey": "lt1710" 
+ "fillKey": "lt1780" 
 },
 "LBR": {
- "fillKey": "lt1710" 
+ "fillKey": "lt1780" 
 },
 "SLE": {
- "fillKey": "lt1710" 
+ "fillKey": "lt1780" 
 },
 "NGA": {
- "fillKey": "lt1710" 
+ "fillKey": "lt1780" 
 } 
 },
 "9": {
  "GIN": {
- "fillKey": "lt1710" 
+ "fillKey": "lt1780" 
 },
 "LBR": {
- "fillKey": "lt1710" 
+ "fillKey": "lt1780" 
 },
 "SLE": {
- "fillKey": "lt1710" 
+ "fillKey": "lt1780" 
 },
 "NGA": {
- "fillKey": "lt1710" 
+ "fillKey": "lt1780" 
 } 
 },
 "10": {
  "GIN": {
- "fillKey": "lt1710" 
+ "fillKey": "lt1780" 
 },
 "LBR": {
- "fillKey": "lt1710" 
+ "fillKey": "lt1780" 
 },
 "SLE": {
- "fillKey": "lt1710" 
+ "fillKey": "lt1780" 
 },
 "NGA": {
- "fillKey": "lt1710" 
+ "fillKey": "lt1780" 
 } 
 },
 "11": {
  "GIN": {
- "fillKey": "lt1710" 
+ "fillKey": "lt1780" 
 },
 "LBR": {
- "fillKey": "lt1710" 
+ "fillKey": "lt1780" 
 },
 "SLE": {
- "fillKey": "lt1710" 
+ "fillKey": "lt1780" 
 },
 "NGA": {
- "fillKey": "lt1710" 
+ "fillKey": "lt1780" 
 } 
 },
 "12": {
  "GIN": {
- "fillKey": "lt1710" 
+ "fillKey": "lt1780" 
 },
 "LBR": {
- "fillKey": "lt1710" 
+ "fillKey": "lt1780" 
 },
 "SLE": {
- "fillKey": "lt1710" 
+ "fillKey": "lt1780" 
 },
 "NGA": {
- "fillKey": "lt1710" 
+ "fillKey": "lt1780" 
 } 
 },
 "13": {
  "GIN": {
- "fillKey": "lt1710" 
+ "fillKey": "lt1780" 
 },
 "LBR": {
- "fillKey": "lt1710" 
+ "fillKey": "lt1780" 
 },
 "SLE": {
- "fillKey": "lt1710" 
+ "fillKey": "lt1780" 
 },
 "NGA": {
- "fillKey": "lt1710" 
+ "fillKey": "lt1780" 
 } 
 },
 "14": {
  "GIN": {
- "fillKey": "lt1710" 
+ "fillKey": "lt1780" 
 },
 "LBR": {
- "fillKey": "lt1710" 
+ "fillKey": "lt1780" 
 },
 "SLE": {
- "fillKey": "lt1710" 
+ "fillKey": "lt1780" 
 },
 "NGA": {
- "fillKey": "lt1710" 
+ "fillKey": "lt1780" 
 } 
 },
 "15": {
  "GIN": {
- "fillKey": "lt1710" 
+ "fillKey": "lt1780" 
 },
 "LBR": {
- "fillKey": "lt1710" 
+ "fillKey": "lt1780" 
 },
 "SLE": {
- "fillKey": "lt1710" 
+ "fillKey": "lt1780" 
 },
 "NGA": {
- "fillKey": "lt1710" 
+ "fillKey": "lt1780" 
 } 
 },
 "16": {
  "GIN": {
- "fillKey": "lt1710" 
+ "fillKey": "lt1780" 
 },
 "LBR": {
- "fillKey": "lt1710" 
+ "fillKey": "lt1780" 
 },
 "SLE": {
- "fillKey": "lt1710" 
+ "fillKey": "lt1780" 
 },
 "NGA": {
- "fillKey": "lt1710" 
+ "fillKey": "lt1780" 
 } 
 },
 "17": {
  "GIN": {
- "fillKey": "lt1710" 
+ "fillKey": "lt1780" 
 },
 "LBR": {
- "fillKey": "lt1710" 
+ "fillKey": "lt1780" 
 },
 "SLE": {
- "fillKey": "lt1710" 
+ "fillKey": "lt1780" 
 },
 "NGA": {
- "fillKey": "lt1710" 
+ "fillKey": "lt1780" 
 } 
 },
 "18": {
  "GIN": {
- "fillKey": "lt1710" 
+ "fillKey": "lt1780" 
 },
 "LBR": {
- "fillKey": "lt1710" 
+ "fillKey": "lt1780" 
 },
 "SLE": {
- "fillKey": "lt1710" 
+ "fillKey": "lt1780" 
 },
 "NGA": {
- "fillKey": "lt1710" 
+ "fillKey": "lt1780" 
 } 
 },
 "19": {
  "GIN": {
- "fillKey": "lt1710" 
+ "fillKey": "lt1780" 
 },
 "LBR": {
- "fillKey": "lt1710" 
+ "fillKey": "lt1780" 
 },
 "SLE": {
- "fillKey": "lt1710" 
+ "fillKey": "lt1780" 
 },
 "NGA": {
- "fillKey": "lt1710" 
+ "fillKey": "lt1780" 
 } 
 },
 "20": {
  "GIN": {
- "fillKey": "lt1710" 
+ "fillKey": "lt1780" 
 },
 "LBR": {
- "fillKey": "lt1710" 
+ "fillKey": "lt1780" 
 },
 "SLE": {
- "fillKey": "lt1710" 
+ "fillKey": "lt1780" 
 },
 "NGA": {
- "fillKey": "lt1710" 
+ "fillKey": "lt1780" 
 } 
 },
 "21": {
  "GIN": {
- "fillKey": "lt1710" 
+ "fillKey": "lt1780" 
 },
 "LBR": {
- "fillKey": "lt1710" 
+ "fillKey": "lt1780" 
 },
 "SLE": {
- "fillKey": "lt1710" 
+ "fillKey": "lt1780" 
 },
 "NGA": {
- "fillKey": "lt1710" 
+ "fillKey": "lt1780" 
 } 
 },
 "22": {
  "GIN": {
- "fillKey": "lt1710" 
+ "fillKey": "lt1780" 
 },
 "LBR": {
- "fillKey": "lt1710" 
+ "fillKey": "lt1780" 
 },
 "SLE": {
- "fillKey": "lt1710" 
+ "fillKey": "lt1780" 
 },
 "NGA": {
- "fillKey": "lt1710" 
+ "fillKey": "lt1780" 
 } 
 },
 "23": {
  "GIN": {
- "fillKey": "lt1710" 
+ "fillKey": "lt1780" 
 },
 "LBR": {
- "fillKey": "lt1710" 
+ "fillKey": "lt1780" 
 },
 "SLE": {
- "fillKey": "lt1710" 
+ "fillKey": "lt1780" 
 },
 "NGA": {
- "fillKey": "lt1710" 
+ "fillKey": "lt1780" 
 } 
 },
 "24": {
  "GIN": {
- "fillKey": "lt1710" 
+ "fillKey": "lt1780" 
 },
 "LBR": {
- "fillKey": "lt1710" 
+ "fillKey": "lt1780" 
 },
 "SLE": {
- "fillKey": "lt1710" 
+ "fillKey": "lt1780" 
 },
 "NGA": {
- "fillKey": "lt1710" 
+ "fillKey": "lt1780" 
 } 
 },
 "25": {
  "GIN": {
- "fillKey": "lt1710" 
+ "fillKey": "lt1780" 
 },
 "LBR": {
- "fillKey": "lt1710" 
+ "fillKey": "lt1780" 
 },
 "SLE": {
- "fillKey": "lt1710" 
+ "fillKey": "lt1780" 
 },
 "NGA": {
- "fillKey": "lt1710" 
+ "fillKey": "lt1780" 
 } 
 },
 "26": {
  "GIN": {
- "fillKey": "lt1710" 
+ "fillKey": "lt1780" 
 },
 "LBR": {
- "fillKey": "lt1710" 
+ "fillKey": "lt1780" 
 },
 "SLE": {
- "fillKey": "lt1710" 
+ "fillKey": "lt1780" 
 },
 "NGA": {
- "fillKey": "lt1710" 
+ "fillKey": "lt1780" 
 } 
 },
 "27": {
  "GIN": {
- "fillKey": "lt1710" 
+ "fillKey": "lt1780" 
 },
 "LBR": {
- "fillKey": "lt1710" 
+ "fillKey": "lt1780" 
 },
 "SLE": {
- "fillKey": "lt1710" 
+ "fillKey": "lt1780" 
 },
 "NGA": {
- "fillKey": "lt1710" 
+ "fillKey": "lt1780" 
 } 
 },
 "28": {
  "GIN": {
- "fillKey": "lt1710" 
+ "fillKey": "lt1780" 
 },
 "LBR": {
- "fillKey": "lt1710" 
+ "fillKey": "lt1780" 
 },
 "SLE": {
- "fillKey": "lt1710" 
+ "fillKey": "lt1780" 
 },
 "NGA": {
- "fillKey": "lt1710" 
+ "fillKey": "lt1780" 
 } 
 },
 "29": {
  "GIN": {
- "fillKey": "lt1710" 
+ "fillKey": "lt1780" 
 },
 "LBR": {
- "fillKey": "lt1710" 
+ "fillKey": "lt1780" 
 },
 "SLE": {
- "fillKey": "lt1710" 
+ "fillKey": "lt1780" 
 },
 "NGA": {
- "fillKey": "lt1710" 
+ "fillKey": "lt1780" 
 } 
 },
 "30": {
  "GIN": {
- "fillKey": "lt1710" 
+ "fillKey": "lt1780" 
 },
 "LBR": {
- "fillKey": "lt1710" 
+ "fillKey": "lt1780" 
 },
 "SLE": {
- "fillKey": "lt1710" 
+ "fillKey": "lt1780" 
 },
 "NGA": {
- "fillKey": "lt1710" 
+ "fillKey": "lt1780" 
 } 
 },
 "31": {
  "GIN": {
- "fillKey": "lt1710" 
+ "fillKey": "lt1780" 
 },
 "LBR": {
- "fillKey": "lt1710" 
+ "fillKey": "lt1780" 
 },
 "SLE": {
- "fillKey": "lt1710" 
+ "fillKey": "lt1780" 
 },
 "NGA": {
- "fillKey": "lt1710" 
+ "fillKey": "lt1780" 
 } 
 },
 "32": {
  "GIN": {
- "fillKey": "lt1710" 
+ "fillKey": "lt1780" 
 },
 "LBR": {
- "fillKey": "lt1710" 
+ "fillKey": "lt1780" 
 },
 "SLE": {
- "fillKey": "lt1710" 
+ "fillKey": "lt1780" 
 },
 "NGA": {
- "fillKey": "lt1710" 
+ "fillKey": "lt1780" 
 } 
 },
 "33": {
  "GIN": {
- "fillKey": "lt1710" 
+ "fillKey": "lt1780" 
 },
 "LBR": {
- "fillKey": "lt1710" 
+ "fillKey": "lt1780" 
 },
 "SLE": {
- "fillKey": "lt1710" 
+ "fillKey": "lt1780" 
 },
 "NGA": {
- "fillKey": "lt1710" 
+ "fillKey": "lt1780" 
 } 
 },
 "34": {
  "GIN": {
- "fillKey": "lt1710" 
+ "fillKey": "lt1780" 
 },
 "LBR": {
- "fillKey": "lt1710" 
+ "fillKey": "lt1780" 
 },
 "SLE": {
- "fillKey": "lt1710" 
+ "fillKey": "lt1780" 
 },
 "NGA": {
- "fillKey": "lt1710" 
+ "fillKey": "lt1780" 
 } 
 },
 "35": {
  "GIN": {
- "fillKey": "lt1710" 
+ "fillKey": "lt1780" 
 },
 "LBR": {
- "fillKey": "lt1710" 
+ "fillKey": "lt1780" 
 },
 "SLE": {
- "fillKey": "lt1710" 
+ "fillKey": "lt1780" 
 },
 "NGA": {
- "fillKey": "lt1710" 
+ "fillKey": "lt1780" 
 } 
 },
 "36": {
  "GIN": {
- "fillKey": "lt1710" 
+ "fillKey": "lt1780" 
 },
 "LBR": {
- "fillKey": "lt1710" 
+ "fillKey": "lt1780" 
 },
 "SLE": {
- "fillKey": "lt1710" 
+ "fillKey": "lt1780" 
 },
 "NGA": {
- "fillKey": "lt1710" 
+ "fillKey": "lt1780" 
 } 
 },
 "37": {
  "GIN": {
- "fillKey": "lt1710" 
+ "fillKey": "lt1780" 
 },
 "LBR": {
- "fillKey": "lt1710" 
+ "fillKey": "lt1780" 
 },
 "SLE": {
- "fillKey": "lt1710" 
+ "fillKey": "lt1780" 
 },
 "NGA": {
- "fillKey": "lt1710" 
+ "fillKey": "lt1780" 
 } 
 },
 "38": {
  "GIN": {
- "fillKey": "lt1710" 
+ "fillKey": "lt1780" 
 },
 "LBR": {
- "fillKey": "lt1710" 
+ "fillKey": "lt1780" 
 },
 "SLE": {
- "fillKey": "lt1710" 
+ "fillKey": "lt1780" 
 },
 "NGA": {
- "fillKey": "lt1710" 
+ "fillKey": "lt1780" 
 } 
 },
 "39": {
  "GIN": {
- "fillKey": "lt1710" 
+ "fillKey": "lt1780" 
 },
 "LBR": {
- "fillKey": "lt1710" 
+ "fillKey": "lt1780" 
 },
 "SLE": {
- "fillKey": "lt1710" 
+ "fillKey": "lt1780" 
 },
 "NGA": {
- "fillKey": "lt1710" 
+ "fillKey": "lt1780" 
 } 
 },
 "40": {
  "GIN": {
- "fillKey": "lt1710" 
+ "fillKey": "lt1780" 
 },
 "LBR": {
- "fillKey": "lt1710" 
+ "fillKey": "lt1780" 
 },
 "SLE": {
- "fillKey": "lt1710" 
+ "fillKey": "lt1780" 
 },
 "NGA": {
- "fillKey": "lt1710" 
+ "fillKey": "lt1780" 
 } 
 },
 "41": {
  "GIN": {
- "fillKey": "lt1710" 
+ "fillKey": "lt1780" 
 },
 "LBR": {
- "fillKey": "lt1710" 
+ "fillKey": "lt1780" 
 },
 "SLE": {
- "fillKey": "lt1710" 
+ "fillKey": "lt1780" 
 },
 "NGA": {
- "fillKey": "lt1710" 
+ "fillKey": "lt1780" 
 } 
 },
 "42": {
  "GIN": {
- "fillKey": "lt1710" 
+ "fillKey": "lt1780" 
 },
 "LBR": {
- "fillKey": "lt1710" 
+ "fillKey": "lt1780" 
 },
 "SLE": {
- "fillKey": "lt1710" 
+ "fillKey": "lt1780" 
 },
 "NGA": {
- "fillKey": "lt1710" 
+ "fillKey": "lt1780" 
 } 
 },
 "43": {
  "GIN": {
- "fillKey": "lt1710" 
+ "fillKey": "lt1780" 
 },
 "LBR": {
- "fillKey": "lt1710" 
+ "fillKey": "lt1780" 
 },
 "SLE": {
- "fillKey": "lt1710" 
+ "fillKey": "lt1780" 
 },
 "NGA": {
- "fillKey": "lt1710" 
+ "fillKey": "lt1780" 
 } 
 },
 "44": {
  "GIN": {
- "fillKey": "lt1710" 
+ "fillKey": "lt1780" 
 },
 "LBR": {
- "fillKey": "lt1710" 
+ "fillKey": "lt1780" 
 },
 "SLE": {
- "fillKey": "lt1710" 
+ "fillKey": "lt1780" 
 },
 "NGA": {
- "fillKey": "lt1710" 
+ "fillKey": "lt1780" 
 } 
 },
 "45": {
  "GIN": {
- "fillKey": "lt1710" 
+ "fillKey": "lt1780" 
 },
 "LBR": {
- "fillKey": "lt1710" 
+ "fillKey": "lt1780" 
 },
 "SLE": {
- "fillKey": "lt1710" 
+ "fillKey": "lt1780" 
 },
 "NGA": {
- "fillKey": "lt1710" 
+ "fillKey": "lt1780" 
 } 
 },
 "46": {
  "GIN": {
- "fillKey": "lt1710" 
+ "fillKey": "lt1780" 
 },
 "LBR": {
- "fillKey": "lt1710" 
+ "fillKey": "lt1780" 
 },
 "SLE": {
- "fillKey": "lt1710" 
+ "fillKey": "lt1780" 
 },
 "NGA": {
- "fillKey": "lt1710" 
+ "fillKey": "lt1780" 
 } 
 },
 "47": {
  "GIN": {
- "fillKey": "lt1710" 
+ "fillKey": "lt1780" 
 },
 "LBR": {
- "fillKey": "lt1710" 
+ "fillKey": "lt1780" 
 },
 "SLE": {
- "fillKey": "lt1710" 
+ "fillKey": "lt1780" 
 },
 "NGA": {
- "fillKey": "lt1710" 
+ "fillKey": "lt1780" 
 } 
 },
 "48": {
  "GIN": {
- "fillKey": "lt1710" 
+ "fillKey": "lt1780" 
 },
 "LBR": {
- "fillKey": "lt1710" 
+ "fillKey": "lt1780" 
 },
 "SLE": {
- "fillKey": "lt1710" 
+ "fillKey": "lt1780" 
 },
 "NGA": {
- "fillKey": "lt1710" 
+ "fillKey": "lt1780" 
 } 
 },
 "49": {
  "GIN": {
- "fillKey": "lt1710" 
+ "fillKey": "lt1780" 
 },
 "LBR": {
- "fillKey": "lt1710" 
+ "fillKey": "lt1780" 
 },
 "SLE": {
- "fillKey": "lt1710" 
+ "fillKey": "lt1780" 
 },
 "NGA": {
- "fillKey": "lt1710" 
+ "fillKey": "lt1780" 
 } 
 },
 "50": {
  "GIN": {
- "fillKey": "lt1710" 
+ "fillKey": "lt1780" 
 },
 "LBR": {
- "fillKey": "lt1710" 
+ "fillKey": "lt1780" 
 },
 "SLE": {
- "fillKey": "lt1710" 
+ "fillKey": "lt1780" 
 },
 "NGA": {
- "fillKey": "lt1710" 
+ "fillKey": "lt1780" 
 } 
 },
 "51": {
  "GIN": {
- "fillKey": "lt1710" 
+ "fillKey": "lt1780" 
 },
 "LBR": {
- "fillKey": "lt1710" 
+ "fillKey": "lt1780" 
 },
 "SLE": {
- "fillKey": "lt1710" 
+ "fillKey": "lt1780" 
 },
 "NGA": {
- "fillKey": "lt1710" 
+ "fillKey": "lt1780" 
 } 
 },
 "52": {
  "GIN": {
- "fillKey": "lt1710" 
+ "fillKey": "lt1780" 
 },
 "LBR": {
- "fillKey": "lt1710" 
+ "fillKey": "lt1780" 
 },
 "SLE": {
- "fillKey": "lt1710" 
+ "fillKey": "lt1780" 
 },
 "NGA": {
- "fillKey": "lt1710" 
+ "fillKey": "lt1780" 
 } 
 },
 "53": {
  "GIN": {
- "fillKey": "lt1710" 
+ "fillKey": "lt1780" 
 },
 "LBR": {
- "fillKey": "lt1710" 
+ "fillKey": "lt1780" 
 },
 "SLE": {
- "fillKey": "lt1710" 
+ "fillKey": "lt1780" 
 },
 "NGA": {
- "fillKey": "lt1710" 
+ "fillKey": "lt1780" 
 } 
 },
 "54": {
  "GIN": {
- "fillKey": "lt1710" 
+ "fillKey": "lt1780" 
 },
 "LBR": {
- "fillKey": "lt1710" 
+ "fillKey": "lt1780" 
 },
 "SLE": {
- "fillKey": "lt1710" 
+ "fillKey": "lt1780" 
 },
 "NGA": {
- "fillKey": "lt1710" 
+ "fillKey": "lt1780" 
 } 
 },
 "55": {
  "GIN": {
- "fillKey": "lt1710" 
+ "fillKey": "lt1780" 
 },
 "LBR": {
- "fillKey": "lt1710" 
+ "fillKey": "lt1780" 
 },
 "SLE": {
- "fillKey": "lt1710" 
+ "fillKey": "lt1780" 
 },
 "NGA": {
- "fillKey": "lt1710" 
+ "fillKey": "lt1780" 
 } 
 },
 "56": {
  "GIN": {
- "fillKey": "lt1710" 
+ "fillKey": "lt1780" 
 },
 "LBR": {
- "fillKey": "lt1710" 
+ "fillKey": "lt1780" 
 },
 "SLE": {
- "fillKey": "lt1710" 
+ "fillKey": "lt1780" 
 },
 "NGA": {
- "fillKey": "lt1710" 
+ "fillKey": "lt1780" 
 } 
 },
 "57": {
  "GIN": {
- "fillKey": "lt1710" 
+ "fillKey": "lt1780" 
 },
 "LBR": {
- "fillKey": "lt1710" 
+ "fillKey": "lt1780" 
 },
 "SLE": {
- "fillKey": "lt1710" 
+ "fillKey": "lt1780" 
 },
 "NGA": {
- "fillKey": "lt1710" 
+ "fillKey": "lt1780" 
 } 
 },
 "58": {
  "GIN": {
- "fillKey": "lt1710" 
+ "fillKey": "lt1780" 
 },
 "LBR": {
- "fillKey": "lt1710" 
+ "fillKey": "lt1780" 
 },
 "SLE": {
- "fillKey": "lt1710" 
+ "fillKey": "lt1780" 
 },
 "NGA": {
- "fillKey": "lt1710" 
+ "fillKey": "lt1780" 
 } 
 },
 "59": {
  "GIN": {
- "fillKey": "lt1710" 
+ "fillKey": "lt1780" 
 },
 "LBR": {
- "fillKey": "lt1710" 
+ "fillKey": "lt1780" 
 },
 "SLE": {
- "fillKey": "lt1710" 
+ "fillKey": "lt1780" 
 },
 "NGA": {
- "fillKey": "lt1710" 
+ "fillKey": "lt1780" 
 } 
 },
 "60": {
  "GIN": {
- "fillKey": "lt1710" 
+ "fillKey": "lt1780" 
 },
 "LBR": {
- "fillKey": "lt1710" 
+ "fillKey": "lt1780" 
 },
 "SLE": {
- "fillKey": "lt1710" 
+ "fillKey": "lt1780" 
 },
 "NGA": {
- "fillKey": "lt1710" 
+ "fillKey": "lt1780" 
 } 
 },
 "61": {
  "GIN": {
- "fillKey": "lt1710" 
+ "fillKey": "lt1780" 
 },
 "LBR": {
- "fillKey": "lt1710" 
+ "fillKey": "lt1780" 
 },
 "SLE": {
- "fillKey": "lt1710" 
+ "fillKey": "lt1780" 
 },
 "NGA": {
- "fillKey": "lt1710" 
+ "fillKey": "lt1780" 
 } 
 },
 "62": {
  "GIN": {
- "fillKey": "lt1710" 
+ "fillKey": "lt1780" 
 },
 "LBR": {
- "fillKey": "lt1710" 
+ "fillKey": "lt1780" 
 },
 "SLE": {
- "fillKey": "lt1710" 
+ "fillKey": "lt1780" 
 },
 "NGA": {
- "fillKey": "lt1710" 
+ "fillKey": "lt1780" 
 } 
 },
 "63": {
  "GIN": {
- "fillKey": "lt1710" 
+ "fillKey": "lt1780" 
 },
 "LBR": {
- "fillKey": "lt1710" 
+ "fillKey": "lt1780" 
 },
 "SLE": {
- "fillKey": "lt1710" 
+ "fillKey": "lt1780" 
 },
 "NGA": {
- "fillKey": "lt1710" 
+ "fillKey": "lt1780" 
 } 
 },
 "64": {
  "GIN": {
- "fillKey": "lt1710" 
+ "fillKey": "lt1780" 
 },
 "LBR": {
- "fillKey": "lt1710" 
+ "fillKey": "lt1780" 
 },
 "SLE": {
- "fillKey": "lt1710" 
+ "fillKey": "lt1780" 
 },
 "NGA": {
- "fillKey": "lt1710" 
+ "fillKey": "lt1780" 
 } 
 },
 "65": {
  "GIN": {
- "fillKey": "lt1710" 
+ "fillKey": "lt1780" 
 },
 "LBR": {
- "fillKey": "lt1710" 
+ "fillKey": "lt1780" 
 },
 "SLE": {
- "fillKey": "lt1710" 
+ "fillKey": "lt1780" 
 },
 "NGA": {
- "fillKey": "lt1710" 
+ "fillKey": "lt1780" 
 } 
 },
 "66": {
  "GIN": {
- "fillKey": "lt1710" 
+ "fillKey": "lt1780" 
 },
 "LBR": {
- "fillKey": "lt1710" 
+ "fillKey": "lt1780" 
 },
 "SLE": {
- "fillKey": "lt1710" 
+ "fillKey": "lt1780" 
 },
 "NGA": {
- "fillKey": "lt1710" 
+ "fillKey": "lt1780" 
 } 
 },
 "67": {
  "GIN": {
- "fillKey": "lt1710" 
+ "fillKey": "lt1780" 
 },
 "LBR": {
- "fillKey": "lt1710" 
+ "fillKey": "lt1780" 
 },
 "SLE": {
- "fillKey": "lt1710" 
+ "fillKey": "lt1780" 
 },
 "NGA": {
- "fillKey": "lt1710" 
+ "fillKey": "lt1780" 
 } 
 },
 "68": {
  "GIN": {
- "fillKey": "lt1710" 
+ "fillKey": "lt1780" 
 },
 "LBR": {
- "fillKey": "lt1710" 
+ "fillKey": "lt1780" 
 },
 "SLE": {
- "fillKey": "lt1710" 
+ "fillKey": "lt1780" 
 },
 "NGA": {
- "fillKey": "lt1710" 
+ "fillKey": "lt1780" 
 } 
 },
 "69": {
  "GIN": {
- "fillKey": "lt1710" 
+ "fillKey": "lt1780" 
 },
 "LBR": {
- "fillKey": "lt1710" 
+ "fillKey": "lt1780" 
 },
 "SLE": {
- "fillKey": "lt1710" 
+ "fillKey": "lt1780" 
 },
 "NGA": {
- "fillKey": "lt1710" 
+ "fillKey": "lt1780" 
 } 
 },
 "70": {
  "GIN": {
- "fillKey": "lt1710" 
+ "fillKey": "lt1780" 
 },
 "LBR": {
- "fillKey": "lt1710" 
+ "fillKey": "lt1780" 
 },
 "SLE": {
- "fillKey": "lt1710" 
+ "fillKey": "lt1780" 
 },
 "NGA": {
- "fillKey": "lt1710" 
+ "fillKey": "lt1780" 
 } 
 },
 "71": {
  "GIN": {
- "fillKey": "lt1710" 
+ "fillKey": "lt1780" 
 },
 "LBR": {
- "fillKey": "lt1710" 
+ "fillKey": "lt1780" 
 },
 "SLE": {
- "fillKey": "lt1710" 
+ "fillKey": "lt1780" 
 },
 "NGA": {
- "fillKey": "lt1710" 
+ "fillKey": "lt1780" 
 } 
 },
 "72": {
  "GIN": {
- "fillKey": "lt1710" 
+ "fillKey": "lt1780" 
 },
 "LBR": {
- "fillKey": "lt1710" 
+ "fillKey": "lt1780" 
 },
 "SLE": {
- "fillKey": "lt1710" 
+ "fillKey": "lt1780" 
 },
 "NGA": {
- "fillKey": "lt1710" 
+ "fillKey": "lt1780" 
 } 
 },
 "73": {
  "GIN": {
- "fillKey": "lt1710" 
+ "fillKey": "lt1780" 
 },
 "LBR": {
- "fillKey": "lt1710" 
+ "fillKey": "lt1780" 
 },
 "SLE": {
- "fillKey": "lt1710" 
+ "fillKey": "lt1780" 
 },
 "NGA": {
- "fillKey": "lt1710" 
+ "fillKey": "lt1780" 
 } 
 },
 "74": {
  "GIN": {
- "fillKey": "lt1710" 
+ "fillKey": "lt1780" 
 },
 "LBR": {
- "fillKey": "lt1710" 
+ "fillKey": "lt1780" 
 },
 "SLE": {
- "fillKey": "lt1710" 
+ "fillKey": "lt1780" 
 },
 "NGA": {
- "fillKey": "lt1710" 
+ "fillKey": "lt1780" 
 } 
 },
 "75": {
  "GIN": {
- "fillKey": "lt1710" 
+ "fillKey": "lt1780" 
 },
 "LBR": {
- "fillKey": "lt1710" 
+ "fillKey": "lt1780" 
 },
 "SLE": {
- "fillKey": "lt1710" 
+ "fillKey": "lt1780" 
 },
 "NGA": {
- "fillKey": "lt1710" 
+ "fillKey": "lt1780" 
 } 
 },
 "76": {
  "GIN": {
- "fillKey": "lt1710" 
+ "fillKey": "lt1780" 
 },
 "LBR": {
- "fillKey": "lt1710" 
+ "fillKey": "lt1780" 
 },
 "SLE": {
- "fillKey": "lt1710" 
+ "fillKey": "lt1780" 
 },
 "NGA": {
- "fillKey": "lt1710" 
+ "fillKey": "lt1780" 
 } 
 },
 "77": {
  "GIN": {
- "fillKey": "lt1710" 
+ "fillKey": "lt1780" 
 },
 "LBR": {
- "fillKey": "lt1710" 
+ "fillKey": "lt1780" 
 },
 "SLE": {
- "fillKey": "lt1710" 
+ "fillKey": "lt1780" 
 },
 "NGA": {
- "fillKey": "lt1710" 
+ "fillKey": "lt1780" 
 } 
 },
 "78": {
  "GIN": {
- "fillKey": "lt1710" 
+ "fillKey": "lt1780" 
 },
 "LBR": {
- "fillKey": "lt1710" 
+ "fillKey": "lt1780" 
 },
 "SLE": {
- "fillKey": "lt1710" 
+ "fillKey": "lt1780" 
 },
 "NGA": {
- "fillKey": "lt1710" 
+ "fillKey": "lt1780" 
 } 
 },
 "79": {
  "GIN": {
- "fillKey": "lt1710" 
+ "fillKey": "lt1780" 
 },
 "LBR": {
- "fillKey": "lt1710" 
+ "fillKey": "lt1780" 
 },
 "SLE": {
- "fillKey": "lt1710" 
+ "fillKey": "lt1780" 
 },
 "NGA": {
- "fillKey": "lt1710" 
+ "fillKey": "lt1780" 
 } 
 },
 "80": {
  "GIN": {
- "fillKey": "lt1710" 
+ "fillKey": "lt1780" 
 },
 "LBR": {
- "fillKey": "lt1710" 
+ "fillKey": "lt1780" 
 },
 "SLE": {
- "fillKey": "lt1710" 
+ "fillKey": "lt1780" 
 },
 "NGA": {
- "fillKey": "lt1710" 
+ "fillKey": "lt1780" 
 } 
 },
 "81": {
  "GIN": {
- "fillKey": "lt1710" 
+ "fillKey": "lt1780" 
 },
 "LBR": {
- "fillKey": "lt1710" 
+ "fillKey": "lt1780" 
 },
 "SLE": {
- "fillKey": "lt1710" 
+ "fillKey": "lt1780" 
 },
 "NGA": {
- "fillKey": "lt1710" 
+ "fillKey": "lt1780" 
 } 
 },
 "82": {
  "GIN": {
- "fillKey": "lt1710" 
+ "fillKey": "lt1780" 
 },
 "LBR": {
- "fillKey": "lt1710" 
+ "fillKey": "lt1780" 
 },
 "SLE": {
- "fillKey": "lt1710" 
+ "fillKey": "lt1780" 
 },
 "NGA": {
- "fillKey": "lt1710" 
+ "fillKey": "lt1780" 
 } 
 },
 "83": {
  "GIN": {
- "fillKey": "lt1710" 
+ "fillKey": "lt1780" 
 },
 "LBR": {
- "fillKey": "lt1710" 
+ "fillKey": "lt1780" 
 },
 "SLE": {
- "fillKey": "lt1710" 
+ "fillKey": "lt1780" 
 },
 "NGA": {
- "fillKey": "lt1710" 
+ "fillKey": "lt1780" 
 } 
 },
 "84": {
  "GIN": {
- "fillKey": "lt1710" 
+ "fillKey": "lt1780" 
 },
 "LBR": {
- "fillKey": "lt1710" 
+ "fillKey": "lt1780" 
 },
 "SLE": {
- "fillKey": "lt1710" 
+ "fillKey": "lt1780" 
 },
 "NGA": {
- "fillKey": "lt1710" 
+ "fillKey": "lt1780" 
 } 
 },
 "85": {
  "GIN": {
- "fillKey": "lt1710" 
+ "fillKey": "lt1780" 
 },
 "LBR": {
- "fillKey": "lt1710" 
+ "fillKey": "lt1780" 
 },
 "SLE": {
- "fillKey": "lt1710" 
+ "fillKey": "lt1780" 
 },
 "NGA": {
- "fillKey": "lt1710" 
+ "fillKey": "lt1780" 
 } 
 },
 "86": {
  "GIN": {
- "fillKey": "lt1710" 
+ "fillKey": "lt1780" 
 },
 "LBR": {
- "fillKey": "lt1710" 
+ "fillKey": "lt1780" 
 },
 "SLE": {
- "fillKey": "lt1710" 
+ "fillKey": "lt1780" 
 },
 "NGA": {
- "fillKey": "lt1710" 
+ "fillKey": "lt1780" 
 } 
 },
 "87": {
  "GIN": {
- "fillKey": "lt1710" 
+ "fillKey": "lt1780" 
 },
 "LBR": {
- "fillKey": "lt1710" 
+ "fillKey": "lt1780" 
 },
 "SLE": {
- "fillKey": "lt1710" 
+ "fillKey": "lt1780" 
 },
 "NGA": {
- "fillKey": "lt1710" 
+ "fillKey": "lt1780" 
 } 
 },
 "88": {
  "GIN": {
- "fillKey": "lt1710" 
+ "fillKey": "lt1780" 
 },
 "LBR": {
- "fillKey": "lt1710" 
+ "fillKey": "lt1780" 
 },
 "SLE": {
- "fillKey": "lt1710" 
+ "fillKey": "lt1780" 
 },
 "NGA": {
- "fillKey": "lt1710" 
+ "fillKey": "lt1780" 
 } 
 },
 "89": {
  "GIN": {
- "fillKey": "lt1710" 
+ "fillKey": "lt1780" 
 },
 "LBR": {
- "fillKey": "lt1710" 
+ "fillKey": "lt1780" 
 },
 "SLE": {
- "fillKey": "lt1710" 
+ "fillKey": "lt1780" 
 },
 "NGA": {
- "fillKey": "lt1710" 
+ "fillKey": "lt1780" 
 } 
 },
 "90": {
  "GIN": {
- "fillKey": "lt1710" 
+ "fillKey": "lt1780" 
 },
 "LBR": {
- "fillKey": "lt1710" 
+ "fillKey": "lt1780" 
 },
 "SLE": {
- "fillKey": "lt1710" 
+ "fillKey": "lt1780" 
 },
 "NGA": {
- "fillKey": "lt1710" 
+ "fillKey": "lt1780" 
 } 
 },
 "91": {
  "GIN": {
- "fillKey": "lt1710" 
+ "fillKey": "lt1780" 
 },
 "LBR": {
- "fillKey": "lt1710" 
+ "fillKey": "lt1780" 
 },
 "SLE": {
- "fillKey": "lt1710" 
+ "fillKey": "lt1780" 
 },
 "NGA": {
- "fillKey": "lt1710" 
+ "fillKey": "lt1780" 
 } 
 },
 "92": {
  "GIN": {
- "fillKey": "lt1710" 
+ "fillKey": "lt1780" 
 },
 "LBR": {
- "fillKey": "lt1710" 
+ "fillKey": "lt1780" 
 },
 "SLE": {
- "fillKey": "lt1710" 
+ "fillKey": "lt1780" 
 },
 "NGA": {
- "fillKey": "lt1710" 
+ "fillKey": "lt1780" 
 } 
 },
 "93": {
  "GIN": {
- "fillKey": "lt1710" 
+ "fillKey": "lt1780" 
 },
 "LBR": {
- "fillKey": "lt1710" 
+ "fillKey": "lt1780" 
 },
 "SLE": {
- "fillKey": "lt1710" 
+ "fillKey": "lt1780" 
 },
 "NGA": {
- "fillKey": "lt1710" 
+ "fillKey": "lt1780" 
 } 
 },
 "94": {
  "GIN": {
- "fillKey": "lt1710" 
+ "fillKey": "lt1780" 
 },
 "LBR": {
- "fillKey": "lt1710" 
+ "fillKey": "lt1780" 
 },
 "SLE": {
- "fillKey": "lt1710" 
+ "fillKey": "lt1780" 
 },
 "NGA": {
- "fillKey": "lt1710" 
+ "fillKey": "lt1780" 
 } 
 },
 "95": {
  "GIN": {
- "fillKey": "lt1710" 
+ "fillKey": "lt1780" 
 },
 "LBR": {
- "fillKey": "lt1710" 
+ "fillKey": "lt1780" 
 },
 "SLE": {
- "fillKey": "lt1710" 
+ "fillKey": "lt1780" 
 },
 "NGA": {
- "fillKey": "lt1710" 
+ "fillKey": "lt1780" 
 } 
 },
 "96": {
  "GIN": {
- "fillKey": "lt1710" 
+ "fillKey": "lt1780" 
 },
 "LBR": {
- "fillKey": "lt1710" 
+ "fillKey": "lt1780" 
 },
 "SLE": {
- "fillKey": "lt1710" 
+ "fillKey": "lt1780" 
 },
 "NGA": {
- "fillKey": "lt1710" 
+ "fillKey": "lt1780" 
 } 
 },
 "97": {
  "GIN": {
- "fillKey": "lt1710" 
+ "fillKey": "lt1780" 
 },
 "LBR": {
- "fillKey": "lt1710" 
+ "fillKey": "lt1780" 
 },
 "SLE": {
- "fillKey": "lt1710" 
+ "fillKey": "lt1780" 
 },
 "NGA": {
- "fillKey": "lt1710" 
+ "fillKey": "lt1780" 
 } 
 },
 "98": {
  "GIN": {
- "fillKey": "lt1710" 
+ "fillKey": "lt1780" 
 },
 "LBR": {
- "fillKey": "lt1710" 
+ "fillKey": "lt1780" 
 },
 "SLE": {
- "fillKey": "lt1710" 
+ "fillKey": "lt1780" 
 },
 "NGA": {
- "fillKey": "lt1710" 
+ "fillKey": "lt1780" 
 } 
 },
 "99": {
  "GIN": {
- "fillKey": "lt1710" 
+ "fillKey": "lt1780" 
 },
 "LBR": {
- "fillKey": "lt1710" 
+ "fillKey": "lt1780" 
 },
 "SLE": {
- "fillKey": "lt1710" 
+ "fillKey": "lt1780" 
 },
 "NGA": {
- "fillKey": "lt1710" 
+ "fillKey": "lt1780" 
 } 
 },
 "100": {
  "GIN": {
- "fillKey": "lt1710" 
+ "fillKey": "lt1780" 
 },
 "LBR": {
- "fillKey": "lt1710" 
+ "fillKey": "lt1780" 
 },
 "SLE": {
- "fillKey": "lt1710" 
+ "fillKey": "lt1780" 
 },
 "NGA": {
- "fillKey": "lt1710" 
+ "fillKey": "lt1780" 
 } 
 },
 "101": {
  "GIN": {
- "fillKey": "lt1710" 
+ "fillKey": "lt1780" 
 },
 "LBR": {
- "fillKey": "lt1710" 
+ "fillKey": "lt1780" 
 },
 "SLE": {
- "fillKey": "lt1710" 
+ "fillKey": "lt1780" 
 },
 "NGA": {
- "fillKey": "lt1710" 
+ "fillKey": "lt1780" 
 } 
 },
 "102": {
  "GIN": {
- "fillKey": "lt1710" 
+ "fillKey": "lt1780" 
 },
 "LBR": {
- "fillKey": "lt1710" 
+ "fillKey": "lt1780" 
 },
 "SLE": {
- "fillKey": "lt1710" 
+ "fillKey": "lt1780" 
 },
 "NGA": {
- "fillKey": "lt1710" 
+ "fillKey": "lt1780" 
 } 
 },
 "103": {
  "GIN": {
- "fillKey": "lt1710" 
+ "fillKey": "lt1780" 
 },
 "LBR": {
- "fillKey": "lt1710" 
+ "fillKey": "lt1780" 
 },
 "SLE": {
- "fillKey": "lt1710" 
+ "fillKey": "lt1780" 
 },
 "NGA": {
- "fillKey": "lt1710" 
+ "fillKey": "lt1780" 
 } 
 },
 "104": {
  "GIN": {
- "fillKey": "lt1710" 
+ "fillKey": "lt1780" 
 },
 "LBR": {
- "fillKey": "lt1710" 
+ "fillKey": "lt1780" 
 },
 "SLE": {
- "fillKey": "lt1710" 
+ "fillKey": "lt1780" 
 },
 "NGA": {
- "fillKey": "lt1710" 
+ "fillKey": "lt1780" 
 } 
 },
 "105": {
  "GIN": {
- "fillKey": "lt1710" 
+ "fillKey": "lt1780" 
 },
 "LBR": {
- "fillKey": "lt1710" 
+ "fillKey": "lt1780" 
 },
 "SLE": {
- "fillKey": "lt1710" 
+ "fillKey": "lt1780" 
 },
 "NGA": {
- "fillKey": "lt1710" 
+ "fillKey": "lt1780" 
 } 
 },
 "106": {
  "GIN": {
- "fillKey": "lt1710" 
+ "fillKey": "lt1780" 
 },
 "LBR": {
- "fillKey": "lt1710" 
+ "fillKey": "lt1780" 
 },
 "SLE": {
- "fillKey": "lt1710" 
+ "fillKey": "lt1780" 
 },
 "NGA": {
- "fillKey": "lt1710" 
+ "fillKey": "lt1780" 
 } 
 },
 "107": {
  "GIN": {
- "fillKey": "lt1710" 
+ "fillKey": "lt1780" 
 },
 "LBR": {
- "fillKey": "lt1710" 
+ "fillKey": "lt1780" 
 },
 "SLE": {
- "fillKey": "lt1710" 
+ "fillKey": "lt1780" 
 },
 "NGA": {
- "fillKey": "lt1710" 
+ "fillKey": "lt1780" 
 } 
 },
 "108": {
  "GIN": {
- "fillKey": "lt1710" 
+ "fillKey": "lt1780" 
 },
 "LBR": {
- "fillKey": "lt1710" 
+ "fillKey": "lt1780" 
 },
 "SLE": {
- "fillKey": "lt1710" 
+ "fillKey": "lt1780" 
 },
 "NGA": {
- "fillKey": "lt1710" 
+ "fillKey": "lt1780" 
 } 
 },
 "109": {
  "GIN": {
- "fillKey": "lt1710" 
+ "fillKey": "lt1780" 
 },
 "LBR": {
- "fillKey": "lt1710" 
+ "fillKey": "lt1780" 
 },
 "SLE": {
- "fillKey": "lt1710" 
+ "fillKey": "lt1780" 
 },
 "NGA": {
- "fillKey": "lt1710" 
+ "fillKey": "lt1780" 
 } 
 },
 "110": {
  "GIN": {
- "fillKey": "lt1710" 
+ "fillKey": "lt1780" 
 },
 "LBR": {
- "fillKey": "lt1710" 
+ "fillKey": "lt1780" 
 },
 "SLE": {
- "fillKey": "lt1710" 
+ "fillKey": "lt1780" 
 },
 "NGA": {
- "fillKey": "lt1710" 
+ "fillKey": "lt1780" 
 } 
 },
 "111": {
  "GIN": {
- "fillKey": "lt1710" 
+ "fillKey": "lt1780" 
 },
 "LBR": {
- "fillKey": "lt1710" 
+ "fillKey": "lt1780" 
 },
 "SLE": {
- "fillKey": "lt1710" 
+ "fillKey": "lt1780" 
 },
 "NGA": {
- "fillKey": "lt1710" 
+ "fillKey": "lt1780" 
 } 
 },
 "112": {
  "GIN": {
- "fillKey": "lt1710" 
+ "fillKey": "lt1780" 
 },
 "LBR": {
- "fillKey": "lt1710" 
+ "fillKey": "lt1780" 
 },
 "SLE": {
- "fillKey": "lt1710" 
+ "fillKey": "lt1780" 
 },
 "NGA": {
- "fillKey": "lt1710" 
+ "fillKey": "lt1780" 
 } 
 },
 "113": {
  "GIN": {
- "fillKey": "lt1710" 
+ "fillKey": "lt1780" 
 },
 "LBR": {
- "fillKey": "lt1710" 
+ "fillKey": "lt1780" 
 },
 "SLE": {
- "fillKey": "lt1710" 
+ "fillKey": "lt1780" 
 },
 "NGA": {
- "fillKey": "lt1710" 
+ "fillKey": "lt1780" 
 } 
 },
 "114": {
  "GIN": {
- "fillKey": "lt1710" 
+ "fillKey": "lt1780" 
 },
 "LBR": {
- "fillKey": "lt1710" 
+ "fillKey": "lt1780" 
 },
 "SLE": {
- "fillKey": "lt1710" 
+ "fillKey": "lt1780" 
 },
 "NGA": {
- "fillKey": "lt1710" 
+ "fillKey": "lt1780" 
 } 
 },
 "115": {
  "GIN": {
- "fillKey": "lt1710" 
+ "fillKey": "lt1780" 
 },
 "LBR": {
- "fillKey": "lt1710" 
+ "fillKey": "lt1780" 
 },
 "SLE": {
- "fillKey": "lt1710" 
+ "fillKey": "lt1780" 
 },
 "NGA": {
- "fillKey": "lt1710" 
+ "fillKey": "lt1780" 
 } 
 },
 "116": {
  "GIN": {
- "fillKey": "lt1710" 
+ "fillKey": "lt1780" 
 },
 "LBR": {
- "fillKey": "lt1710" 
+ "fillKey": "lt1780" 
 },
 "SLE": {
- "fillKey": "lt1710" 
+ "fillKey": "lt1780" 
 },
 "NGA": {
- "fillKey": "lt1710" 
+ "fillKey": "lt1780" 
 } 
 },
 "117": {
  "GIN": {
- "fillKey": "lt1710" 
+ "fillKey": "lt1780" 
 },
 "LBR": {
- "fillKey": "lt1710" 
+ "fillKey": "lt1780" 
 },
 "SLE": {
- "fillKey": "lt1710" 
+ "fillKey": "lt1780" 
 },
 "NGA": {
- "fillKey": "lt1710" 
+ "fillKey": "lt1780" 
 } 
 },
 "118": {
  "GIN": {
- "fillKey": "lt1710" 
+ "fillKey": "lt1780" 
 },
 "LBR": {
- "fillKey": "lt1710" 
+ "fillKey": "lt1780" 
 },
 "SLE": {
- "fillKey": "lt1710" 
+ "fillKey": "lt1780" 
 },
 "NGA": {
- "fillKey": "lt1710" 
+ "fillKey": "lt1780" 
 } 
 },
 "119": {
  "GIN": {
- "fillKey": "lt1710" 
+ "fillKey": "lt1780" 
 },
 "LBR": {
- "fillKey": "lt1710" 
+ "fillKey": "lt1780" 
 },
 "SLE": {
- "fillKey": "lt1710" 
+ "fillKey": "lt1780" 
 },
 "NGA": {
- "fillKey": "lt1710" 
+ "fillKey": "lt1780" 
 } 
 },
 "120": {
  "GIN": {
- "fillKey": "lt1710" 
+ "fillKey": "lt1780" 
 },
 "LBR": {
- "fillKey": "lt1710" 
+ "fillKey": "lt1780" 
 },
 "SLE": {
- "fillKey": "lt1710" 
+ "fillKey": "lt1780" 
 },
 "NGA": {
- "fillKey": "lt1710" 
+ "fillKey": "lt1780" 
 } 
 },
 "121": {
  "GIN": {
- "fillKey": "lt1710" 
+ "fillKey": "lt1780" 
 },
 "LBR": {
- "fillKey": "lt1710" 
+ "fillKey": "lt1780" 
 },
 "SLE": {
- "fillKey": "lt1710" 
+ "fillKey": "lt1780" 
 },
 "NGA": {
- "fillKey": "lt1710" 
+ "fillKey": "lt1780" 
 } 
 },
 "122": {
  "GIN": {
- "fillKey": "lt1710" 
+ "fillKey": "lt1780" 
 },
 "LBR": {
- "fillKey": "lt1710" 
+ "fillKey": "lt1780" 
 },
 "SLE": {
- "fillKey": "lt1710" 
+ "fillKey": "lt1780" 
 },
 "NGA": {
- "fillKey": "lt1710" 
+ "fillKey": "lt1780" 
 } 
 },
 "123": {
  "GIN": {
- "fillKey": "lt1710" 
+ "fillKey": "lt1780" 
 },
 "LBR": {
- "fillKey": "lt1710" 
+ "fillKey": "lt1780" 
 },
 "SLE": {
- "fillKey": "lt1710" 
+ "fillKey": "lt1780" 
 },
 "NGA": {
- "fillKey": "lt1710" 
+ "fillKey": "lt1780" 
 } 
 },
 "124": {
  "GIN": {
- "fillKey": "lt1710" 
+ "fillKey": "lt1780" 
 },
 "LBR": {
- "fillKey": "lt1710" 
+ "fillKey": "lt1780" 
 },
 "SLE": {
- "fillKey": "lt1710" 
+ "fillKey": "lt1780" 
 },
 "NGA": {
- "fillKey": "lt1710" 
+ "fillKey": "lt1780" 
 } 
 },
 "125": {
  "GIN": {
- "fillKey": "lt1710" 
+ "fillKey": "lt1780" 
 },
 "LBR": {
- "fillKey": "lt1710" 
+ "fillKey": "lt1780" 
 },
 "SLE": {
- "fillKey": "lt1710" 
+ "fillKey": "lt1780" 
 },
 "NGA": {
- "fillKey": "lt1710" 
+ "fillKey": "lt1780" 
 } 
 },
 "126": {
  "GIN": {
- "fillKey": "lt1710" 
+ "fillKey": "lt1780" 
 },
 "LBR": {
- "fillKey": "lt1710" 
+ "fillKey": "lt1780" 
 },
 "SLE": {
- "fillKey": "lt1710" 
+ "fillKey": "lt1780" 
 },
 "NGA": {
- "fillKey": "lt1710" 
+ "fillKey": "lt1780" 
 } 
 },
 "127": {
  "GIN": {
- "fillKey": "lt1710" 
+ "fillKey": "lt1780" 
 },
 "LBR": {
- "fillKey": "lt1710" 
+ "fillKey": "lt1780" 
 },
 "SLE": {
- "fillKey": "lt1710" 
+ "fillKey": "lt1780" 
 },
 "NGA": {
- "fillKey": "lt1710" 
+ "fillKey": "lt1780" 
 } 
 },
 "128": {
  "GIN": {
- "fillKey": "lt1710" 
+ "fillKey": "lt1780" 
 },
 "LBR": {
- "fillKey": "lt1710" 
+ "fillKey": "lt1780" 
 },
 "SLE": {
- "fillKey": "lt1710" 
+ "fillKey": "lt1780" 
 },
 "NGA": {
- "fillKey": "lt1710" 
+ "fillKey": "lt1780" 
 } 
 },
 "129": {
  "GIN": {
- "fillKey": "lt1710" 
+ "fillKey": "lt1780" 
 },
 "LBR": {
- "fillKey": "lt1710" 
+ "fillKey": "lt1780" 
 },
 "SLE": {
- "fillKey": "lt1710" 
+ "fillKey": "lt1780" 
 },
 "NGA": {
- "fillKey": "lt1710" 
+ "fillKey": "lt1780" 
 } 
 },
 "130": {
  "GIN": {
- "fillKey": "lt1710" 
+ "fillKey": "lt1780" 
 },
 "LBR": {
- "fillKey": "lt1710" 
+ "fillKey": "lt1780" 
 },
 "SLE": {
- "fillKey": "lt1710" 
+ "fillKey": "lt1780" 
 },
 "NGA": {
- "fillKey": "lt1710" 
+ "fillKey": "lt1780" 
 } 
 },
 "131": {
  "GIN": {
- "fillKey": "lt1710" 
+ "fillKey": "lt1780" 
 },
 "LBR": {
- "fillKey": "lt1710" 
+ "fillKey": "lt1780" 
 },
 "SLE": {
- "fillKey": "lt1710" 
+ "fillKey": "lt1780" 
 },
 "NGA": {
- "fillKey": "lt1710" 
+ "fillKey": "lt1780" 
 } 
 },
 "132": {
  "GIN": {
- "fillKey": "lt1710" 
+ "fillKey": "lt1780" 
 },
 "LBR": {
- "fillKey": "lt1710" 
+ "fillKey": "lt1780" 
 },
 "SLE": {
- "fillKey": "lt1710" 
+ "fillKey": "lt1780" 
 },
 "NGA": {
- "fillKey": "lt1710" 
+ "fillKey": "lt1780" 
 } 
 },
 "133": {
  "GIN": {
- "fillKey": "lt1710" 
+ "fillKey": "lt1780" 
 },
 "LBR": {
- "fillKey": "lt1710" 
+ "fillKey": "lt1780" 
 },
 "SLE": {
- "fillKey": "lt1710" 
+ "fillKey": "lt1780" 
 },
 "NGA": {
- "fillKey": "lt1710" 
+ "fillKey": "lt1780" 
 } 
 },
 "134": {
  "GIN": {
- "fillKey": "lt1710" 
+ "fillKey": "lt1780" 
 },
 "LBR": {
- "fillKey": "lt1710" 
+ "fillKey": "lt1780" 
 },
 "SLE": {
- "fillKey": "lt1710" 
+ "fillKey": "lt1780" 
 },
 "NGA": {
- "fillKey": "lt1710" 
+ "fillKey": "lt1780" 
 } 
 },
 "135": {
  "GIN": {
- "fillKey": "lt1710" 
+ "fillKey": "lt1780" 
 },
 "LBR": {
- "fillKey": "lt1710" 
+ "fillKey": "lt1780" 
 },
 "SLE": {
- "fillKey": "lt1710" 
+ "fillKey": "lt1780" 
 },
 "NGA": {
- "fillKey": "lt1710" 
+ "fillKey": "lt1780" 
 } 
 },
 "136": {
  "GIN": {
- "fillKey": "lt1710" 
+ "fillKey": "lt1780" 
 },
 "LBR": {
- "fillKey": "lt1710" 
+ "fillKey": "lt1780" 
 },
 "SLE": {
- "fillKey": "lt1710" 
+ "fillKey": "lt1780" 
 },
 "NGA": {
- "fillKey": "lt1710" 
+ "fillKey": "lt1780" 
 } 
 },
 "137": {
  "GIN": {
- "fillKey": "lt1710" 
+ "fillKey": "lt1780" 
 },
 "LBR": {
- "fillKey": "lt1710" 
+ "fillKey": "lt1780" 
 },
 "SLE": {
- "fillKey": "lt1710" 
+ "fillKey": "lt1780" 
 },
 "NGA": {
- "fillKey": "lt1710" 
+ "fillKey": "lt1780" 
 } 
 },
 "138": {
  "GIN": {
- "fillKey": "lt1710" 
+ "fillKey": "lt1780" 
 },
 "LBR": {
- "fillKey": "lt1710" 
+ "fillKey": "lt1780" 
 },
 "SLE": {
- "fillKey": "lt1710" 
+ "fillKey": "lt1780" 
 },
 "NGA": {
- "fillKey": "lt1710" 
+ "fillKey": "lt1780" 
 } 
 },
 "139": {
  "GIN": {
- "fillKey": "lt1710" 
+ "fillKey": "lt1780" 
 },
 "LBR": {
- "fillKey": "lt1710" 
+ "fillKey": "lt1780" 
 },
 "SLE": {
- "fillKey": "lt1710" 
+ "fillKey": "lt1780" 
 },
 "NGA": {
- "fillKey": "lt1710" 
+ "fillKey": "lt1780" 
 } 
 },
 "140": {
  "GIN": {
- "fillKey": "lt1710" 
+ "fillKey": "lt1780" 
 },
 "LBR": {
- "fillKey": "lt1710" 
+ "fillKey": "lt1780" 
 },
 "SLE": {
- "fillKey": "lt1710" 
+ "fillKey": "lt1780" 
 },
 "NGA": {
- "fillKey": "lt1710" 
+ "fillKey": "lt1780" 
 } 
 },
 "141": {
  "GIN": {
- "fillKey": "lt1710" 
+ "fillKey": "lt1780" 
 },
 "LBR": {
- "fillKey": "lt1710" 
+ "fillKey": "lt1780" 
 },
 "SLE": {
- "fillKey": "lt1710" 
+ "fillKey": "lt1780" 
 },
 "NGA": {
- "fillKey": "lt1710" 
+ "fillKey": "lt1780" 
 } 
 },
 "142": {
  "GIN": {
- "fillKey": "lt1710" 
+ "fillKey": "lt1780" 
 },
 "LBR": {
- "fillKey": "lt1710" 
+ "fillKey": "lt1780" 
 },
 "SLE": {
- "fillKey": "lt1710" 
+ "fillKey": "lt1780" 
 },
 "NGA": {
- "fillKey": "lt1710" 
+ "fillKey": "lt1780" 
 } 
 },
 "143": {
  "GIN": {
- "fillKey": "lt1710" 
+ "fillKey": "lt1780" 
 },
 "LBR": {
- "fillKey": "lt1710" 
+ "fillKey": "lt1780" 
 },
 "SLE": {
- "fillKey": "lt1710" 
+ "fillKey": "lt1780" 
 },
 "NGA": {
- "fillKey": "lt1710" 
+ "fillKey": "lt1780" 
 } 
 },
 "144": {
  "GIN": {
- "fillKey": "lt1710" 
+ "fillKey": "lt1780" 
 },
 "LBR": {
- "fillKey": "lt1710" 
+ "fillKey": "lt1780" 
 },
 "SLE": {
- "fillKey": "lt1710" 
+ "fillKey": "lt1780" 
 },
 "NGA": {
- "fillKey": "lt1710" 
+ "fillKey": "lt1780" 
 } 
 },
 "145": {
  "GIN": {
- "fillKey": "lt1710" 
+ "fillKey": "lt1780" 
 },
 "LBR": {
- "fillKey": "lt1710" 
+ "fillKey": "lt1780" 
 },
 "SLE": {
- "fillKey": "lt1710" 
+ "fillKey": "lt1780" 
 },
 "NGA": {
- "fillKey": "lt1710" 
+ "fillKey": "lt1780" 
 } 
 },
 "146": {
  "GIN": {
- "fillKey": "lt1710" 
+ "fillKey": "lt1780" 
 },
 "LBR": {
- "fillKey": "lt1710" 
+ "fillKey": "lt1780" 
 },
 "SLE": {
- "fillKey": "lt1710" 
+ "fillKey": "lt1780" 
 },
 "NGA": {
- "fillKey": "lt1710" 
+ "fillKey": "lt1780" 
 } 
 },
 "147": {
  "GIN": {
- "fillKey": "lt1710" 
+ "fillKey": "lt1780" 
 },
 "LBR": {
- "fillKey": "lt1710" 
+ "fillKey": "lt1780" 
 },
 "SLE": {
- "fillKey": "lt1710" 
+ "fillKey": "lt1780" 
 },
 "NGA": {
- "fillKey": "lt1710" 
+ "fillKey": "lt1780" 
 } 
 },
 "148": {
  "GIN": {
- "fillKey": "lt1710" 
+ "fillKey": "lt1780" 
 },
 "LBR": {
- "fillKey": "lt1710" 
+ "fillKey": "lt1780" 
 },
 "SLE": {
- "fillKey": "lt1710" 
+ "fillKey": "lt1780" 
 },
 "NGA": {
- "fillKey": "lt1710" 
+ "fillKey": "lt1780" 
 } 
 },
 "149": {
  "GIN": {
- "fillKey": "lt1710" 
+ "fillKey": "lt1780" 
 },
 "LBR": {
- "fillKey": "lt1710" 
+ "fillKey": "lt1780" 
 },
 "SLE": {
- "fillKey": "lt1710" 
+ "fillKey": "lt1780" 
 },
 "NGA": {
- "fillKey": "lt1710" 
+ "fillKey": "lt1780" 
 } 
 },
 "150": {
  "GIN": {
- "fillKey": "lt1710" 
+ "fillKey": "lt1780" 
 },
 "LBR": {
- "fillKey": "lt1710" 
+ "fillKey": "lt1780" 
 },
 "SLE": {
- "fillKey": "lt1710" 
+ "fillKey": "lt1780" 
 },
 "NGA": {
- "fillKey": "lt1710" 
+ "fillKey": "lt1780" 
 } 
 },
 "151": {
  "GIN": {
- "fillKey": "lt1710" 
+ "fillKey": "lt1780" 
 },
 "LBR": {
- "fillKey": "lt1710" 
+ "fillKey": "lt1780" 
 },
 "SLE": {
- "fillKey": "lt1710" 
+ "fillKey": "lt1780" 
 },
 "NGA": {
- "fillKey": "lt1710" 
+ "fillKey": "lt1780" 
 } 
 },
 "152": {
  "GIN": {
- "fillKey": "lt1710" 
+ "fillKey": "lt1780" 
 },
 "LBR": {
- "fillKey": "lt1710" 
+ "fillKey": "lt1780" 
 },
 "SLE": {
- "fillKey": "lt1710" 
+ "fillKey": "lt1780" 
 },
 "NGA": {
- "fillKey": "lt1710" 
+ "fillKey": "lt1780" 
 } 
 },
 "153": {
  "GIN": {
- "fillKey": "lt1710" 
+ "fillKey": "lt1780" 
 },
 "LBR": {
- "fillKey": "lt1710" 
+ "fillKey": "lt1780" 
 },
 "SLE": {
- "fillKey": "lt1710" 
+ "fillKey": "lt1780" 
 },
 "NGA": {
- "fillKey": "lt1710" 
+ "fillKey": "lt1780" 
 } 
 },
 "154": {
  "GIN": {
- "fillKey": "lt1710" 
+ "fillKey": "lt1780" 
 },
 "LBR": {
- "fillKey": "lt1710" 
+ "fillKey": "lt1780" 
 },
 "SLE": {
- "fillKey": "lt1710" 
+ "fillKey": "lt1780" 
 },
 "NGA": {
- "fillKey": "lt1710" 
+ "fillKey": "lt1780" 
 } 
 },
 "155": {
  "GIN": {
- "fillKey": "lt1710" 
+ "fillKey": "lt1780" 
 },
 "LBR": {
- "fillKey": "lt1710" 
+ "fillKey": "lt1780" 
 },
 "SLE": {
- "fillKey": "lt1710" 
+ "fillKey": "lt1780" 
 },
 "NGA": {
- "fillKey": "lt1710" 
+ "fillKey": "lt1780" 
 } 
 },
 "156": {
  "GIN": {
- "fillKey": "lt1710" 
+ "fillKey": "lt1780" 
 },
 "LBR": {
- "fillKey": "lt1710" 
+ "fillKey": "lt1780" 
 },
 "SLE": {
- "fillKey": "lt1710" 
+ "fillKey": "lt1780" 
 },
 "NGA": {
- "fillKey": "lt1710" 
+ "fillKey": "lt1780" 
 } 
 },
 "157": {
  "GIN": {
- "fillKey": "lt1710" 
+ "fillKey": "lt1780" 
 },
 "LBR": {
- "fillKey": "lt1710" 
+ "fillKey": "lt1780" 
 },
 "SLE": {
- "fillKey": "lt1710" 
+ "fillKey": "lt1780" 
 },
 "NGA": {
- "fillKey": "lt1710" 
+ "fillKey": "lt1780" 
 } 
 },
 "158": {
  "GIN": {
- "fillKey": "lt1710" 
+ "fillKey": "lt1780" 
 },
 "LBR": {
- "fillKey": "lt1710" 
+ "fillKey": "lt1780" 
 },
 "SLE": {
- "fillKey": "lt1710" 
+ "fillKey": "lt1780" 
 },
 "NGA": {
- "fillKey": "lt1710" 
+ "fillKey": "lt1780" 
 } 
 },
 "159": {
  "GIN": {
- "fillKey": "lt1710" 
+ "fillKey": "lt1780" 
 },
 "LBR": {
- "fillKey": "lt1710" 
+ "fillKey": "lt1780" 
 },
 "SLE": {
- "fillKey": "lt1710" 
+ "fillKey": "lt1780" 
 },
 "NGA": {
- "fillKey": "lt1710" 
+ "fillKey": "lt1780" 
 } 
 },
 "160": {
  "GIN": {
- "fillKey": "lt1710" 
+ "fillKey": "lt1780" 
 },
 "LBR": {
- "fillKey": "lt1710" 
+ "fillKey": "lt1780" 
 },
 "SLE": {
- "fillKey": "lt1710" 
+ "fillKey": "lt1780" 
 },
 "NGA": {
- "fillKey": "lt1710" 
+ "fillKey": "lt1780" 
 } 
 },
 "161": {
  "GIN": {
- "fillKey": "lt1710" 
+ "fillKey": "lt1780" 
 },
 "LBR": {
- "fillKey": "lt1710" 
+ "fillKey": "lt1780" 
 },
 "SLE": {
- "fillKey": "lt1710" 
+ "fillKey": "lt1780" 
 },
 "NGA": {
- "fillKey": "lt1710" 
+ "fillKey": "lt1780" 
 } 
 },
 "162": {
  "GIN": {
- "fillKey": "lt1710" 
+ "fillKey": "lt1780" 
 },
 "LBR": {
- "fillKey": "lt1710" 
+ "fillKey": "lt1780" 
 },
 "SLE": {
- "fillKey": "lt1710" 
+ "fillKey": "lt1780" 
 },
 "NGA": {
- "fillKey": "lt1710" 
+ "fillKey": "lt1780" 
 } 
 },
 "163": {
  "GIN": {
- "fillKey": "lt1710" 
+ "fillKey": "lt1780" 
 },
 "LBR": {
- "fillKey": "lt1710" 
+ "fillKey": "lt1780" 
 },
 "SLE": {
- "fillKey": "lt1710" 
+ "fillKey": "lt1780" 
 },
 "NGA": {
- "fillKey": "lt1710" 
+ "fillKey": "lt1780" 
 } 
 },
 "164": {
  "GIN": {
- "fillKey": "lt1710" 
+ "fillKey": "lt1780" 
 },
 "LBR": {
- "fillKey": "lt1710" 
+ "fillKey": "lt1780" 
 },
 "SLE": {
- "fillKey": "lt1710" 
+ "fillKey": "lt1780" 
 },
 "NGA": {
- "fillKey": "lt1710" 
+ "fillKey": "lt1780" 
 } 
 },
 "165": {
  "GIN": {
- "fillKey": "lt1710" 
+ "fillKey": "lt1780" 
 },
 "LBR": {
- "fillKey": "lt1710" 
+ "fillKey": "lt1780" 
 },
 "SLE": {
- "fillKey": "lt1710" 
+ "fillKey": "lt1780" 
 },
 "NGA": {
- "fillKey": "lt1710" 
+ "fillKey": "lt1780" 
 } 
 },
 "166": {
  "GIN": {
- "fillKey": "lt1710" 
+ "fillKey": "lt1780" 
 },
 "LBR": {
- "fillKey": "lt1710" 
+ "fillKey": "lt1780" 
 },
 "SLE": {
- "fillKey": "lt1710" 
+ "fillKey": "lt1780" 
 },
 "NGA": {
- "fillKey": "lt1710" 
+ "fillKey": "lt1780" 
 } 
 },
 "167": {
  "GIN": {
- "fillKey": "lt1710" 
+ "fillKey": "lt1780" 
 },
 "LBR": {
- "fillKey": "lt1710" 
+ "fillKey": "lt1780" 
 },
 "SLE": {
- "fillKey": "lt1710" 
+ "fillKey": "lt1780" 
 },
 "NGA": {
- "fillKey": "lt1710" 
+ "fillKey": "lt1780" 
 } 
 },
 "168": {
  "GIN": {
- "fillKey": "lt1710" 
+ "fillKey": "lt1780" 
 },
 "LBR": {
- "fillKey": "lt1710" 
+ "fillKey": "lt1780" 
 },
 "SLE": {
- "fillKey": "lt1710" 
+ "fillKey": "lt1780" 
 },
 "NGA": {
- "fillKey": "lt1710" 
+ "fillKey": "lt1780" 
 } 
 },
 "169": {
  "GIN": {
- "fillKey": "lt1710" 
+ "fillKey": "lt1780" 
 },
 "LBR": {
- "fillKey": "lt1710" 
+ "fillKey": "lt1780" 
 },
 "SLE": {
- "fillKey": "lt1710" 
+ "fillKey": "lt1780" 
 },
 "NGA": {
- "fillKey": "lt1710" 
+ "fillKey": "lt1780" 
 } 
 },
 "170": {
  "GIN": {
- "fillKey": "lt1710" 
+ "fillKey": "lt1780" 
 },
 "LBR": {
- "fillKey": "lt1710" 
+ "fillKey": "lt1780" 
 },
 "SLE": {
- "fillKey": "lt1710" 
+ "fillKey": "lt1780" 
 },
 "NGA": {
- "fillKey": "lt1710" 
+ "fillKey": "lt1780" 
 } 
 },
 "171": {
  "GIN": {
- "fillKey": "lt1710" 
+ "fillKey": "lt1780" 
 },
 "LBR": {
- "fillKey": "lt1710" 
+ "fillKey": "lt1780" 
 },
 "SLE": {
- "fillKey": "lt1710" 
+ "fillKey": "lt1780" 
 },
 "NGA": {
- "fillKey": "lt1710" 
+ "fillKey": "lt1780" 
 } 
 },
 "172": {
  "GIN": {
- "fillKey": "lt1710" 
+ "fillKey": "lt1780" 
 },
 "LBR": {
- "fillKey": "lt1710" 
+ "fillKey": "lt1780" 
 },
 "SLE": {
- "fillKey": "lt1710" 
+ "fillKey": "lt1780" 
 },
 "NGA": {
- "fillKey": "lt1710" 
+ "fillKey": "lt1780" 
 } 
 },
 "173": {
  "GIN": {
- "fillKey": "lt1710" 
+ "fillKey": "lt1780" 
 },
 "LBR": {
- "fillKey": "lt1710" 
+ "fillKey": "lt1780" 
 },
 "SLE": {
- "fillKey": "lt1710" 
+ "fillKey": "lt1780" 
 },
 "NGA": {
- "fillKey": "lt1710" 
+ "fillKey": "lt1780" 
 } 
 },
 "174": {
  "GIN": {
- "fillKey": "lt1710" 
+ "fillKey": "lt1780" 
 },
 "LBR": {
- "fillKey": "lt1710" 
+ "fillKey": "lt1780" 
 },
 "SLE": {
- "fillKey": "lt1710" 
+ "fillKey": "lt1780" 
 },
 "NGA": {
- "fillKey": "lt1710" 
+ "fillKey": "lt1780" 
 } 
 },
 "175": {
  "GIN": {
- "fillKey": "lt1710" 
+ "fillKey": "lt1780" 
 },
 "LBR": {
- "fillKey": "lt1710" 
+ "fillKey": "lt1780" 
 },
 "SLE": {
- "fillKey": "lt1710" 
+ "fillKey": "lt1780" 
 },
 "NGA": {
- "fillKey": "lt1710" 
+ "fillKey": "lt1780" 
 } 
 },
 "176": {
  "GIN": {
- "fillKey": "lt1710" 
+ "fillKey": "lt1780" 
 },
 "LBR": {
- "fillKey": "lt1710" 
+ "fillKey": "lt1780" 
 },
 "SLE": {
- "fillKey": "lt1710" 
+ "fillKey": "lt1780" 
 },
 "NGA": {
- "fillKey": "lt1710" 
+ "fillKey": "lt1780" 
 } 
 },
 "177": {
  "GIN": {
- "fillKey": "lt1710" 
+ "fillKey": "lt1780" 
 },
 "LBR": {
- "fillKey": "lt1710" 
+ "fillKey": "lt1780" 
 },
 "SLE": {
- "fillKey": "lt1710" 
+ "fillKey": "lt1780" 
 },
 "NGA": {
- "fillKey": "lt1710" 
+ "fillKey": "lt1780" 
 } 
 },
 "178": {
  "GIN": {
- "fillKey": "lt1710" 
+ "fillKey": "lt1780" 
 },
 "LBR": {
- "fillKey": "lt1710" 
+ "fillKey": "lt1780" 
 },
 "SLE": {
- "fillKey": "lt1710" 
+ "fillKey": "lt1780" 
 },
 "NGA": {
- "fillKey": "lt1710" 
+ "fillKey": "lt1780" 
 } 
 },
 "179": {
  "GIN": {
- "fillKey": "lt1710" 
+ "fillKey": "lt1780" 
 },
 "LBR": {
- "fillKey": "lt1710" 
+ "fillKey": "lt1780" 
 },
 "SLE": {
- "fillKey": "lt1710" 
+ "fillKey": "lt1780" 
 },
 "NGA": {
- "fillKey": "lt1710" 
+ "fillKey": "lt1780" 
 } 
 },
 "180": {
  "GIN": {
- "fillKey": "lt1710" 
+ "fillKey": "lt1780" 
 },
 "LBR": {
- "fillKey": "lt1710" 
+ "fillKey": "lt1780" 
 },
 "SLE": {
- "fillKey": "lt1710" 
+ "fillKey": "lt1780" 
 },
 "NGA": {
- "fillKey": "lt1710" 
+ "fillKey": "lt1780" 
 } 
 },
 "181": {
  "GIN": {
- "fillKey": "lt1710" 
+ "fillKey": "lt1780" 
 },
 "LBR": {
- "fillKey": "lt1710" 
+ "fillKey": "lt1780" 
 },
 "SLE": {
- "fillKey": "lt1710" 
+ "fillKey": "lt1780" 
 },
 "NGA": {
- "fillKey": "lt1710" 
+ "fillKey": "lt1780" 
 } 
 },
 "182": {
  "GIN": {
- "fillKey": "lt1710" 
+ "fillKey": "lt1780" 
 },
 "LBR": {
- "fillKey": "lt1710" 
+ "fillKey": "lt1780" 
 },
 "SLE": {
- "fillKey": "lt1710" 
+ "fillKey": "lt1780" 
 },
 "NGA": {
- "fillKey": "lt1710" 
+ "fillKey": "lt1780" 
 } 
 },
 "183": {
  "GIN": {
- "fillKey": "lt1710" 
+ "fillKey": "lt1780" 
 },
 "LBR": {
- "fillKey": "lt1710" 
+ "fillKey": "lt1780" 
 },
 "SLE": {
- "fillKey": "lt1710" 
+ "fillKey": "lt1780" 
 },
 "NGA": {
- "fillKey": "lt1710" 
+ "fillKey": "lt1780" 
 } 
 },
 "184": {
  "GIN": {
- "fillKey": "lt1710" 
+ "fillKey": "lt1780" 
 },
 "LBR": {
- "fillKey": "lt1710" 
+ "fillKey": "lt1780" 
 },
 "SLE": {
- "fillKey": "lt1710" 
+ "fillKey": "lt1780" 
 },
 "NGA": {
- "fillKey": "lt1710" 
+ "fillKey": "lt1780" 
 } 
 },
 "185": {
  "GIN": {
- "fillKey": "lt1710" 
+ "fillKey": "lt1780" 
 },
 "LBR": {
- "fillKey": "lt1710" 
+ "fillKey": "lt1780" 
 },
 "SLE": {
- "fillKey": "lt1710" 
+ "fillKey": "lt1780" 
 },
 "NGA": {
- "fillKey": "lt1710" 
+ "fillKey": "lt1780" 
 } 
 },
 "186": {
  "GIN": {
- "fillKey": "lt1710" 
+ "fillKey": "lt1780" 
 },
 "LBR": {
- "fillKey": "lt1710" 
+ "fillKey": "lt1780" 
 },
 "SLE": {
- "fillKey": "lt1710" 
+ "fillKey": "lt1780" 
 },
 "NGA": {
- "fillKey": "lt1710" 
+ "fillKey": "lt1780" 
 } 
 },
 "187": {
  "GIN": {
- "fillKey": "lt1710" 
+ "fillKey": "lt1780" 
 },
 "LBR": {
- "fillKey": "lt1710" 
+ "fillKey": "lt1780" 
 },
 "SLE": {
- "fillKey": "lt1710" 
+ "fillKey": "lt1780" 
 },
 "NGA": {
- "fillKey": "lt1710" 
+ "fillKey": "lt1780" 
 } 
 },
 "188": {
  "GIN": {
- "fillKey": "lt1710" 
+ "fillKey": "lt1780" 
 },
 "LBR": {
- "fillKey": "lt1710" 
+ "fillKey": "lt1780" 
 },
 "SLE": {
- "fillKey": "lt1710" 
+ "fillKey": "lt1780" 
 },
 "NGA": {
- "fillKey": "lt1710" 
+ "fillKey": "lt1780" 
 } 
 },
 "189": {
  "GIN": {
- "fillKey": "lt1710" 
+ "fillKey": "lt1780" 
 },
 "LBR": {
- "fillKey": "lt1710" 
+ "fillKey": "lt1780" 
 },
 "SLE": {
- "fillKey": "lt1710" 
+ "fillKey": "lt1780" 
 },
 "NGA": {
- "fillKey": "lt1710" 
+ "fillKey": "lt1780" 
 } 
 },
 "190": {
  "GIN": {
- "fillKey": "lt1710" 
+ "fillKey": "lt1780" 
 },
 "LBR": {
- "fillKey": "lt1710" 
+ "fillKey": "lt1780" 
 },
 "SLE": {
- "fillKey": "lt1710" 
+ "fillKey": "lt1780" 
 },
 "NGA": {
- "fillKey": "lt1710" 
+ "fillKey": "lt1780" 
 } 
 },
 "191": {
  "GIN": {
- "fillKey": "lt1710" 
+ "fillKey": "lt1780" 
 },
 "LBR": {
- "fillKey": "lt1710" 
+ "fillKey": "lt1780" 
 },
 "SLE": {
- "fillKey": "lt1710" 
+ "fillKey": "lt1780" 
 },
 "NGA": {
- "fillKey": "lt1710" 
+ "fillKey": "lt1780" 
 } 
 },
 "192": {
  "GIN": {
- "fillKey": "lt1710" 
+ "fillKey": "lt1780" 
 },
 "LBR": {
- "fillKey": "lt1710" 
+ "fillKey": "lt1780" 
 },
 "SLE": {
- "fillKey": "lt1710" 
+ "fillKey": "lt1780" 
 },
 "NGA": {
- "fillKey": "lt1710" 
+ "fillKey": "lt1780" 
 } 
 },
 "193": {
  "GIN": {
- "fillKey": "lt1710" 
+ "fillKey": "lt1780" 
 },
 "LBR": {
- "fillKey": "lt1710" 
+ "fillKey": "lt1780" 
 },
 "SLE": {
- "fillKey": "lt1710" 
+ "fillKey": "lt1780" 
 },
 "NGA": {
- "fillKey": "lt1710" 
+ "fillKey": "lt1780" 
 } 
 },
 "194": {
  "GIN": {
- "fillKey": "lt1710" 
+ "fillKey": "lt1780" 
 },
 "LBR": {
- "fillKey": "lt1710" 
+ "fillKey": "lt1780" 
 },
 "SLE": {
- "fillKey": "lt1710" 
+ "fillKey": "lt1780" 
 },
 "NGA": {
- "fillKey": "lt1710" 
+ "fillKey": "lt1780" 
 } 
 },
 "195": {
  "GIN": {
- "fillKey": "lt1710" 
+ "fillKey": "lt1780" 
 },
 "LBR": {
- "fillKey": "lt1710" 
+ "fillKey": "lt1780" 
 },
 "SLE": {
- "fillKey": "lt1710" 
+ "fillKey": "lt1780" 
 },
 "NGA": {
- "fillKey": "lt1710" 
+ "fillKey": "lt1780" 
 } 
 },
 "196": {
  "GIN": {
- "fillKey": "lt1710" 
+ "fillKey": "lt1780" 
 },
 "LBR": {
- "fillKey": "lt1710" 
+ "fillKey": "lt1780" 
 },
 "SLE": {
- "fillKey": "lt1710" 
+ "fillKey": "lt1780" 
 },
 "NGA": {
- "fillKey": "lt1710" 
+ "fillKey": "lt1780" 
 } 
 },
 "197": {
  "GIN": {
- "fillKey": "lt1710" 
+ "fillKey": "lt1780" 
 },
 "LBR": {
- "fillKey": "lt1710" 
+ "fillKey": "lt1780" 
 },
 "SLE": {
- "fillKey": "lt1710" 
+ "fillKey": "lt1780" 
 },
 "NGA": {
- "fillKey": "lt1710" 
+ "fillKey": "lt1780" 
 } 
 },
 "198": {
  "GIN": {
- "fillKey": "lt1710" 
+ "fillKey": "lt1780" 
 },
 "LBR": {
- "fillKey": "lt1710" 
+ "fillKey": "lt1780" 
 },
 "SLE": {
- "fillKey": "lt1710" 
+ "fillKey": "lt1780" 
 },
 "NGA": {
- "fillKey": "lt1710" 
+ "fillKey": "lt1780" 
 } 
 },
 "199": {
  "GIN": {
- "fillKey": "lt1710" 
+ "fillKey": "lt1780" 
 },
 "LBR": {
- "fillKey": "lt1710" 
+ "fillKey": "lt1780" 
 },
 "SLE": {
- "fillKey": "lt1710" 
+ "fillKey": "lt1780" 
 },
 "NGA": {
- "fillKey": "lt1710" 
+ "fillKey": "lt1780" 
 } 
 },
 "200": {
  "GIN": {
- "fillKey": "lt1710" 
+ "fillKey": "lt1780" 
 },
 "LBR": {
- "fillKey": "lt1710" 
+ "fillKey": "lt1780" 
 },
 "SLE": {
- "fillKey": "lt1710" 
+ "fillKey": "lt1780" 
 },
 "NGA": {
- "fillKey": "lt1710" 
+ "fillKey": "lt1780" 
 } 
 },
 "201": {
  "GIN": {
- "fillKey": "lt1710" 
+ "fillKey": "lt1780" 
 },
 "LBR": {
- "fillKey": "lt1710" 
+ "fillKey": "lt1780" 
 },
 "SLE": {
- "fillKey": "lt1710" 
+ "fillKey": "lt1780" 
 },
 "NGA": {
- "fillKey": "lt1710" 
+ "fillKey": "lt1780" 
 } 
 },
 "202": {
  "GIN": {
- "fillKey": "lt1710" 
+ "fillKey": "lt1780" 
 },
 "LBR": {
- "fillKey": "lt1710" 
+ "fillKey": "lt1780" 
 },
 "SLE": {
- "fillKey": "lt1710" 
+ "fillKey": "lt1780" 
 },
 "NGA": {
- "fillKey": "lt1710" 
+ "fillKey": "lt1780" 
 } 
 },
 "203": {
  "GIN": {
- "fillKey": "lt1710" 
+ "fillKey": "lt1780" 
 },
 "LBR": {
- "fillKey": "lt1710" 
+ "fillKey": "lt1780" 
 },
 "SLE": {
- "fillKey": "lt1710" 
+ "fillKey": "lt1780" 
 },
 "NGA": {
- "fillKey": "lt1710" 
+ "fillKey": "lt1780" 
 } 
 },
 "204": {
  "GIN": {
- "fillKey": "lt1710" 
+ "fillKey": "lt1780" 
 },
 "LBR": {
- "fillKey": "lt1710" 
+ "fillKey": "lt1780" 
 },
 "SLE": {
- "fillKey": "lt1710" 
+ "fillKey": "lt1780" 
 },
 "NGA": {
- "fillKey": "lt1710" 
+ "fillKey": "lt1780" 
 } 
 },
 "205": {
  "GIN": {
- "fillKey": "lt1710" 
+ "fillKey": "lt1780" 
 },
 "LBR": {
- "fillKey": "lt1710" 
+ "fillKey": "lt1780" 
 },
 "SLE": {
- "fillKey": "lt1710" 
+ "fillKey": "lt1780" 
 },
 "NGA": {
- "fillKey": "lt1710" 
+ "fillKey": "lt1780" 
 } 
 },
 "206": {
  "GIN": {
- "fillKey": "lt1710" 
+ "fillKey": "lt1780" 
 },
 "LBR": {
- "fillKey": "lt1710" 
+ "fillKey": "lt1780" 
 },
 "SLE": {
- "fillKey": "lt1710" 
+ "fillKey": "lt1780" 
 },
 "NGA": {
- "fillKey": "lt1710" 
+ "fillKey": "lt1780" 
 } 
 },
 "207": {
  "GIN": {
- "fillKey": "lt1710" 
+ "fillKey": "lt1780" 
 },
 "LBR": {
- "fillKey": "lt1710" 
+ "fillKey": "lt1780" 
 },
 "SLE": {
- "fillKey": "lt1710" 
+ "fillKey": "lt1780" 
 },
 "NGA": {
- "fillKey": "lt1710" 
+ "fillKey": "lt1780" 
 } 
 },
 "208": {
  "GIN": {
- "fillKey": "lt1710" 
+ "fillKey": "lt1780" 
 },
 "LBR": {
- "fillKey": "lt1710" 
+ "fillKey": "lt1780" 
 },
 "SLE": {
- "fillKey": "lt1710" 
+ "fillKey": "lt1780" 
 },
 "NGA": {
- "fillKey": "lt1710" 
+ "fillKey": "lt1780" 
 } 
 },
 "209": {
  "GIN": {
- "fillKey": "lt1710" 
+ "fillKey": "lt1780" 
 },
 "LBR": {
- "fillKey": "lt1710" 
+ "fillKey": "lt1780" 
 },
 "SLE": {
- "fillKey": "lt1710" 
+ "fillKey": "lt1780" 
 },
 "NGA": {
- "fillKey": "lt1710" 
+ "fillKey": "lt1780" 
 } 
 },
 "210": {
  "GIN": {
- "fillKey": "lt1710" 
+ "fillKey": "lt1780" 
 },
 "LBR": {
- "fillKey": "lt1710" 
+ "fillKey": "lt1780" 
 },
 "SLE": {
- "fillKey": "lt1710" 
+ "fillKey": "lt1780" 
 },
 "NGA": {
- "fillKey": "lt1710" 
+ "fillKey": "lt1780" 
 } 
 },
 "211": {
  "GIN": {
- "fillKey": "lt1710" 
+ "fillKey": "lt1780" 
 },
 "LBR": {
- "fillKey": "lt1710" 
+ "fillKey": "lt1780" 
 },
 "SLE": {
- "fillKey": "lt1710" 
+ "fillKey": "lt1780" 
 },
 "NGA": {
- "fillKey": "lt1710" 
+ "fillKey": "lt1780" 
 } 
 },
 "212": {
  "GIN": {
- "fillKey": "lt1710" 
+ "fillKey": "lt1780" 
 },
 "LBR": {
- "fillKey": "lt1710" 
+ "fillKey": "lt1780" 
 },
 "SLE": {
- "fillKey": "lt1710" 
+ "fillKey": "lt1780" 
 },
 "NGA": {
- "fillKey": "lt1710" 
+ "fillKey": "lt1780" 
 } 
 },
 "213": {
  "GIN": {
- "fillKey": "lt1710" 
+ "fillKey": "lt1780" 
 },
 "LBR": {
- "fillKey": "lt1710" 
+ "fillKey": "lt1780" 
 },
 "SLE": {
- "fillKey": "lt3410" 
+ "fillKey": "lt1780" 
 },
 "NGA": {
- "fillKey": "lt1710" 
+ "fillKey": "lt1780" 
 } 
 },
 "214": {
  "GIN": {
- "fillKey": "lt1710" 
+ "fillKey": "lt1780" 
 },
 "LBR": {
- "fillKey": "lt3410" 
+ "fillKey": "lt1780" 
 },
 "SLE": {
- "fillKey": "lt3410" 
+ "fillKey": "lt1780" 
 },
 "NGA": {
- "fillKey": "lt1710" 
+ "fillKey": "lt1780" 
 } 
 },
 "215": {
  "GIN": {
- "fillKey": "lt1710" 
+ "fillKey": "lt1780" 
 },
 "LBR": {
- "fillKey": "lt3410" 
+ "fillKey": "lt1780" 
 },
 "SLE": {
- "fillKey": "lt3410" 
+ "fillKey": "lt3560" 
 },
 "NGA": {
- "fillKey": "lt1710" 
+ "fillKey": "lt1780" 
 } 
 },
 "216": {
  "GIN": {
- "fillKey": "lt1710" 
+ "fillKey": "lt1780" 
 },
 "LBR": {
- "fillKey": "lt3410" 
+ "fillKey": "lt3560" 
 },
 "SLE": {
- "fillKey": "lt3410" 
+ "fillKey": "lt3560" 
 },
 "NGA": {
- "fillKey": "lt1710" 
+ "fillKey": "lt3560" 
 } 
 },
 "217": {
  "GIN": {
- "fillKey": "lt3410" 
+ "fillKey": "lt1780" 
 },
 "LBR": {
- "fillKey": "lt3410" 
+ "fillKey": "lt3560" 
 },
 "SLE": {
- "fillKey": "lt5120" 
+ "fillKey": "lt3560" 
 },
 "NGA": {
- "fillKey": "lt1710" 
+ "fillKey": "lt3560" 
 } 
 },
 "218": {
  "GIN": {
- "fillKey": "lt3410" 
+ "fillKey": "lt1780" 
 },
 "LBR": {
- "fillKey": "lt5120" 
+ "fillKey": "lt3560" 
 },
 "SLE": {
- "fillKey": "lt5120" 
+ "fillKey": "lt5340" 
 },
 "NGA": {
- "fillKey": "lt1710" 
+ "fillKey": "lt3560" 
 } 
 },
 "219": {
  "GIN": {
- "fillKey": "lt3410" 
+ "fillKey": "lt1780" 
 },
 "LBR": {
- "fillKey": "lt5120" 
+ "fillKey": "lt5340" 
 },
 "SLE": {
- "fillKey": "lt6830" 
+ "fillKey": "lt7120" 
 },
 "NGA": {
- "fillKey": "lt1710" 
+ "fillKey": "lt5340" 
 } 
 },
 "220": {
  "GIN": {
- "fillKey": "lt5120" 
+ "fillKey": "lt1780" 
 },
 "LBR": {
- "fillKey": "lt5120" 
+ "fillKey": "lt5340" 
 },
 "SLE": {
- "fillKey": "lt6830" 
+ "fillKey": "lt8900" 
 },
 "NGA": {
- "fillKey": "lt1710" 
+ "fillKey": "lt5340" 
 } 
 },
 "221": {
  "GIN": {
- "fillKey": "lt5120" 
+ "fillKey": "lt1780" 
 },
 "LBR": {
- "fillKey": "lt6830" 
+ "fillKey": "lt7120" 
 },
 "SLE": {
- "fillKey": "lt8530" 
+ "fillKey": "lt10700" 
 },
 "NGA": {
- "fillKey": "lt1710" 
+ "fillKey": "lt7120" 
 } 
 },
 "222": {
  "GIN": {
- "fillKey": "lt6830" 
+ "fillKey": "lt1780" 
 },
 "LBR": {
- "fillKey": "lt8530" 
+ "fillKey": "lt8900" 
 },
 "SLE": {
- "fillKey": "lt10200" 
+ "fillKey": "lt14200" 
 },
 "NGA": {
- "fillKey": "lt1710" 
+ "fillKey": "lt8900" 
 } 
 },
 "223": {
  "GIN": {
- "fillKey": "lt8530" 
+ "fillKey": "lt1780" 
 },
 "LBR": {
- "fillKey": "lt10200" 
+ "fillKey": "lt12500" 
 },
 "SLE": {
- "fillKey": "lt13700" 
+ "fillKey": "lt16000" 
 },
 "NGA": {
- "fillKey": "lt1710" 
-} 
-},
-"224": {
- "GIN": {
- "fillKey": "lt10200" 
-},
-"LBR": {
- "fillKey": "lt13700" 
-},
-"SLE": {
- "fillKey": "lt15400" 
-},
-"NGA": {
- "fillKey": "lt1710" 
+ "fillKey": "lt12500" 
 } 
 } 
 }
@@ -8619,8 +8594,7 @@ var dayLabels=
 "228": "2014-11-09",
 "229": "2014-11-10",
 "230": "2014-11-11",
-"231": "2014-11-12",
-"232": "2014-11-13" 
+"231": "2014-11-12" 
 };
 var chartParams_pred={"dom": "zoom_map_pred",
 "scope": "world",
@@ -8631,30 +8605,30 @@ var chartParams_pred={"dom": "zoom_map_pred",
 "fills": 
 {
  "defaultFill": "#ffffef",
-"lt1710": "#ffffef",
-"lt3410": "#fff7bf",
-"lt5120": "#fee39f",
-"lt6830": "#fec45f",
-"lt8530": "#fe993f",
-"lt10200": "#ec702f",
-"lt11900": "#cc4c1f",
-"lt13700": "#993402",
-"lt15400": "#662520" 
+"lt1780": "#ffffef",
+"lt3560": "#fff7bf",
+"lt5340": "#fee39f",
+"lt7120": "#fec45f",
+"lt8900": "#fe993f",
+"lt10700": "#ec702f",
+"lt12500": "#cc4c1f",
+"lt14200": "#993402",
+"lt16000": "#662520" 
 }
 ,
 "data":
 {
  "GIN": {
- "fillKey": "lt1710" 
+ "fillKey": "lt1780" 
 },
 "LBR": {
- "fillKey": "lt1710" 
+ "fillKey": "lt1780" 
 },
 "SLE": {
- "fillKey": "lt1710" 
+ "fillKey": "lt1780" 
 },
 "NGA": {
- "fillKey": "lt1710" 
+ "fillKey": "lt1780" 
 } 
 }
 ,"setProjection": function( element, options ) {
