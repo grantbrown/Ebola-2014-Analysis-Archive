@@ -167,7 +167,7 @@ library(parallel) # Load the parallel library to enable multiple chains to be ru
 documentCompilationMode = "release"
 #documentCompilationMode = "debug"
 modelDF = 0
-pred.days = 15
+pred.days = 30
 
 
 ## Compute number of samples/batches
@@ -760,10 +760,10 @@ buildAndRunModel = function(params)
   runSimulation(SEIRmodel, numBatches = numBurnInBatches)
   SEIRmodel$compartmentSamplingMode = 16
   SEIRmodel$parameterSamplingMode = 7
+  SEIRmodel$performHybridStep = 10
   if (modelDF > 0)
   {
       SEIRmodel$useDecorrelation = 0
-      SEIRmodel$performHybridStep = 100
   }
   # Run Simulation
   cat(paste("Running chain ", params[["chainNumber"]], "\n", sep =""))
