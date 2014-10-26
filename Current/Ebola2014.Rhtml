@@ -176,17 +176,19 @@ numConvergenceBatches = ifelse(documentCompilationMode == "release", 6000,  10)
 convergenceBatchSize =  ifelse(documentCompilationMode == "release", 1000, 100) 
 extraR0Iterations =     ifelse(documentCompilationMode == "release", 500,   10)
 iterationStride =       ifelse(documentCompilationMode == "release", 750,   50)
-targetDaysPerRecord = 6
+targetDaysPerRecord = 1
 
 ## Read in the data
 url = 'http://en.wikipedia.org/w/index.php?title=Ebola_virus_epidemic_in_West_Africa&redirect=no'
 tbls = readHTMLTable(url)
 # These lines changes depending on the page formatting.
-table1 = tbls[[7]] 
-table2 = tbls[[8]]
+table1 = tbls[[5]] 
+table2 = tbls[[7]]
 
-dat = rbind(table1[2:nrow(table1),c(1, 4, 6, 8, 10,12)],
-            table2[2:nrow(table2),c(1, 4, 6, 8, 10,12)])
+table1 = cbind(table1[2:nrow(table1),c(1, 5, 7, 9)],16)
+table2 = table2[2:nrow(table2),c(1, 4, 6, 8, 10)]
+colnames(table2) = colnames(table1)
+dat = rbind(table1,table2)
 
 # One date is now (sometimes) duplicated on the Wikipedia page, due to using different sources. 
 # Clean that up first. 
