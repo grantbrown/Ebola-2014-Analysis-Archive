@@ -176,7 +176,7 @@ numConvergenceBatches = ifelse(documentCompilationMode == "release", 6000,  10)
 convergenceBatchSize =  ifelse(documentCompilationMode == "release", 1000, 100) 
 extraR0Iterations =     ifelse(documentCompilationMode == "release", 500,   10)
 iterationStride =       ifelse(documentCompilationMode == "release", 750,   50)
-targetDaysPerRecord = 1
+targetDaysPerRecord = 7
 
 ## Read in the data
 url = 'http://en.wikipedia.org/w/index.php?title=Ebola_virus_epidemic_in_West_Africa&redirect=no'
