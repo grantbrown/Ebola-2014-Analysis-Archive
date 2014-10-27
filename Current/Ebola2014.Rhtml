@@ -166,7 +166,13 @@ library(parallel) # Load the parallel library to enable multiple chains to be ru
 
 documentCompilationMode = "release"
 #documentCompilationMode = "debug"
-modelDF = 0
+# How many degrees of freedom should the fit have?
+modelDF = 4
+# if modelDF != 0, should spline basis be knot based or DF based?
+# Option1: "Knots"
+# Option2: "DF"
+modelMode = "Knots"
+# How far into the future do we want to make predictions?
 pred.days = 30
 
 
@@ -556,9 +562,25 @@ daysSinceJan = as.numeric(rptDate - as.Date("2014-01-01"))
 daysSinceJan.predict = c(max(daysSinceJan) + 1, max(daysSinceJan) 
                          + seq(2,pred.days-2,2))
 {
-if (modelDF != 0)
+if (modelDF != 0 && modelMode == "DF")
 {
   splineBasis = ns(daysSinceJan, df = modelDF)
+  splineBasis.predict = predict(splineBasis, daysSinceJan.predict)
+  Z = matrix(splineBasis, ncol = modelDF)
+  Z.predict = splineBasis.predict
+  # These co-variates are the same for each spatial location, 
+  # so duplicate them row-wise. 
+  Z = Z[rep(1:nrow(Z), nrow(X)),,drop=FALSE]
+  Z.predict = Z.predict[rep(1:nrow(Z.predict), nrow(X)),,drop=FALSE]
+  
+  # For convenience, let's combine X and Z for prediction.
+  X.pred = cbind(X.predict[rep(1:nrow(X.predict), 
+                               each = nrow(Z.predict)/nrow(X)),], Z.predict)
+}
+else if (modelDF != 0 && modelMode == "Knots")
+{
+  splineBasis = ns(daysSinceJan, knots = floor(quantile(daysSinceJan, 
+                                                        seq(0,1, length = modelDF)))[1:(modelDF-1)])
   splineBasis.predict = predict(splineBasis, daysSinceJan.predict)
   Z = matrix(splineBasis, ncol = modelDF)
   Z.predict = splineBasis.predict
@@ -652,7 +674,7 @@ proposeParameters = function(seedVal, chainNumber)
     gamma_ir=-log(1-p_ir)
       
     # Starting value for exposure regression parameters
-    beta = rep(0, ncol(X) + ifelse(is.na(Z), 0, ncol(Z)))
+    beta = rep(0, ncol(X) + ifelse(all(is.na(Z)), 0, ncol(Z)))
     beta[1] = 2.5 + rnorm(1,0,0.5)
     
     phi = 0.01 # Overdispersion precision
@@ -765,7 +787,7 @@ buildAndRunModel = function(params)
   SEIRmodel$performHybridStep = 10
   if (modelDF > 0)
   {
-      SEIRmodel$useDecorrelation = 0
+      SEIRmodel$useDecorrelation = 10
   }
   # Run Simulation
   cat(paste("Running chain ", params[["chainNumber"]], "\n", sep =""))
@@ -882,25 +904,15 @@ plotChains = function(c1, c2, c3, main)
 
 figure8 = function()
 {
-  par(mfrow = c(3,2))
+  par(mfrow = c(2,2))
   plotChains(chain1$BetaP_SE_0,
              chain2$BetaP_SE_0,
              chain3$BetaP_SE_0, 
              "Guinea Exposure Intercept")
-  plotChains(chain1$BetaP_SE_3,
-             chain2$BetaP_SE_3,
-             chain3$BetaP_SE_3, 
-             "Linear Time Component")
-  
   plotChains(chain1$BetaP_SE_1,
              chain2$BetaP_SE_1,
              chain3$BetaP_SE_1, 
              "Liberia Exposure Intercept")
-  plotChains(chain1$BetaP_SE_3,
-             chain2$BetaP_SE_3,
-             chain3$BetaP_SE_3, 
-             "Quadratic Time Component")
-  
   plotChains(chain1$BetaP_SE_2,
              chain2$BetaP_SE_2,
              chain3$BetaP_SE_2, 
@@ -908,11 +920,20 @@ figure8 = function()
   plotChains(chain1$BetaP_SE_3,
              chain2$BetaP_SE_3,
              chain3$BetaP_SE_3, 
-             "Cubic Time Component")
- 
-  
-  
+             "Nigeria Exposure Intercept")
 }
+
+figure8_5 = function()
+{
+  for (i in ncol(X):(ncol(X) + ncol(Z)-1))
+  {
+      plotChains(chain1[[paste("BetaP_SE_", i, sep = "")]],
+                 chain2[[paste("BetaP_SE_", i, sep = "")]],
+                 chain3[[paste("BetaP_SE_", i, sep = "")]],
+                 paste("Temporal Basis Parameter ", i-ncol(X)+1, sep = ""))
+  }
+}
+
 figure9 = function()
 {
   par(mfrow = c(2,1))
@@ -941,7 +962,7 @@ figure9_5 = function()
 
 ## Parameter Estimates 
 
-nbeta = ncol(X) + ifelse(class("Z") == "matrix", ncol(Z), 0)
+nbeta = ncol(X) + ifelse(class(Z) == "matrix", ncol(Z), 0)
 c1 = chain1[floor(nrow(chain1)/2):nrow(chain1),c(1:(nbeta + length(dmList)),
                                                  (nbeta+length(dmList)+1):
                                                    (nbeta+length(dmList)+3))]
@@ -1375,6 +1396,10 @@ several important parameters, and take a look at the Gelman and Rubin convergenc
 </p>
 <!--begin.rcode dpi=150, fig.align='center', echo=FALSE
 figure8()
+end.rcode-->
+
+<!--begin.rcode dpi=150, fig.align='center', echo=FALSE, fig.width=6, fig.height=3
+figure8_5()
 end.rcode-->
 
 <!--begin.rcode dpi=150, fig.align='center', echo=FALSE
