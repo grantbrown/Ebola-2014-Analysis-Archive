@@ -962,7 +962,7 @@ figure9_5 = function()
 
 ## Parameter Estimates 
 
-nbeta = ncol(X) + ifelse(class("Z") == "matrix", ncol(Z), 0)
+nbeta = ncol(X) + ifelse(class(Z) == "matrix", ncol(Z), 0)
 c1 = chain1[floor(nrow(chain1)/2):nrow(chain1),c(1:(nbeta + length(dmList)),
                                                  (nbeta+length(dmList)+1):
                                                    (nbeta+length(dmList)+3))]
