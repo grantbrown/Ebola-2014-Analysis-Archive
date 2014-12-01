@@ -177,9 +177,10 @@ pred.days = 30
 
 
 ## Compute number of samples/batches
-numBurnInBatches =      ifelse(documentCompilationMode == "release", 1000,  1)
-numConvergenceBatches = ifelse(documentCompilationMode == "release", 6000,  10)
-convergenceBatchSize =  ifelse(documentCompilationMode == "release", 1000, 100) 
+numBurnInBatches =      ifelse(documentCompilationMode == "release", 1000,  100)
+convergenceCriterion =  ifelse(documentCompilationMode == "release", 1.02,  100)
+convergenceSampleSize =  ifelse(documentCompilationMode == "release", 100000, 100) 
+convergenceBatchSize =  ifelse(documentCompilationMode == "release", 1000, 10) 
 extraR0Iterations =     ifelse(documentCompilationMode == "release", 500,   10)
 iterationStride =       ifelse(documentCompilationMode == "release", 750,   50)
 targetDaysPerRecord = 7
@@ -647,8 +648,8 @@ priorBeta_gammaEI = 1000;
 priorAlpha_gammaIR = 140;
 priorBeta_gammaIR = 1000;
 # Declare prior parameters for the overdispersion precision
-priorAlpha_phi = 10
-priorBeta_phi = 0.1
+priorAlpha_phi = 10000
+priorBeta_phi = 100
 
 # Declare prior precision for exposure model paramters
 betaPriorPrecision = 0.1
@@ -728,10 +729,12 @@ paramsList = list(list("estimateR0"=FALSE, "traceCompartments"=TRUE, "seedVal"=1
                   list("estimateR0"=TRUE, "traceCompartments"=FALSE, "seedVal"=1224,"chainNumber"=5),
                   list("estimateR0"=FALSE,"traceCompartments"=FALSE, "seedVal"=12325,"chainNumber"=6))
 
-buildAndRunModel = function(params)
+buildAndBurnInModel = function(params)
 {
   library(spatialSEIR)
-  proposal = proposeParameters(params[["seedVal"]], params[["chainNumber"]])
+  # save proposal and params to node workspace
+  proposal <<- proposeParameters(params[["seedVal"]], params[["chainNumber"]])
+  params <<- params
   SEIRmodel =  buildSEIRModel(proposal$outFileName,
                               proposal$DataModel,
                               proposal$ExposureModel,
@@ -776,29 +779,20 @@ buildAndRunModel = function(params)
 
   # Burn in tuning parameters
   runSimulation(SEIRmodel, numBatches = numBurnInBatches)
-  SEIRmodel$compartmentSamplingMode = 16
+  runSimulation(SEIRmodel, batchSize = 100, numBatches = numBurnInBatches)
+  
+  SEIRmodel$compartmentSamplingMode = 17
   SEIRmodel$parameterSamplingMode = 7
   SEIRmodel$performHybridStep = 10
   if (modelDF > 0)
   {
       SEIRmodel$useDecorrelation = 10
   }
-  # Run Simulation
-  cat(paste("Running chain ", params[["chainNumber"]], "\n", sep =""))
-
-  tm = 0
+}
 
 
-  tm = tm + system.time(runSimulation(SEIRmodel, 
-	    numBatches=numConvergenceBatches, 
-	    batchSize=convergenceBatchSize, 
-	    targetAcceptanceRatio=0.2,
-	    tolerance=0.025,
-	    proportionChange = 0.05))
-
- 
-  cat(paste("Time elapsed for ", proposal$outFileName," : ", round(tm[3]/60,3), 
-              " minutes\n", sep = ""))
+finishSimulation = function(iterationNumber)
+{
   dat = read.csv(proposal$outFileName)
   
   ## Do we need to estimate R0 for this chain?
@@ -809,12 +803,12 @@ buildAndRunModel = function(params)
     empiricalR0 = array(0, dim = c(nrow(I_star), ncol(I_star), extraR0Iterations))
     for (i in 1:extraR0Iterations)
     {
-        SEIRmodel$simulate(iterationStride)
+        localModelObject$simulate(iterationStride)
         for (j in 0:(nrow(I_star)-1))
         {
-            R0[j,,i] = SEIRmodel$estimateR0(j)
-            effectiveR0[j,,i] = SEIRmodel$estimateEffectiveR0(j)
-            empiricalR0[j,,i] = apply(SEIRmodel$getIntegratedGenerationMatrix(j), 1, sum)
+            R0[j,,i] = localModelObject$estimateR0(j)
+            effectiveR0[j,,i] = localModelObject$estimateEffectiveR0(j)
+            empiricalR0[j,,i] = apply(localModelObject$getIntegratedGenerationMatrix(j), 1, sum)
         }
     }
     
@@ -863,15 +857,55 @@ clusterExport(cl, c( "offsets",
                      "iterationStride",
                      "proposeParameters",
                      "generateCompartmentProposal",
-                     "numConvergenceBatches",
-                     "convergenceBatchSize",
                      "extraR0Iterations",
                      "I_star",
                      "modelDF",
                      "numBurnInBatches"))
 
 
-chains = parLapply(cl, paramsList, buildAndRunModel)
+additionalIterations = function(params)
+{
+    
+    N = params[[1]]
+    batchSize = params[[2]]
+    targetRatio = params[[3]]
+    targetWidth=params[[4]]
+    proportionChange = params[[5]]
+    updateParameters = params[[6]]
+    for (i in 1:(N/batchSize))
+    {
+        localModelObject$simulate(batchSize)
+        if (updateParameters)
+        {
+            localModelObject$updateSamplingParameters(targetRatio, targetWidth, proportionChange)
+        }
+    }
+}
+
+
+iterationParams = list(convergenceSampleSize, convergenceBatchSize,
+                       targetAcceptanceRatio=0.2,   
+                       tolerance=0.05,
+                       proportionChange = 0.1,
+                       updateSamplingParams = FALSE)
+iterationParams = list(iterationParams, iterationParams, iterationParams)
+fileNames = paste(paste("chain_output_ebola_", c(paramsList[[1]]$chainNumber,
+                        paramsList[[2]]$chainNumber,
+                        paramsList[[3]]$chainNumber), sep = ""), ".txt", sep = "")                      
+chains = parLapply(cl, paramsList, buildAndBurnInModel)
+
+conv = FALSE
+while (!conv)
+{
+    cat("Not converged, adding iterations...\n")
+    parLapply(cl, iterationParams, additionalIterations)
+    conv = checkConvergence(fileNames[1], fileNames[2], fileNames[3], maxVal = convergenceCriterion)
+}
+cat("Chains converged, finishing up...\n")
+
+cleanUpParamsList = list(1,2,3)
+chains = parLapply(cl, cleanUpParamsList, finishSimulation)
+
 stopCluster(cl)
 
 chain1 = chains[[1]]$chainOutput 
