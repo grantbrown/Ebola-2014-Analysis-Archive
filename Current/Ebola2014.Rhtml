@@ -164,8 +164,8 @@ library(parallel) # Load the parallel library to enable multiple chains to be ru
 
 ## Define Document Compilation Parameters
 
-documentCompilationMode = "release"
-#documentCompilationMode = "debug"
+#documentCompilationMode = "release"
+documentCompilationMode = "debug"
 # How many degrees of freedom should the fit have?
 modelDF = 4
 # if modelDF != 0, should spline basis be knot based or DF based?
@@ -191,20 +191,10 @@ tbls = readHTMLTable(url)
 table1 = tbls[[5]] 
 table2 = tbls[[7]]
 
-table1 = cbind(table1[2:nrow(table1),c(1, 5, 7, 9)],16)
+table1 = cbind(table1[2:nrow(table1),c(1, 4, 6, 8)],20)
 table2 = table2[2:nrow(table2),c(1, 4, 6, 8, 10)]
 colnames(table2) = colnames(table1)
 dat = rbind(table1,table2)
-
-# One date is now (sometimes) duplicated on the Wikipedia page, due to using different sources. 
-# Clean that up first. 
-dup.indices = which(as.Date(dat[,1], "%d %b %Y") == as.Date("2014-06-05"))
-
-if (length(dup.indices) > 1)
-{
-  dat[dup.indices[1],4] = dat[dup.indices[2],4]
-  dat = rbind(dat[1:dup.indices[1],], dat[(dup.indices[2]+1):nrow(dat),])
-}
 
 charDate = as.character(dat[2:nrow(dat),1])
 for (i in 1:length(charDate))
@@ -225,6 +215,7 @@ original.rptDate = original.rptDate[ascendingOrder]
 cleanData = function(dataColumn, ascendingOrder)
 {
     # Remove commas
+    dataColumn = as.character(dataColumn)
     dataColumn = gsub(",", "", dataColumn, fixed = TRUE)
     dataColumn = gsub("≥", "", dataColumn, fixed = TRUE)
     # Remove +1 -1 stuff
@@ -235,11 +226,13 @@ cleanData = function(dataColumn, ascendingOrder)
             dataColumn)[ascendingOrder], "\n"), function(x){ifelse(length(x) == 0, "—", x[[1]])}
         )
       )
-    if (is.na(charCol[1]) || charCol[1] == "—")
+    if (is.na(charCol[1]) || (charCol[1] == "—" || charCol[1] == "-"))
     {
       charCol[1] = "0"
     }
-    charCol = as.numeric(ifelse(charCol == "—", "", charCol))
+    charCol = as.numeric(ifelse(charCol == "—", "",
+                         ifelse(charCol == "-", "", charCol)))
+    
     for (i in 2:length(charCol))
     {
       if (is.na(charCol[i]))
@@ -247,7 +240,7 @@ cleanData = function(dataColumn, ascendingOrder)
         charCol[i] = charCol[i-1]  
       }
     }
-    charCol
+    # charCol
     # Correct for undercounts
     for (i in seq(length(charCol), 2))
     {
@@ -701,10 +694,9 @@ proposeParameters = function(seedVal, chainNumber)
                                                          0.01)) # phi)
     
     InitContainer = buildInitialValueContainer(I_star, N, 
-                                               S0 = N[1,]-I_star[1,] - I0,
-                                               I0 = I0, 
-                                               p_ir = 0.2, 
-                                               p_rs = 0.00)
+                                               S0 = N[1,]-I_star[1,] - 2*I0,
+                                               E0 = I0,
+                                               I0 = I0)
     DistanceModel = buildDistanceModel(dmList)
     TransitionPriors = buildTransitionPriorsManually(priorAlpha_gammaEI,priorBeta_gammaEI,
                                                      priorAlpha_gammaIR,priorBeta_gammaIR)
@@ -750,6 +742,8 @@ buildAndRunModel = function(params)
                               proposal$SamplingControl)
   
   SEIRmodel$setRandomSeed(params[["seedVal"]])
+  # Save model object to node workspace
+  localModelObject <<- SEIRmodel
  
   # Do we need to keep track of compartment values for prediction? 
   # No sense doing this for all of the chains.
