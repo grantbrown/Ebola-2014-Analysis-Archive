@@ -178,13 +178,15 @@ pred.days = 30
 
 ## Compute number of samples/batches
 numBurnInBatches =      ifelse(documentCompilationMode == "release", 1000,  100)
-convergenceCriterion =  ifelse(documentCompilationMode == "release", 1.02,  100)
+convergenceCriterion =  ifelse(documentCompilationMode == "release", 1.1,  100)
 convergenceSampleSize =  ifelse(documentCompilationMode == "release", 100000, 100) 
 convergenceBatchSize =  ifelse(documentCompilationMode == "release", 100000, 10) 
+minimumSamples =         ifelse(documentCompilationMode == "release", 1000000, 200000) 
 extraR0Iterations =     ifelse(documentCompilationMode == "release", 500,   10)
 extraR0BatchSize =     ifelse(documentCompilationMode == "release", 1000,   10)
 iterationStride =       ifelse(documentCompilationMode == "release", 10000,   100)
 targetDaysPerRecord = 7
+totalSamples = 0
 
 ## Read in the data
 url = 'http://en.wikipedia.org/w/index.php?title=Ebola_virus_epidemic_in_West_Africa&redirect=no'
@@ -889,8 +891,9 @@ while (!conv)
 {
     cat("Not converged, adding iterations...\n")
     parLapply(cl, iterationParams, additionalIterations)
-    conv = checkConvergence(fileNames[1], fileNames[2], fileNames[3], 
-    maxVal = convergenceCriterion)
+    totalSamples = totalSamples + convergenceSampleSize
+    conv = checkConvergence(fileNames[1], fileNames[2], fileNames[3], maxVal = convergenceCriterion)
+    conv && (minimumSamples > totalSamples)
 }
 cat("Chains converged, finishing up...\n")
 
