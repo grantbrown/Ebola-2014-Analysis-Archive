@@ -164,8 +164,8 @@ library(parallel) # Load the parallel library to enable multiple chains to be ru
 
 ## Define Document Compilation Parameters
 
-#documentCompilationMode = "release"
-documentCompilationMode = "debug"
+documentCompilationMode = "release"
+#documentCompilationMode = "debug"
 # How many degrees of freedom should the fit have?
 modelDF = 4
 # if modelDF != 0, should spline basis be knot based or DF based?
@@ -178,11 +178,12 @@ pred.days = 30
 
 ## Compute number of samples/batches
 numBurnInBatches =      ifelse(documentCompilationMode == "release", 1000,  100)
-convergenceCriterion =  ifelse(documentCompilationMode == "release", 1.02,  2)
+convergenceCriterion =  ifelse(documentCompilationMode == "release", 1.02,  100)
 convergenceSampleSize =  ifelse(documentCompilationMode == "release", 100000, 100) 
-convergenceBatchSize =  ifelse(documentCompilationMode == "release", 1000, 10) 
+convergenceBatchSize =  ifelse(documentCompilationMode == "release", 100000, 10) 
 extraR0Iterations =     ifelse(documentCompilationMode == "release", 500,   10)
-iterationStride =       ifelse(documentCompilationMode == "release", 750,   50)
+extraR0BatchSize =     ifelse(documentCompilationMode == "release", 1000,   10)
+iterationStride =       ifelse(documentCompilationMode == "release", 10000,   100)
 targetDaysPerRecord = 7
 
 ## Read in the data
@@ -624,10 +625,20 @@ betaPrsPriorPrecision = 0.5
 
     
 # Declare prior parameters for the E to I and I to R probabilities. 
-priorAlpha_gammaEI = 250;
-priorBeta_gammaEI = 1000;
-priorAlpha_gammaIR = 140;
-priorBeta_gammaIR = 1000;
+
+# Latent period between 1 and 21 days
+priorAlpha_gammaEI = 100000;
+priorBeta_gammaEI = 300000;
+priorAlpha_gammaIR = 30000;
+priorBeta_gammaIR = 200000;
+hist(rgeom(rep(1, 100000), 1-exp(-rgamma(100000,priorAlpha_gammaEI, 
+                                         priorBeta_gammaEI))), xlab = "Days",
+     main = "Prior Distribution\n Ebola Latent Period", freq=FALSE)
+
+hist(rgeom(rep(1, 100000), 1-exp(-rgamma(100000,priorAlpha_gammaIR, 
+                                         priorBeta_gammaIR))), xlab = "Days",
+     main = "Prior Distribution\n Ebola Infectious Period", freq=FALSE)
+
 # Declare prior parameters for the overdispersion precision
 priorAlpha_phi = 10000
 priorBeta_phi = 100
@@ -736,7 +747,6 @@ buildAndBurnInModel = function(params)
     SEIRmodel$setTrace(0) #Guinea 
     SEIRmodel$setTrace(1) #Liberia
     SEIRmodel$setTrace(2) #Sierra Leone
-    SEIRmodel$setTrace(3) #Nigeria
   }
       
   # Make a helper function to run each chain, as well as update the metropolis 
@@ -763,7 +773,6 @@ buildAndBurnInModel = function(params)
   runSimulation(SEIRmodel, batchSize = 100, numBatches = numBurnInBatches)
   
   SEIRmodel$compartmentSamplingMode = 17
-  SEIRmodel$parameterSamplingMode = 7
   SEIRmodel$performHybridStep = 10
   if (modelDF > 0)
   {
@@ -784,7 +793,7 @@ finishSimulation = function(iterationNumber)
     empiricalR0 = array(0, dim = c(nrow(I_star), ncol(I_star), extraR0Iterations))
     for (i in 1:extraR0Iterations)
     {
-        localModelObject$simulate(iterationStride)
+        localModelObject$simulate(extraR0BatchSize)
         for (j in 0:(nrow(I_star)-1))
         {
             R0[j,,i] = localModelObject$estimateR0(j)
@@ -927,10 +936,6 @@ figure8 = function()
              chain2$BetaP_SE_2,
              chain3$BetaP_SE_2, 
              "Sierra Leone Exposure Intercept")
-  plotChains(chain1$BetaP_SE_3,
-             chain2$BetaP_SE_3,
-             chain3$BetaP_SE_3, 
-             "Nigeria Exposure Intercept")
 }
 
 figure8_5 = function()
