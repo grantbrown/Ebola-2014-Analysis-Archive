@@ -184,7 +184,7 @@ convergenceBatchSize =  ifelse(documentCompilationMode == "release", 100000, 10)
 minimumSamples =         ifelse(documentCompilationMode == "release", 1000000, 200000) 
 extraR0Iterations =     ifelse(documentCompilationMode == "release", 500,   10)
 extraR0BatchSize =     ifelse(documentCompilationMode == "release", 1000,   10)
-iterationStride =       ifelse(documentCompilationMode == "release", 10000,   100)
+iterationStride =       ifelse(documentCompilationMode == "release", 1000,   100)
 targetDaysPerRecord = 7
 totalSamples = 0
 
@@ -195,7 +195,7 @@ tbls = readHTMLTable(url)
 table1 = tbls[[5]] 
 table2 = tbls[[7]]
 
-table1 = cbind(table1[2:nrow(table1),c(1, 3, 5, 7)])
+table1 = cbind(table1[2:nrow(table1),c(1, 4, 6, 8)])
 table2 = table2[2:nrow(table2),c(1, 4, 6, 8)]
 colnames(table2) = colnames(table1)
 dat = rbind(table1,table2)
@@ -890,11 +890,12 @@ chains = parLapply(cl, paramsList, buildAndBurnInModel)
 conv = FALSE
 while (!conv)
 {
-    cat("Not converged, adding iterations...\n")
+    cat(paste("Not converged, adding iterations. Total so far: ", totalSamples, 
+              "\n", sep =""))
     parLapply(cl, iterationParams, additionalIterations)
     totalSamples = totalSamples + convergenceSampleSize
     conv = checkConvergence(fileNames[1], fileNames[2], fileNames[3], maxVal = convergenceCriterion)
-    conv && (minimumSamples > totalSamples)
+    conv = (conv && (minimumSamples < totalSamples))
 }
 cat("Chains converged, finishing up...\n")
 
