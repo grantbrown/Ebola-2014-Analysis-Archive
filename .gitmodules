@@ -1,0 +1,3 @@
+[submodule "Data/ebola"]
+	path = Data/ebola
+	url = https://github.com/grantbrown/ebola.git
