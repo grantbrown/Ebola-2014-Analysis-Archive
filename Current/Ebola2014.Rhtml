@@ -181,7 +181,7 @@ numBurnInBatches =      ifelse(documentCompilationMode == "release", 1000,  100)
 convergenceCriterion =  ifelse(documentCompilationMode == "release", 1.2,  100)
 convergenceSampleSize =  ifelse(documentCompilationMode == "release", 100000, 100) 
 convergenceBatchSize =  ifelse(documentCompilationMode == "release", 100000, 10) 
-minimumSamples =         ifelse(documentCompilationMode == "release", 100000, 200000) 
+minimumSamples =         ifelse(documentCompilationMode == "release", 1000000, 200000) 
 extraR0Iterations =     ifelse(documentCompilationMode == "release", 500,   10)
 extraR0BatchSize =     ifelse(documentCompilationMode == "release", 1000,   10)
 iterationStride =       ifelse(documentCompilationMode == "release", 1000,   100)
@@ -604,16 +604,13 @@ betaPrsPriorPrecision = 0.5
 # Declare prior parameters for the E to I and I to R probabilities. 
 
 # Latent period between 1 and 21 days
-priorAlpha_gammaEI = 100000;
-priorBeta_gammaEI = 300000;
-priorAlpha_gammaIR = 30000;
-priorBeta_gammaIR = 200000;
-hist(rgeom(rep(1, 100000), 1-exp(-rgamma(100000,priorAlpha_gammaEI, 
-                                         priorBeta_gammaEI))), xlab = "Days",
+prior_gamma_ei = 1/5
+prior_gamma_ir = 1/7
+transitionEffectiveSampleSizes = 1000
+hist(rgeom(rep(1, 100000), 1-exp(-prior_gamma_ei)), xlab = "Days",
      main = "Prior Distribution\n Ebola Latent Period", freq=FALSE)
 
-hist(rgeom(rep(1, 100000), 1-exp(-rgamma(100000,priorAlpha_gammaIR, 
-                                         priorBeta_gammaIR))), xlab = "Days",
+hist(rgeom(rep(1, 100000), 1-exp(-prior_gamma_ir)), xlab = "Days",
      main = "Prior Distribution\n Ebola Infectious Period", freq=FALSE)
 
 # Declare prior parameters for the overdispersion precision
@@ -669,8 +666,8 @@ proposeParameters = function(seedVal, chainNumber)
                                                E0 = I0,
                                                I0 = I0)
     DistanceModel = buildDistanceModel(dmList, priorAlpha = 1, priorBeta = 500)
-    TransitionPriors = buildTransitionPriorsManually(priorAlpha_gammaEI,priorBeta_gammaEI,
-                                                     priorAlpha_gammaIR,priorBeta_gammaIR)
+    TransitionPriors = buildTransitionPriorsFromProbabilities(1-exp(-prior_gamma_ei), 1-exp(-prior_gamma_ir),
+                                                              transitionEffectiveSampleSizes, transitionEffectiveSampleSizes)
     return(list(DataModel=DataModel,
                 ExposureModel=ExposureModel,
                 ReinfectionModel=ReinfectionModel,
@@ -811,10 +808,9 @@ clusterExport(cl, c( "offsets",
                      "Z",
                      "I0",
                      "X_p_rs",
-                     "priorAlpha_gammaEI",
-                     "priorBeta_gammaEI",
-                     "priorAlpha_gammaIR",
-                     "priorBeta_gammaIR",
+                     "prior_gamma_ei",
+                     "prior_gamma_ir",
+                     "transitionEffectiveSampleSizes",
                      "priorAlpha_phi",
                      "priorBeta_phi",
                      "betaPriorPrecision",
