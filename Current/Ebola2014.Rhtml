@@ -46,7 +46,7 @@
           <h5><a href="https://grantbrown.github.io">Grant Brown</a></h5>
           <h5><a href="http://www.public-health.uiowa.edu/people/jacob-oleson/">Jacob Oleson</a></h5>
           <h5>Last Updated:
-<!--begin.rcode echo=FALSE, results='asis'
+<!--begin.rcode label="SaveDate", echo=FALSE, results='asis'
 cat(as.character(Sys.Date()))
 end.rcode-->
 </h5>
@@ -155,7 +155,7 @@ end.rcode-->
       </p>
 <button class="btn btn-default code-button">Show/Hide Code Block</button>
 <div class="code-and-output-block" style="display:none">
-<!--begin.rcode
+<!--begin.rcode label="LoadPackagesReadData"
 library(knitr)
 library(coda) # Load the coda library for MCMC convergence diagnosis
 library(spatialSEIR)
@@ -173,7 +173,7 @@ modelDF = 0
 # Option2: "DF"
 modelMode = "DF"
 # How far into the future do we want to make predictions?
-pred.days = 30
+pred.days = 90
 
 
 ## Compute number of samples/batches
@@ -181,7 +181,7 @@ numBurnInBatches =      ifelse(documentCompilationMode == "release", 1000,  100)
 convergenceCriterion =  ifelse(documentCompilationMode == "release", 1.2,  100)
 convergenceSampleSize =  ifelse(documentCompilationMode == "release", 100000, 100) 
 convergenceBatchSize =  ifelse(documentCompilationMode == "release", 100000, 10) 
-minimumSamples =         ifelse(documentCompilationMode == "release", 1000000, 200000) 
+minimumSamples =         ifelse(documentCompilationMode == "release", 100000, 200000) 
 extraR0Iterations =     ifelse(documentCompilationMode == "release", 500,   10)
 extraR0BatchSize =     ifelse(documentCompilationMode == "release", 1000,   10)
 iterationStride =       ifelse(documentCompilationMode == "release", 1000,   100)
@@ -311,7 +311,7 @@ end.rcode-->
 With data in hand, let's begin where every analysis should begin: graphs.
 </p>
 
-<!--begin.rcode dpi=150, fig.align='center', echo=FALSE
+<!--begin.rcode label="PlotFig1", dpi=150, fig.align='center', echo=FALSE
 figure1()
 end.rcode-->
 <p>
@@ -320,7 +320,7 @@ end.rcode-->
 </p>
 <button class="btn btn-default code-button">Show/Hide Code Block</button>
 <div class="code-and-output-block" style="display:none">
-<!--begin.rcode fig.align='center', results='asis'
+<!--begin.rcode label="SaveTable", fig.align='center', results='asis'
 kable(rawData)
 end.rcode-->
 </div>
@@ -330,7 +330,7 @@ This graph and corresponding table represent cumulative counts, but because case
 </p>
 <button class="btn btn-default code-button">Show/Hide Code Block</button>
 <div class="code-and-output-block" style="display:none">
-<!--begin.rcode
+<!--begin.rcode label="CreateDataset"
 
 # The "I_star" name will make more sense in a bit
 I_star = cbind(uncumulate(Guinea), 
@@ -362,7 +362,7 @@ figure2 = function()
          lty=1, lwd = 2,
          ylim = ylim, type = "l"
          )
-    abline(h = seq(0, 1000, 5), lty = 2, col = "lightgrey")
+    abline(h = seq(0, 1000, 10), lty = 2, col = "lightgrey")
     lines(rptDate, InfectionPerDay[,2], col = "blue",lty=2, lwd = 2)
     lines(rptDate, InfectionPerDay[,3], col = "red", lty = 3, lwd = 2)
     par(xaxt="n")
@@ -385,7 +385,7 @@ end.rcode-->
   For better graphical representation, the "un-cumulated" counts are scaled to represent average number of infections per day, and linearly interpolated. The process is a bit noisier from this perspective when compared to the original cumulative counts.  
 </p>
 
-<!--begin.rcode dpi=150,fig.align='center',echo=FALSE
+<!--begin.rcode label="PlotFigure2", dpi=150,fig.align='center',echo=FALSE
   figure2()
 end.rcode-->
 
@@ -394,7 +394,7 @@ end.rcode-->
 One can also represent this data geographically to get an idea of the spatial epidemic pattern, and to place the problem in a more relatable context. 
 
 <h4 align=center>Average Number of Infections Per Day:</h4>
-<!--begin.rcode echo=FALSE
+<!--begin.rcode label="MakeMap1", echo=FALSE
 # From here on we'll use the aggregated data. 
 
 maxIdx = nrow(I_star)
@@ -521,16 +521,12 @@ temporal trend.
   
 <button class="btn btn-default code-button">Show/Hide Code Block</button>
       <div class="code-and-output-block" style="display:none">
-<!--begin.rcode
+<!--begin.rcode label="BuildVariables"
 library(splines)
 # Guinea, Liberia, Sierra Leone, Nigeria
 N = matrix(c(10057975, 4128572, 6190280), nrow = nrow(I_star),ncol = 3, 
            byrow=TRUE)
-#X = diag(ncol(N))
-# Sierra Leone and Liberia have similar characteristics. 
-X = matrix(c(1,0,
-             0,1,
-             0,1), ncol = 2, byrow=TRUE)
+X = diag(ncol(N))
 X.predict = X
 
 daysSinceJan = as.numeric(rptDate - as.Date("2014-01-01"))
@@ -696,7 +692,7 @@ end.rcode-->
   
 <button class="btn btn-default code-button">Show/Hide Code Block</button>
       <div class="code-and-output-block" style="display:none">
-<!--begin.rcode
+<!--begin.rcode label="BuildAndRunModel"
 
 
 paramsList = list(list("estimateR0"=FALSE, "traceCompartments"=TRUE, "seedVal"=133,"chainNumber"=4),
@@ -1352,19 +1348,19 @@ indication that the samplers have indeed converged to the posterior distribution
 problem at hand. In the code below, we'll read in the MCMC output files created so far, plot the three chains for each of 
 several important parameters, and take a look at the Gelman and Rubin convergence diagnostic (which should be close to 1 if the chains have converged.)
 </p>
-<!--begin.rcode dpi=150, fig.align='center', echo=FALSE
+<!--begin.rcode label="PlotFigure8", dpi=150, fig.align='center', echo=FALSE
 figure8()
 end.rcode-->
 
-<!--begin.rcode dpi=150, fig.align='center', echo=FALSE, fig.width=6, fig.height=3
+<!--begin.rcode label="PlotFigure8_5", dpi=150, fig.align='center', echo=FALSE, fig.width=6, fig.height=3
 figure8_5()
 end.rcode-->
 
-<!--begin.rcode dpi=150, fig.align='center', echo=FALSE
+<!--begin.rcode label="PlotFigure9", dpi=150, fig.align='center', echo=FALSE
 figure9()
 end.rcode-->
 
-<!--begin.rcode dpi=150, fig.align='center', echo=FALSE, fig.width=6, fig.height=3
+<!--begin.rcode label="PlotFigure9_5", dpi=150, fig.align='center', echo=FALSE, fig.width=6, fig.height=3
 figure9_5()
 end.rcode-->
 
@@ -1385,7 +1381,7 @@ the parametric form chosen, this alternative approach to basic reproductive numb
 </p>
 <br/><br/>
 
-<!--begin.rcode dpi=150, fig.align='center', echo=FALSE, results='asis'
+<!--begin.rcode label="PlotR0Stuff", dpi=150, fig.align='center', echo=FALSE, results='asis'
   figure10(R0_list[["R0"]], " ")
 cat("<hr>")
   figure10(R0_list[["effectiveR0"]], "Effective")
@@ -1405,13 +1401,13 @@ Below, we will attempt to predict the course of the epidemic through early fall.
 We must be cautious when making predictions about a chaotic process this far into the future. The intensity function which drives the exposure process is based on simple smooth functions of time, rather than any external information. While this is perfectly adequate for estimation, it may or may not provide good prediction performance. 
 </p>
 
-<!--begin.rcode dpi=150, fig.align='center', echo=FALSE
+<!--begin.rcode label="Plotfigure11", dpi=150, fig.align='center', echo=FALSE
 figure11()
 end.rcode-->
 
 It is sometimes helpful to visualize exponential growth on the log scale. 
 
-<!--begin.rcode dpi=150, fig.align='center', echo=FALSE
+<!--begin.rcode label="PlotFigure11_5", dpi=150, fig.align='center', echo=FALSE
 figure11_5()
 end.rcode-->
 
@@ -1424,7 +1420,7 @@ end.rcode-->
 <div class="col-sm-2"></div>
 <div class="col-sm-9">
 <h4>Estimated and Predicted number of Infectious Individuals</h4><br/>
-<!--begin.rcode results = "asis", echo=FALSE
+<!--begin.rcode label="SavePredTable", results = "asis", echo=FALSE
 kable(pred.table, format = "html", digits = 0, align = "c")
 end.rcode-->
 </div>
