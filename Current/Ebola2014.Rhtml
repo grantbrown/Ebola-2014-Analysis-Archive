@@ -167,7 +167,7 @@ library(parallel) # Load the parallel library to enable multiple chains to be ru
 documentCompilationMode = "release"
 #documentCompilationMode = "debug"
 # How many degrees of freedom should the fit have?
-modelDF = 0
+modelDF = 3
 # if modelDF != 0, should spline basis be knot based or DF based?
 # Option1: "Knots"
 # Option2: "DF"
@@ -181,7 +181,7 @@ numBurnInBatches =      ifelse(documentCompilationMode == "release", 1000,  100)
 convergenceCriterion =  ifelse(documentCompilationMode == "release", 1.2,  100)
 convergenceSampleSize =  ifelse(documentCompilationMode == "release", 100000, 100) 
 convergenceBatchSize =  ifelse(documentCompilationMode == "release", 100000, 10) 
-minimumSamples =         ifelse(documentCompilationMode == "release", 1000000, 200000) 
+minimumSamples =         ifelse(documentCompilationMode == "release", 3000000, 200000) 
 extraR0Iterations =     ifelse(documentCompilationMode == "release", 500,   10)
 extraR0BatchSize =     ifelse(documentCompilationMode == "release", 1000,   10)
 iterationStride =       ifelse(documentCompilationMode == "release", 1000,   100)
