@@ -167,11 +167,11 @@ library(parallel) # Load the parallel library to enable multiple chains to be ru
 documentCompilationMode = "release"
 #documentCompilationMode = "debug"
 # How many degrees of freedom should the fit have?
-modelDF = 4
+modelDF = 5
 # if modelDF != 0, should spline basis be knot based or DF based?
 # Option1: "Knots"
 # Option2: "DF"
-modelMode = "Knots"
+modelMode = "DF"
 # How far into the future do we want to make predictions?
 pred.days = 90
 
@@ -606,7 +606,7 @@ betaPrsPriorPrecision = 0.5
 # Latent period between 1 and 21 days
 prior_gamma_ei = 1/5
 prior_gamma_ir = 1/7
-transitionEffectiveSampleSizes = 1000
+transitionEffectiveSampleSizes = 10000
 hist(rgeom(rep(1, 100000), 1-exp(-prior_gamma_ei)), xlab = "Days",
      main = "Prior Distribution\n Ebola Latent Period", freq=FALSE)
 
@@ -873,7 +873,7 @@ cat("Chains converged, finishing up...\n")
 
 cleanUpParamsList = list(1,2,3)
 chains = parLapply(cl, cleanUpParamsList, finishSimulation)
-
+save("chains", "./chainOutput/Robj")
 stopCluster(cl)
 
 chain1 = chains[[1]]$chainOutput 
