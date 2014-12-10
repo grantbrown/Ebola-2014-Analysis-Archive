@@ -873,7 +873,7 @@ cat("Chains converged, finishing up...\n")
 
 cleanUpParamsList = list(1,2,3)
 chains = parLapply(cl, cleanUpParamsList, finishSimulation)
-save("chains", "./chainOutput/Robj")
+save("chains", file="./chainOutput.Robj")
 stopCluster(cl)
 
 chain1 = chains[[1]]$chainOutput 
