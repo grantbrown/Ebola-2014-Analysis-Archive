@@ -922,7 +922,7 @@ figure8 = function()
 
 figure8_5 = function()
 {
-  if (any(is.na(Z))){return())}
+  if (any(is.na(Z))){return()}
   for (i in ncol(X):(ncol(X) + ncol(Z)-1))
   {
       plotChains(chain1[[paste("BetaP_SE_", i, sep = "")]],
