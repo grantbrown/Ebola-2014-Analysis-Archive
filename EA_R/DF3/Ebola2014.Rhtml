@@ -922,7 +922,7 @@ figure8 = function()
 
 figure8_5 = function()
 {
-  if (is.na(Z)){return()}
+  if (any(is.na(Z))){return()}
   for (i in ncol(X):(ncol(X) + ncol(Z)-1))
   {
       plotChains(chain1[[paste("BetaP_SE_", i, sep = "")]],
@@ -1059,6 +1059,7 @@ predictEpidemic = function(beta.pred,
                            offsets.pred)
 {
     N = (S0+E0+I0+R0)
+    offsets.pred = c(offsets.pred, 1)
     p_se_components = matrix(exp(X.pred %*% beta.pred), ncol=length(S0))
     p_se = matrix(0, ncol = length(S0), nrow = nrow(p_se_components))
     p_ei = 1-exp(-gamma.ei*offsets.pred)
@@ -1124,7 +1125,7 @@ predict.i = function(i)
     rho[i] = dataRow[[paste("rho_", i-1, sep = "")]]
   }
   beta = rep(0, modelDF+ncol(X))
-  for (i in 0:(modelDF+2))
+  for (i in 0:(modelDF+ncol(X)-1))
   {
     beta[i+1] = dataRow[[paste("BetaP_SE_", i, sep = "")]]
   }
