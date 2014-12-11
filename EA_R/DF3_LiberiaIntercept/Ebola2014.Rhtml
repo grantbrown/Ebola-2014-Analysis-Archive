@@ -167,7 +167,7 @@ library(parallel) # Load the parallel library to enable multiple chains to be ru
 #documentCompilationMode = "release"
 documentCompilationMode = "debug"
 # How many degrees of freedom should the fit have?
-modelDF = 5
+modelDF = 3
 # if modelDF != 0, should spline basis be knot based or DF based?
 # Option1: "Knots"
 # Option2: "DF"
@@ -543,6 +543,11 @@ if (modelDF != 0 && modelMode == "DF")
   # so duplicate them row-wise. 
   Z = Z[rep(1:nrow(Z), nrow(X)),,drop=FALSE]
   Z.predict = Z.predict[rep(1:nrow(Z.predict), nrow(X)),,drop=FALSE]
+  # Add additional Liberia Component
+  LiberiaIndicator = c(rep(0, nrow(I_star)), rptDate < as.Date("2014-05-23"), 
+                       rep(0, nrow(I_star)))
+  Z = cbind(Z, LiberiaIndicator)
+  Z.predict = cbind(Z.predict, 0)
   
   # For convenience, let's combine X and Z for prediction.
   X.pred = cbind(X.predict[rep(1:nrow(X.predict), 
@@ -559,6 +564,12 @@ else if (modelDF != 0 && modelMode == "Knots")
   # so duplicate them row-wise. 
   Z = Z[rep(1:nrow(Z), nrow(X)),,drop=FALSE]
   Z.predict = Z.predict[rep(1:nrow(Z.predict), nrow(X)),,drop=FALSE]
+  # Add additional Liberia Component
+  LiberiaIndicator = c(rep(0, nrow(I_star)), rptDate < as.Date("2014-05-23"), 
+                       rep(0, nrow(I_star)))
+  Z = cbind(Z, LiberiaIndicator)
+  Z.predict = cbind(Z.predict, 0)
+  modelDF = modelDF + 1
   
   # For convenience, let's combine X and Z for prediction.
   X.pred = cbind(X.predict[rep(1:nrow(X.predict), 
@@ -1124,8 +1135,8 @@ predict.i = function(i)
   {
     rho[i] = dataRow[[paste("rho_", i-1, sep = "")]]
   }
-  beta = rep(0, modelDF+ncol(X))
-  for (i in 0:(modelDF+ncol(X) -1))
+  beta = rep(0, ncol(Z)+ncol(X))
+  for (i in 0:(ncol(Z)+ncol(X) -1))
   {
     beta[i+1] = dataRow[[paste("BetaP_SE_", i, sep = "")]]
   }

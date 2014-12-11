@@ -164,8 +164,8 @@ library(parallel) # Load the parallel library to enable multiple chains to be ru
 
 ## Define Document Compilation Parameters
 
-documentCompilationMode = "release"
-#documentCompilationMode = "debug"
+#documentCompilationMode = "release"
+documentCompilationMode = "debug"
 # How many degrees of freedom should the fit have?
 modelDF = 0
 # if modelDF != 0, should spline basis be knot based or DF based?
@@ -177,30 +177,30 @@ pred.days = 120
 
 
 ## Compute number of samples/batches
-numBurnInBatches =      ifelse(documentCompilationMode == "release", 1000,  100)
-convergenceCriterion =  ifelse(documentCompilationMode == "release", 1.2,  100)
-convergenceSampleSize =  ifelse(documentCompilationMode == "release", 100000, 100) 
-convergenceBatchSize =  ifelse(documentCompilationMode == "release", 100000, 10) 
-minimumSamples =         ifelse(documentCompilationMode == "release", 3000000, 200000) 
-extraR0Iterations =     ifelse(documentCompilationMode == "release", 500,   10)
-extraR0BatchSize =     ifelse(documentCompilationMode == "release", 1000,   10)
+numBurnInBatches =      ifelse(documentCompilationMode == "release", 1000,  1000)
+convergenceCriterion =  ifelse(documentCompilationMode == "release", 1.2,  5)
+convergenceSampleSize =  ifelse(documentCompilationMode == "release", 100000, 10000) 
+convergenceBatchSize =  ifelse(documentCompilationMode == "release", 100000, 10000) 
+minimumSamples =         ifelse(documentCompilationMode == "release", 3000000, 50000) 
+extraR0Iterations =     ifelse(documentCompilationMode == "release", 500,   50)
+extraR0BatchSize =     ifelse(documentCompilationMode == "release", 1000,   1000)
 iterationStride =       ifelse(documentCompilationMode == "release", 1000,   100)
-targetDaysPerRecord = 3
+targetDaysPerRecord = 7
 totalSamples = 0
 
 ## Read in the data
 
 dat = read.csv("../../Data/ebola/country_timeseries.csv")[,c(1, 3,4,5)]
 
-charDate = as.character(dat[2:nrow(dat),1])
+charDate = as.character(dat[,1])
 
 rptDate = as.Date(charDate, "%m/%d/%Y")
-numDays = max(rptDate) - min(rptDate) + 1
+numDays = max(rptDate) - min(rptDate)
 numDays.pred = numDays + pred.days
 
 original.rptDate = rptDate
 ascendingOrder = order(rptDate)
-rptDate = rptDate[ascendingOrder][2:length(rptDate)]
+rptDate = rptDate[ascendingOrder]
 original.rptDate = original.rptDate[ascendingOrder]
 
 
