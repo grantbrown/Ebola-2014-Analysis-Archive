@@ -273,7 +273,7 @@ thinIndices = function(minDays, weights)
     keepIdx
 }
 
-keepIdx = thinIndices(targetDaysPerRecord, c(1,nDays))
+keepIdx = thinIndices(targetDaysPerRecord, c(nDays,1))
 keepIdx = keepIdx[order(keepIdx)]
 
 

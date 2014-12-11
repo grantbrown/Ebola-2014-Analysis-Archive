@@ -164,8 +164,8 @@ library(parallel) # Load the parallel library to enable multiple chains to be ru
 
 ## Define Document Compilation Parameters
 
-#documentCompilationMode = "release"
-documentCompilationMode = "debug"
+documentCompilationMode = "release"
+#documentCompilationMode = "debug"
 # How many degrees of freedom should the fit have?
 modelDF = 3
 # if modelDF != 0, should spline basis be knot based or DF based?
@@ -273,7 +273,7 @@ thinIndices = function(minDays, weights)
     keepIdx
 }
 
-keepIdx = thinIndices(targetDaysPerRecord, c(1,nDays))
+keepIdx = thinIndices(targetDaysPerRecord, c(nDays,1))
 keepIdx = keepIdx[order(keepIdx)]
 
 
