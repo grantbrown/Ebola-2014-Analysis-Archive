@@ -101,10 +101,10 @@ label: BuildVariables
 label: BuildAndRunModel
 Setting seed.
 Setting seed.
-Warning: you may be requesting a LOT of data.
-Warning: you may be requesting a LOT of data.
-Warning: you may be requesting a LOT of data.
 Setting seed.
+Warning: you may be requesting a LOT of data.
+Warning: you may be requesting a LOT of data.
+Warning: you may be requesting a LOT of data.
   |                                                                         |..........................                                       |  40%
   ordinary text without R code
 
@@ -271,4 +271,4 @@ output file: Ebola2014.html
 > 
 > proc.time()
      user    system   elapsed 
-   91.298     0.386 10238.328 
+  283.918     0.794 10598.250 
