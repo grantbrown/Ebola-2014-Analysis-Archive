@@ -178,7 +178,7 @@ pred.days = 120
 
 ## Compute number of samples/batches
 numBurnInBatches =      ifelse(documentCompilationMode == "release", 1000,  1000)
-convergenceCriterion =  ifelse(documentCompilationMode == "release", 1.2,  5)
+convergenceCriterion =  ifelse(documentCompilationMode == "release", 1.05,  5)
 convergenceSampleSize =  ifelse(documentCompilationMode == "release", 100000, 10000) 
 convergenceBatchSize =  ifelse(documentCompilationMode == "release", 100000, 10000) 
 minimumSamples =         ifelse(documentCompilationMode == "release", 3000000, 50000) 
@@ -748,10 +748,10 @@ buildAndBurnInModel = function(params)
   runSimulation(SEIRmodel, batchSize = 100, numBatches = numBurnInBatches)
   
   SEIRmodel$compartmentSamplingMode = 17
-  SEIRmodel$performHybridStep = 10
+  SEIRmodel$performHybridStep = 50
   if (modelDF > 0)
   {
-      SEIRmodel$useDecorrelation = 10
+      SEIRmodel$useDecorrelation = 50
   }
 }
 
